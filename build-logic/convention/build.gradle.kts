@@ -1,14 +1,19 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     `kotlin-dsl`
 }
 
-group = "dev.yaaum.buildlogic"
+group = "dev.yaaum.convention"
 
 java {
-    @Suppress("UnstableApiUsage")
-    sourceCompatibility = JavaVersion.VERSION_24
-    @Suppress("UnstableApiUsage")
-    targetCompatibility = JavaVersion.VERSION_24
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+tasks.withType<KotlinCompile>().configureEach {
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
+    }
 }
 
 dependencies {
@@ -18,6 +23,13 @@ dependencies {
 
 gradlePlugin {
     plugins {
-
+        register("androidApplication") {
+            id = "yaaum.convention.application"
+            implementationClass = "dev.yaaum.convention.conventionplugin.android.AndroidApplicationConventionPlugin"
+        }
+        register("androidComposeApplication") {
+            id = "yaaum.convention.compose.application"
+            implementationClass = "dev.yaaum.convention.conventionplugin.android.AndroidApplicationComposeConventionPlugin"
+        }
     }
 }
