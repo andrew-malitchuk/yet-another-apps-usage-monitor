@@ -1,5 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+buildscript {
+    dependencies{
+        classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.23.0")
+    }
+}
+
 plugins {
     `kotlin-dsl`
 }
@@ -19,6 +25,7 @@ tasks.withType<KotlinCompile>().configureEach {
 dependencies {
     compileOnly(libs.android.gradlePlugin)
     compileOnly(libs.kotlin.gradlePlugin)
+    compileOnly(libs.detekt.gradlePlugin)
 }
 
 gradlePlugin {
@@ -30,6 +37,10 @@ gradlePlugin {
         register("androidComposeApplication") {
             id = "yaaum.convention.compose.application"
             implementationClass = "dev.yaaum.convention.conventionplugin.android.AndroidApplicationComposeConventionPlugin"
+        }
+        register("commonDetekt") {
+            id = "yaaum.convention.common.detekt"
+            implementationClass = "dev.yaaum.convention.conventionplugin.common.DetektConventionPlugin"
         }
     }
 }

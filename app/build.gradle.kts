@@ -1,5 +1,6 @@
 plugins {
     id("yaaum.convention.application")
+    id("yaaum.convention.common.detekt")
 }
 
 android {
