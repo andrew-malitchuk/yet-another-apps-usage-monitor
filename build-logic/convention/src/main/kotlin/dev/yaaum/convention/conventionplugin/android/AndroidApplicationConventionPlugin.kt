@@ -4,11 +4,14 @@ import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.gradle.LibraryExtension
 import dev.yaaum.convention.config.ProjectConfig
 import dev.yaaum.convention.config.VersionConfig
+import dev.yaaum.convention.ext.implementDependency
 import dev.yaaum.convention.ext.kotlinOptions
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
+import org.gradle.kotlin.dsl.getByType
 import org.jetbrains.kotlin.gradle.dsl.kotlinExtension
 
 @Suppress("unused")
@@ -37,9 +40,12 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                     jvmTarget = ProjectConfig.KOTLIN_VERSION
                 }
             }
-
-            dependencies {
-
+            extensions.getByType<VersionCatalogsExtension>().named("libs").apply {
+                dependencies {
+                    implementDependency {
+                        "core.ktx"
+                    }
+                }
             }
         }
     }

@@ -7,6 +7,9 @@ material = "1.9.0"
 androidGradlePlugin = "7.3.1"
 kotlin = "1.7.20"
 detekt= "1.23.1"
+org-jmailen-kotlinter="3.16.0"
+lint-checks="26.1.3"
+lint-api="25.3.0"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -15,6 +18,12 @@ material = { group = "com.google.android.material", name = "material", version.r
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 detekt-gradlePlugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
+org-jmailen-kotlinter = { group = "org.jmailen.gradle",name="kotlinter-gradle", version.ref = "org-jmailen-kotlinter" }
+# https://mvnrepository.com/artifact/com.android.tools.lint/lint-checks
+lint-checks = {group = "com.android.tools.lint", name = "lint-checks", version.ref="lint-checks"}
+# https://mvnrepository.com/artifact/com.android.tools.lint/lint-api
+lint-api = { group="com.android.tools.lint", name="lint-api", version.ref="lint-api"}
+
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }

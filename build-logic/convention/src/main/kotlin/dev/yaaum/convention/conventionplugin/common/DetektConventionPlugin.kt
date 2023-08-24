@@ -8,6 +8,7 @@ import org.gradle.api.Project
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.gradle.kotlin.dsl.getByType
 
+@Suppress("unused")
 class DetektConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
