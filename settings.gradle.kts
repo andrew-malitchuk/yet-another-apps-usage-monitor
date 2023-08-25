@@ -17,3 +17,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "YAAUM"
 include(":app")
+
+include(":domain")
+include(":domain:impl")
+include(":domain:cored")

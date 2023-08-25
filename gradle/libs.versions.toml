@@ -10,6 +10,9 @@ detekt= "1.23.1"
 org-jmailen-kotlinter="3.16.0"
 lint-checks="31.1.1"
 lint-api="31.1.1"
+junit = "4.13.2"
+androidx-test-ext-junit = "1.1.5"
+espresso-core = "3.5.1"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -23,11 +26,15 @@ org-jmailen-kotlinter = { group = "org.jmailen.gradle",name="kotlinter-gradle", 
 lint-checks = {group = "com.android.tools.lint", name = "lint-checks", version.ref="lint-checks"}
 # https://mvnrepository.com/artifact/com.android.tools.lint/lint-api
 lint-api = { group="com.android.tools.lint", name="lint-api", version.ref="lint-api"}
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
 
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
+com-android-library = { id = "com.android.library", version.ref = "agp" }
 
 [bundles]
 
