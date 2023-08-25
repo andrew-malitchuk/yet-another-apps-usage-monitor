@@ -1,4 +1,7 @@
+@file:Suppress("UnstableApiUsage")
+
 dependencyResolutionManagement {
+    @Suppress("UnstableApiUsage")
     repositories {
         google()
         mavenCentral()

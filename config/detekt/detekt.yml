@@ -14,7 +14,7 @@ complexity:
     ignoreDefaultParameters: true
     ignoreDataClasses: true
     ignoreAnnotatedParameter: [ ]
-    ignoreAnnotated: "javax.inject.Inject,javax.annotation.Generated"
+    ignoreAnnotated: ["javax.inject.Inject,javax.annotation.Generated"]
   LongMethod:
     active: true
     threshold: 100
@@ -24,14 +24,14 @@ complexity:
   TooManyFunctions:
     active: true
     excludes: [
-      '**/test/**',
-      '**/androidTest/**',
-      '**/commonTest/**',
-      '**/jvmTest/**',
-      '**/androidUnitTest/**',
-      '**/androidInstrumentedTest/**',
-      '**/jsTest/**',
-      '**/iosTest/**'
+      "**/test/**",
+      "**/androidTest/**",
+      "**/commonTest/**",
+      "**/jvmTest/**",
+      "**/androidUnitTest/**",
+      "**/androidInstrumentedTest/**",
+      "**/jsTest/**",
+      "**/iosTest/**"
     ]
     thresholdInFiles: 25
     thresholdInClasses: 25
@@ -48,15 +48,15 @@ complexity:
     ignoreSimpleWhenEntries: false
     ignoreNestingFunctions: false
     nestingFunctions:
-      - 'also'
-      - 'apply'
-      - 'forEach'
-      - 'isNotNull'
-      - 'ifNull'
-      - 'let'
-      - 'run'
-      - 'use'
-      - 'with'
+      - "also"
+      - "apply"
+      - "forEach"
+      - "isNotNull"
+      - "ifNull"
+      - "let"
+      - "run"
+      - "use"
+      - "with"
 
 exceptions:
   active: true

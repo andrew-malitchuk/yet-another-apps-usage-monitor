@@ -1,29 +1,33 @@
 package dev.yaaum.convention.conventionplugin.common
 
-import dev.yaaum.convention.ext.libs
+
+import dev.yaaum.convention.ext.detekt
+import dev.yaaum.convention.ext.plugins
+import dev.yaaum.convention.ext.unaryPlus
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
 
-import io.gitlab.arturbosch.detekt.extensions.DetektExtension
-import org.gradle.kotlin.dsl.getByType
-
+/**
+ * Contains configuration for detekt
+ */
 @Suppress("unused")
 class DetektConventionPlugin : Plugin<Project> {
-    override fun apply(target: Project) {
-        with(target) {
-            with(pluginManager) {
-                apply("io.gitlab.arturbosch.detekt")
-            }
-            extensions.getByType<DetektExtension>().apply {
-                buildUponDefaultConfig = true
-                allRules = true
-                config.setFrom("${rootProject.rootDir}$DETEKT_CONFIG_PATH")
-            }
+    override fun apply(target: Project) = with(target) {
+        plugins {
+            +"io.gitlab.arturbosch.detekt"
+        }
+        detekt {
+            buildUponDefaultConfig = true
+            allRules = true
+            config.setFrom("${rootProject.rootDir}$DETEKT_CONFIG_PATH")
         }
     }
 
     companion object {
+        /**
+         * Relative path for YML file with configuration
+         */
         const val DETEKT_CONFIG_PATH = "/config/detekt/detekt.yml"
     }
 }
