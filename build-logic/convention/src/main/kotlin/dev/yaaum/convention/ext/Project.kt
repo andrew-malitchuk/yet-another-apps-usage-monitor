@@ -3,6 +3,7 @@
 package dev.yaaum.convention.ext
 
 import com.android.build.api.dsl.ApplicationExtension
+import com.android.build.gradle.LibraryExtension
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalog
@@ -35,6 +36,25 @@ val Project.libs
  */
 fun Project.app(block: ApplicationExtension.() -> Unit) {
     this.extensions.configure<ApplicationExtension> {
+        this.block()
+    }
+}
+
+/**
+ * DSL wrapper for library configuration
+ *
+ * @receiver Project
+ * @param block lambda body
+ *
+ * ```
+ * lib {
+ *      defaultConfig {
+ *          applicationId = ProjectConfig.APPLICATION_ID
+ *          ...
+ * ```
+ */
+fun Project.lib(block: LibraryExtension.() -> Unit) {
+    this.extensions.configure<LibraryExtension> {
         this.block()
     }
 }

@@ -1,4 +1,3 @@
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     id("yaaum.convention.feature")
     id("yaaum.convention.common.detekt")
@@ -6,5 +5,5 @@ plugins {
 }
 
 android {
-    namespace = "dev.yaaum.domain.impl"
+    namespace = "dev.yaaum.data.repository.impl"
 }

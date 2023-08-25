@@ -4,6 +4,7 @@ import dev.yaaum.convention.config.ProjectConfig
 import dev.yaaum.convention.config.VersionConfig
 import dev.yaaum.convention.ext.app
 import dev.yaaum.convention.ext.kotlinOptions
+import dev.yaaum.convention.ext.lib
 import dev.yaaum.convention.ext.plugins
 import dev.yaaum.convention.ext.unaryPlus
 import org.gradle.api.Plugin
@@ -22,15 +23,11 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
             +"org.jetbrains.kotlin.android"
         }
 
-        app {
+        lib {
             defaultConfig {
-                applicationId = ProjectConfig.APPLICATION_ID
                 compileSdk = ProjectConfig.SDK.COMPILE_SDK
                 minSdk = ProjectConfig.SDK.MIN_SDK
                 targetSdk = ProjectConfig.SDK.TARGET_SDK
-
-                versionCode = VersionConfig.VERSION_CODE
-                versionName = VersionConfig.VERSION_NAME
             }
             compileOptions {
                 sourceCompatibility = ProjectConfig.JAVA_VERSION

@@ -68,11 +68,6 @@ configuration for [Detekt](https://github.com/detekt/detekt)
 [KtlintConventionPlugin](src%2Fmain%2Fkotlin%2Fdev%2Fyaaum%2Fconvention%2Fconventionplugin%2Fcommon%2FKtlintConventionPlugin.kt) -
 configuration for [kotliner-gradle](https://github.com/jeremymailen/kotlinter-gradle)
 
-##### LintConventionPlugin
-
-[LintConventionPlugin](src%2Fmain%2Fkotlin%2Fdev%2Fyaaum%2Fconvention%2Fconventionplugin%2Fcommon%2FLintConventionPlugin.kt) -
-configuration for Android Lint
-
 ### Project Configuration
 
 All stuff for project-level configuration are located in:

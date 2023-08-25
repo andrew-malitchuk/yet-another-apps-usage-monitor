@@ -3,7 +3,6 @@ plugins {
     id("yaaum.convention.compose.application")
     id("yaaum.convention.common.detekt")
     id("yaaum.convention.common.ktlint")
-    id("yaaum.convention.common.lint")
 }
 
 android {

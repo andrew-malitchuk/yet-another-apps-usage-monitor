@@ -78,11 +78,6 @@ gradlePlugin {
             implementationClass =
                 "dev.yaaum.convention.conventionplugin.common.KtlintConventionPlugin"
         }
-        register("commonLint") {
-            id = "yaaum.convention.common.lint"
-            implementationClass =
-                "dev.yaaum.convention.conventionplugin.common.LintConventionPlugin"
-        }
         //endregion Common
     }
 }
