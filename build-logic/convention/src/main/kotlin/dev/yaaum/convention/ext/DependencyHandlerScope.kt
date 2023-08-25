@@ -5,8 +5,8 @@ import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.kotlin.dsl.DependencyHandlerScope
 
 context(VersionCatalog)
-fun DependencyHandlerScope.implementDependency(value: () -> String) {
-    add("implementation", this@VersionCatalog.findLibrary(value()).get())
+fun DependencyHandlerScope.implementDependency(value: String) {
+    add("implementation", this@VersionCatalog.findLibrary(value).get())
 }
 
 context(Project)
