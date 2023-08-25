@@ -5,5 +5,5 @@ plugins {
 }
 
 android {
-    namespace = "dev.yaaum.domain.impl"
+    namespace = "dev.yaaum.presentation.core.navigation"
 }

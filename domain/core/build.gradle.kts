@@ -1,4 +1,3 @@
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     id("yaaum.convention.feature")
     id("yaaum.convention.common.detekt")

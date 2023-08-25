@@ -1,8 +1,6 @@
 package dev.yaaum.convention.conventionplugin.android
 
 import dev.yaaum.convention.config.ProjectConfig
-import dev.yaaum.convention.config.VersionConfig
-import dev.yaaum.convention.ext.app
 import dev.yaaum.convention.ext.kotlinOptions
 import dev.yaaum.convention.ext.lib
 import dev.yaaum.convention.ext.plugins
@@ -27,6 +25,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
             defaultConfig {
                 compileSdk = ProjectConfig.SDK.COMPILE_SDK
                 minSdk = ProjectConfig.SDK.MIN_SDK
+                @Suppress("UnstableApiUsage")
                 targetSdk = ProjectConfig.SDK.TARGET_SDK
             }
             compileOptions {

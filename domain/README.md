@@ -1,6 +1,6 @@
 # YAAUM
 
-## Domain
+## :domain
 
 ### :domain
 

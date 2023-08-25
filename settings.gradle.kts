@@ -1,4 +1,8 @@
 @file:Suppress("UnstableApiUsage")
+
+include(":core")
+
+
 pluginManagement {
     includeBuild("build-logic")
     repositories {
@@ -17,6 +21,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "YAAUM"
+
 include(":app")
 
 //region Domain
@@ -25,7 +30,19 @@ include(":domain:impl")
 include(":domain:core")
 //endregion Domain
 
+//region Data
 include(":data")
 include(":data:core")
 include(":data:repository:impl")
 include(":data:repository")
+//region Data
+
+//region Presentation
+include(":presentation")
+include(":presentation:core")
+include(":presentation:core:localisation")
+include(":presentation:core:navigation")
+include(":presentation:core:ui")
+include(":presentation:feature")
+include(":presentation:feature:main")
+//endregion Presentation
