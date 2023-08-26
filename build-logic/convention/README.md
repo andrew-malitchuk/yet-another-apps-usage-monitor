@@ -1,6 +1,6 @@
 # YAAUM
 
-## `build-logic:convention`
+## :build-logic:convention
 
 To improve code maintenance, a number of plugins have been developed.
 
@@ -19,13 +19,13 @@ They are grouped by subject area:
 
 ##### AndroidApplicationConventionPlugin
 
-[AndroidApplicationConventionPlugin.kt](src%2Fmain%2Fkotlin%2Fdev%2Fyaaum%2Fconvention%2Fconventionplugin%2Fandroid%2FAndroidApplicationConventionPlugin.kt) -
+[AndroidApplicationConventionPlugin](src%2Fmain%2Fkotlin%2Fdev%2Fyaaum%2Fconvention%2Fconventionplugin%2Fandroid%2FAndroidApplicationConventionPlugin.kt) -
 contains all specific stuff for project-level configuration, like, compile sdk, target sdk, version
 code... etc.
 
 ##### AndroidApplicationComposeConventionPlugin
 
-[AndroidApplicationConventionPlugin.kt](src%2Fmain%2Fkotlin%2Fdev%2Fyaaum%2Fconvention%2Fconventionplugin%2Fandroid%2FAndroidApplicationConventionPlugin.kt) = [AndroidApplicationConventionPlugin.kt](src%2Fmain%2Fkotlin%2Fdev%2Fyaaum%2Fconvention%2Fconventionplugin%2Fandroid%2FAndroidApplicationConventionPlugin.kt) +
+[AndroidApplicationConventionPlugin](src%2Fmain%2Fkotlin%2Fdev%2Fyaaum%2Fconvention%2Fconventionplugin%2Fandroid%2FAndroidApplicationConventionPlugin.kt) = [AndroidApplicationConventionPlugin](src%2Fmain%2Fkotlin%2Fdev%2Fyaaum%2Fconvention%2Fconventionplugin%2Fandroid%2FAndroidApplicationConventionPlugin.kt) +
 Compose related stuff.
 
 ##### AndroidFeatureConventionPlugin
@@ -35,7 +35,7 @@ contains default re-usable configuration for feature-module.
 
 ##### AndroidFeatureComposeConventionPlugin
 
-[AndroidFeatureComposeConventionPlugin.kt](src%2Fmain%2Fkotlin%2Fdev%2Fyaaum%2Fconvention%2Fconventionplugin%2Fandroid%2FAndroidFeatureComposeConventionPlugin.kt) = [AndroidFeatureConventionPlugin](src%2Fmain%2Fkotlin%2Fdev%2Fyaaum%2Fconvention%2Fconventionplugin%2Fandroid%2FAndroidFeatureConventionPlugin.kt) +
+[AndroidFeatureComposeConventionPlugin](src%2Fmain%2Fkotlin%2Fdev%2Fyaaum%2Fconvention%2Fconventionplugin%2Fandroid%2FAndroidFeatureComposeConventionPlugin.kt) = [AndroidFeatureConventionPlugin](src%2Fmain%2Fkotlin%2Fdev%2Fyaaum%2Fconvention%2Fconventionplugin%2Fandroid%2FAndroidFeatureConventionPlugin.kt) +
 Compose
 
 ##### AndroidTestConventionPlugin
@@ -72,5 +72,5 @@ configuration for [kotliner-gradle](https://github.com/jeremymailen/kotlinter-gr
 
 All stuff for project-level configuration are located in:
 
-- [ProjectConfig.kt](src%2Fmain%2Fkotlin%2Fdev%2Fyaaum%2Fconvention%2Fconfig%2FProjectConfig.kt);
-- [VersionConfig.kt](src%2Fmain%2Fkotlin%2Fdev%2Fyaaum%2Fconvention%2Fconfig%2FVersionConfig.kt).
+- [ProjectConfig](src%2Fmain%2Fkotlin%2Fdev%2Fyaaum%2Fconvention%2Fconfig%2FProjectConfig.kt);
+- [VersionConfig](src%2Fmain%2Fkotlin%2Fdev%2Fyaaum%2Fconvention%2Fconfig%2FVersionConfig.kt).
