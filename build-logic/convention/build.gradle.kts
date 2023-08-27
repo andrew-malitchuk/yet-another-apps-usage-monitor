@@ -18,10 +18,10 @@ tasks.withType<KotlinCompile>().configureEach {
 }
 
 dependencies {
-    compileOnly(libs.android.gradlePlugin)
-    compileOnly(libs.kotlin.gradlePlugin)
-    implementation(libs.detekt.gradlePlugin)
-    implementation(libs.org.jmailen.kotlinter)
+    compileOnly(libs.android.gradle.plugin)
+    compileOnly(libs.kotlin.gradle.plugin)
+    implementation(libs.detekt.gradle.plugin)
+    implementation(libs.kotlinter.gradle)
     implementation(libs.lint.checks)
     implementation(libs.lint.api)
 }

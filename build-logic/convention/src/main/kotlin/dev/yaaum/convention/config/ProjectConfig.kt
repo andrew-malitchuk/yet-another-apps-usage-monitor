@@ -15,7 +15,7 @@ object ProjectConfig {
         const val COMPILE_SDK = TARGET_SDK
     }
 
-    val JAVA_VERSION = JavaVersion.VERSION_19
+    val JAVA_VERSION = JavaVersion.VERSION_18
 
-    const val KOTLIN_VERSION = "19"
+    const val KOTLIN_VERSION = "18"
 }

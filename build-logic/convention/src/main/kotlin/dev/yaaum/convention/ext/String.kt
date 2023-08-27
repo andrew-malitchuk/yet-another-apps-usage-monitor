@@ -35,6 +35,5 @@ operator fun String.unaryPlus() {
  */
 context(Lint)
 operator fun String.unaryMinus() {
-    @Suppress("UnstableApiUsage")
     disable.add(this)
 }

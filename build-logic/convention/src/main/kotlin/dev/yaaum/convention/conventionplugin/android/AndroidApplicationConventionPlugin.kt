@@ -44,6 +44,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 jvmTarget = ProjectConfig.KOTLIN_VERSION
             }
         }
+
         with(libs) {
             dependencies {
                 implementDependency("core.ktx")

@@ -1,5 +1,3 @@
-@file:Suppress("unused")
-
 package dev.yaaum.convention.ext
 
 import com.android.build.api.dsl.ApplicationExtension

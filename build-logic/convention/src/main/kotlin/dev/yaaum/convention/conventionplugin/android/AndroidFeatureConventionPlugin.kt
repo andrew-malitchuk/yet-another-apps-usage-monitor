@@ -25,7 +25,8 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
             defaultConfig {
                 compileSdk = ProjectConfig.SDK.COMPILE_SDK
                 minSdk = ProjectConfig.SDK.MIN_SDK
-                @Suppress("UnstableApiUsage")
+                // TODO: Fix it!
+                @Suppress("DEPRECATION")
                 targetSdk = ProjectConfig.SDK.TARGET_SDK
             }
             compileOptions {

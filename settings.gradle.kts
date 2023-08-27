@@ -45,6 +45,9 @@ include(":presentation:core")
 include(":presentation:core:localisation")
 include(":presentation:core:navigation")
 include(":presentation:core:ui")
+//region Feature
 include(":presentation:feature")
 include(":presentation:feature:main")
+include(":presentation:feature:host")
+//endregion Feature
 //endregion Presentation
