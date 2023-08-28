@@ -74,3 +74,28 @@ All stuff for project-level configuration are located in:
 
 - [ProjectConfig](src%2Fmain%2Fkotlin%2Fdev%2Fyaaum%2Fconvention%2Fconfig%2FProjectConfig.kt);
 - [VersionConfig](src%2Fmain%2Fkotlin%2Fdev%2Fyaaum%2Fconvention%2Fconfig%2FVersionConfig.kt).
+
+### Custom tasks
+
+#### InstallGitHookTask
+
+[InstallGitHookTask](src%2Fmain%2Fkotlin%2Fdev%2Fyaaum%2Fconvention%2Ftask%2FInstallGitHookTask.kt) -
+Gradle task to copy git hooks files from `<root-dir>/config/githook/pre-commit` to `.git/hooks`.
+
+In `pre-commit` defines few gradle task:
+
+- `./gradlew detekt`;
+- `./gradle lintKotlin`.
+
+Those tasks run sequentially before `git commit`; in case if one of follow Gradle tasks finished
+unsuccessfully - your not able to finish commit.
+
+Command to execute this task:
+
+```shell
+./gradlew installGitHookTask
+```
+
+Task is registered in [AndroidApplicationConventionPlugin](src%2Fmain%2Fkotlin%2Fdev%2Fyaaum%2Fconvention%2Fconventionplugin%2Fandroid%2FAndroidApplicationConventionPlugin.kt)
+
+

@@ -4,15 +4,32 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 import java.io.File
 
+/**
+ * Simple Gradle task to copy githook config file
+ * from: `<root-dir>/config/githook/pre-commit`
+ * to: `.git/hooks`.
+ *
+ * Installed in AndroidApplicationConventionPlugin & named as `installGitHookTask` command.
+ *
+ * How to run:
+ * ```
+ * ./gradle installGitHookTask
+ * ```
+ *
+ * __N.B.__ AndroidApplicationConventionPlugin has to be applied in your module.
+ *
+ * @see AndroidApplicationConventionPlugin
+ * @see AndroidApplicationComposeConventionPlugin
+ */
 abstract class InstallGitHookTask : DefaultTask() {
 
     @TaskAction
-    fun foo() {
+    fun action() {
         this.project.copy {
             from(
                 File(
                     this@InstallGitHookTask.project.rootProject.rootDir,
-                    "config/pre-commit"
+                    "config/githook/pre-commit"
                 )
             )
             into {
