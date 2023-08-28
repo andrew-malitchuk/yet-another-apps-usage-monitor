@@ -1,18 +1,58 @@
 [versions]
-agp = "8.1.0"
-org-jetbrains-kotlin-android = "1.8.0"
-core-ktx = "1.9.0"
+gradle = "8.1.1"
+coreKtx = "1.10.1"
 appcompat = "1.6.1"
 material = "1.9.0"
+kotlin = "1.9.0"
+detektGradlePlugin = "1.23.1"
+kotlinterGradle = "3.16.0"
+lint = "31.1.1"
+
+compose = "1.1.1"
+uiTooling = "1.5.0"
+activityCompose = "1.7.2"
+lifecycleViewmodelCompose = "2.6.1"
+# https://developer.android.com/jetpack/androidx/releases/compose-compiler
+androidxComposeCompiler = "1.5.2"
+composeRuntime = "1.5.0"
 
 [libraries]
-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+# https://mvnrepository.com/artifact/androidx.core/core-ktx?repo=google
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+# https://mvnrepository.com/artifact/androidx.appcompat/appcompat?repo=google
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+# https://mvnrepository.com/artifact/com.google.android.material/material?repo=google
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+android-gradle-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "gradle" }
+# https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin
+kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+# https://mvnrepository.com/artifact/io.gitlab.arturbosch.detekt/detekt-gradle-plugin
+detekt-gradle-plugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detektGradlePlugin" }
+# https://github.com/jeremymailen/kotlinter-gradle/releases
+kotlinter-gradle = { group = "org.jmailen.gradle", name = "kotlinter-gradle", version.ref = "kotlinterGradle" }
+# https://mvnrepository.com/artifact/com.android.tools.lint/lint-checks
+lint-checks = { group = "com.android.tools.lint", name = "lint-checks", version.ref = "lint" }
+# https://mvnrepository.com/artifact/com.android.tools.lint/lint-api
+lint-api = { group = "com.android.tools.lint", name = "lint-api", version.ref = "lint" }
+# https://mvnrepository.com/artifact/androidx.compose.material3/material3
+material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "compose" }
+# https://mvnrepository.com/artifact/androidx.compose.ui/ui-tooling?repo=google
+ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "uiTooling" }
+# https://mvnrepository.com/artifact/androidx.compose.ui/ui
+activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+# https://mvnrepository.com/artifact/androidx.lifecycle/lifecycle-viewmodel-compose?repo=google
+lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
+# https://mvnrepository.com/artifact/androidx.compose.runtime/runtime
+compose-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "composeRuntime" }
+
 
 [plugins]
-com-android-application = { id = "com.android.application", version.ref = "agp" }
-org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
+# https://mvnrepository.com/artifact/com.android.application/com.android.application.gradle.plugin
+com-android-application = { id = "com.android.application", version.ref = "gradle" }
+# https://mvnrepository.com/artifact/org.jetbrains.kotlin.android/org.jetbrains.kotlin.android.gradle.plugin
+org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+# https://mvnrepository.com/artifact/com.android.library/com.android.library.gradle.plugin?repo=google
+com-android-library = { id = "com.android.library", version.ref = "gradle" }
 
 [bundles]
 

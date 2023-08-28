@@ -1,31 +1,17 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    alias(libs.plugins.com.android.application)
-    alias(libs.plugins.org.jetbrains.kotlin.android)
+    id("yaaum.convention.compose.application")
+    id("yaaum.convention.common.detekt")
+    id("yaaum.convention.common.ktlint")
 }
 
 android {
     namespace = "dev.yaaum.app"
-    compileSdk = 33
-
-    defaultConfig {
-        applicationId = "dev.yaaum.app"
-        minSdk = 24
-        targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
 }
 
 dependencies {
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
+
+    implementation(project(":presentation:feature:host"))
 }
