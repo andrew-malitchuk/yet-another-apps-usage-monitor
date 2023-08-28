@@ -8,9 +8,11 @@ import dev.yaaum.convention.ext.kotlinOptions
 import dev.yaaum.convention.ext.libs
 import dev.yaaum.convention.ext.plugins
 import dev.yaaum.convention.ext.unaryPlus
+import dev.yaaum.convention.task.InstallGitHookTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
+import org.gradle.kotlin.dsl.register
 
 /**
  * Default configuration for application-module.
@@ -20,6 +22,8 @@ import org.gradle.kotlin.dsl.dependencies
  */
 class AndroidApplicationConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) = with(target) {
+
+        tasks.register<InstallGitHookTask>("installGitHookTask")
 
         plugins {
             +"com.android.application"
@@ -50,6 +54,9 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 implementDependency("core.ktx")
             }
         }
+
+
+
     }
 
 }
