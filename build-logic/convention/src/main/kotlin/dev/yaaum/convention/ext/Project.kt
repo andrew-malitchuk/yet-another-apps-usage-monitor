@@ -32,6 +32,7 @@ val Project.libs
  *          ...
  * ```
  */
+@Suppress("unused")
 fun Project.app(block: ApplicationExtension.() -> Unit) {
     this.extensions.configure<ApplicationExtension> {
         this.block()
@@ -51,6 +52,7 @@ fun Project.app(block: ApplicationExtension.() -> Unit) {
  *          ...
  * ```
  */
+@Suppress("unused")
 fun Project.lib(block: LibraryExtension.() -> Unit) {
     this.extensions.configure<LibraryExtension> {
         this.block()
@@ -69,6 +71,7 @@ fun Project.lib(block: LibraryExtension.() -> Unit) {
  * }
  * ```
  */
+@Suppress("unused")
 fun Project.plugins(block: PluginManager.() -> Unit) {
     this.pluginManager.block()
 }
@@ -86,6 +89,7 @@ fun Project.plugins(block: PluginManager.() -> Unit) {
  * }
  * ```
  */
+@Suppress("unused")
 fun Project.detekt(block: DetektExtension.() -> Unit) {
     val detektScope = extensions.getByType<DetektExtension>()
     detektScope.block()
@@ -103,6 +107,7 @@ fun Project.detekt(block: DetektExtension.() -> Unit) {
  * }
  * ```
  */
+@Suppress("unused")
 fun Project.ktlint(block: KotlinterExtension.() -> Unit) {
     val ktlintScope = extensions.getByType<KotlinterExtension>()
     ktlintScope.block()

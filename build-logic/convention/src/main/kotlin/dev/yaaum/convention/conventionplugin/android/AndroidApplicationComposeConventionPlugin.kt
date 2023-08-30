@@ -32,9 +32,11 @@ class AndroidApplicationComposeConventionPlugin : Plugin<Project> {
             dependencies {
                 implementDependency("material3")
                 implementDependency("ui.tooling")
+                implementDependency("ui.tooling.preview")
                 implementDependency("activity.compose")
                 implementDependency("lifecycle.viewmodel.compose")
                 implementDependency("compose.runtime")
+                implementDependency("accompanist.systemuicontroller")
             }
         }
     }
