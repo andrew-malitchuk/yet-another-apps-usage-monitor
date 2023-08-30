@@ -9,10 +9,13 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Process
 import android.provider.Settings
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.material3.Text
+import dev.yaaum.common.core.ext.asDate
+import java.util.Locale
 
 class HostActivity : ComponentActivity() {
 
@@ -48,23 +51,31 @@ class HostActivity : ComponentActivity() {
 
     fun timeConsuming() {
         val lUsageStatsMap =
-            (this.getSystemService(USAGE_STATS_SERVICE) as? UsageStatsManager)?.queryAndAggregateUsageStats(
-                0,
-                System.currentTimeMillis(),
-            )
-        lUsageStatsMap.toString()
+            (applicationContext.getSystemService(USAGE_STATS_SERVICE) as? UsageStatsManager)
+                ?.queryAndAggregateUsageStats(
+                    0,
+                    System.currentTimeMillis(),
+                )
+        lUsageStatsMap?.keys?.forEach { key ->
+            val usage = lUsageStatsMap[key]
+            if (usage?.totalTimeVisible != 0L) {
+                val foo = usage?.totalTimeVisible?.asDate("HH:mm:ss:SS", true, Locale.US)
+                Log.d("foo", "$foo | ${usage?.packageName}")
+            }
+        }
     }
 
     private fun getInstalledApps(): List<AppList>? {
-        val apps: MutableList<AppList> = ArrayList<AppList>()
-        val packs = packageManager.getInstalledPackages(0)
+        val apps: MutableList<AppList> = ArrayList()
+        val packs = applicationContext.packageManager.getInstalledPackages(0)
         // List<PackageInfo> packs = getPackageManager().getInstalledPackages(PackageManager.GET_PERMISSIONS);
         for (i in packs.indices) {
             val p = packs[i]
             if (!isSystemPackage(p)) {
-                val appName = p.applicationInfo.loadLabel(packageManager).toString()
+                val appName =
+                    p.applicationInfo.loadLabel(applicationContext.packageManager).toString()
                 val icon = p.applicationInfo.loadIcon(
-                    packageManager,
+                    applicationContext.packageManager,
                 )
                 val packages = p.applicationInfo.packageName
                 apps.add(AppList(appName, icon, packages))

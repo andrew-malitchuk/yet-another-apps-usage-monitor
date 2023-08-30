@@ -1,15 +1,18 @@
 package dev.yaaum.convention.task
 
 import org.gradle.api.DefaultTask
+import org.gradle.api.provider.Property
+import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
 import java.io.File
 
 /**
- * Simple Gradle task to copy githook config file
- * from: `<root-dir>/config/githook/pre-commit`
- * to: `.git/hooks`.
+ * Simple Gradle task to copy git hook config file
+ * to `.git/hooks`.
  *
  * Installed in AndroidApplicationConventionPlugin & named as `installGitHookTask` command.
+ *
+ * @param from relative path to git hook config file (`<root-dir>/config/githook/pre-commit`)
  *
  * How to run:
  * ```
@@ -21,7 +24,14 @@ import java.io.File
  * @see AndroidApplicationConventionPlugin
  * @see AndroidApplicationComposeConventionPlugin
  */
+@Suppress("KDocUnresolvedReference", "SpellCheckingInspection")
 abstract class InstallGitHookTask : DefaultTask() {
+
+    /**
+     * Relative path to config file
+     */
+    @get:Input
+    abstract var from: String
 
     @TaskAction
     fun action() {
@@ -29,16 +39,23 @@ abstract class InstallGitHookTask : DefaultTask() {
             from(
                 File(
                     this@InstallGitHookTask.project.rootProject.rootDir,
-                    "config/githook/pre-commit"
+                    from
                 )
             )
             into {
                 File(
                     this@InstallGitHookTask.project.rootProject.rootDir,
-                    ".git/hooks"
+                    GIT_HOOK_LOCATION
                 )
             }
             fileMode = 0x777
         }
+    }
+
+    companion object {
+        /**
+         * Default git hook directory
+         */
+        const val GIT_HOOK_LOCATION = ".git/hooks"
     }
 }

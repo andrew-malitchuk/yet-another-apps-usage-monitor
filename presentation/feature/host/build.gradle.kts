@@ -9,3 +9,7 @@ plugins {
 android {
     namespace = "dev.yaaum.feature.host"
 }
+
+dependencies {
+    implementation(project(":common:core"))
+}

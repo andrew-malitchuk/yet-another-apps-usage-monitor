@@ -23,7 +23,9 @@ import org.gradle.kotlin.dsl.register
 class AndroidApplicationConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) = with(target) {
 
-        tasks.register<InstallGitHookTask>("installGitHookTask")
+        tasks.register<InstallGitHookTask>("installGitHookTask") {
+            from = "config/githook/pre-commit"
+        }
 
         plugins {
             +"com.android.application"
@@ -54,7 +56,6 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 implementDependency("core.ktx")
             }
         }
-
 
 
     }

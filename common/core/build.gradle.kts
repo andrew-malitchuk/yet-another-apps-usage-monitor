@@ -1,3 +1,5 @@
+@file:Suppress("SpellCheckingInspection")
+
 plugins {
     id("yaaum.convention.feature")
     id("yaaum.convention.common.detekt")
