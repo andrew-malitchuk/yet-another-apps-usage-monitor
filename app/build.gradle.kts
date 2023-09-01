@@ -2,6 +2,7 @@ plugins {
     id("yaaum.convention.compose.application")
     id("yaaum.convention.common.detekt")
     id("yaaum.convention.common.ktlint")
+    alias(libs.plugins.ksp)
 }
 
 android {

@@ -4,6 +4,8 @@ plugins {
     id("yaaum.convention.compose.feature")
     id("yaaum.convention.common.detekt")
     id("yaaum.convention.common.ktlint")
+    alias(libs.plugins.ksp)
+
 }
 
 android {
@@ -12,4 +14,6 @@ android {
 
 dependencies {
     implementation(project(":common:core"))
+    implementation(libs.compose.destinations.core)
+    ksp(libs.compose.destinations.ksp)
 }
