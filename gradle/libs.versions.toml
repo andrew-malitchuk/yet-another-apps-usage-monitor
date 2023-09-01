@@ -8,6 +8,7 @@ kotlin = "1.9.0"
 detektGradlePlugin = "1.23.1"
 kotlinterGradle = "3.16.0"
 lint = "31.1.1"
+navigationCompose="2.7.3"
 
 kotlinxCollectionsImmutable = "0.3.5"
 kotlinxCoroutines = "1.7.3"
@@ -84,6 +85,7 @@ voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.
 voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
 voyager-androidx = { module = "cafe.adriel.voyager:voyager-androidx", version.ref = "voyager" }
 voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager" }
+voyager-tab-navigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyager" }
 # https://mvnrepository.com/artifact/androidx.core/core-splashscreen
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidxCoreSplashscreen" }
 # https://mvnrepository.com/artifact/io.insert-koin
@@ -129,7 +131,8 @@ accompanist-pager-indicators = { group = "com.google.accompanist", name = "accom
 lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycleRuntimeCompose" }
 # https://mvnrepository.com/artifact/com.squareup.logcat/logcat
 squareup-logcat = { group = "com.squareup.logcat", name = "logcat", version.ref = "logcat" }
-
+# https://mvnrepository.com/artifact/androidx.navigation/navigation-compose?repo=google
+navigation-compose = {group="androidx.navigation",name="navigation-compose", version.ref="navigationCompose"}
 
 [plugins]
 # https://mvnrepository.com/artifact/com.android.application/com.android.application.gradle.plugin
