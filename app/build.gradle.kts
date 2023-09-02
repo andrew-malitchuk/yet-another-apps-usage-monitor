@@ -15,4 +15,5 @@ dependencies {
     implementation(libs.material)
 
     implementation(project(":presentation:feature:host"))
+    implementation(project(":presentation:feature:onboarding"))
 }

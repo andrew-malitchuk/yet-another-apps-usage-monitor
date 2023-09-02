@@ -80,3 +80,5 @@ naming:
   active: true
   MemberNameEqualsClassName:
     active: false
+  FunctionNaming:
+    active: false

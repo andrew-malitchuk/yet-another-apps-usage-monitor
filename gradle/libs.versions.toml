@@ -18,6 +18,7 @@ androidxComposeCompiler = "1.5.2"
 composeRuntime = "1.5.0"
 accompanistSystemuicontroller = "0.32.0"
 composeDestinations="1.9.52"
+rebugger="1.0.0-alpha06"
 
 [libraries]
 # https://mvnrepository.com/artifact/androidx.core/core-ktx?repo=google
@@ -54,6 +55,10 @@ accompanist-systemuicontroller = { group = "com.google.accompanist", name = "acc
 compose-destinations-core={group="io.github.raamcosta.compose-destinations", name="core", version.ref="composeDestinations"}
 # https://mvnrepository.com/artifact/io.github.raamcosta.compose-destinations
 compose-destinations-ksp={group="io.github.raamcosta.compose-destinations", name="ksp", version.ref="composeDestinations"}
+# https://github.com/theapache64/rebugger/releases/tag/1.0.0-alpha06
+# https://mvnrepository.com/artifact/io.github.raamcosta.compose-destinations
+compose-destinations-animations-core={group="io.github.raamcosta.compose-destinations", name="animations-core", version.ref="composeDestinations"}
+github-theapache64 = { group = "com.github.theapache64", name = "rebugger", version.ref = "rebugger" }
 
 
 [plugins]

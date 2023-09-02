@@ -14,4 +14,7 @@ android {
 dependencies {
     implementation(libs.compose.destinations.core)
     ksp(libs.compose.destinations.ksp)
+
+    implementation(project(":presentation:core:ui"))
+    implementation(project(":presentation:core:navigation"))
 }

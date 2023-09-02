@@ -25,7 +25,8 @@ class AndroidApplicationComposeConventionPlugin : Plugin<Project> {
         app {
             buildFeatures.compose = true
             composeOptions {
-                kotlinCompilerExtensionVersion = libs.findVersion("androidxComposeCompiler").get().toString()
+                kotlinCompilerExtensionVersion =
+                    libs.findVersion("androidxComposeCompiler").get().toString()
             }
         }
         with(libs) {
@@ -37,6 +38,7 @@ class AndroidApplicationComposeConventionPlugin : Plugin<Project> {
                 implementDependency("lifecycle.viewmodel.compose")
                 implementDependency("compose.runtime")
                 implementDependency("accompanist.systemuicontroller")
+                implementDependency("github.theapache64")
             }
         }
     }

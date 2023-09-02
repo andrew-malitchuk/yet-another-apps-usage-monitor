@@ -1,4 +1,4 @@
-package dev.yaaum.host.screen
+package dev.yaaum.host
 
 import android.app.AppOpsManager
 import android.app.usage.UsageStatsManager
@@ -13,8 +13,9 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.material3.Text
 import dev.yaaum.common.core.ext.asDate
+import dev.yaaum.host.screen.HostScreen
+import dev.yaaum.ui.theme.YaaumTheme
 import java.util.Locale
 
 class HostActivity : ComponentActivity() {
@@ -25,7 +26,10 @@ class HostActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Text("yaaum")
+            YaaumTheme {
+//                https://github.com/philipplackner/ComposeNavDestinationsDemo/tree/final
+                HostScreen()
+            }
         }
         if (!isPermissionGranted()) {
             getContent.launch(
