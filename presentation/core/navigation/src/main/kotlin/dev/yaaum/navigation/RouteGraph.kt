@@ -1,5 +1,8 @@
 package dev.yaaum.navigation
 
-object RouteGraph {
-    const val ONBOARDING_ROUTE = "onboarding"
+import cafe.adriel.voyager.core.registry.ScreenProvider
+
+sealed class RouteGraph : ScreenProvider {
+    data object OnboardingScreen : RouteGraph()
+    data object MainScreen : RouteGraph()
 }

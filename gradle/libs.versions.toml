@@ -19,6 +19,7 @@ composeRuntime = "1.5.0"
 accompanistSystemuicontroller = "0.32.0"
 composeDestinations="1.9.52"
 rebugger="1.0.0-alpha06"
+voyager = "1.0.0-rc05"
 
 [libraries]
 # https://mvnrepository.com/artifact/androidx.core/core-ktx?repo=google
@@ -51,15 +52,13 @@ lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-
 compose-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "composeRuntime" }
 # https://mvnrepository.com/artifact/com.google.accompanist/accompanist-systemuicontroller
 accompanist-systemuicontroller = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "accompanistSystemuicontroller" }
-# https://mvnrepository.com/artifact/io.github.raamcosta.compose-destinations
-compose-destinations-core={group="io.github.raamcosta.compose-destinations", name="core", version.ref="composeDestinations"}
-# https://mvnrepository.com/artifact/io.github.raamcosta.compose-destinations
-compose-destinations-ksp={group="io.github.raamcosta.compose-destinations", name="ksp", version.ref="composeDestinations"}
-# https://github.com/theapache64/rebugger/releases/tag/1.0.0-alpha06
-# https://mvnrepository.com/artifact/io.github.raamcosta.compose-destinations
-compose-destinations-animations-core={group="io.github.raamcosta.compose-destinations", name="animations-core", version.ref="composeDestinations"}
+# TODO: add links
 github-theapache64 = { group = "com.github.theapache64", name = "rebugger", version.ref = "rebugger" }
-
+# TODO: add links
+voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
+voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
+voyager-androidx = { module = "cafe.adriel.voyager:voyager-androidx", version.ref = "voyager" }
+voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager" }
 
 [plugins]
 # https://mvnrepository.com/artifact/com.android.application/com.android.application.gradle.plugin

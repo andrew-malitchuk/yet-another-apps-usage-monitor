@@ -1,4 +1,4 @@
-package dev.yaaum.onboarding.screen.onboarding
+package dev.yaaum.main.screen.main
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,10 +14,10 @@ import dev.yaaum.navigation.RouteGraph
 import dev.yaaum.ui.theme.YaaumTheme
 
 @Composable
-fun OnboardingScreen(
+fun MainScreen(
     navigator: Navigator,
 ) {
-    val mainScreen = rememberScreen(RouteGraph.MainScreen)
+    val onboardingScreen = rememberScreen(RouteGraph.OnboardingScreen)
 
     Rebugger(
         trackMap = mapOf(),
@@ -30,9 +30,9 @@ fun OnboardingScreen(
             ClickableText(
                 modifier = Modifier
                     .align(Alignment.Center),
-                text = AnnotatedString(text = "Onboarding"),
+                text = AnnotatedString(text = "Main"),
                 onClick = {
-                    navigator.push(mainScreen)
+                    navigator.push(onboardingScreen)
                 },
             )
         }

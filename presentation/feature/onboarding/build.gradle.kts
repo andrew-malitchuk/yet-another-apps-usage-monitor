@@ -12,8 +12,10 @@ android {
 }
 
 dependencies {
-    implementation(libs.compose.destinations.core)
-    ksp(libs.compose.destinations.ksp)
+    implementation(libs.voyager.navigator)
+    implementation(libs.voyager.transitions)
+    implementation(libs.voyager.androidx)
+    implementation(libs.voyager.koin)
 
     implementation(project(":presentation:core:ui"))
     implementation(project(":presentation:core:navigation"))

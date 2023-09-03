@@ -13,8 +13,9 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
+import cafe.adriel.voyager.navigator.Navigator
 import dev.yaaum.common.core.ext.asDate
-import dev.yaaum.host.screen.HostScreen
+import dev.yaaum.onboarding.navigation.OnboardingRoute
 import dev.yaaum.ui.theme.YaaumTheme
 import java.util.Locale
 
@@ -27,8 +28,7 @@ class HostActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             YaaumTheme {
-//                https://github.com/philipplackner/ComposeNavDestinationsDemo/tree/final
-                HostScreen()
+                Navigator(OnboardingRoute())
             }
         }
         if (!isPermissionGranted()) {
