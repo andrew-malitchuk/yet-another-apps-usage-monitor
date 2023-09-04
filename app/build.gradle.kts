@@ -2,6 +2,7 @@ plugins {
     id("yaaum.convention.compose.application")
     id("yaaum.convention.common.detekt")
     id("yaaum.convention.common.ktlint")
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -14,4 +15,7 @@ dependencies {
     implementation(libs.material)
 
     implementation(project(":presentation:feature:host"))
+    implementation(project(":presentation:feature:onboarding"))
+    implementation(project(":presentation:feature:settings"))
+    implementation(project(":presentation:core:navigation"))
 }

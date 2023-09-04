@@ -37,6 +37,7 @@ class AndroidFeatureComposeConventionPlugin : Plugin<Project> {
                 implementDependency("lifecycle.viewmodel.compose")
                 implementDependency("compose.runtime")
                 implementDependency("accompanist.systemuicontroller")
+                implementDependency("github.theapache64")
             }
         }
     }
