@@ -6,6 +6,9 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import dev.yaaum.onboarding.screen.composable.onboarding.OnboardingScreen
 
+/**
+ * Route for OnboardingScreen
+ */
 class OnboardingRoute : Screen {
     @Composable
     override fun Content() {

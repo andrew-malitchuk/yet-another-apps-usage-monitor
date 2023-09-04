@@ -6,6 +6,9 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import dev.yaaum.settings.screen.composable.settings.SettingsScreen
 
+/**
+ * Route for SettingsScreen
+ */
 class SettingsRoute : Screen {
     @Composable
     override fun Content() {

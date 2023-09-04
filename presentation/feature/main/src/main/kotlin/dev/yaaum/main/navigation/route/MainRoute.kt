@@ -6,12 +6,15 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import dev.yaaum.main.screen.composable.main.MainScreen
 
+/**
+ * Route for MainScreen
+ *
+ * @param from
+ */
 class MainRoute(private val from: String) : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-//        val mainScreen = rememberScreen(SharedScreen.MainScreen)
-
         MainScreen(navigator, from)
     }
 }
