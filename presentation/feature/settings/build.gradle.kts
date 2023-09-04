@@ -5,11 +5,10 @@ plugins {
     id("yaaum.convention.common.detekt")
     id("yaaum.convention.common.ktlint")
     alias(libs.plugins.ksp)
-
 }
 
 android {
-    namespace = "dev.yaaum.feature.host"
+    namespace = "dev.yaaum.feature.settings"
 }
 
 dependencies {
@@ -19,8 +18,5 @@ dependencies {
     implementation(libs.voyager.koin)
 
     implementation(project(":presentation:core:ui"))
-    implementation(project(":common:core"))
-    implementation(project(":presentation:feature:onboarding"))
-    implementation(project(":presentation:feature:main"))
-    implementation(project(":presentation:feature:settings"))
+    implementation(project(":presentation:core:navigation"))
 }

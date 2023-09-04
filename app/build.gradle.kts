@@ -16,5 +16,6 @@ dependencies {
 
     implementation(project(":presentation:feature:host"))
     implementation(project(":presentation:feature:onboarding"))
+    implementation(project(":presentation:feature:settings"))
     implementation(project(":presentation:core:navigation"))
 }

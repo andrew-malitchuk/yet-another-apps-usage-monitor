@@ -15,7 +15,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import cafe.adriel.voyager.navigator.Navigator
 import dev.yaaum.common.core.ext.asDate
-import dev.yaaum.onboarding.navigation.OnboardingRoute
+import dev.yaaum.onboarding.navigation.route.OnboardingRoute
 import dev.yaaum.ui.theme.YaaumTheme
 import java.util.Locale
 
