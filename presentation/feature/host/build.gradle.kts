@@ -18,6 +18,9 @@ dependencies {
     implementation(libs.voyager.androidx)
     implementation(libs.voyager.koin)
 
+    implementation(libs.androidx.core.splashscreen)
+
+
     implementation(project(":presentation:core:ui"))
     implementation(project(":common:core"))
     implementation(project(":presentation:feature:onboarding"))

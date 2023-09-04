@@ -13,10 +13,12 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import cafe.adriel.voyager.navigator.Navigator
 import dev.yaaum.common.core.ext.asDate
 import dev.yaaum.onboarding.navigation.route.OnboardingRoute
 import dev.yaaum.ui.theme.YaaumTheme
+import kotlinx.coroutines.launch
 import java.util.Locale
 
 class HostActivity : ComponentActivity() {
@@ -25,6 +27,8 @@ class HostActivity : ComponentActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
+
         super.onCreate(savedInstanceState)
         setContent {
             YaaumTheme {
