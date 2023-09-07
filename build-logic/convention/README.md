@@ -43,6 +43,11 @@ Compose
 [AndroidTestConventionPlugin](src%2Fmain%2Fkotlin%2Fdev%2Fyaaum%2Fconvention%2Fconventionplugin%2Fandroid%2FAndroidTestConventionPlugin.kt) -
 configuration for integration test (aka Android-platform tests).
 
+##### KoinConventionPlugin
+
+[KoinConventionPlugin](src%2Fmain%2Fkotlin%2Fdev%2Fyaaum%2Fconvention%2Fconventionplugin%2Fandroid%2FKoinConventionPlugin.kt) -
+configuration for Koin DI.
+
 #### Kotlin
 
 ##### KotlinLibraryConventionPlugin
@@ -96,6 +101,7 @@ Command to execute this task:
 ./gradlew installGitHookTask
 ```
 
-Task is registered in [AndroidApplicationConventionPlugin](src%2Fmain%2Fkotlin%2Fdev%2Fyaaum%2Fconvention%2Fconventionplugin%2Fandroid%2FAndroidApplicationConventionPlugin.kt)
+Task is registered
+in [AndroidApplicationConventionPlugin](src%2Fmain%2Fkotlin%2Fdev%2Fyaaum%2Fconvention%2Fconventionplugin%2Fandroid%2FAndroidApplicationConventionPlugin.kt)
 
 

@@ -54,6 +54,11 @@ gradlePlugin {
             implementationClass =
                 "dev.yaaum.convention.conventionplugin.android.AndroidTestConventionPlugin"
         }
+        register("androidKoin") {
+            id = "yaaum.convention.koin"
+            implementationClass =
+                "dev.yaaum.convention.conventionplugin.android.KoinConventionPlugin"
+        }
         //endregion Android
         //region Kotlin
         register("kotlinLibrary") {
