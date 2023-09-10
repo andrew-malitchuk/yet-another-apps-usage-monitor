@@ -5,5 +5,5 @@ plugins {
 }
 
 android {
-    namespace = "dev.yaaum.data.repository.impl"
+    namespace = "dev.yaaum.data.repository.core"
 }
