@@ -29,8 +29,9 @@ include(":common:core")
 
 //region Domain
 include(":domain")
-include(":domain:impl")
 include(":domain:core")
+include(":domain:timeusage")
+include(":domain:timeusage:impl")
 //endregion Domain
 
 //region Data

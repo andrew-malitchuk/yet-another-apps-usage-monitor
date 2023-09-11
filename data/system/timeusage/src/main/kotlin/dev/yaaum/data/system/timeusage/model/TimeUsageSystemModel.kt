@@ -3,6 +3,9 @@ package dev.yaaum.data.system.timeusage.model
 import android.app.usage.UsageStats
 import dev.yaaum.data.system.core.model.base.BaseSystemModel
 
+/**
+ * Container for app usage statistic. (In other words, wrapper over `UsageStats`).
+ */
 data class TimeUsageSystemModel(
     val packageName: String?,
     val usageBegin: Long?,
@@ -11,6 +14,9 @@ data class TimeUsageSystemModel(
     val totalTimeInForeground: Long?,
 ) : BaseSystemModel
 
+/**
+ * `UsageStats` -> `TimeUsageSystemModel`
+ */
 fun UsageStats.toSystemModel() =
     TimeUsageSystemModel(
         packageName = this.packageName,

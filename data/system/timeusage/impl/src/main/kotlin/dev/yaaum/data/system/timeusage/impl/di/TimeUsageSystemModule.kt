@@ -1,11 +1,14 @@
-package dev.yaaum.repository.timeusage.impl.di
+package dev.yaaum.data.system.timeusage.impl.di
 
+import dev.yaaum.data.system.timeusage.impl.source.TimeUsageDataSourceImpl
 import dev.yaaum.data.system.timeusage.source.TimeUsageDataSource
-import dev.yaaum.repository.timeusage.impl.source.TimeUsageDataSourceImpl
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
-val timeUsageModule = module {
+/**
+ * `:data:system:timeusage:impl`
+ */
+val timeUsageSystemModule = module {
     single<TimeUsageDataSource> {
         TimeUsageDataSourceImpl(androidContext())
     }

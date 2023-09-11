@@ -2,12 +2,11 @@ plugins {
     id("yaaum.convention.feature")
     id("yaaum.convention.common.detekt")
     id("yaaum.convention.common.ktlint")
-    id("yaaum.convention.koin")
     alias(libs.plugins.ksp)
 }
 
 android {
-    namespace = "dev.yaaum.data.system.timeusage.impl"
+    namespace = "dev.yaaum.domain.timeusage"
 }
 
 dependencies{
@@ -17,8 +16,10 @@ dependencies{
     implementation(libs.arrow.fx.coroutines)
     implementation(libs.arrow.optics)
     ksp(libs.arrow.optics.ksp.plugin)
-    implementation(project(":data:system:timeusage"))
-    implementation(project(":data:system:core"))
+
+    implementation(project(":domain:core"))
+    implementation(project(":data:repository:core"))
+    implementation(project(":data:repository:timeusage"))
 }
 
 // Necessary for context receiver

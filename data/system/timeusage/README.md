@@ -1,7 +1,3 @@
 # YAAUM
 
-## data:timeusage
-
-### :timeusage
-
-### :timeusage:impl
+## :data:system:timeusage

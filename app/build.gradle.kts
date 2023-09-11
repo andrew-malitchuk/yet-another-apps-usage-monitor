@@ -25,6 +25,11 @@ dependencies {
     // XX
     implementation(project(":data:system:timeusage"))
     implementation(project(":data:system:timeusage:impl"))
+    implementation(project(":data:repository:timeusage:impl"))
+    implementation(project(":data:repository:timeusage"))
+
+    implementation(project(":domain:timeusage"))
+    implementation(project(":domain:timeusage:impl"))
 }
 
 // Necessary for context receiver

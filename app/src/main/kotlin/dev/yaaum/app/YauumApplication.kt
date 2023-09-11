@@ -2,9 +2,12 @@ package dev.yaaum.app
 
 import android.app.Application
 import arrow.core.raise.fold
-import dev.yaaum.data.system.timeusage.impl.di.timeUsageModule
+import dev.yaaum.data.system.timeusage.impl.di.timeUsageSystemModule
 import dev.yaaum.data.system.timeusage.source.TimeUsageDataSource
+import dev.yaaum.domain.timeusage.GetStatisticsAboutAllAppsUseCase
+import dev.yaaum.domain.timeusage.impl.di.timeUsageDomainModule
 import dev.yaaum.host.navigation.navigationInit
+import dev.yaaum.repository.timeusage.impl.di.timeUsageRepoModule
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -15,24 +18,35 @@ class YauumApplication : Application() {
 
     val foo: TimeUsageDataSource by inject()
 
+    val bar: GetStatisticsAboutAllAppsUseCase by inject()
+
     override fun onCreate() {
         super.onCreate()
         navigationInit()
+        diInit()
+
+        GlobalScope.launch {
+            bar().fold(
+                {
+                },
+                { result ->
+                    result.toString()
+                },
+            )
+        }
+    }
+
+    private fun diInit() {
         startKoin {
             androidContext(this@YauumApplication)
             modules(
                 listOf(
-                    timeUsageModule,
+                    // TODO: add in separated modules like `domainModule`, `dataModule` etc
+                    timeUsageDomainModule,
+                    timeUsageSystemModule,
+                    timeUsageRepoModule,
                 ),
             )
-        }
-        GlobalScope.launch {
-            fold({
-                foo.getApplicationsUsage()
-            }, { error ->
-            }, { result ->
-                result.toString()
-            })
         }
     }
 }

@@ -4,7 +4,5 @@
 
 ### :domain
 
-### :domain:impl
-
 ### :domain:core    
 
