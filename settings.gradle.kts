@@ -29,15 +29,21 @@ include(":common:core")
 
 //region Domain
 include(":domain")
-include(":domain:impl")
 include(":domain:core")
+include(":domain:timeusage")
+include(":domain:timeusage:impl")
 //endregion Domain
 
 //region Data
 include(":data")
 include(":data:core")
-include(":data:repository:impl")
-include(":data:repository")
+include(":data:repository:core")
+include(":data:repository:timeusage")
+include(":data:repository:timeusage:impl")
+include(":data:system")
+include(":data:system:core")
+include(":data:system:timeusage")
+include(":data:system:timeusage:impl")
 //region Data
 
 //region Presentation

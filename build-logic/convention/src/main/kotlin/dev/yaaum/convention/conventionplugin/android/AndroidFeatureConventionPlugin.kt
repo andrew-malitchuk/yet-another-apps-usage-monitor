@@ -7,6 +7,8 @@ import dev.yaaum.convention.ext.plugins
 import dev.yaaum.convention.ext.unaryPlus
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 /**
  * Convention plugin for feature-module
@@ -37,6 +39,13 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 jvmTarget = ProjectConfig.KOTLIN_VERSION
             }
         }
+        // Necessary for context receiver
+        tasks.withType<KotlinCompile>().configureEach {
+            kotlinOptions {
+                freeCompilerArgs = freeCompilerArgs + "-Xcontext-receivers"
+            }
+        }
     }
 
 }
+

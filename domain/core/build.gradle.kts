@@ -7,3 +7,7 @@ plugins {
 android {
     namespace = "dev.yaaum.domain.core"
 }
+
+dependencies {
+    implementation(project(":common:core"))
+}

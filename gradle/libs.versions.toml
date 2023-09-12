@@ -9,6 +9,8 @@ detektGradlePlugin = "1.23.1"
 kotlinterGradle = "3.16.0"
 lint = "31.1.1"
 
+kotlinxCoroutines="1.7.3"
+
 compose = "1.1.1"
 uiTooling = "1.5.0"
 activityCompose = "1.7.2"
@@ -17,10 +19,17 @@ lifecycleViewmodelCompose = "2.6.1"
 androidxComposeCompiler = "1.5.2"
 composeRuntime = "1.5.0"
 accompanistSystemuicontroller = "0.32.0"
-composeDestinations="1.9.52"
-rebugger="1.0.0-alpha06"
+composeDestinations = "1.9.52"
+rebugger = "1.0.0-alpha06"
 voyager = "1.0.0-rc05"
-androidxCoreSplashscreen= "1.0.1"
+androidxCoreSplashscreen = "1.0.1"
+
+koin = "3.3.0"
+koinTest = "3.3.0"
+koinAndroid = "3.3.1"
+koinCompose = "3.4.0"
+
+arrow = "1.2.0"
 
 [libraries]
 # https://mvnrepository.com/artifact/androidx.core/core-ktx?repo=google
@@ -62,6 +71,21 @@ voyager-androidx = { module = "cafe.adriel.voyager:voyager-androidx", version.re
 voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager" }
 # https://mvnrepository.com/artifact/androidx.core/core-splashscreen
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidxCoreSplashscreen" }
+# https://mvnrepository.com/artifact/io.insert-koin
+koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
+koin-test = { group = "io.insert-koin", name = "koin-test-junit4", version.ref = "koinTest" }
+koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koinAndroid" }
+koin-workmanager = { group = "io.insert-koin", name = "koin-androidx-workmanager", version.ref = "koinAndroid" }
+koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koinCompose" }
+# https://mvnrepository.com/artifact/io.arrow-kt
+arrow-core = { group = "io.arrow-kt", name = "arrow-core", version.ref = "arrow" }
+arrow-fx-coroutines = { group = "io.arrow-kt", name = "arrow-fx-coroutines", version.ref = "arrow" }
+arrow-optics = { group = "io.arrow-kt", name = "arrow-optics", version.ref = "arrow" }
+arrow-optics-ksp-plugin = { group = "io.arrow-kt", name = "arrow-optics-ksp-plugin", version.ref = "arrow" }
+# https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+# https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-test
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
 
 
 [plugins]
@@ -75,4 +99,6 @@ com-android-library = { id = "com.android.library", version.ref = "gradle" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 [bundles]
+arrow = ["arrow-core", "arrow-fx-coroutines", "arrow-optics"]
+
 
