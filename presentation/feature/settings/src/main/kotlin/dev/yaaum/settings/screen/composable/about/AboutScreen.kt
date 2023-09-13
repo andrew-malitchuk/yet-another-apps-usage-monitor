@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.navigator.Navigator
 import com.theapache64.rebugger.Rebugger
-import dev.yaaum.navigation.RouteGraph
+import dev.yaaum.presentation.core.navigation.RouteGraph
 import dev.yaaum.ui.theme.YaaumTheme
 
 @Composable

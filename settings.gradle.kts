@@ -22,9 +22,9 @@ rootProject.name = "YAAUM"
 
 include(":app")
 
+// TODO: rename
 //region Common
-include(":common")
-include(":common:core")
+include(":core:common")
 //endregion Common
 
 //region Domain
@@ -52,6 +52,7 @@ include(":presentation:core")
 include(":presentation:core:localisation")
 include(":presentation:core:navigation")
 include(":presentation:core:ui")
+include(":presentation:core:common")
 //region Feature
 include(":presentation:feature")
 include(":presentation:feature:main")

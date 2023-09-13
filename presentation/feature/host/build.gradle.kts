@@ -22,7 +22,7 @@ dependencies {
 
 
     implementation(project(":presentation:core:ui"))
-    implementation(project(":common:core"))
+    implementation(project(":core:common"))
     implementation(project(":presentation:feature:onboarding"))
     implementation(project(":presentation:feature:main"))
     implementation(project(":presentation:feature:settings"))
