@@ -23,8 +23,8 @@ dependencies {
     implementation(project(":presentation:feature:settings"))
     implementation(project(":presentation:core:navigation"))
     // XX
-    implementation(project(":data:system:timeusage"))
-    implementation(project(":data:system:timeusage:impl"))
+    implementation(project(":data:source:system:timeusage"))
+    implementation(project(":data:source:system:timeusage:impl"))
     implementation(project(":data:repository:timeusage:impl"))
     implementation(project(":data:repository:timeusage"))
 

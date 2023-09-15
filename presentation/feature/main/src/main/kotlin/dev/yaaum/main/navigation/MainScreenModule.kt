@@ -2,7 +2,7 @@ package dev.yaaum.main.navigation
 
 import cafe.adriel.voyager.core.registry.screenModule
 import dev.yaaum.main.navigation.route.MainRoute
-import dev.yaaum.navigation.RouteGraph
+import dev.yaaum.presentation.core.navigation.RouteGraph
 
 /**
  * Module for `presentation:feature:main`

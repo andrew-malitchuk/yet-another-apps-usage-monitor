@@ -1,7 +1,7 @@
 [versions]
 gradle = "8.1.1"
 ksp = "1.9.0-1.0.11"
-coreKtx = "1.10.1"
+coreKtx = "1.12.0"
 appcompat = "1.6.1"
 material = "1.9.0"
 kotlin = "1.9.0"
@@ -9,15 +9,15 @@ detektGradlePlugin = "1.23.1"
 kotlinterGradle = "3.16.0"
 lint = "31.1.1"
 
-kotlinxCoroutines="1.7.3"
+kotlinxCoroutines = "1.7.3"
 
 compose = "1.1.1"
-uiTooling = "1.5.0"
+uiTooling = "1.5.1"
 activityCompose = "1.7.2"
-lifecycleViewmodelCompose = "2.6.1"
+lifecycleViewmodelCompose = "2.6.2"
 # https://developer.android.com/jetpack/androidx/releases/compose-compiler
 androidxComposeCompiler = "1.5.2"
-composeRuntime = "1.5.0"
+composeRuntime = "1.5.1"
 accompanistSystemuicontroller = "0.32.0"
 composeDestinations = "1.9.52"
 rebugger = "1.0.0-alpha06"
@@ -86,6 +86,8 @@ arrow-optics-ksp-plugin = { group = "io.arrow-kt", name = "arrow-optics-ksp-plug
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 # https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-test
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
+# https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-android
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
 
 
 [plugins]
