@@ -17,8 +17,8 @@ dependencies{
     implementation(libs.arrow.fx.coroutines)
     implementation(libs.arrow.optics)
     ksp(libs.arrow.optics.ksp.plugin)
-    implementation(project(":data:system:timeusage"))
-    implementation(project(":data:system:core"))
+    implementation(project(":data:source:system:timeusage"))
+    implementation(project(":data:source:system:core"))
     implementation(project(":data:repository:timeusage"))
     implementation(project(":data:repository:core"))
 }

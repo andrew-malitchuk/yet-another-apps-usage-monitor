@@ -40,10 +40,10 @@ include(":data:core")
 include(":data:repository:core")
 include(":data:repository:timeusage")
 include(":data:repository:timeusage:impl")
-include(":data:system")
-include(":data:system:core")
-include(":data:system:timeusage")
-include(":data:system:timeusage:impl")
+include(":data:source:system")
+include(":data:source:system:core")
+include(":data:source:system:timeusage")
+include(":data:source:system:timeusage:impl")
 //region Data
 
 //region Presentation

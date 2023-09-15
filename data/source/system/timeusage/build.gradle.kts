@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "dev.yaaum.data.repository.timeusage"
+    namespace = "dev.yaaum.data.source.system.timeusage"
 }
 
 dependencies{
@@ -18,8 +18,6 @@ dependencies{
     ksp(libs.arrow.optics.ksp.plugin)
 
     implementation(project(":data:source:system:core"))
-    implementation(project(":data:repository:core"))
-    implementation(project(":data:source:system:timeusage"))
 }
 
 // Necessary for context receiver

@@ -1,7 +1,7 @@
 package dev.yaaum.data.repository.timeusage.model
 
 import dev.yaaum.data.repository.core.model.base.BaseRepoModel
-import dev.yaaum.data.system.timeusage.model.TimeUsageSystemModel
+import dev.yaaum.data.source.system.timeusage.model.TimeUsageSystemModel
 
 /**
  * Container for app usage statistic. (In other words, wrapper over `UsageStats`).
