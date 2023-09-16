@@ -1,0 +1,25 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="NightAdjusted.Theme.Yaaum" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
+    </style>
+
+    <style name="PlatformAdjusted.Theme.Yaaum" parent="NightAdjusted.Theme.Yaaum">
+        <item name="android:statusBarColor">#000000</item>
+    </style>
+
+    <style name="Theme.Yaaum" parent="PlatformAdjusted.Theme.Yaaum" />
+
+    <style name="NightAdjusted.Theme.Splash" parent="Theme.SplashScreen">
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="Theme.Yaaum.Splash" parent="NightAdjusted.Theme.Splash">
+        <item name="windowSplashScreenAnimatedIcon">@drawable/app_icon_splashscreen_logo_animated</item>
+        <item name="windowSplashScreenBackground">#FBFBFF</item>
+        <item name="windowSplashScreenAnimationDuration">2147483647</item>
+        <item name="postSplashScreenTheme">@style/Theme.Yaaum</item>
+    </style>
+
+</resources>

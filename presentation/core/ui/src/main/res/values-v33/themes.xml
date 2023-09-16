@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Yacsa.Splash" parent="NightAdjusted.Theme.Splash">
+        <item name="windowSplashScreenBackground">#FBFBFF</item>
+        <item name="windowSplashScreenAnimationDuration">1500</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/app_icon_splashscreen_logo_animated
+        </item>
+        <item name="android:windowSplashScreenBehavior">icon_preferred</item>
+        <item name="postSplashScreenTheme">@style/Theme.Yaaum</item>
+    </style>
+
+</resources>

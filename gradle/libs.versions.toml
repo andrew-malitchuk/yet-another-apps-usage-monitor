@@ -30,6 +30,7 @@ koinAndroid = "3.3.1"
 koinCompose = "3.4.0"
 
 arrow = "1.2.0"
+composeMaterial = "1.5.1"
 
 [libraries]
 # https://mvnrepository.com/artifact/androidx.core/core-ktx?repo=google
@@ -88,6 +89,8 @@ kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
 # https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-android
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+# https://mvnrepository.com/artifact/androidx.compose.material/material
+compose-material = { group = "androidx.compose.material", name = "material", version.ref = "composeMaterial" }
 
 [plugins]
 # https://mvnrepository.com/artifact/com.android.application/com.android.application.gradle.plugin
