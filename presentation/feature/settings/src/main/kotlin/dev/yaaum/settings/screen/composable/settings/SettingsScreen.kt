@@ -8,8 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.navigator.Navigator
 import com.theapache64.rebugger.Rebugger
+import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.settings.navigation.route.AboutRoute
-import dev.yaaum.ui.theme.YaaumTheme
 
 @Composable
 fun SettingsScreen(

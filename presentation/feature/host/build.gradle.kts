@@ -20,8 +20,8 @@ dependencies {
 
     implementation(libs.androidx.core.splashscreen)
 
-
     implementation(project(":presentation:core:ui"))
+    implementation(project(":presentation:core:common"))
     implementation(project(":core:common"))
     implementation(project(":presentation:feature:onboarding"))
     implementation(project(":presentation:feature:main"))
