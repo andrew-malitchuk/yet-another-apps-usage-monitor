@@ -10,7 +10,7 @@ import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.navigator.Navigator
 import com.theapache64.rebugger.Rebugger
 import dev.yaaum.presentation.core.navigation.RouteGraph
-import dev.yaaum.ui.theme.YaaumTheme
+import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 
 @Composable
 fun AboutScreen(

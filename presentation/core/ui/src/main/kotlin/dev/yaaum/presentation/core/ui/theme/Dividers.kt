@@ -1,7 +1,7 @@
 package dev.yaaum.presentation.core.ui.theme
 
 import androidx.compose.ui.unit.dp
-import dev.yaaum.ui.theme.common.YaaumDividers
+import dev.yaaum.presentation.core.ui.theme.common.YaaumDividers
 
 val dividers = YaaumDividers(
     default = 0.dp,

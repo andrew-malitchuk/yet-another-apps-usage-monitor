@@ -1,8 +1,8 @@
 package dev.yaaum.data.repository.timeusage
 
-import arrow.core.raise.Raise
 import dev.yaaum.data.repository.core.exception.base.BaseRepoException
 import dev.yaaum.data.repository.timeusage.model.TimeUsageRepoModel
+import kotlin.jvm.Throws
 
 /**
  * Lazy wrapper over system call for Application Usage API
@@ -15,7 +15,9 @@ interface TimeUsageRepository {
      *
      * @receiver hypothetical exception
      * @return list of app usage info
+     *
+     * @throws BaseRepoException
      */
-    context(Raise<BaseRepoException>)
+    @Throws(BaseRepoException::class)
     suspend fun getApplicationsUsage(): List<TimeUsageRepoModel>
 }
