@@ -1,4 +1,4 @@
-package dev.yaaum.common.core.ext
+package dev.yaaum.core.common.ext
 
 import java.text.SimpleDateFormat
 import java.util.Locale

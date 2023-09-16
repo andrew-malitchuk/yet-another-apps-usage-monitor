@@ -1,5 +1,3 @@
-@file:Suppress("SpellCheckingInspection")
-
 plugins {
     id("yaaum.convention.feature")
     id("yaaum.convention.common.detekt")
@@ -7,5 +5,5 @@ plugins {
 }
 
 android {
-    namespace = "dev.yaaum.common.core"
+    namespace = "dev.yaaum.core.common"
 }

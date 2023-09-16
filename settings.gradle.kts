@@ -23,8 +23,9 @@ rootProject.name = "YAAUM"
 include(":app")
 
 //region Common
-include(":common")
-include(":common:core")
+include(":core")
+include(":core:common")
+include(":core:konsist")
 //endregion Common
 
 //region Domain
