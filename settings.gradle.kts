@@ -24,7 +24,9 @@ include(":app")
 
 // TODO: rename
 //region Common
-include(":core:common")
+include(":common")
+include(":common:core")
+include(":common:konsist")
 //endregion Common
 
 //region Domain
@@ -51,8 +53,8 @@ include(":presentation")
 include(":presentation:core")
 include(":presentation:core:localisation")
 include(":presentation:core:navigation")
+include(":presentation:core:platform")
 include(":presentation:core:ui")
-include(":presentation:core:common")
 //region Feature
 include(":presentation:feature")
 include(":presentation:feature:main")

@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "dev.yaaum.feature.main"
+    namespace = "dev.yaaum.presentation.feature.main"
 }
 
 dependencies {
