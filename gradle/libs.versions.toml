@@ -32,6 +32,12 @@ koinCompose = "3.4.0"
 arrow = "1.2.0"
 composeMaterial = "1.5.1"
 
+junit = "4.13.2"
+mockitoCore = "5.5.0"
+mockitoKotlin = "5.1.0"
+konsist ="0.12.1"
+
+
 [libraries]
 # https://mvnrepository.com/artifact/androidx.core/core-ktx?repo=google
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -91,6 +97,14 @@ kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
 # https://mvnrepository.com/artifact/androidx.compose.material/material
 compose-material = { group = "androidx.compose.material", name = "material", version.ref = "composeMaterial" }
+# https://mvnrepository.com/artifact/junit/junit
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+# https://mvnrepository.com/artifact/org.mockito/mockito-core
+mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockitoCore" }
+# https://mvnrepository.com/artifact/org.mockito.kotlin/mockito-kotlin
+mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockitoKotlin" }
+# https://github.com/LemonAppDev/konsist/releases/tag/v0.12.1
+konsist = { group = "com.lemonappdev", name ="konsist", version.ref="konsist"}
 
 [plugins]
 # https://mvnrepository.com/artifact/com.android.application/com.android.application.gradle.plugin

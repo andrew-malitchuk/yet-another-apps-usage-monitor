@@ -9,7 +9,7 @@ plugins {
 }
 
 android {
-    namespace = "dev.yaaum.feature.host"
+    namespace = "dev.yaaum.presentation.feature.host"
 }
 
 dependencies {
@@ -21,8 +21,8 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
 
     implementation(project(":presentation:core:ui"))
-    implementation(project(":presentation:core:common"))
-    implementation(project(":core:common"))
+    implementation(project(":presentation:core:platform"))
+    implementation(project(":common:core"))
     implementation(project(":presentation:feature:onboarding"))
     implementation(project(":presentation:feature:main"))
     implementation(project(":presentation:feature:settings"))

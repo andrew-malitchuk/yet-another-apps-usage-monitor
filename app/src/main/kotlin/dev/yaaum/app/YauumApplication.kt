@@ -5,7 +5,7 @@ import dev.yaaum.data.source.system.timeusage.impl.di.timeUsageSystemModule
 import dev.yaaum.data.source.system.timeusage.source.TimeUsageDataSource
 import dev.yaaum.domain.timeusage.GetStatisticsAboutAllAppsUseCase
 import dev.yaaum.domain.timeusage.impl.di.timeUsageDomainModule
-import dev.yaaum.host.navigation.navigationInit
+import dev.yaaum.presentation.feature.host.navigation.navigationInit
 import dev.yaaum.repository.timeusage.impl.di.timeUsageRepoModule
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

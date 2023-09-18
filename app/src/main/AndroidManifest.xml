@@ -19,7 +19,7 @@
 
     <application android:name="dev.yaaum.app.YauumApplication">
         <activity
-            android:name="dev.yaaum.host.HostActivity"
+            android:name="dev.yaaum.presentation.feature.host.HostActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
