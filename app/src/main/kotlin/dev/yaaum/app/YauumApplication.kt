@@ -1,6 +1,7 @@
 package dev.yaaum.app
 
 import android.app.Application
+import dev.yaaum.data.source.datastore.configuration.impl.di.configurationDataStoreModule
 import dev.yaaum.data.source.system.timeusage.impl.di.timeUsageSystemModule
 import dev.yaaum.data.source.system.timeusage.source.TimeUsageDataSource
 import dev.yaaum.domain.timeusage.GetStatisticsAboutAllAppsUseCase
@@ -44,6 +45,7 @@ class YauumApplication : Application() {
                     timeUsageDomainModule,
                     timeUsageSystemModule,
                     timeUsageRepoModule,
+                    configurationDataStoreModule,
                 ),
             )
         }

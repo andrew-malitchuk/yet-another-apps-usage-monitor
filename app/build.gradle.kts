@@ -25,6 +25,8 @@ dependencies {
     // XX
     implementation(project(":data:source:system:timeusage"))
     implementation(project(":data:source:system:timeusage:impl"))
+    implementation(project(":data:source:datastore:configuration"))
+    implementation(project(":data:source:datastore:configuration:impl"))
     implementation(project(":data:repository:timeusage:impl"))
     implementation(project(":data:repository:timeusage"))
 

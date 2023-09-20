@@ -46,6 +46,10 @@ include(":data:source:system")
 include(":data:source:system:core")
 include(":data:source:system:timeusage")
 include(":data:source:system:timeusage:impl")
+include(":data:source:datastore")
+include(":data:source:datastore:core")
+include(":data:source:datastore:configuration")
+include(":data:source:datastore:configuration:impl")
 //region Data
 
 //region Presentation
