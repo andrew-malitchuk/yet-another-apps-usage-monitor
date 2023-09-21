@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "dev.yaaum.data.source.datastore:configuration.impl"
+    namespace = "dev.yaaum.data.source.datastore.configuration.impl"
 }
 
 dependencies {

@@ -34,6 +34,8 @@ include(":domain")
 include(":domain:core")
 include(":domain:timeusage")
 include(":domain:timeusage:impl")
+include(":domain:configuration")
+include(":domain:configuration:impl")
 //endregion Domain
 
 //region Data
@@ -42,6 +44,8 @@ include(":data:core")
 include(":data:repository:core")
 include(":data:repository:timeusage")
 include(":data:repository:timeusage:impl")
+include(":data:repository:configuration")
+include(":data:repository:configuration:impl")
 include(":data:source:system")
 include(":data:source:system:core")
 include(":data:source:system:timeusage")

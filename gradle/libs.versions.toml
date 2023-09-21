@@ -12,7 +12,7 @@ lint = "31.1.1"
 kotlinxCollectionsImmutable = "0.3.5"
 kotlinxCoroutines = "1.7.3"
 kotlinxSerializationJson= "1.6.0"
-kotlinSerialization="1.9.10"
+kotlinSerialization="1.9.0"
 
 compose = "1.1.1"
 uiTooling = "1.5.1"

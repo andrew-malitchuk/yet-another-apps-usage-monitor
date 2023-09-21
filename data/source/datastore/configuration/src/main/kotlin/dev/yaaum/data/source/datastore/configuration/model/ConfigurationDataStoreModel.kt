@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ConfigurationDataStoreModel(
-    val themeMode: ThemeMode = ThemeMode.NI,
+    val themeMode: String? = null,
 ) : BaseDataStoreModel
 
 // data class Author private constructor(val name: String) {
