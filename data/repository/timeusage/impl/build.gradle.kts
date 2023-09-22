@@ -9,11 +9,12 @@ android {
     namespace = "dev.yaaum.data.repository.timeusage.impl"
 }
 
-dependencies{
+dependencies {
     implementation(libs.kotlinx.coroutines.core)
 
     implementation(project(":data:source:system:timeusage"))
     implementation(project(":data:source:system:core"))
+    implementation(project(":data:source:datastore:configuration"))
     implementation(project(":data:repository:timeusage"))
     implementation(project(":data:repository:core"))
 }

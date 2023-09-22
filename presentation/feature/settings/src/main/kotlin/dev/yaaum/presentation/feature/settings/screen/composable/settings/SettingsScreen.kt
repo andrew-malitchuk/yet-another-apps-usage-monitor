@@ -18,7 +18,7 @@ fun SettingsScreen(
     Rebugger(
         trackMap = mapOf(),
     )
-    YaaumTheme() {
+    YaaumTheme {
         Column(
             modifier = Modifier
                 .fillMaxSize(),

@@ -13,7 +13,6 @@ interface TimeUsageRepository {
      * Retrieve general information about application usage.
      * Returns about __all__ application.
      *
-     * @receiver hypothetical exception
      * @return list of app usage info
      *
      * @throws BaseRepoException

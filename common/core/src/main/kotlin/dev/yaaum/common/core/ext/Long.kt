@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit
  * @return human-readable date
  */
 // TODO: test
+@Suppress("unused")
 fun Long.asDate(
     pattern: String,
     isEpochTimestamp: Boolean = true,

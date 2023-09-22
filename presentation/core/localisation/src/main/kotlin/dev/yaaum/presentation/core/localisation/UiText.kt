@@ -12,7 +12,7 @@ import androidx.compose.ui.res.stringResource
  * Simple use case: we have general, localised error string in `strings.xml` and some use case
  * wants to pass human-readable error vai string.xml entry.
  */
-@Suppress("SpreadOperator")
+@Suppress("SpreadOperator", "unused")
 sealed class UiText {
 
     /**
