@@ -29,15 +29,6 @@ include(":common:core")
 include(":common:konsist")
 //endregion Common
 
-//region Domain
-include(":domain")
-include(":domain:core")
-include(":domain:timeusage")
-include(":domain:timeusage:impl")
-include(":domain:configuration")
-include(":domain:configuration:impl")
-//endregion Domain
-
 //region Data
 include(":data")
 include(":data:core")
@@ -56,17 +47,27 @@ include(":data:source:datastore:configuration")
 include(":data:source:datastore:configuration:impl")
 //region Data
 
+//region Domain
+include(":domain")
+include(":domain:core")
+include(":domain:timeusage")
+include(":domain:timeusage:impl")
+include(":domain:configuration")
+include(":domain:configuration:impl")
+//endregion Domain
+
 //region Presentation
 include(":presentation")
 include(":presentation:core")
 include(":presentation:core:localisation")
+include(":presentation:core:models")
 include(":presentation:core:navigation")
 include(":presentation:core:platform")
 include(":presentation:core:ui")
 //region Feature
 include(":presentation:feature")
-include(":presentation:feature:main")
 include(":presentation:feature:host")
+include(":presentation:feature:main")
 include(":presentation:feature:onboarding")
 include(":presentation:feature:settings")
 //endregion Feature

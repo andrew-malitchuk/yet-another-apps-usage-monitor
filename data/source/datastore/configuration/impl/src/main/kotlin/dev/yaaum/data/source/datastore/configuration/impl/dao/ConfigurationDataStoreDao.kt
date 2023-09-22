@@ -12,6 +12,9 @@ class ConfigurationDataStoreDao(
     private val context: Context,
 ) : BaseDataStoreDao<ConfigurationDataStoreModel> {
 
+    /**
+     * DAO for configuration
+     */
     private val Context.datastore by dataStore(
         ConfigurationDataStore.FILENAME,
         ConfigurationSerializer,

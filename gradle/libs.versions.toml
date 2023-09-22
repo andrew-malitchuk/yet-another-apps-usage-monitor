@@ -26,6 +26,7 @@ composeDestinations = "1.9.52"
 rebugger = "1.0.0-alpha06"
 voyager = "1.0.0-rc05"
 androidxCoreSplashscreen = "1.0.1"
+datastoreVersion="1.0.0"
 
 koin = "3.3.0"
 koinTest = "3.3.0"
@@ -114,6 +115,8 @@ mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mo
 mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockitoKotlin" }
 # https://github.com/LemonAppDev/konsist/releases/tag/v0.12.1
 konsist = { group = "com.lemonappdev", name ="konsist", version.ref="konsist"}
+# https://mvnrepository.com/artifact/androidx.datastore/datastore
+datastore = { group = "androidx.datastore", name = "datastore", version.ref = "datastoreVersion" }
 
 [plugins]
 # https://mvnrepository.com/artifact/com.android.application/com.android.application.gradle.plugin

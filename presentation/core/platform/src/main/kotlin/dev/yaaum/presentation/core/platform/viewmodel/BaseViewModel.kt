@@ -7,6 +7,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
@@ -16,6 +19,7 @@ import kotlin.coroutines.CoroutineContext
  *
  * Contains safe coroutine launcher and other re-usable stuff suitable for all VMs in this project.
  */
+@Suppress("unused")
 abstract class BaseViewModel : ViewModel() {
 
     /**
@@ -61,6 +65,16 @@ abstract class BaseViewModel : ViewModel() {
             } finally {
                 loading?.invoke(false)
             }
+        }
+    }
+
+    /**
+     * To avoid boilerplate (private MutableStateFlow & public StateFlow), this extension has been
+     * created
+     */
+    protected fun <T> StateFlow<T>.setValue(value: T) {
+        (this as? MutableStateFlow)?.update {
+            value
         }
     }
 }

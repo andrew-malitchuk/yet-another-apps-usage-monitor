@@ -1,7 +1,7 @@
 # YAAUM
 
-## data:timeusage
+## :data:repository
 
-### :timeusage
+### :data:repository:configuration
 
-### :timeusage:impl
+### :data:repository:configuration:impl

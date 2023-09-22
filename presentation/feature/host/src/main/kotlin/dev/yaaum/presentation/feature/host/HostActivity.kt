@@ -2,19 +2,23 @@ package dev.yaaum.presentation.feature.host
 
 import androidx.compose.runtime.Composable
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.lifecycleScope
+import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.navigator.Navigator
-import dev.yaaum.presentaion.feature.onboarding.navigation.route.OnboardingRoute
+import dev.yaaum.presentation.core.models.isDarkMode
+import dev.yaaum.presentation.core.navigation.RouteGraph
 import dev.yaaum.presentation.core.platform.activity.BaseActivity
 import dev.yaaum.presentation.core.ui.splash.exitAnimation
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
+import dev.yaaum.presentation.feature.main.screen.composable.HostViewModel
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HostActivity : BaseActivity() {
 
-    private var shouldKeep = true
+    private val hostViewModel: HostViewModel by viewModel()
+
+    private var shouldKeepSplash = true
 
     override fun configureSplash() {
         installSplashScreen().apply {
@@ -23,23 +27,26 @@ class HostActivity : BaseActivity() {
                     it.exitAnimation()
                 }
             }
-            setKeepOnScreenCondition { shouldKeep }
+            setKeepOnScreenCondition { shouldKeepSplash }
         }
     }
 
     @Composable
     override fun ConfigureUi() {
-        YaaumTheme {
-            Navigator(OnboardingRoute())
+        val isDarkMode = hostViewModel.currentThemeUiModel.value?.isDarkMode() ?: false
+        YaaumTheme(isDarkMode) {
+            val onboardingRoute = rememberScreen(RouteGraph.OnboardingScreen)
+            Navigator(onboardingRoute)
         }
     }
 
     override fun observeLoading() {
-        // TODO: fix it; just a demo
-        GlobalScope.launch(Dispatchers.Main) {
-            @Suppress("MagicNumber")
-            delay(2_500L)
-            shouldKeep = false
+        lifecycleScope.launch {
+            hostViewModel.isSetupLoadingStateFlow.collect { isLoading ->
+                isLoading?.let {
+                    shouldKeepSplash = it
+                }
+            }
         }
     }
 }

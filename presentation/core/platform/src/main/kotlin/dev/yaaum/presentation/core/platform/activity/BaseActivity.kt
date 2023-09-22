@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
  * In our case, when we a talking about Compose or single-activity application, i guess, base class
  * for activity is not so necessary, but, it makes code more readable.
  */
+@Suppress("unused", "KDocUnresolvedReference")
 abstract class BaseActivity : ComponentActivity() {
 
     private val extras: Bundle? by lazy { intent.extras }

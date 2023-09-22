@@ -3,13 +3,10 @@ package dev.yaaum.data.source.datastore.configuration.model
 import dev.yaaum.data.source.datastore.core.model.base.BaseDataStoreModel
 import kotlinx.serialization.Serializable
 
+/**
+ * Represent application configuration which can be modified by user
+ */
 @Serializable
 data class ConfigurationDataStoreModel(
     val themeMode: String? = null,
 ) : BaseDataStoreModel
-
-// data class Author private constructor(val name: String) {
-//    companion object {
-//        operator fun invoke(name: String): Either<EmptyAuthorName, Author> = TODO()
-//    }
-// }

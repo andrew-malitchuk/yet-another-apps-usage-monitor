@@ -21,10 +21,10 @@ dependencies {
     implementation(project(":common:core"))
 
     implementation(project(":presentation:feature:host"))
+    implementation(project(":presentation:feature:main"))
     implementation(project(":presentation:feature:onboarding"))
     implementation(project(":presentation:feature:settings"))
     implementation(project(":presentation:core:navigation"))
-    // XX
     implementation(project(":data:source:system:timeusage"))
     implementation(project(":data:source:system:timeusage:impl"))
     implementation(project(":data:source:datastore:configuration"))

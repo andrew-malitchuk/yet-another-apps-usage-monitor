@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit
  * @return seconds
  */
 // TODO: test
+@Suppress("unused")
 fun String.asTime(pattern: String, locale: Locale = Locale.US): Long {
     if (isEmpty()) return 0L
     return try {

@@ -22,7 +22,7 @@ fun MainScreen(
     Rebugger(
         trackMap = mapOf(),
     )
-    YaaumTheme() {
+    YaaumTheme {
         Column(
             modifier = Modifier
                 .fillMaxSize(),
