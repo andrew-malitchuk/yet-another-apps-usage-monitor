@@ -1,6 +1,6 @@
 package dev.yaaum.data.repository.timeusage
 
-import dev.yaaum.data.repository.core.exception.base.BaseRepoException
+import dev.yaaum.data.core.exception.base.BaseDataException
 import dev.yaaum.data.repository.timeusage.model.TimeUsageRepoModel
 import kotlin.jvm.Throws
 
@@ -15,8 +15,8 @@ interface TimeUsageRepository {
      *
      * @return list of app usage info
      *
-     * @throws BaseRepoException
+     * @throws BaseDataException
      */
-    @Throws(BaseRepoException::class)
+    @Throws(BaseDataException::class)
     suspend fun getApplicationsUsage(): List<TimeUsageRepoModel>
 }

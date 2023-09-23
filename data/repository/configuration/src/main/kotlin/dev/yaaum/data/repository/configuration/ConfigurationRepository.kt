@@ -1,7 +1,7 @@
 package dev.yaaum.data.repository.configuration
 
+import dev.yaaum.data.core.exception.base.BaseDataException
 import dev.yaaum.data.repository.configuration.model.ConfigurationRepoModel
-import dev.yaaum.data.repository.core.exception.base.BaseRepoException
 import kotlin.jvm.Throws
 
 interface ConfigurationRepository {
@@ -11,9 +11,9 @@ interface ConfigurationRepository {
      *
      * @return configuration
      *
-     * @throws BaseRepoException
+     * @throws BaseDataException
      */
-    @Throws(BaseRepoException::class)
+    @Throws(BaseDataException::class)
     suspend fun getCurrentConfiguration(): ConfigurationRepoModel?
 
     /**
@@ -21,8 +21,8 @@ interface ConfigurationRepository {
      *
      * @param value configuration to set or update
      *
-     * @throws BaseRepoException
+     * @throws BaseDataException
      */
-    @Throws(BaseRepoException::class)
+    @Throws(BaseDataException::class)
     suspend fun setOrUpdateConfiguration(value: ConfigurationRepoModel)
 }

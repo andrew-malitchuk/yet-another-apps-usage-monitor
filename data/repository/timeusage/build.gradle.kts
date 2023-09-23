@@ -13,5 +13,6 @@ dependencies{
 
     implementation(project(":data:source:system:core"))
     implementation(project(":data:repository:core"))
+    implementation(project(":data:core"))
     implementation(project(":data:source:system:timeusage"))
 }
