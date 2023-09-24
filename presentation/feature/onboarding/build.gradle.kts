@@ -29,6 +29,7 @@ dependencies {
     implementation(project(":presentation:core:models"))
 
     implementation(project(":presentation:feature:main"))
+    implementation(project(":presentation:core:ui"))
 
     implementation(project(":domain:core"))
     implementation(project(":domain:configuration"))
