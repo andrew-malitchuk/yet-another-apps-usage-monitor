@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -17,7 +18,8 @@ import com.theapache64.rebugger.Rebugger
 import dev.yaaum.presentaion.feature.onboarding.screen.OnboardingViewModel
 import dev.yaaum.presentation.core.models.isDarkMode
 import dev.yaaum.presentation.core.navigation.RouteGraph
-import dev.yaaum.presentation.core.ui.composable.button.YaaumButton
+import dev.yaaum.presentation.core.ui.composable.button.base.YaaumButton
+import dev.yaaum.presentation.core.ui.composable.button.circle.base.YaaumCircleButton
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.feature.main.screen.composable.HostViewModel
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme as Theme
@@ -61,6 +63,11 @@ fun OnboardingScreen(
                     ).show()
                 },
                 icon = Icons.Default.Person,
+            )
+            YaaumCircleButton(
+                onClick = {
+                },
+                icon = Icons.Default.Add,
             )
         }
     }
