@@ -102,7 +102,7 @@ internal fun animateButtonPreview() {
         spacing = 8.dp,
         minWidth = 60.dp,
         minHeight = 48.dp,
-        paddings = PaddingValues(all = 16.dp),
+        paddings = PaddingValues(all = 32.dp),
         textStyle = LocalTextStyle.current.copy(fontSize = 24.sp),
         animationDuration = 250,
         animationEasing = EaseInBack,

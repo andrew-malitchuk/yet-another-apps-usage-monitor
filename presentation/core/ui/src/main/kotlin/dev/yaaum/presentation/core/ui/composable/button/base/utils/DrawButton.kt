@@ -76,8 +76,12 @@ fun drawButton(
             Spacer(modifier = Modifier.width(spacing))
         }
 
-        if (text != null && textStyle != null) {
-            Text(text = text, color = foregroundColor, style = textStyle)
+        if (text != null) {
+            if (textStyle != null) {
+                Text(text = text, color = foregroundColor, style = textStyle)
+            } else {
+                Text(text = text, color = foregroundColor)
+            }
         }
     }
 }
