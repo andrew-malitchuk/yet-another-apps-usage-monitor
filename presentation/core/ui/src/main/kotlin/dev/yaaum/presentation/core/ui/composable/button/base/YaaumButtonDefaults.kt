@@ -2,17 +2,25 @@ package dev.yaaum.presentation.core.ui.composable.button.base
 
 import androidx.compose.animation.core.EaseInCirc
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.sp
 import dev.yaaum.common.core.ext.has
+import dev.yaaum.presentation.core.ui.R
+import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
+/**
+ * Default style for button
+ */
 @Suppress("MagicNumber")
 object YaaumButtonDefaults {
     val colors = object : YaaumButtonColors {
@@ -53,12 +61,39 @@ object YaaumButtonDefaults {
     }
 
     val sizes = object : YaaumButtonSizes {
-        override val iconSize = 32.dp
-        override val borderSize = 3.dp
-        override val contentPadding = PaddingValues(all = 16.dp)
-        override val spacing = 8.dp
-        override val minWidth = 60.dp
-        override val minHeight = 48.dp
+        override val iconSize: Dp
+            @Composable
+            get() {
+                return YaaumTheme.spacing.extraMedium
+            }
+
+        override val borderSize: Dp
+            @Composable
+            get() {
+                return YaaumTheme.spacing.default
+            }
+        override val contentPadding: PaddingValues
+            @Composable
+            get() {
+                return PaddingValues(
+                    all = YaaumTheme.spacing.small,
+                )
+            }
+        override val spacing: Dp
+            @Composable
+            get() {
+                return YaaumTheme.spacing.extraSmall
+            }
+        override val minWidth: Dp
+            @Composable
+            get() {
+                return YaaumTheme.spacing.large
+            }
+        override val minHeight: Dp
+            @Composable
+            get() {
+                return YaaumTheme.spacing.large
+            }
     }
 
     val animation = object : YaaumButtonAnimation {
@@ -66,10 +101,16 @@ object YaaumButtonDefaults {
         override val easing = EaseInCirc
     }
 
-    val shape = CutCornerShape(topEndPercent = 30, bottomStartPercent = 30)
+    val shape = RoundedCornerShape(50)
 
     val textStyle = TextStyle(
-//        fontFamily = MontserratFont,
+        fontFamily = FontFamily(
+            Font(
+                R.font.ubuntu_bold,
+                weight = FontWeight.Black,
+                style = FontStyle.Normal,
+            ),
+        ),
         fontWeight = FontWeight.SemiBold,
         fontSize = 24.sp,
     )

@@ -3,13 +3,10 @@
 package dev.yaaum.presentation.core.ui.composable.button.base
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -18,11 +15,27 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
-import androidx.compose.ui.unit.dp
 import dev.yaaum.presentation.core.ui.composable.button.base.utils.stateButton
+import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 
 /**
- * https://proandroiddev.com/compose-a-compose-button-by-composing-composable-functions-9f275772bd23
+ * Top of the button hierarchy.
+ *
+ * Used for __circle__ and __ordinary__ buttons
+ *
+ * @param text
+ * @param onClick
+ * @param modifier
+ * @param icon
+ * @param enabled
+ * @param colors
+ * @param sizes
+ * @param shape
+ * @param textStyle
+ * @param animation
+ * @param interactionSource
+ *
+ * [source](https://proandroiddev.com/compose-a-compose-button-by-composing-composable-functions-9f275772bd23)
  */
 @Composable
 fun YaaumButton(
@@ -53,29 +66,26 @@ fun YaaumButton(
     )
 }
 
-@Preview(name = "Enabled", group = "Button", showBackground = true)
+@Preview(showBackground = true)
 @Composable
-fun ButtonPreview() {
-    var showIcon by remember { mutableStateOf(true) }
-    Box(modifier = Modifier.padding(24.dp)) {
+fun Preview_YaaumButton_Dark() {
+    YaaumTheme(useDarkTheme = true) {
         YaaumButton(
             text = LoremIpsum(1).values.first(),
-            onClick = { showIcon = !showIcon },
-            icon = if (showIcon) Icons.Default.Home else null,
+            onClick = { },
+            icon = Icons.Default.Home,
         )
     }
 }
 
-@Preview(name = "Disabled", group = "Button", showBackground = true)
+@Preview(showBackground = true)
 @Composable
-fun ButtonDisabledPreview() {
-    var showIcon by remember { mutableStateOf(true) }
-    Box(modifier = Modifier.padding(24.dp)) {
+fun Preview_YaaumButton_Light() {
+    YaaumTheme(useDarkTheme = false) {
         YaaumButton(
             text = LoremIpsum(1).values.first(),
-            onClick = { showIcon = !showIcon },
-            icon = if (showIcon) Icons.Default.Home else null,
-            enabled = false,
+            onClick = { },
+            icon = Icons.Default.Home,
         )
     }
 }

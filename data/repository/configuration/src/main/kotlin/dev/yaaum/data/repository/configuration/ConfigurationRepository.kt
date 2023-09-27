@@ -4,6 +4,10 @@ import dev.yaaum.data.core.exception.base.BaseDataException
 import dev.yaaum.data.repository.configuration.model.ConfigurationRepoModel
 import kotlin.jvm.Throws
 
+/**
+ * Fulfill all base stuff with application configuration, like, change|store current theme, locale
+ * etc
+ */
 interface ConfigurationRepository {
 
     /**

@@ -1,8 +1,6 @@
 package dev.yaaum.presentation.core.ui.composable.button.ordinary.base
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
@@ -13,12 +11,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.yaaum.presentation.core.ui.composable.button.base.YaaumButtonAnimation
 import dev.yaaum.presentation.core.ui.composable.button.base.YaaumButtonColors
 import dev.yaaum.presentation.core.ui.composable.button.base.YaaumButtonSizes
 import dev.yaaum.presentation.core.ui.composable.button.base.utils.stateButton
+import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 
+/**
+ * Top of ordinary button hierarchy
+ *
+ * @param text
+ * @param onClick
+ * @param modifier
+ * @param icon
+ * @param enabled
+ * @param colors
+ * @param sizes
+ * @param textStyle
+ * @param animation
+ * @param interactionSource
+ */
 @Composable
 fun YaaumOrdinaryButton(
     text: String,
@@ -47,10 +59,10 @@ fun YaaumOrdinaryButton(
     )
 }
 
-@Preview(name = "Enabled", group = "Button", showBackground = true)
+@Preview(showBackground = true)
 @Composable
-fun Preview_YaaumOrdinaryButton_Enabled() {
-    Box(modifier = Modifier.padding(24.dp)) {
+fun Preview_YaaumOrdinaryButton_Dark() {
+    YaaumTheme(useDarkTheme = true) {
         YaaumOrdinaryButton(
             text = "foobar",
             onClick = { },
@@ -60,15 +72,14 @@ fun Preview_YaaumOrdinaryButton_Enabled() {
     }
 }
 
-@Preview(name = "Disabled", group = "Button", showBackground = true)
+@Preview(showBackground = true)
 @Composable
-fun Preview_YaaumOrdinaryButton_Disabled() {
-    Box(modifier = Modifier.padding(24.dp)) {
+fun Preview_YaaumOrdinaryButton_Light() {
+    YaaumTheme(useDarkTheme = false) {
         YaaumOrdinaryButton(
             text = "foobar",
             onClick = { },
             icon = Icons.Default.Home,
-            enabled = false,
             textStyle = null,
         )
     }

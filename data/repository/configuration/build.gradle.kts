@@ -10,7 +10,6 @@ android {
 
 dependencies{
     implementation(libs.kotlinx.coroutines.core)
-
     implementation(project(":data:repository:core"))
     implementation(project(":data:source:datastore:configuration"))
     implementation(project(":data:source:datastore:core"))

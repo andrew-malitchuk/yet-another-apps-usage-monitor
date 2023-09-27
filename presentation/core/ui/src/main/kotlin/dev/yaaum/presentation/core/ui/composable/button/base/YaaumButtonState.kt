@@ -1,5 +1,11 @@
 package dev.yaaum.presentation.core.ui.composable.button.base
 
+/**
+ * Button states:
+ * - hover;
+ * - pressed;
+ * - focused?.
+ */
 object YaaumButtonState {
     @JvmStatic
     val HOVER = 1.shl(0)

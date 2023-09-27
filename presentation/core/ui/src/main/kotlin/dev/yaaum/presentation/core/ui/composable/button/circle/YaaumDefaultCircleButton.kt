@@ -15,7 +15,20 @@ import dev.yaaum.presentation.core.ui.composable.button.base.YaaumButtonColors
 import dev.yaaum.presentation.core.ui.composable.button.base.YaaumButtonSizes
 import dev.yaaum.presentation.core.ui.composable.button.circle.base.YaaumCircleButton
 import dev.yaaum.presentation.core.ui.composable.button.circle.base.YaaumCircleButtonDefaults
+import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 
+/**
+ * Project-level implementation for circle button
+ *
+ * @param onClick
+ * @param modifier
+ * @param icon
+ * @param enabled
+ * @param colors
+ * @param sizes
+ * @param animation
+ * @param interactionSource
+ */
 @Composable
 fun YaaumDefaultCircleButton(
     onClick: () -> Unit,
@@ -39,21 +52,24 @@ fun YaaumDefaultCircleButton(
     )
 }
 
-@Preview(name = "Enabled", group = "Button", showBackground = true)
+@Preview(showBackground = true)
 @Composable
-fun Preview_YaaumCircleButtonDefaults_Enabled() {
-    YaaumDefaultCircleButton(
-        onClick = { },
-        icon = Icons.Default.Home,
-    )
+fun Preview_YaaumCircleButtonDefaults_Dark() {
+    YaaumTheme(useDarkTheme = true) {
+        YaaumDefaultCircleButton(
+            onClick = { },
+            icon = Icons.Default.Home,
+        )
+    }
 }
 
-@Preview(name = "Disabled", group = "Button", showBackground = true)
+@Preview(showBackground = true)
 @Composable
-fun Preview_YaaumCircleButtonDefaults_Disabled() {
-    YaaumDefaultCircleButton(
-        onClick = { },
-        icon = Icons.Default.Home,
-        enabled = false,
-    )
+fun Preview_YaaumCircleButtonDefaults_Light() {
+    YaaumTheme(useDarkTheme = false) {
+        YaaumDefaultCircleButton(
+            onClick = { },
+            icon = Icons.Default.Home,
+        )
+    }
 }

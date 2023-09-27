@@ -5,6 +5,14 @@ import androidx.compose.runtime.Stable
 import androidx.compose.runtime.State
 import androidx.compose.ui.graphics.Color
 
+/**
+ * Default colors for button.
+ *
+ * Contains colors:
+ * - border;
+ * - foreground;
+ * - background.
+ */
 interface YaaumButtonColors {
     @Stable
     @Composable

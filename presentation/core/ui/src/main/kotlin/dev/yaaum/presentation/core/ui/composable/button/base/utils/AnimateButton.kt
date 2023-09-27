@@ -22,7 +22,28 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 
+/**
+ * Perform button redraw via calling [drawButton]
+ *
+ * @param text button title; if `null` - title will be hidden
+ * @param icon button icon; if `null` - icon will be hidden
+ * @param backgroundColor
+ * @param foregroundColor
+ * @param borderColor
+ * @param shape button shape
+ * @param iconSize
+ * @param borderSize
+ * @param spacing space between [icon] and [text]
+ * @param minWidth
+ * @param minHeight
+ * @param paddings
+ * @param textStyle
+ * @param animationDuration
+ * @param animationEasing adjust an animation’s fraction
+ * @param modifier
+ */
 @SuppressLint("ComposableNaming")
 @Suppress("LongParameterList")
 @Composable
@@ -89,22 +110,49 @@ fun animateButton(
 @SuppressLint("ComposableNaming")
 @Preview(showBackground = true)
 @Composable
-internal fun animateButtonPreview() {
-    animateButton(
-        text = "Button",
-        icon = Icons.Default.AccountCircle,
-        backgroundColor = Color.White,
-        foregroundColor = Color.Black,
-        borderColor = Color.Black,
-        shape = CutCornerShape(topEndPercent = 30, bottomStartPercent = 30),
-        iconSize = 32.dp,
-        borderSize = 3.dp,
-        spacing = 8.dp,
-        minWidth = 60.dp,
-        minHeight = 48.dp,
-        paddings = PaddingValues(all = 32.dp),
-        textStyle = LocalTextStyle.current.copy(fontSize = 24.sp),
-        animationDuration = 250,
-        animationEasing = EaseInBack,
-    )
+internal fun Preview_animateButton_Dark() {
+    YaaumTheme(useDarkTheme = true) {
+        animateButton(
+            text = "Button",
+            icon = Icons.Default.AccountCircle,
+            backgroundColor = Color.White,
+            foregroundColor = Color.Black,
+            borderColor = Color.Black,
+            shape = CutCornerShape(topEndPercent = 30, bottomStartPercent = 30),
+            iconSize = 32.dp,
+            borderSize = 3.dp,
+            spacing = 8.dp,
+            minWidth = 60.dp,
+            minHeight = 48.dp,
+            paddings = PaddingValues(all = 32.dp),
+            textStyle = LocalTextStyle.current.copy(fontSize = 24.sp),
+            animationDuration = 250,
+            animationEasing = EaseInBack,
+        )
+    }
+}
+
+@SuppressLint("ComposableNaming")
+@Preview(showBackground = true)
+@Composable
+internal fun Preview_animateButton_Light() {
+    YaaumTheme(useDarkTheme = false) {
+        animateButton(
+            text = "Button",
+            icon = Icons.Default.AccountCircle,
+            backgroundColor = Color.White,
+            foregroundColor = Color.Black,
+            borderColor = Color.Black,
+            shape = CutCornerShape(topEndPercent = 30, bottomStartPercent = 30),
+            iconSize = 32.dp,
+            borderSize = 3.dp,
+            spacing = 8.dp,
+            minWidth = 60.dp,
+            minHeight = 48.dp,
+            paddings = PaddingValues(all = 32.dp),
+            textStyle = LocalTextStyle.current.copy(fontSize = 24.sp),
+            animationDuration = 250,
+            animationEasing = EaseInBack,
+        )
+    }
 }

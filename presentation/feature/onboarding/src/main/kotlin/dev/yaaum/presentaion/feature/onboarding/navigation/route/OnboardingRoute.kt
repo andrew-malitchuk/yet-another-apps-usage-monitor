@@ -18,7 +18,6 @@ class OnboardingRoute : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-//        val mainScreen = rememberScreen(SharedScreen.MainScreen)
         val onboardingViewModel: OnboardingViewModel = koinViewModel()
         val hostViewModel: HostViewModel = koinViewModel(
             viewModelStoreOwner = LocalContext.current as ComponentActivity,

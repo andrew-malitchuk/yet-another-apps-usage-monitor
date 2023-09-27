@@ -21,6 +21,7 @@ dependencies {
     implementation(libs.arrow.core)
     implementation(libs.arrow.fx.coroutines)
     implementation(libs.arrow.optics)
+    implementation(libs.accompanist.pager.indicators)
 
     implementation(project(":common:core"))
     implementation(project(":presentation:core:ui"))
@@ -30,6 +31,7 @@ dependencies {
 
     implementation(project(":presentation:feature:main"))
     implementation(project(":presentation:core:ui"))
+    implementation(project(":presentation:core:localisation"))
 
     implementation(project(":domain:core"))
     implementation(project(":domain:configuration"))

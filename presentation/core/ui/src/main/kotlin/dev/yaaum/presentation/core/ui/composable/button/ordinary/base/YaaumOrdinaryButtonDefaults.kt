@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.yaaum.common.core.ext.has
 import dev.yaaum.presentation.core.ui.composable.button.base.YaaumButtonAnimation
@@ -16,6 +17,9 @@ import dev.yaaum.presentation.core.ui.composable.button.base.YaaumButtonState
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 import java.time.format.TextStyle
 
+/**
+ * Default style for ordinary button
+ */
 object YaaumOrdinaryButtonDefaults {
 
     val colors = object : YaaumButtonColors {
@@ -56,12 +60,39 @@ object YaaumOrdinaryButtonDefaults {
     }
 
     val sizes = object : YaaumButtonSizes {
-        override val iconSize = 24.dp
-        override val borderSize = 0.dp
-        override val contentPadding = PaddingValues(all = 8.dp)
-        override val spacing = 2.dp
-        override val minWidth = 32.dp
-        override val minHeight = 32.dp
+        override val iconSize: Dp
+            @Composable
+            get() {
+                return YaaumTheme.spacing.extraMedium
+            }
+
+        override val borderSize: Dp
+            @Composable
+            get() {
+                return 0.dp
+            }
+        override val contentPadding: PaddingValues
+            @Composable
+            get() {
+                return PaddingValues(
+                    all = YaaumTheme.spacing.small,
+                )
+            }
+        override val spacing: Dp
+            @Composable
+            get() {
+                return YaaumTheme.spacing.extraSmall
+            }
+        override val minWidth: Dp
+            @Composable
+            get() {
+                return YaaumTheme.spacing.large
+            }
+        override val minHeight: Dp
+            @Composable
+            get() {
+                return YaaumTheme.spacing.large
+            }
     }
 
     const val ANIMATION_DURATION = 125

@@ -19,15 +19,6 @@ fun YaaumTheme(
         baseLightColorPalette
     }
 
-    with(systemUiController) {
-        setSystemBarsColor(
-            color = colors.background,
-        )
-        setNavigationBarColor(
-            color = colors.background,
-        )
-    }
-
     CompositionLocalProvider(
         LocalYaaumColors provides colors,
         LocalYaaumCorners provides corners,
@@ -37,4 +28,13 @@ fun YaaumTheme(
         LocalYaaumTypography provides typography,
         content = content,
     )
+
+    with(systemUiController) {
+        setSystemBarsColor(
+            color = colors.background,
+        )
+        setNavigationBarColor(
+            color = colors.background,
+        )
+    }
 }

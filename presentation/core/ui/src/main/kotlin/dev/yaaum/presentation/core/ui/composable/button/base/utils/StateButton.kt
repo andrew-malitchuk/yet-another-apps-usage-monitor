@@ -19,6 +19,21 @@ import dev.yaaum.presentation.core.ui.composable.button.base.YaaumButtonColors
 import dev.yaaum.presentation.core.ui.composable.button.base.YaaumButtonSizes
 import dev.yaaum.presentation.core.ui.composable.button.base.YaaumButtonState
 
+/**
+ * Define and handle button states
+ *
+ * @param text button title; if `null` - title will be hidden
+ * @param onClick
+ * @param icon button icon; if `null` - icon will be hidden
+ * @param colors
+ * @param sizes
+ * @param shape button shape
+ * @param textStyle
+ * @param animation
+ * @param enabled
+ * @param interactionSource
+ * @param modifier
+ */
 @SuppressLint("ComposableNaming")
 @Composable
 fun stateButton(
