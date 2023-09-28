@@ -16,7 +16,7 @@ import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 fun AboutScreen(
     navigator: Navigator,
 ) {
-    val mainScreen = rememberScreen(RouteGraph.MainScreen(from = "about"))
+    val mainScreen = rememberScreen(RouteGraph.MainScreen)
 
     Rebugger(
         trackMap = mapOf(),

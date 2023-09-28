@@ -2,6 +2,8 @@ package dev.yaaum.presentation.core.platform.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.yaaum.presentation.core.analytics.core.model.base.BaseAnalyticModel
+import dev.yaaum.presentation.core.analytics.logger.AnalyticsLogger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -12,6 +14,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.koin.android.ext.android.inject
+import org.koin.java.KoinJavaComponent.inject
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -21,6 +25,8 @@ import kotlin.coroutines.CoroutineContext
  */
 @Suppress("unused")
 abstract class BaseViewModel : ViewModel() {
+
+    val analyticsLogger: AnalyticsLogger by inject(AnalyticsLogger::class.java)
 
     /**
      * Container for hypothetical errors which might happens in [launch]
@@ -76,5 +82,14 @@ abstract class BaseViewModel : ViewModel() {
         (this as? MutableStateFlow)?.update {
             value
         }
+    }
+
+    /**
+     * Log analytics event in DSL way
+     *
+     * @param staffToTrack some analytic event
+     */
+    fun logEvent(staffToTrack: () -> BaseAnalyticModel) {
+        analyticsLogger.logEvent(staffToTrack)
     }
 }

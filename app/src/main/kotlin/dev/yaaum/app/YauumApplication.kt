@@ -6,6 +6,9 @@ import dev.yaaum.data.source.system.timeusage.impl.di.timeUsageSystemModule
 import dev.yaaum.domain.configuration.impl.di.configurationDomainModule
 import dev.yaaum.domain.timeusage.impl.di.timeUsageDomainModule
 import dev.yaaum.presentaion.feature.onboarding.di.onboardingFeatureModule
+import dev.yaaum.presentation.core.analytics.logger.impl.di.analyticsLoggerModule
+import dev.yaaum.presentation.core.analytics.publisher.impl.di.analyticsProviderModule
+import dev.yaaum.presentation.core.analytics.subscriber.impl.local.di.localAnalyticsModule
 import dev.yaaum.presentation.feature.host.navigation.navigationInit
 import dev.yaaum.presentation.feature.main.di.mainFeatureModule
 import dev.yaaum.repository.configuration.impl.di.configurationRepoModule
@@ -35,6 +38,9 @@ class YauumApplication : Application() {
                     configurationDomainModule,
                     mainFeatureModule,
                     onboardingFeatureModule,
+                    analyticsLoggerModule,
+                    analyticsProviderModule,
+                    localAnalyticsModule,
                 ),
             )
         }

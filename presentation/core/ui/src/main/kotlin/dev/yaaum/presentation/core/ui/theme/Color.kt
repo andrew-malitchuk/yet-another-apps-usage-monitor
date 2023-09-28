@@ -12,8 +12,8 @@ val yaaum_theme_light_secondary = Color(0xFFED254E)
 val yaaum_theme_light_onSecondary = Color(0xFFFBFBFF)
 val yaaum_theme_light_background = Color(0xFFFBFBFF)
 val yaaum_theme_light_onBackground = Color(0xFF040f16)
-val yaaum_theme_light_surface = Color(0xFFEBF5EE)
-val yaaum_theme_light_onSurface = Color(0xFF011936)
+val yaaum_theme_light_surface = Color(0xFFB8B8D1)
+val yaaum_theme_light_onSurface = Color(0xFFFBFBFF)
 //endregion Light colors
 
 //region Dark colors

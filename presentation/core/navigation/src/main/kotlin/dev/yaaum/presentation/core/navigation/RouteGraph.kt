@@ -13,10 +13,8 @@ sealed class RouteGraph : ScreenProvider {
 
     /**
      * `:presentation:feature:main`
-     *
-     * @param from
      */
-    data class MainScreen(val from: String) : RouteGraph()
+    data object MainScreen : RouteGraph()
 
     /**
      * `:presentation:feature:settings`

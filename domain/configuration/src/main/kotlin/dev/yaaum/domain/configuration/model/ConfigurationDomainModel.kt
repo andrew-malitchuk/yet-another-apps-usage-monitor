@@ -8,6 +8,7 @@ import dev.yaaum.domain.core.model.BaseDomainModel
  */
 data class ConfigurationDomainModel(
     val themeMode: String? = null,
+    val isOnboardingFinished: Boolean? = false,
 ) : BaseDomainModel
 
 /**
@@ -16,6 +17,7 @@ data class ConfigurationDomainModel(
 fun ConfigurationDomainModel.toRepoModel(): ConfigurationRepoModel {
     return ConfigurationRepoModel(
         themeMode = this.themeMode,
+        isOnboardingFinished = this.isOnboardingFinished,
     )
 }
 
@@ -25,5 +27,6 @@ fun ConfigurationDomainModel.toRepoModel(): ConfigurationRepoModel {
 fun ConfigurationRepoModel.toDomainModel(): ConfigurationDomainModel {
     return ConfigurationDomainModel(
         themeMode = this.themeMode,
+        isOnboardingFinished = this.isOnboardingFinished,
     )
 }

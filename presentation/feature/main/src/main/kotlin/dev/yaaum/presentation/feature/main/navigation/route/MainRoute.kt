@@ -8,13 +8,11 @@ import dev.yaaum.presentation.feature.main.screen.composable.main.MainScreen
 
 /**
  * Route for MainScreen
- *
- * @param from
  */
-class MainRoute(private val from: String) : Screen {
+class MainRoute : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        MainScreen(navigator, from)
+        MainScreen(navigator)
     }
 }

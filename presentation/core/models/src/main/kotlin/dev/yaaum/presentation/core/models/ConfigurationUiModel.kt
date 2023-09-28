@@ -8,6 +8,7 @@ import dev.yaaum.presentation.core.models.base.BaseUiModel
  */
 data class ConfigurationUiModel(
     val themeMode: ThemeUiModel? = ThemeUiModel.AUTO,
+    val isOnboardingFinished: Boolean?,
 ) : BaseUiModel
 
 /**
@@ -17,6 +18,7 @@ data class ConfigurationUiModel(
 fun ConfigurationUiModel.toDomainModel(): ConfigurationDomainModel {
     return ConfigurationDomainModel(
         themeMode = this.themeMode?.theme,
+        isOnboardingFinished = this.isOnboardingFinished,
     )
 }
 
@@ -28,5 +30,6 @@ fun ConfigurationDomainModel.toUiModel(): ConfigurationUiModel {
         themeMode = this.themeMode?.let {
             ThemeUiModel.values().firstOrNull { it.theme == this.themeMode }
         },
+        isOnboardingFinished = this.isOnboardingFinished,
     )
 }

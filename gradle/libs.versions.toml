@@ -11,8 +11,8 @@ lint = "31.1.1"
 
 kotlinxCollectionsImmutable = "0.3.5"
 kotlinxCoroutines = "1.7.3"
-kotlinxSerializationJson= "1.6.0"
-kotlinSerialization="1.9.0"
+kotlinxSerializationJson = "1.6.0"
+kotlinSerialization = "1.9.0"
 
 compose = "1.1.1"
 uiTooling = "1.5.1"
@@ -26,7 +26,7 @@ composeDestinations = "1.9.52"
 rebugger = "1.0.0-alpha06"
 voyager = "1.0.0-rc05"
 androidxCoreSplashscreen = "1.0.1"
-datastoreVersion="1.0.0"
+datastoreVersion = "1.0.0"
 
 koin = "3.3.0"
 koinTest = "3.3.0"
@@ -39,8 +39,11 @@ composeMaterial = "1.5.1"
 junit = "4.13.2"
 mockitoCore = "5.5.0"
 mockitoKotlin = "5.1.0"
-konsist ="0.12.1"
+konsist = "0.12.1"
 
+faker = "1.14.0"
+accompanistPager = "0.32.0"
+lifecycleRuntimeCompose = "2.6.2"
 
 [libraries]
 # https://mvnrepository.com/artifact/androidx.core/core-ktx?repo=google
@@ -114,9 +117,15 @@ mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mo
 # https://mvnrepository.com/artifact/org.mockito.kotlin/mockito-kotlin
 mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockitoKotlin" }
 # https://github.com/LemonAppDev/konsist/releases/tag/v0.12.1
-konsist = { group = "com.lemonappdev", name ="konsist", version.ref="konsist"}
+konsist = { group = "com.lemonappdev", name = "konsist", version.ref = "konsist" }
 # https://mvnrepository.com/artifact/androidx.datastore/datastore
 datastore = { group = "androidx.datastore", name = "datastore", version.ref = "datastoreVersion" }
+# https://mvnrepository.com/artifact/io.github.serpro69/kotlin-faker
+faker = { group = "io.github.serpro69", name = "kotlin-faker", version.ref = "faker" }
+# https://mvnrepository.com/artifact/com.google.accompanist/accompanist-pager-indicators
+accompanist-pager-indicators = { group = "com.google.accompanist", name = "accompanist-pager-indicators", version.ref = "accompanistPager" }
+# https://mvnrepository.com/artifact/androidx.lifecycle/lifecycle-runtime-compose?repo=google
+lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycleRuntimeCompose" }
 
 [plugins]
 # https://mvnrepository.com/artifact/com.android.application/com.android.application.gradle.plugin

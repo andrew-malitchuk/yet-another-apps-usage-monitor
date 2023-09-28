@@ -1,6 +1,6 @@
 package dev.yaaum.data.source.system.timeusage.source
 
-import dev.yaaum.data.source.system.core.exception.base.BaseSystemException
+import dev.yaaum.data.core.exception.base.BaseDataException
 import dev.yaaum.data.source.system.timeusage.model.TimeUsageSystemModel
 import kotlin.jvm.Throws
 
@@ -15,8 +15,8 @@ interface TimeUsageDataSource {
      *
      * @return list of app usage info
      *
-     * @throws BaseSystemException
+     * @throws BaseDataException
      */
-    @Throws(BaseSystemException::class)
+    @Throws(BaseDataException::class)
     suspend fun getApplicationsUsage(): List<TimeUsageSystemModel>
 }
