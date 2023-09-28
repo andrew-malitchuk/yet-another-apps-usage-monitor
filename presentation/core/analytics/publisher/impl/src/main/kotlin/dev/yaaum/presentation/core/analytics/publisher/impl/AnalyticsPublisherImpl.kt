@@ -8,26 +8,21 @@ import dev.yaaum.presentation.core.analytics.subscriber.AnalyticsSubscriber
 
 class AnalyticsPublisherImpl : AnalyticsPublisher {
 
-    private var subscribers: Set<AnalyticsSubscriber> = emptySet()
+    private var subscribers: List<AnalyticsSubscriber> = arrayListOf()
 
     override fun subscribe(subscriber: AnalyticsSubscriber) {
-        (subscribers as? MutableSet)?.add(subscriber)
+        (subscribers as? ArrayList)?.add(subscriber)
     }
 
     override fun unsubscribe(subscriber: AnalyticsSubscriber) {
-        (subscribers as? MutableSet)?.remove(subscriber)
+        (subscribers as? ArrayList)?.remove(subscriber)
     }
 
     override fun notify(input: BaseAnalyticModel) {
         subscribers.forEach { subscriber ->
             when (input) {
-                is BaseAnalyticProperty -> {
-                    subscriber.setProperty(input)
-                }
-
-                is BaseAnalyticEvent -> {
-                    subscriber.logEvent(input)
-                }
+                is BaseAnalyticProperty -> subscriber.setProperty(input)
+                is BaseAnalyticEvent -> subscriber.logEvent(input)
             }
         }
     }

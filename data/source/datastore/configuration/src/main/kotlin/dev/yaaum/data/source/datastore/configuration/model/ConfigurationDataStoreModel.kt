@@ -9,4 +9,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ConfigurationDataStoreModel(
     val themeMode: String? = null,
+    val isOnboardingFinished: Boolean? = false,
 ) : BaseDataStoreModel

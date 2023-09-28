@@ -8,6 +8,7 @@ import dev.yaaum.data.source.datastore.configuration.model.ConfigurationDataStor
  */
 data class ConfigurationRepoModel(
     val themeMode: String? = null,
+    val isOnboardingFinished: Boolean?,
 ) : BaseRepoModel
 
 /**
@@ -16,6 +17,7 @@ data class ConfigurationRepoModel(
 fun ConfigurationRepoModel.toDataStoreModel(): ConfigurationDataStoreModel {
     return ConfigurationDataStoreModel(
         themeMode = this.themeMode,
+        isOnboardingFinished = this.isOnboardingFinished,
     )
 }
 
@@ -25,5 +27,6 @@ fun ConfigurationRepoModel.toDataStoreModel(): ConfigurationDataStoreModel {
 fun ConfigurationDataStoreModel.toRepoModel(): ConfigurationRepoModel {
     return ConfigurationRepoModel(
         themeMode = this.themeMode,
+        isOnboardingFinished = this.isOnboardingFinished,
     )
 }

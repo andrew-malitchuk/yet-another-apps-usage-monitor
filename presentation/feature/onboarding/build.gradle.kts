@@ -28,6 +28,8 @@ dependencies {
     implementation(project(":presentation:core:platform"))
     implementation(project(":presentation:core:navigation"))
     implementation(project(":presentation:core:models"))
+    implementation(project(":presentation:core:analytics:core"))
+    implementation(project(":presentation:core:analytics:logger"))
 
     implementation(project(":presentation:feature:main"))
     implementation(project(":presentation:core:ui"))

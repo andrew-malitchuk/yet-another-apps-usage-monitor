@@ -11,6 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import dev.yaaum.presentation.core.ui.composable.button.base.YaaumButtonAnimation
 import dev.yaaum.presentation.core.ui.composable.button.base.YaaumButtonColors
 import dev.yaaum.presentation.core.ui.composable.button.base.YaaumButtonSizes
+import dev.yaaum.presentation.core.ui.composable.button.ordinary.base.YaaumOrdinaryButton
 import dev.yaaum.presentation.core.ui.composable.button.ordinary.base.YaaumOrdinaryButtonDefaults
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 
@@ -41,7 +42,7 @@ fun YaaumDefaultOrdinaryButton(
     animation: YaaumButtonAnimation = YaaumOrdinaryButtonDefaults.animation,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    YaaumDefaultOrdinaryButton(
+    YaaumOrdinaryButton(
         text,
         onClick,
         modifier,

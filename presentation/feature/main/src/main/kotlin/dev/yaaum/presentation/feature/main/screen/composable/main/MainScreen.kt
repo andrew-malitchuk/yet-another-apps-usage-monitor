@@ -15,7 +15,6 @@ import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 @Composable
 fun MainScreen(
     navigator: Navigator,
-    from: String,
 ) {
     val settingsScreen = rememberScreen(RouteGraph.SettingsScreen)
 
@@ -27,7 +26,6 @@ fun MainScreen(
             modifier = Modifier
                 .fillMaxSize(),
         ) {
-            Text(text = "Main: from: $from")
             Button(onClick = {
                 navigator.push(settingsScreen)
             }) {

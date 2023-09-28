@@ -17,7 +17,7 @@ class HostViewModel(
     private val getCurrentConfigurationUseCase: GetCurrentConfigurationUseCase,
 ) : BaseViewModel() {
 
-    var configurationStateFlow: StateFlow<ConfigurationUiModel?> =
+    private var configurationStateFlow: StateFlow<ConfigurationUiModel?> =
         MutableStateFlow(null)
 
     private var isConfigurationLoadingStateFlow: StateFlow<Boolean?> = MutableStateFlow(true)
@@ -27,6 +27,8 @@ class HostViewModel(
 
     var currentThemeUiModel: MutableState<ThemeUiModel?> =
         mutableStateOf(null)
+
+    var isOnboardingFinished: StateFlow<Boolean?> = MutableStateFlow(null)
 
     init {
         setup()
@@ -40,9 +42,12 @@ class HostViewModel(
                 delay(1_500L)
                 getCurrentConfigurationUseCase().getOrNull() ?: ConfigurationDomainModel()
             },
-            result = {
-                configurationStateFlow.setValue(it?.toUiModel())
-                currentThemeUiModel.value = it?.toUiModel()?.themeMode
+            result = { result ->
+                result?.let {
+                    isOnboardingFinished.setValue(it.isOnboardingFinished)
+                }
+                configurationStateFlow.setValue(result?.toUiModel())
+                currentThemeUiModel.value = result?.toUiModel()?.themeMode
             },
             errorBlock = {
                 it.toString()

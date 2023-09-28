@@ -7,7 +7,7 @@ import dev.yaaum.presentation.core.analytics.subscriber.AnalyticsSubscriber
 
 class AnalyticsLoggerImpl(
     private var publisher: AnalyticsPublisher,
-    vararg subscriber: AnalyticsSubscriber
+    vararg subscriber: AnalyticsSubscriber,
 ) : AnalyticsLogger {
 
     init {
@@ -19,5 +19,4 @@ class AnalyticsLoggerImpl(
     override fun logEvent(staffToTrack: () -> BaseAnalyticModel) {
         publisher.notify(staffToTrack())
     }
-
 }

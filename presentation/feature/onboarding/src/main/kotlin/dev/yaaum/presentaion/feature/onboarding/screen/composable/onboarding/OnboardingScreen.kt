@@ -19,7 +19,7 @@ fun OnboardingScreen(
     @Suppress("unused")
     onboardingViewModel: OnboardingViewModel,
 ) {
-    val mainScreen = rememberScreen(RouteGraph.MainScreen(from = "onboarding"))
+    val mainScreen = rememberScreen(RouteGraph.MainScreen)
     val isDarkMode = hostViewModel.currentThemeUiModel.value?.isDarkMode() ?: false
     val onboardingPages = onboardingViewModel.onboardingPages
 
@@ -36,6 +36,7 @@ fun OnboardingScreen(
         OnboardingContent(
             onboardingPages = onboardingPages,
             onDoneClick = {
+                onboardingViewModel.setOnboardingFinished()
                 navigator.replace(mainScreen)
             },
             onInfoClick = {

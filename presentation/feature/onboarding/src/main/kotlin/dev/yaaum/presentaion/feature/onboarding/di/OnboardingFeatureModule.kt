@@ -8,5 +8,9 @@ import org.koin.dsl.module
  * :presentation:feature:onboarding
  */
 val onboardingFeatureModule = module {
-    viewModel { OnboardingViewModel() }
+    viewModel {
+        OnboardingViewModel(
+            setOnboardingFinishedUseCase = get(),
+        )
+    }
 }

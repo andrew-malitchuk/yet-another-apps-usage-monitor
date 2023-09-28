@@ -14,5 +14,4 @@ class LocalAnalyticsSubscriber : AnalyticsSubscriber {
     override fun setProperty(property: BaseAnalyticProperty) {
         Log.d(this::class.simpleName, "${property.key} : ${property.value}")
     }
-
 }

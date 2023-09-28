@@ -28,6 +28,7 @@ class ConfigurationDataStoreDao(
         context.datastore.updateData { configuration ->
             configuration.copy(
                 themeMode = value.themeMode,
+                isOnboardingFinished = value.isOnboardingFinished,
             )
         }
     }

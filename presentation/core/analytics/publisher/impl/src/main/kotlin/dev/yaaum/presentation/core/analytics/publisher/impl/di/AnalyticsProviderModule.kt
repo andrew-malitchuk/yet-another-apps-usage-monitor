@@ -9,8 +9,6 @@ import org.koin.dsl.module
  */
 val analyticsProviderModule = module {
     single<AnalyticsPublisher> {
-        AnalyticsPublisherImpl(
-
-        )
+        AnalyticsPublisherImpl()
     }
 }
