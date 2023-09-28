@@ -35,6 +35,9 @@ class YauumApplication : Application() {
                     configurationDomainModule,
                     mainFeatureModule,
                     onboardingFeatureModule,
+//                    analyticsLoggerModule,
+//                    analyticsProviderModule,
+//                    localAnalyticsModule
                 ),
             )
         }
