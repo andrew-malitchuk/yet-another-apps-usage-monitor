@@ -44,6 +44,7 @@ konsist = "0.12.1"
 faker = "1.14.0"
 accompanistPager = "0.32.0"
 lifecycleRuntimeCompose = "2.6.2"
+logcat = "0.1"
 
 [libraries]
 # https://mvnrepository.com/artifact/androidx.core/core-ktx?repo=google
@@ -126,6 +127,9 @@ faker = { group = "io.github.serpro69", name = "kotlin-faker", version.ref = "fa
 accompanist-pager-indicators = { group = "com.google.accompanist", name = "accompanist-pager-indicators", version.ref = "accompanistPager" }
 # https://mvnrepository.com/artifact/androidx.lifecycle/lifecycle-runtime-compose?repo=google
 lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycleRuntimeCompose" }
+# https://mvnrepository.com/artifact/com.squareup.logcat/logcat
+squareup-logcat = { group = "com.squareup.logcat", name = "logcat", version.ref = "logcat" }
+
 
 [plugins]
 # https://mvnrepository.com/artifact/com.android.application/com.android.application.gradle.plugin
