@@ -16,6 +16,7 @@ dependencies {
     implementation(libs.voyager.transitions)
     implementation(libs.voyager.androidx)
     implementation(libs.voyager.koin)
+    implementation(libs.voyager.tab.navigator)
 
     implementation(project(":presentation:core:ui"))
     implementation(project(":presentation:core:navigation"))

@@ -17,10 +17,15 @@ dependencies {
     implementation(libs.voyager.transitions)
     implementation(libs.voyager.androidx)
     implementation(libs.voyager.koin)
+    implementation(libs.voyager.tab.navigator)
 
     implementation(libs.arrow.core)
     implementation(libs.arrow.fx.coroutines)
     implementation(libs.arrow.optics)
+
+    implementation(libs.material3)
+    implementation(libs.navigation.compose)
+    implementation("androidx.compose.material:material:1.5.2")
 
     implementation(project(":presentation:core:ui"))
     implementation(project(":presentation:core:platform"))

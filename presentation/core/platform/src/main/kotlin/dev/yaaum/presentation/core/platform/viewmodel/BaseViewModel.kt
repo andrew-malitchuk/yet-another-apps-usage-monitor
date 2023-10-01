@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.yaaum.presentation.core.analytics.core.model.base.BaseAnalyticModel
 import dev.yaaum.presentation.core.analytics.logger.AnalyticsLogger
-import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -26,8 +25,6 @@ import kotlin.coroutines.CoroutineContext
  */
 @Suppress("unused")
 abstract class BaseViewModel : ViewModel() {
-
-    protected val logger = KotlinLogging.logger {}
 
     val analyticsLogger: AnalyticsLogger by inject(AnalyticsLogger::class.java)
 
