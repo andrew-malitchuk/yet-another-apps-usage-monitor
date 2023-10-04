@@ -35,7 +35,7 @@ koinAndroid = "3.3.1"
 koinCompose = "3.4.0"
 
 arrow = "1.2.0"
-composeMaterial = "1.5.1"
+composeMaterial = "1.5.3"
 
 junit = "4.13.2"
 mockitoCore = "5.5.0"

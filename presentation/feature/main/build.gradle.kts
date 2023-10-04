@@ -25,7 +25,8 @@ dependencies {
 
     implementation(libs.material3)
     implementation(libs.navigation.compose)
-    implementation("androidx.compose.material:material:1.5.2")
+    implementation(libs.compose.material)
+//    implementation("androidx.compose.material:material:1.5.2")
 
     implementation(project(":presentation:core:ui"))
     implementation(project(":presentation:core:platform"))

@@ -23,7 +23,7 @@ import dev.yaaum.presentation.feature.main.navigation.tab.ApplicationListTab
 import dev.yaaum.presentation.feature.main.navigation.tab.HeathTab
 import dev.yaaum.presentation.feature.main.navigation.tab.SettingsTab
 import dev.yaaum.presentation.feature.main.navigation.tab.StatisticTab
-import dev.yaaum.presentation.feature.main.screen.composable.ui.tab.Foo
+import dev.yaaum.presentation.feature.main.screen.composable.ui.tab.CenterButton
 import dev.yaaum.presentation.feature.main.screen.composable.ui.tab.TabNavigationItem
 
 @Composable
@@ -57,7 +57,7 @@ fun MainScreen() {
                     ) {
                         TabNavigationItem(HeathTab)
                         TabNavigationItem(ApplicationListTab)
-                        Foo(AddTab)
+                        CenterButton(AddTab)
                         TabNavigationItem(StatisticTab)
                         TabNavigationItem(SettingsTab)
                     }

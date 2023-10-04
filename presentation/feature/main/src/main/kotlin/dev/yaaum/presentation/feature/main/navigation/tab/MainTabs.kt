@@ -33,10 +33,8 @@ data object HeathTab : MainTabs() {
     override val options: TabOptions
         @Composable
         get() {
-//                val title = stringResource(R.string.home_tab)
             val title = "health"
             val icon = rememberVectorPainter(Icons.Default.Home)
-
             return remember {
                 TabOptions(
                     index = 0u,
@@ -66,10 +64,8 @@ data object ApplicationListTab : MainTabs() {
     override val options: TabOptions
         @Composable
         get() {
-//                val title = stringResource(R.string.home_tab)
             val title = "applications"
             val icon = rememberVectorPainter(Icons.Default.List)
-
             return remember {
                 TabOptions(
                     index = 0u,
@@ -99,10 +95,8 @@ data object AddTab : MainTabs() {
     override val options: TabOptions
         @Composable
         get() {
-//                val title = stringResource(R.string.home_tab)
             val title = "add"
             val icon = rememberVectorPainter(Icons.Default.Add)
-
             return remember {
                 TabOptions(
                     index = 0u,
@@ -132,7 +126,6 @@ data object StatisticTab : MainTabs() {
     override val options: TabOptions
         @Composable
         get() {
-//                val title = stringResource(R.string.home_tab)
             val title = "statistic"
             val icon = rememberVectorPainter(Icons.Default.Create)
 
@@ -165,7 +158,6 @@ data object SettingsTab : MainTabs() {
     override val options: TabOptions
         @Composable
         get() {
-//                val title = stringResource(R.string.home_tab)
             val title = "settings"
             val icon = rememberVectorPainter(Icons.Default.Settings)
 

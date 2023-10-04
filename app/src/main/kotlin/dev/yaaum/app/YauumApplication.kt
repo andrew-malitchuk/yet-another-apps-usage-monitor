@@ -13,6 +13,8 @@ import dev.yaaum.presentation.feature.host.navigation.navigationInit
 import dev.yaaum.presentation.feature.main.di.mainFeatureModule
 import dev.yaaum.repository.configuration.impl.di.configurationRepoModule
 import dev.yaaum.repository.timeusage.impl.di.timeUsageRepoModule
+import logcat.AndroidLogcatLogger
+import logcat.LogPriority
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -21,7 +23,12 @@ class YauumApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         navigationInit()
+        loggerInit()
         diInit()
+    }
+
+    private fun loggerInit() {
+        AndroidLogcatLogger.installOnDebuggableApp(this, minPriority = LogPriority.VERBOSE)
     }
 
     private fun diInit() {
