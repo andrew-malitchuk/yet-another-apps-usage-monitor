@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import dev.yaaum.presentation.feature.main.screen.composable.applications.ApplicationsScreen
 
 val tabs = listOf(
     HeathTab,
@@ -77,17 +78,7 @@ data object ApplicationListTab : MainTabs() {
 
     @Composable
     override fun Content() {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Green),
-        ) {
-            Text(
-                modifier = Modifier
-                    .align(Alignment.Center),
-                text = "applications",
-            )
-        }
+        ApplicationsScreen()
     }
 }
 
