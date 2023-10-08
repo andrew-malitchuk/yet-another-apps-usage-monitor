@@ -27,7 +27,7 @@ import dev.yaaum.presentation.feature.main.screen.composable.main.content.fetche
 import io.github.serpro69.kfaker.Faker
 
 @Composable
-fun LimitedListBlock(
+fun LimitedApplicationListBlock(
     title: String,
     list: List<String>,
     onMoreClick: (() -> Unit)? = null,
@@ -78,6 +78,17 @@ fun LimitedListBlock(
                 )
             }
         }
+        Spacer(modifier = Modifier.height(YaaumTheme.spacing.small))
+        YaaumDefaultCircleButton(
+            modifier = Modifier
+                // TODO: fix
+                .size(32.dp)
+                .align(Alignment.CenterHorizontally),
+            icon = ImageVector.vectorResource(id = R.drawable.icon_plus_bold_24),
+            onClick = {
+                onMoreClick?.invoke()
+            },
+        )
     }
 }
 
@@ -86,7 +97,7 @@ fun LimitedListBlock(
 fun Preview_ApplicationListBlock_Dark() {
     val faker = Faker()
     YaaumTheme(useDarkTheme = true) {
-        LimitedListBlock(
+        LimitedApplicationListBlock(
             title = faker.quote.fortuneCookie(),
             listOf("foo", "bar", "foobar"),
         )
@@ -98,7 +109,7 @@ fun Preview_ApplicationListBlock_Dark() {
 fun Preview_ApplicationListBlock_Light() {
     val faker = Faker()
     YaaumTheme(useDarkTheme = false) {
-        LimitedListBlock(
+        LimitedApplicationListBlock(
             title = faker.quote.fortuneCookie(),
             listOf("foo", "bar", "foobar"),
         )

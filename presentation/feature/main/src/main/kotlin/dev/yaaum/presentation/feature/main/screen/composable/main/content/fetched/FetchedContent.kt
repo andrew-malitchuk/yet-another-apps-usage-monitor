@@ -17,7 +17,8 @@ import dev.yaaum.presentation.core.ui.composable.card.GeneralHealthCard
 import dev.yaaum.presentation.core.ui.composable.header.SimpleHeader
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
-import dev.yaaum.presentation.feature.main.screen.composable.main.content.fetched.block.LimitedListBlock
+import dev.yaaum.presentation.feature.main.screen.composable.main.content.fetched.block.LimitedApplicationListBlock
+import dev.yaaum.presentation.feature.main.screen.composable.main.content.fetched.block.RecommendationBlock
 import io.github.serpro69.kfaker.Faker
 
 @Composable
@@ -33,7 +34,11 @@ fun FetchedContent() {
     ) {
         SimpleHeader(icon = ImageVector.vectorResource(R.drawable.icon_gear_six_bold_24))
         GeneralHealthCard()
-        LimitedListBlock(
+        LimitedApplicationListBlock(
+            title = Faker().quote.fortuneCookie(),
+            list = listOf("foo", "bar", "foobar"),
+        )
+        RecommendationBlock(
             title = Faker().quote.fortuneCookie(),
             list = listOf("foo", "bar", "foobar"),
         )
