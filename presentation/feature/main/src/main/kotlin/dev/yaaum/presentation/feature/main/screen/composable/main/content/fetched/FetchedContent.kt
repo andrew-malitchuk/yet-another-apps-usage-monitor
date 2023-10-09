@@ -22,7 +22,9 @@ import dev.yaaum.presentation.feature.main.screen.composable.main.content.fetche
 import io.github.serpro69.kfaker.Faker
 
 @Composable
-fun FetchedContent() {
+fun FetchedContent(
+    onSettingsClick: (() -> Unit)? = null,
+) {
     val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
@@ -32,7 +34,10 @@ fun FetchedContent() {
             .padding(YaaumTheme.spacing.medium),
         verticalArrangement = Arrangement.spacedBy(YaaumTheme.spacing.small),
     ) {
-        SimpleHeader(icon = ImageVector.vectorResource(R.drawable.icon_gear_six_bold_24))
+        SimpleHeader(
+            icon = ImageVector.vectorResource(R.drawable.icon_gear_six_bold_24),
+            onClick = onSettingsClick,
+        )
         GeneralHealthCard()
         LimitedApplicationListBlock(
             title = Faker().quote.fortuneCookie(),

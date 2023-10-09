@@ -4,6 +4,8 @@ import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import dev.yaaum.presentation.feature.main.screen.composable.HostViewModel
 import dev.yaaum.presentation.feature.main.screen.composable.main.MainScreen
 import org.koin.androidx.compose.koinViewModel
@@ -17,8 +19,10 @@ class MainRoute : Screen {
         val hostViewModel: HostViewModel = koinViewModel(
             viewModelStoreOwner = LocalContext.current as ComponentActivity,
         )
+        val navigator = LocalNavigator.currentOrThrow
 
         MainScreen(
+            navigator = navigator,
             hostViewModel = hostViewModel,
         )
     }
