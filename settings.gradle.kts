@@ -80,5 +80,6 @@ include(":presentation:feature:host")
 include(":presentation:feature:main")
 include(":presentation:feature:onboarding")
 include(":presentation:feature:settings")
+include(":presentation:feature:applications")
 //endregion Feature
 //endregion Presentation

@@ -20,4 +20,9 @@ sealed class RouteGraph : ScreenProvider {
      * `:presentation:feature:settings`
      */
     data object SettingsScreen : RouteGraph()
+
+    /**
+     * `:presentation:feature:applications`
+     */
+    data object ApplicationsScreen : RouteGraph()
 }

@@ -24,6 +24,7 @@ import io.github.serpro69.kfaker.Faker
 @Composable
 fun FetchedContent(
     onSettingsClick: (() -> Unit)? = null,
+    onMoreClick: (() -> Unit)? = null,
 ) {
     val scrollState = rememberScrollState()
     Column(
@@ -42,6 +43,7 @@ fun FetchedContent(
         LimitedApplicationListBlock(
             title = Faker().quote.fortuneCookie(),
             list = listOf("foo", "bar", "foobar"),
+            onMoreClick = onMoreClick,
         )
         RecommendationBlock(
             title = Faker().quote.fortuneCookie(),

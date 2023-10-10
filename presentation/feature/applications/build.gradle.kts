@@ -9,7 +9,7 @@ plugins {
 }
 
 android {
-    namespace = "dev.yaaum.presentation.feature.host"
+    namespace = "dev.yaaum.feature.applications"
 }
 
 dependencies {
@@ -22,20 +22,19 @@ dependencies {
     implementation(libs.arrow.core)
     implementation(libs.arrow.fx.coroutines)
     implementation(libs.arrow.optics)
-
-    implementation(libs.androidx.core.splashscreen)
-
-    implementation(project(":presentation:core:ui"))
-    implementation(project(":presentation:core:platform"))
-    implementation(project(":presentation:core:models"))
-    implementation(project(":presentation:core:navigation"))
-
-    implementation(project(":presentation:feature:main"))
-    implementation(project(":presentation:feature:onboarding"))
-    implementation(project(":presentation:feature:settings"))
-    implementation(project(":presentation:feature:applications"))
+    implementation(libs.accompanist.pager.indicators)
 
     implementation(project(":common:core"))
+    implementation(project(":presentation:core:ui"))
+    implementation(project(":presentation:core:platform"))
+    implementation(project(":presentation:core:navigation"))
+    implementation(project(":presentation:core:models"))
+    implementation(project(":presentation:core:analytics:core"))
+    implementation(project(":presentation:core:analytics:logger"))
+
+    implementation(project(":presentation:feature:main"))
+    implementation(project(":presentation:core:ui"))
+    implementation(project(":presentation:core:localisation"))
 
     implementation(project(":domain:core"))
     implementation(project(":domain:configuration"))
