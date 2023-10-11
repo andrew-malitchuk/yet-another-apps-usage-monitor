@@ -9,7 +9,7 @@ import dev.yaaum.presentaion.feature.onboarding.screen.composable.onboarding.con
 import dev.yaaum.presentation.core.models.isDarkMode
 import dev.yaaum.presentation.core.navigation.RouteGraph
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
-import dev.yaaum.presentation.feature.main.screen.composable.HostViewModel
+import dev.yaaum.presentation.feature.main.screen.HostViewModel
 
 @Composable
 @Suppress("UnusedParameter", "UnusedPrivateProperty")

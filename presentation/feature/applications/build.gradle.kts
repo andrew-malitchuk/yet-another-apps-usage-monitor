@@ -38,4 +38,5 @@ dependencies {
 
     implementation(project(":domain:core"))
     implementation(project(":domain:configuration"))
+    implementation(project(":domain:timeusage"))
 }

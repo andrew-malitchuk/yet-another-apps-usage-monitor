@@ -6,7 +6,7 @@ import androidx.compose.ui.platform.LocalContext
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import dev.yaaum.presentation.feature.main.screen.composable.HostViewModel
+import dev.yaaum.presentation.feature.main.screen.HostViewModel
 import dev.yaaum.presentation.feature.main.screen.composable.main.MainScreen
 import org.koin.androidx.compose.koinViewModel
 

@@ -8,7 +8,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import dev.yaaum.presentation.feature.applications.screen.ApplicationsViewModel
 import dev.yaaum.presentation.feature.applications.screen.composable.applications.ApplicationsScreen
-import dev.yaaum.presentation.feature.main.screen.composable.HostViewModel
+import dev.yaaum.presentation.feature.main.screen.HostViewModel
 import org.koin.androidx.compose.koinViewModel
 
 /**

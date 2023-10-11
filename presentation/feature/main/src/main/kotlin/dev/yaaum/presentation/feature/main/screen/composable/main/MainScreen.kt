@@ -7,7 +7,7 @@ import com.theapache64.rebugger.Rebugger
 import dev.yaaum.presentation.core.models.isDarkMode
 import dev.yaaum.presentation.core.navigation.RouteGraph
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
-import dev.yaaum.presentation.feature.main.screen.composable.HostViewModel
+import dev.yaaum.presentation.feature.main.screen.HostViewModel
 import dev.yaaum.presentation.feature.main.screen.composable.main.content.fetched.FetchedContent
 
 @Composable

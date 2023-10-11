@@ -1,4 +1,4 @@
-package dev.yaaum.presentation.feature.main.screen.composable
+package dev.yaaum.presentation.feature.main.screen
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
