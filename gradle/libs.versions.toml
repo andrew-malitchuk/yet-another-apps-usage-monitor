@@ -46,6 +46,7 @@ faker = "1.14.0"
 accompanistPager = "0.32.0"
 lifecycleRuntimeCompose = "2.6.2"
 logcat = "0.1"
+accompanistDrawablepainter="0.32.0"
 
 [libraries]
 # https://mvnrepository.com/artifact/androidx.core/core-ktx?repo=google
@@ -133,6 +134,9 @@ lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-ru
 squareup-logcat = { group = "com.squareup.logcat", name = "logcat", version.ref = "logcat" }
 # https://mvnrepository.com/artifact/androidx.navigation/navigation-compose?repo=google
 navigation-compose = {group="androidx.navigation",name="navigation-compose", version.ref="navigationCompose"}
+# https://mvnrepository.com/artifact/com.google.accompanist/accompanist-drawablepainter
+accompanist-drawablepainter={group="com.google.accompanist", name="accompanist-drawablepainter", version.ref="accompanistDrawablepainter"}
+
 
 [plugins]
 # https://mvnrepository.com/artifact/com.android.application/com.android.application.gradle.plugin

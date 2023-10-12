@@ -37,6 +37,8 @@ include(":data:repository:timeusage")
 include(":data:repository:timeusage:impl")
 include(":data:repository:configuration")
 include(":data:repository:configuration:impl")
+include(":data:repository:applications")
+include(":data:repository:applications:impl")
 include(":data:source:system")
 include(":data:source:system:core")
 include(":data:source:system:timeusage")
@@ -45,6 +47,8 @@ include(":data:source:datastore")
 include(":data:source:datastore:core")
 include(":data:source:datastore:configuration")
 include(":data:source:datastore:configuration:impl")
+include(":data:source:system:applications")
+include(":data:source:system:applications:impl")
 //region Data
 
 //region Domain
@@ -54,6 +58,8 @@ include(":domain:timeusage")
 include(":domain:timeusage:impl")
 include(":domain:configuration")
 include(":domain:configuration:impl")
+include(":domain:applications")
+include(":domain:applications:impl")
 //endregion Domain
 
 //region Presentation

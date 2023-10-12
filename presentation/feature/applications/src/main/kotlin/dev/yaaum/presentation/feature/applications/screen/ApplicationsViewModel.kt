@@ -1,18 +1,18 @@
 package dev.yaaum.presentation.feature.applications.screen
 
 import arrow.core.raise.fold
-import dev.yaaum.domain.timeusage.GetStatisticsAboutAllAppsUseCase
-import dev.yaaum.presentation.core.models.TimeUsageUiModel
+import dev.yaaum.domain.applications.GetAllAppsUseCase
+import dev.yaaum.presentation.core.models.ApplicationsUiModel
 import dev.yaaum.presentation.core.models.toUiModel
 import dev.yaaum.presentation.core.platform.viewmodel.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class ApplicationsViewModel(
-    private val getStatisticsAboutAllAppsUseCase: GetStatisticsAboutAllAppsUseCase,
+    private val getAllAppsUseCase: GetAllAppsUseCase,
 ) : BaseViewModel() {
 
-    var applicationStateFlow: StateFlow<List<TimeUsageUiModel>?> = MutableStateFlow(null)
+    var applicationStateFlow: StateFlow<List<ApplicationsUiModel>?> = MutableStateFlow(null)
     var areApplicationsLoadingStateFlow: StateFlow<Boolean?> = MutableStateFlow(true)
     var areApplicationsFailedStateFlow: StateFlow<Throwable?> = MutableStateFlow(null)
 
@@ -24,7 +24,7 @@ class ApplicationsViewModel(
     fun loadApplication() {
         launch(
             request = {
-                getStatisticsAboutAllAppsUseCase()
+                getAllAppsUseCase()
             },
             result = { result ->
                 result?.fold({ error ->

@@ -10,7 +10,7 @@ import org.koin.dsl.module
 val applicationsFeatureModule = module {
     viewModel {
         ApplicationsViewModel(
-            getStatisticsAboutAllAppsUseCase = get(),
+            getAllAppsUseCase = get(),
         )
     }
 }
