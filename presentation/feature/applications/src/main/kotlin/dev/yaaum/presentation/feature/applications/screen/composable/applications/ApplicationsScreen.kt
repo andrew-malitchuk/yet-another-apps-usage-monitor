@@ -37,6 +37,9 @@ fun ApplicationsScreen(
     YaaumTheme(isDarkMode) {
         ApplicationsContent(
             applicationList,
+            onBackClick = {
+                navigator.pop()
+            },
         )
     }
 }
