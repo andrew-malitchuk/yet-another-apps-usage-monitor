@@ -7,4 +7,7 @@ import kotlin.jvm.Throws
 interface ApplicationsDataSource {
     @Throws(BaseDataException::class)
     suspend fun getAllApplications(): List<ApplicationSystemModel>
+
+    @Throws(BaseDataException::class)
+    suspend fun getUserApplications(): List<ApplicationSystemModel>
 }

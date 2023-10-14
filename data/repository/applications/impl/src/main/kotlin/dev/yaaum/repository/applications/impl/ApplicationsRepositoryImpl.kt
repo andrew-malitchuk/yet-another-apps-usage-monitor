@@ -11,4 +11,8 @@ class ApplicationsRepositoryImpl(
     override suspend fun getAllApplications(): List<ApplicationsRepoModel> {
         return applicationsDataSource.getAllApplications().map { it.toRepoModel() }
     }
+
+    override suspend fun getUserApplications(): List<ApplicationsRepoModel> {
+        return applicationsDataSource.getUserApplications().map { it.toRepoModel() }
+    }
 }

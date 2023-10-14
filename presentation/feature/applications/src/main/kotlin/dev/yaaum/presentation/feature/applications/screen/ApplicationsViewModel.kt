@@ -1,7 +1,7 @@
 package dev.yaaum.presentation.feature.applications.screen
 
 import arrow.core.raise.fold
-import dev.yaaum.domain.applications.GetAllAppsUseCase
+import dev.yaaum.domain.applications.GetUserAppsUseCase
 import dev.yaaum.presentation.core.models.ApplicationsUiModel
 import dev.yaaum.presentation.core.models.toUiModel
 import dev.yaaum.presentation.core.platform.viewmodel.BaseViewModel
@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class ApplicationsViewModel(
-    private val getAllAppsUseCase: GetAllAppsUseCase,
+    private val getAllAppsUseCase: GetUserAppsUseCase,
 ) : BaseViewModel() {
 
     var applicationStateFlow: StateFlow<List<ApplicationsUiModel>?> = MutableStateFlow(null)
