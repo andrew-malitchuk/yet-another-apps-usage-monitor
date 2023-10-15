@@ -25,4 +25,9 @@ sealed class RouteGraph : ScreenProvider {
      * `:presentation:feature:applications`
      */
     data object ApplicationsScreen : RouteGraph()
+
+    /**
+     * `:presentation:feature:statistics`
+     */
+    data object PermissionsScreen : RouteGraph()
 }

@@ -16,7 +16,8 @@ fun MainScreen(
     hostViewModel: HostViewModel,
 ) {
     val isDarkMode = hostViewModel.currentThemeUiModel.value?.isDarkMode() ?: false
-    val settingsScreen = rememberScreen(RouteGraph.SettingsScreen)
+//    val settingsScreen = rememberScreen(RouteGraph.SettingsScreen)
+    val settingsScreen = rememberScreen(RouteGraph.PermissionsScreen)
     val applicationsScreen = rememberScreen(RouteGraph.ApplicationsScreen)
 
     Rebugger(
@@ -32,6 +33,7 @@ fun MainScreen(
 //        )
         FetchedContent(
             onSettingsClick = {
+//                navigator.push(settingsScreen)
                 navigator.push(settingsScreen)
             },
             onMoreClick = {
