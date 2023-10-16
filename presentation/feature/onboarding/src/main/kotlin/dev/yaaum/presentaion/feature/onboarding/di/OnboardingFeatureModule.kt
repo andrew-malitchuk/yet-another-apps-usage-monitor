@@ -1,6 +1,6 @@
 package dev.yaaum.presentaion.feature.onboarding.di
 
-import dev.yaaum.presentaion.feature.onboarding.screen.OnboardingViewModel
+import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.OnboardingViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

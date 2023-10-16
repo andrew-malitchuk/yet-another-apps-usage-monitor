@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import dev.yaaum.presentation.feature.settings.screen.composable.settings.SettingsScreen
+import dev.yaaum.presentation.feature.settings.screen.settings.SettingsScreen
 
 /**
  * Route for SettingsScreen
