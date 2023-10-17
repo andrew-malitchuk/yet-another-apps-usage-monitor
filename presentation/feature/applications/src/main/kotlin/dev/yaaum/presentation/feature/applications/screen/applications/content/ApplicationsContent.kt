@@ -8,10 +8,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
@@ -19,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import dev.yaaum.presentation.core.models.ApplicationsUiModel
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.header.TitleHeader
+import dev.yaaum.presentation.core.ui.composable.input.Foo
 import dev.yaaum.presentation.core.ui.composable.various.AnimatedDivider
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.feature.applications.screen.applications.content.list.ApplicationListItem
@@ -29,8 +34,10 @@ import io.github.serpro69.kfaker.Faker
 fun ApplicationsContent(
     applicationList: State<List<ApplicationsUiModel>?>,
     onBackClick: (() -> Unit)? = null,
+    onTextChange: ((String) -> Unit)? = null,
 ) {
     val lazyScrollState = rememberLazyListState()
+    var text by remember { mutableStateOf("Hello") }
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -44,6 +51,18 @@ fun ApplicationsContent(
             state = lazyScrollState,
             modifier = Modifier.fillMaxWidth(),
         )
+        TextField(
+            value = text,
+            onValueChange = {
+                text = it
+                onTextChange?.invoke(it)
+            },
+            label = { Text("Label") },
+        )
+        Foo(
+            text = null,
+        ) {
+        }
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()

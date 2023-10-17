@@ -11,6 +11,7 @@ val applicationsFeatureModule = module {
     viewModel {
         ApplicationsViewModel(
             getAllAppsUseCase = get(),
+            filterAllAppsUseCase = get(),
         )
     }
 }

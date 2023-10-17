@@ -75,8 +75,17 @@ fun LimitedApplicationListBlock(
                 .wrapContentHeight(),
             verticalArrangement = Arrangement.spacedBy(YaaumTheme.spacing.small),
         ) {
-            if (list.value == null) {
-                Text(text = "NO DATA")
+            if (list.value.isNullOrEmpty()) {
+                // TODO: fix
+                Text(
+                    text = "NO DATA",
+                    style = YaaumTheme.typography.caption,
+                    color = YaaumTheme.colors.onBackground,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally),
+                )
             } else {
                 repeat(list.value!!.size) {
                     val item = list.value?.get(it)

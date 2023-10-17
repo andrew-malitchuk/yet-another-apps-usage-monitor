@@ -1,6 +1,9 @@
 package dev.yaaum.presentation.feature.applications.screen.applications
 
+import android.util.Log
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.navigator.Navigator
@@ -22,7 +25,8 @@ fun ApplicationsScreen(
     val mainScreen = rememberScreen(RouteGraph.MainScreen)
     val isDarkMode = hostViewModel.currentThemeUiModel.value?.isDarkMode() ?: false
 
-    val applicationList = applicationsViewModel.applicationStateFlow.collectAsStateWithLifecycle()
+//    val applicationList = applicationsViewModel.applicationStateFlow.collectAsStateWithLifecycle()
+    val applicationList = applicationsViewModel.filterFlow.collectAsStateWithLifecycle()
 
     Rebugger(
         trackMap = mapOf(
@@ -31,6 +35,7 @@ fun ApplicationsScreen(
             "applicationsViewModel" to applicationsViewModel,
             "mainScreen" to mainScreen,
             "isDarkMode" to isDarkMode,
+            "applicationList" to applicationList,
         ),
     )
     YaaumTheme(isDarkMode) {
@@ -38,6 +43,12 @@ fun ApplicationsScreen(
             applicationList = applicationList,
             onBackClick = {
                 navigator.pop()
+            },
+            onTextChange = {
+                Log.d("foo", it)
+                applicationsViewModel.filter(
+                    query = it,
+                )
             },
         )
     }
