@@ -1,6 +1,5 @@
 package dev.yaaum.presentation.feature.applications.screen.applications
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -41,15 +40,9 @@ fun ApplicationsScreen(
     YaaumTheme(isDarkMode) {
         ApplicationsContent(
             applicationList = applicationList,
-            onBackClick = {
-                navigator.pop()
-            },
-            onTextChange = {
-                Log.d("foo", it)
-                applicationsViewModel.filter(
-                    query = it,
-                )
-            },
+            onBackClick = navigator::pop,
+            onTextChange = applicationsViewModel::updateFilterQuery,
+            onSideChange = applicationsViewModel::updateFilterSort,
         )
     }
 }
