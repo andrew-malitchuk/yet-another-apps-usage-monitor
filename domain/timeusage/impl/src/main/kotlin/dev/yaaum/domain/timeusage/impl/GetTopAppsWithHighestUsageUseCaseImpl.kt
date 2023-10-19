@@ -14,7 +14,7 @@ class GetTopAppsWithHighestUsageUseCaseImpl(
 
     override suspend fun invoke(top: Int): Either<BaseDomainError, List<TimeUsageDomainModel>> {
         return try {
-            val list = timeUsageRepository.getApplicationsUsage().sortedByDescending { it.lastTimeUsage }
+            val list = timeUsageRepository.getApplicationsUsage().sortedByDescending { it.totalTimeInForeground }
             Either.Right(list.take(top).map { it.toDomainModel() })
         } catch (ex: Exception) {
             Either.Left(

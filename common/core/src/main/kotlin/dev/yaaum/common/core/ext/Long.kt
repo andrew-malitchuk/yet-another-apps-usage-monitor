@@ -34,3 +34,8 @@ fun Long.asDate(
         ""
     }
 }
+
+fun Long.asHours(): String {
+    val hours = TimeUnit.MILLISECONDS.toMinutes(this)
+    return hours.toString()
+}

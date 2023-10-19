@@ -76,7 +76,6 @@ fun LimitedApplicationListBlock(
             verticalArrangement = Arrangement.spacedBy(YaaumTheme.spacing.small),
         ) {
             if (list.value.isNullOrEmpty()) {
-                // TODO: fix
                 Text(
                     text = "NO DATA",
                     style = YaaumTheme.typography.caption,
@@ -91,7 +90,7 @@ fun LimitedApplicationListBlock(
                     val item = list.value?.get(it)
                     ApplicationListItem(
                         title = item?.packageName ?: "SWW",
-                        description = item?.lastTimeUsage.toString(),
+                        description = item?.totalTimeInForegroundHumanReadable ?: "SWW",
                     )
                 }
             }

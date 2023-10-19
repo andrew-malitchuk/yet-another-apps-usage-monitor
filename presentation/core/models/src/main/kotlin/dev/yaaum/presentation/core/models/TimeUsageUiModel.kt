@@ -1,5 +1,6 @@
 package dev.yaaum.presentation.core.models
 
+import dev.yaaum.common.core.ext.asHours
 import dev.yaaum.domain.timeusage.model.TimeUsageDomainModel
 import dev.yaaum.presentation.core.models.base.BaseUiModel
 
@@ -12,7 +13,13 @@ data class TimeUsageUiModel(
     val usageEnd: Long?,
     val lastTimeUsage: Long?,
     val totalTimeInForeground: Long?,
-) : BaseUiModel
+) : BaseUiModel {
+
+    val totalTimeInForegroundHumanReadable: String
+        get() {
+            return "${totalTimeInForeground?.asHours()} h"
+        }
+}
 
 /**
  * `TimeUsageRepoModel` -> `TimeUsageDomainModel`
