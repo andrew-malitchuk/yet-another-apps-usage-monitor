@@ -45,6 +45,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
         with(libs) {
             dependencies {
                 implementDependency("squareup.logcat")
+                implementDependency("kotlinx.coroutines.core")
             }
         }
         // Necessary for context receiver

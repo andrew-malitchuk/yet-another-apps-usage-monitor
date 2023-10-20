@@ -7,16 +7,14 @@ plugins {
 }
 
 android {
-    namespace = "dev.yaaum.data.source.database.applications.impl"
+    namespace = "dev.yaaum.data.source.database.db"
 }
 
 dependencies{
-    implementation(libs.kotlinx.coroutines.core)
     implementation(libs.room.runtime)
     ksp(libs.room.compiler)
     implementation(libs.room.ktx)
 
-    implementation(project(":data:source:database:applications"))
     implementation(project(":data:source:database:core"))
-    implementation(project(":data:source:database:db"))
+    implementation(project(":data:source:database:applications"))
 }

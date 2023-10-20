@@ -8,7 +8,7 @@ kotlin = "1.9.0"
 detektGradlePlugin = "1.23.1"
 kotlinterGradle = "3.16.0"
 lint = "31.1.1"
-navigationCompose="2.7.3"
+navigationCompose = "2.7.3"
 
 kotlinxCollectionsImmutable = "0.3.5"
 kotlinxCoroutines = "1.7.3"
@@ -46,7 +46,9 @@ faker = "1.14.0"
 accompanistPager = "0.32.0"
 lifecycleRuntimeCompose = "2.6.2"
 logcat = "0.1"
-accompanistDrawablepainter="0.32.0"
+accompanistDrawablepainter = "0.32.0"
+
+room = "2.6.0"
 
 [libraries]
 # https://mvnrepository.com/artifact/androidx.core/core-ktx?repo=google
@@ -133,10 +135,15 @@ lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-ru
 # https://mvnrepository.com/artifact/com.squareup.logcat/logcat
 squareup-logcat = { group = "com.squareup.logcat", name = "logcat", version.ref = "logcat" }
 # https://mvnrepository.com/artifact/androidx.navigation/navigation-compose?repo=google
-navigation-compose = {group="androidx.navigation",name="navigation-compose", version.ref="navigationCompose"}
+navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 # https://mvnrepository.com/artifact/com.google.accompanist/accompanist-drawablepainter
-accompanist-drawablepainter={group="com.google.accompanist", name="accompanist-drawablepainter", version.ref="accompanistDrawablepainter"}
-
+accompanist-drawablepainter = { group = "com.google.accompanist", name = "accompanist-drawablepainter", version.ref = "accompanistDrawablepainter" }
+# https://mvnrepository.com/artifact/androidx.room/room-runtime?repo=google
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+# https://mvnrepository.com/artifact/androidx.room/room-compiler
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+# https://mvnrepository.com/artifact/androidx.room/room-ktx?repo=google
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 
 [plugins]
 # https://mvnrepository.com/artifact/com.android.application/com.android.application.gradle.plugin

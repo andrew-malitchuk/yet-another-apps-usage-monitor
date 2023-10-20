@@ -51,6 +51,7 @@ include(":data:source:system:applications")
 include(":data:source:system:applications:impl")
 include(":data:source:database")
 include(":data:source:database:core")
+include(":data:source:database:db")
 include(":data:source:database:applications")
 include(":data:source:database:applications:impl")
 //region Data
