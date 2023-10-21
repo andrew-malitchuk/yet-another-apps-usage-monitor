@@ -1,6 +1,8 @@
 package dev.yaaum.app
 
 import android.app.Application
+import dev.yaaum.data.source.database.applications.impl.di.applicationsDatabaseModule
+import dev.yaaum.data.source.database.db.di.databaseModule
 import dev.yaaum.data.source.datastore.configuration.impl.di.configurationDataStoreModule
 import dev.yaaum.data.source.system.applications.impl.di.applicationsSystemModule
 import dev.yaaum.data.source.system.timeusage.impl.di.timeUsageSystemModule
@@ -56,6 +58,8 @@ class YauumApplication : Application() {
                     applicationsSystemModule,
                     applicationsRepoModule,
                     applicationsDomainModule,
+                    databaseModule,
+                    applicationsDatabaseModule,
                 ),
             )
         }

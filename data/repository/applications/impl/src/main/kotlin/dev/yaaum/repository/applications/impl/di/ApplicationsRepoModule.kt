@@ -11,6 +11,7 @@ val applicationsRepoModule = module {
     single<ApplicationsRepository> {
         ApplicationsRepositoryImpl(
             applicationsDataSource = get(),
+            applicationsDatabaseSource = get(),
         )
     }
 }

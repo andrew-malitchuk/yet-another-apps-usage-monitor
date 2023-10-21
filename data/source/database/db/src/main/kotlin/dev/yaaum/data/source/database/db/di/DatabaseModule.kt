@@ -1,8 +1,8 @@
 package dev.yaaum.data.source.database.db.di
 
 import androidx.room.Room
+import dev.yaaum.data.source.database.db.DB_NAME
 import dev.yaaum.data.source.database.db.YaaumDatabase
-import dev.yaaum.data.source.database.db.YaaumDatabase.Companion.DB_NAME
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
@@ -18,5 +18,9 @@ val databaseModule = module {
             .fallbackToDestructiveMigration()
             .allowMainThreadQueries()
             .build()
+    }
+
+    single { params ->
+        (params.get() as YaaumDatabase).getApplicationsDatabaseDao()
     }
 }

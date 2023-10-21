@@ -14,6 +14,8 @@ dependencies {
 
     implementation(project(":data:source:system:applications"))
     implementation(project(":data:source:system:core"))
+    implementation(project(":data:source:database:core"))
+    implementation(project(":data:source:database:applications"))
     implementation(project(":data:repository:applications"))
     implementation(project(":data:repository:core"))
 }

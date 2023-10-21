@@ -48,7 +48,7 @@ lifecycleRuntimeCompose = "2.6.2"
 logcat = "0.1"
 accompanistDrawablepainter = "0.32.0"
 
-room = "2.6.0"
+room = "2.5.0"
 
 [libraries]
 # https://mvnrepository.com/artifact/androidx.core/core-ktx?repo=google

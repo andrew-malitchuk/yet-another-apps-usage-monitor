@@ -11,7 +11,7 @@ import dev.yaaum.data.source.database.applications.model.ApplicationsDatabaseMod
 interface ApplicationsDatabaseDao {
 
     @Query("SELECT * FROM ${Table.APPLICATIONS}")
-    suspend fun get(): List<ApplicationsDatabaseModel>?
+    suspend fun get(): List<ApplicationsDatabaseModel>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(value: ApplicationsDatabaseModel): Long
