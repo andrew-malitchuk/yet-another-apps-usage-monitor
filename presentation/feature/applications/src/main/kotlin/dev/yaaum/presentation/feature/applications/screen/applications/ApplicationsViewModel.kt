@@ -1,10 +1,14 @@
 package dev.yaaum.presentation.feature.applications.screen.applications
 
 import androidx.lifecycle.viewModelScope
+import arrow.core.raise.fold
+import dev.yaaum.domain.applications.AddAppToChosenUseCase
 import dev.yaaum.domain.applications.FilterAllAppsUseCase
 import dev.yaaum.domain.applications.GetUserAppsUseCase
+import dev.yaaum.domain.applications.RemoveAppFromChosenUseCase
 import dev.yaaum.domain.core.model.SortOrder
 import dev.yaaum.presentation.core.models.ApplicationsUiModel
+import dev.yaaum.presentation.core.models.toDomainModel
 import dev.yaaum.presentation.core.models.toUiModel
 import dev.yaaum.presentation.core.platform.viewmodel.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,6 +19,8 @@ import kotlinx.coroutines.launch
 class ApplicationsViewModel(
     private val getAllAppsUseCase: GetUserAppsUseCase,
     private val filterAllAppsUseCase: FilterAllAppsUseCase,
+    private val addAppToChosenUseCase: AddAppToChosenUseCase,
+    private val removeAppFromChosenUseCase: RemoveAppFromChosenUseCase,
 ) : BaseViewModel() {
 
     var applicationStateFlow: StateFlow<List<ApplicationsUiModel>?> = MutableStateFlow(null)
@@ -107,6 +113,22 @@ class ApplicationsViewModel(
                 )
             }
         }
+    }
+
+    fun changeApplicationStatus(application: ApplicationsUiModel, isChosen: Boolean) {
+        launch(
+            request = {
+                arrow.core.raise.recover({
+                    if (isChosen) {
+                        addAppToChosenUseCase(application.toDomainModel())
+                    } else {
+                        removeAppFromChosenUseCase(application.toDomainModel())
+                    }
+                }, {
+                    it.toString()
+                })
+            },
+        )
     }
 
     data class Filter(

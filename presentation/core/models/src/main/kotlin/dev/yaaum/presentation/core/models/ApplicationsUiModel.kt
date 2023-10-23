@@ -18,3 +18,13 @@ fun ApplicationsDomainModel.toUiModel() =
         packageName = this.packageName,
         applicationName = this.applicationName,
     )
+
+/**
+ * `ApplicationsUiModel` -> `ApplicationsDomainModel`
+ */
+fun ApplicationsUiModel.toDomainModel() =
+    ApplicationsDomainModel(
+        uuid = this.uuid,
+        packageName = this.packageName,
+        applicationName = this.applicationName,
+    )

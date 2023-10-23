@@ -38,7 +38,11 @@ class ApplicationsDatabaseSourceImpl(
     }
 
     override suspend fun delete(id: Int) {
-        TODO("Not yet implemented")
+        applicationsDatabaseDao.delete(id)
+    }
+
+    override suspend fun delete(packageName: String) {
+        applicationsDatabaseDao.delete(packageName)
     }
 
     override suspend fun delete(ids: List<Int>) {

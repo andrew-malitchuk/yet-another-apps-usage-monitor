@@ -43,6 +43,7 @@ fun ApplicationsScreen(
             onBackClick = navigator::pop,
             onTextChange = applicationsViewModel::updateFilterQuery,
             onSideChange = applicationsViewModel::updateFilterSort,
+            onApplicationClick = applicationsViewModel::changeApplicationStatus,
         )
     }
 }

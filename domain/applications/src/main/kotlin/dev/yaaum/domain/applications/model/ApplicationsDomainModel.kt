@@ -18,3 +18,13 @@ fun ApplicationsRepoModel.toDomainModel() =
         packageName = this.packageName,
         applicationName = this.applicationName,
     )
+
+/**
+ * `ApplicationsDomainModel` -> `ApplicationsRepoModel`
+ */
+fun ApplicationsDomainModel.toRepoModel() =
+    ApplicationsRepoModel(
+        uuid = this.uuid,
+        packageName = this.packageName,
+        applicationName = this.applicationName,
+    )

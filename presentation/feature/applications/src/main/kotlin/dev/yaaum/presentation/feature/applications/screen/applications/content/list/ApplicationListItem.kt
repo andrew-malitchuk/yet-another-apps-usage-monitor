@@ -39,6 +39,7 @@ import io.github.serpro69.kfaker.Faker
 @Composable
 fun ApplicationListItem(
     applicationsUiModel: ApplicationsUiModel,
+    onApplicationClick: ((ApplicationsUiModel, Boolean) -> Unit)? = null,
 ) {
     val isChosen = remember { mutableStateOf(false) }
 
@@ -69,6 +70,7 @@ fun ApplicationListItem(
             .padding(YaaumTheme.spacing.small)
             .clickable {
                 isChosen.value = isChosen.value.not()
+                onApplicationClick?.invoke(applicationsUiModel, isChosen.value)
             },
     ) {
         // TODO: add sizes

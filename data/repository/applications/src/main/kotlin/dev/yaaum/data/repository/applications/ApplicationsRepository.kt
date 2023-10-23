@@ -10,4 +10,10 @@ interface ApplicationsRepository {
 
     @Throws(BaseDataException::class)
     suspend fun getUserApplications(): List<ApplicationsRepoModel>
+
+    @Throws(BaseDataException::class)
+    suspend fun markApplicationAsChosen(value: ApplicationsRepoModel)
+
+    @Throws(BaseDataException::class)
+    suspend fun removeApplicationFromChosen(value: ApplicationsRepoModel)
 }

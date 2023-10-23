@@ -40,6 +40,7 @@ fun ApplicationsContent(
     onBackClick: (() -> Unit)? = null,
     onTextChange: ((String) -> Unit)? = null,
     onSideChange: ((Boolean) -> Unit)? = null,
+    onApplicationClick: ((ApplicationsUiModel, Boolean) -> Unit)? = null,
 ) {
     val lazyScrollState = rememberLazyListState()
     var text by remember { mutableStateOf("") }
@@ -96,7 +97,10 @@ fun ApplicationsContent(
                 items(
                     count = it.size,
                 ) { index ->
-                    ApplicationListItem(it[index])
+                    ApplicationListItem(
+                        applicationsUiModel = it[index],
+                        onApplicationClick = onApplicationClick,
+                    )
                 }
             }
         }
