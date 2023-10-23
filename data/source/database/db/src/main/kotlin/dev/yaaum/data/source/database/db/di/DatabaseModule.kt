@@ -21,6 +21,9 @@ val databaseModule = module {
     }
 
     single { params ->
-        (params.get() as YaaumDatabase).getApplicationsDatabaseDao()
+
+        (get() as YaaumDatabase).getApplicationsDatabaseDao()
+
+//        (params.get() as YaaumDatabase).getApplicationsDatabaseDao()
     }
 }
