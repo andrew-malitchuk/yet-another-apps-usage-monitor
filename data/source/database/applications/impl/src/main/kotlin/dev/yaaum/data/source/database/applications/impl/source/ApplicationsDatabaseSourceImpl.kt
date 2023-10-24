@@ -13,7 +13,7 @@ class ApplicationsDatabaseSourceImpl(
         TODO("Not yet implemented")
     }
 
-    override suspend fun get(): List<ApplicationsDatabaseModel>? {
+    override suspend fun get(): List<ApplicationsDatabaseModel> {
         return applicationsDatabaseDao.get()
     }
 

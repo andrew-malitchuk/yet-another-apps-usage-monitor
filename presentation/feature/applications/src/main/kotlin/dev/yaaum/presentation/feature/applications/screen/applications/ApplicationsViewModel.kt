@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import arrow.core.raise.fold
 import dev.yaaum.domain.applications.AddAppToChosenUseCase
 import dev.yaaum.domain.applications.FilterAllAppsUseCase
+import dev.yaaum.domain.applications.GetApplicationWithChosenCase
 import dev.yaaum.domain.applications.GetUserAppsUseCase
 import dev.yaaum.domain.applications.RemoveAppFromChosenUseCase
 import dev.yaaum.domain.core.model.SortOrder
@@ -18,9 +19,11 @@ import kotlinx.coroutines.launch
 
 class ApplicationsViewModel(
     private val getAllAppsUseCase: GetUserAppsUseCase,
+    @Suppress("UnusedPrivateProperty")
     private val filterAllAppsUseCase: FilterAllAppsUseCase,
     private val addAppToChosenUseCase: AddAppToChosenUseCase,
     private val removeAppFromChosenUseCase: RemoveAppFromChosenUseCase,
+    private val getApplicationWithChosenCase: GetApplicationWithChosenCase,
 ) : BaseViewModel() {
 
     var applicationStateFlow: StateFlow<List<ApplicationsUiModel>?> = MutableStateFlow(null)
@@ -63,13 +66,15 @@ class ApplicationsViewModel(
         )
     }
 
+    @Suppress("UnusedParameter")
     fun filter(query: String? = null, order: SortOrder? = null) {
         launch(
             request = {
-                filterAllAppsUseCase(
-                    query,
-                    order ?: SortOrder.ASC,
-                )
+//                filterAllAppsUseCase(
+//                    query,
+//                    order ?: SortOrder.ASC,
+//                )
+                getApplicationWithChosenCase()
             },
             result = { result ->
                 result?.fold(

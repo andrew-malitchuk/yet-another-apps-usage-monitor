@@ -27,4 +27,8 @@ class ApplicationsRepositoryImpl(
     override suspend fun removeApplicationFromChosen(value: ApplicationsRepoModel) {
         value.applicationName?.let { applicationsDatabaseSource.delete(it) }
     }
+
+    override suspend fun getAllChosenApplications(): List<ApplicationsRepoModel> {
+        return applicationsDatabaseSource.get().map { it.toRepoModel() }
+    }
 }

@@ -41,7 +41,8 @@ fun ApplicationListItem(
     applicationsUiModel: ApplicationsUiModel,
     onApplicationClick: ((ApplicationsUiModel, Boolean) -> Unit)? = null,
 ) {
-    val isChosen = remember { mutableStateOf(false) }
+    // TODO:Fix
+    val isChosen = remember { mutableStateOf(applicationsUiModel.isChosen) }
 
     val animatedDpValue by animateDpAsState(
         targetValue = if (isChosen.value) {

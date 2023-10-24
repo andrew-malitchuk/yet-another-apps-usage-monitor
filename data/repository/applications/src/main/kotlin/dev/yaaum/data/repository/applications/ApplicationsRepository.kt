@@ -16,4 +16,7 @@ interface ApplicationsRepository {
 
     @Throws(BaseDataException::class)
     suspend fun removeApplicationFromChosen(value: ApplicationsRepoModel)
+
+    @Throws(BaseDataException::class)
+    suspend fun getAllChosenApplications(): List<ApplicationsRepoModel>
 }

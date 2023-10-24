@@ -7,6 +7,8 @@ data class ApplicationsUiModel(
     val uuid: Int?,
     val packageName: String?,
     val applicationName: String?,
+    // TODO: fix to immutable
+    var isChosen: Boolean = false,
 ) : BaseDomainModel
 
 /**
@@ -17,6 +19,7 @@ fun ApplicationsDomainModel.toUiModel() =
         uuid = this.uuid,
         packageName = this.packageName,
         applicationName = this.applicationName,
+        isChosen = this.isChosen,
     )
 
 /**
@@ -27,4 +30,5 @@ fun ApplicationsUiModel.toDomainModel() =
         uuid = this.uuid,
         packageName = this.packageName,
         applicationName = this.applicationName,
+        isChosen = this.isChosen,
     )

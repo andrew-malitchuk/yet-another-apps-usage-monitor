@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface BaseDatabaseSource<T : BaseDatabaseModel> {
 
     suspend fun get(id: Int): T?
-    suspend fun get(): List<T>?
+    suspend fun get(): List<T>
     suspend fun getFlow(): Flow<List<T>?>
     suspend fun insert(value: T): Int
     suspend fun insert(values: List<T>)

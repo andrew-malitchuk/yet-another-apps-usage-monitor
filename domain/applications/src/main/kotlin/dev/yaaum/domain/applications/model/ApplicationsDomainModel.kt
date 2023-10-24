@@ -7,6 +7,8 @@ data class ApplicationsDomainModel(
     val uuid: Int?,
     val packageName: String?,
     val applicationName: String?,
+    // TODO: fix to immutable
+    var isChosen: Boolean = false,
 ) : BaseDomainModel
 
 /**
