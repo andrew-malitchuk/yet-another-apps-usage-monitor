@@ -26,6 +26,7 @@ fun ApplicationsScreen(
 
 //    val applicationList = applicationsViewModel.applicationStateFlow.collectAsStateWithLifecycle()
     val applicationList = applicationsViewModel.filterFlow.collectAsStateWithLifecycle()
+    applicationsViewModel.load()
 
     Rebugger(
         trackMap = mapOf(
@@ -40,7 +41,10 @@ fun ApplicationsScreen(
     YaaumTheme(isDarkMode) {
         ApplicationsContent(
             applicationList = applicationList,
-            onBackClick = navigator::pop,
+            onBackClick = {
+                applicationsViewModel.reset()
+                navigator.pop()
+            },
             onTextChange = applicationsViewModel::updateFilterQuery,
             onSideChange = applicationsViewModel::updateFilterSort,
             onApplicationClick = applicationsViewModel::changeApplicationStatus,

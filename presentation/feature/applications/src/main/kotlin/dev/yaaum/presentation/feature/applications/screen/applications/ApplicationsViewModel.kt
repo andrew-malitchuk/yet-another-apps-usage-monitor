@@ -3,8 +3,8 @@ package dev.yaaum.presentation.feature.applications.screen.applications
 import androidx.lifecycle.viewModelScope
 import arrow.core.raise.fold
 import dev.yaaum.domain.applications.AddAppToChosenUseCase
+import dev.yaaum.domain.applications.FilterAllApplicationWithChosenUseCase
 import dev.yaaum.domain.applications.FilterAllAppsUseCase
-import dev.yaaum.domain.applications.GetApplicationWithChosenCase
 import dev.yaaum.domain.applications.GetUserAppsUseCase
 import dev.yaaum.domain.applications.RemoveAppFromChosenUseCase
 import dev.yaaum.domain.core.model.SortOrder
@@ -23,7 +23,7 @@ class ApplicationsViewModel(
     private val filterAllAppsUseCase: FilterAllAppsUseCase,
     private val addAppToChosenUseCase: AddAppToChosenUseCase,
     private val removeAppFromChosenUseCase: RemoveAppFromChosenUseCase,
-    private val getApplicationWithChosenCase: GetApplicationWithChosenCase,
+    private val filterAllApplicationWithChosenUseCase: FilterAllApplicationWithChosenUseCase,
 ) : BaseViewModel() {
 
     var applicationStateFlow: StateFlow<List<ApplicationsUiModel>?> = MutableStateFlow(null)
@@ -43,6 +43,16 @@ class ApplicationsViewModel(
                 filter(it?.query, it?.order)
             }
         }
+    }
+
+    override fun load() {
+        filterQuery.value.let {
+            filter(it?.query, it?.order)
+        }
+    }
+
+    override fun reset() {
+        filterQuery.setValue(null)
     }
 
     fun loadApplication() {
@@ -70,11 +80,10 @@ class ApplicationsViewModel(
     fun filter(query: String? = null, order: SortOrder? = null) {
         launch(
             request = {
-//                filterAllAppsUseCase(
-//                    query,
-//                    order ?: SortOrder.ASC,
-//                )
-                getApplicationWithChosenCase()
+                filterAllApplicationWithChosenUseCase(
+                    query,
+                    order ?: SortOrder.ASC,
+                )
             },
             result = { result ->
                 result?.fold(

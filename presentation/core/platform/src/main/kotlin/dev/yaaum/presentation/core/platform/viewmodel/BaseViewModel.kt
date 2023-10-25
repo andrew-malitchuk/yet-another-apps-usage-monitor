@@ -95,7 +95,9 @@ abstract class BaseViewModel : ViewModel() {
 
     var isDataLoaded: Boolean = false
 
-    fun load() = Unit
+    open fun load() = Unit
+
+    open fun reset() = Unit
 
     fun reload() {
         isDataLoaded = false

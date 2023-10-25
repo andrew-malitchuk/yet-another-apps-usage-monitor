@@ -43,7 +43,6 @@ fun ApplicationListItem(
 ) {
     // TODO:Fix
     val isChosen = remember { mutableStateOf(applicationsUiModel.isChosen) }
-
     val animatedDpValue by animateDpAsState(
         targetValue = if (isChosen.value) {
             YaaumTheme.dividers.extraSmall

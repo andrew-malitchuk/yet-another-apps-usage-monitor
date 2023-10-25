@@ -1,12 +1,14 @@
 package dev.yaaum.domain.applications.impl.di
 
 import dev.yaaum.domain.applications.AddAppToChosenUseCase
+import dev.yaaum.domain.applications.FilterAllApplicationWithChosenUseCase
 import dev.yaaum.domain.applications.FilterAllAppsUseCase
 import dev.yaaum.domain.applications.GetAllAppsUseCase
 import dev.yaaum.domain.applications.GetApplicationWithChosenCase
 import dev.yaaum.domain.applications.GetUserAppsUseCase
 import dev.yaaum.domain.applications.RemoveAppFromChosenUseCase
 import dev.yaaum.domain.applications.impl.AddAppToChosenUseCaseImpl
+import dev.yaaum.domain.applications.impl.FilterAllApplicationWithChosenUseCaseImpl
 import dev.yaaum.domain.applications.impl.FilterAllAppsUseCaseImpl
 import dev.yaaum.domain.applications.impl.GetAllAppsUseCaseImpl
 import dev.yaaum.domain.applications.impl.GetApplicationWithChosenCaseImpl
@@ -45,6 +47,11 @@ val applicationsDomainModule = module {
     }
     single<GetApplicationWithChosenCase> {
         GetApplicationWithChosenCaseImpl(
+            applicationsRepository = get(),
+        )
+    }
+    single<FilterAllApplicationWithChosenUseCase> {
+        FilterAllApplicationWithChosenUseCaseImpl(
             applicationsRepository = get(),
         )
     }
