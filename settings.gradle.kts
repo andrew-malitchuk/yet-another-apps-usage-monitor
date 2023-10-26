@@ -93,5 +93,6 @@ include(":presentation:feature:onboarding")
 include(":presentation:feature:settings")
 include(":presentation:feature:applications")
 include(":presentation:feature:statistics")
+include(":presentation:feature:health")
 //endregion Feature
 //endregion Presentation

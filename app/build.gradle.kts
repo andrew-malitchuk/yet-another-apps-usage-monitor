@@ -26,6 +26,7 @@ dependencies {
     implementation(project(":presentation:feature:settings"))
     implementation(project(":presentation:feature:applications"))
     implementation(project(":presentation:feature:statistics"))
+    implementation(project(":presentation:feature:health"))
     implementation(project(":presentation:core:navigation"))
     implementation(project(":presentation:core:analytics:core"))
     implementation(project(":presentation:core:analytics:logger"))

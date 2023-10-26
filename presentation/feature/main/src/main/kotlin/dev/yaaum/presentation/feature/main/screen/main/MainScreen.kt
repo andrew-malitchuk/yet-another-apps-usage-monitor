@@ -20,6 +20,7 @@ fun MainScreen(
     val isDarkMode = hostViewModel.currentThemeUiModel.value?.isDarkMode() ?: false
     val settingsScreen = rememberScreen(RouteGraph.PermissionsScreen)
     val applicationsScreen = rememberScreen(RouteGraph.ApplicationsScreen)
+    val healthScreen = rememberScreen(RouteGraph.HealthScreen)
 
     val topAppsWithHighestUsage = mainViewModel.topAppsWithHighestUsageStateFlow.collectAsStateWithLifecycle()
 
@@ -43,6 +44,9 @@ fun MainScreen(
             },
             onMoreClick = {
                 navigator.push(applicationsScreen)
+            },
+            onHealthClick = {
+                navigator.push(healthScreen)
             },
         )
     }

@@ -1,6 +1,7 @@
 package dev.yaaum.presentation.core.ui.composable.card
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,14 +22,19 @@ import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
 @Composable
-fun GeneralHealthCard() {
+fun GeneralHealthCard(
+    onClick: (() -> Unit)? = null,
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
             .clip(RoundedCornerShape(YaaumTheme.corners.medium))
             .background(YaaumTheme.colors.surface)
-            .padding(YaaumTheme.spacing.small),
+            .padding(YaaumTheme.spacing.small)
+            .clickable {
+                onClick?.invoke()
+            },
     ) {
         Box(
             modifier = Modifier

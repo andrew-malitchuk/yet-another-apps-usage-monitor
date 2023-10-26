@@ -28,6 +28,7 @@ import io.github.serpro69.kfaker.Faker
 @Composable
 fun FetchedContent(
     onSettingsClick: (() -> Unit)? = null,
+    onHealthClick: (() -> Unit)? = null,
     onMoreClick: (() -> Unit)? = null,
     topAppsWithHighestUsage: State<List<TimeUsageUiModel>?>,
 ) {
@@ -45,7 +46,9 @@ fun FetchedContent(
             icon = ImageVector.vectorResource(R.drawable.icon_gear_six_bold_24),
             onClick = onSettingsClick,
         )
-        GeneralHealthCard()
+        GeneralHealthCard(
+            onClick = onHealthClick,
+        )
         LimitedApplicationListBlock(
             title = Faker().quote.fortuneCookie(),
             list = topAppsWithHighestUsage,

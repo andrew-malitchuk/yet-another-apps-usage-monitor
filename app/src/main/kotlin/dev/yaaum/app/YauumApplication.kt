@@ -14,6 +14,7 @@ import dev.yaaum.presentation.core.analytics.logger.impl.di.analyticsLoggerModul
 import dev.yaaum.presentation.core.analytics.publisher.impl.di.analyticsProviderModule
 import dev.yaaum.presentation.core.analytics.subscriber.impl.local.di.localAnalyticsModule
 import dev.yaaum.presentation.feature.applications.di.applicationsFeatureModule
+import dev.yaaum.presentation.feature.health.di.healthFeatureModule
 import dev.yaaum.presentation.feature.host.navigation.navigationInit
 import dev.yaaum.presentation.feature.main.di.mainFeatureModule
 import dev.yaaum.repository.applications.impl.di.applicationsRepoModule
@@ -60,6 +61,7 @@ class YauumApplication : Application() {
                     applicationsDomainModule,
                     databaseModule,
                     applicationsDatabaseModule,
+                    healthFeatureModule,
                 ),
             )
         }

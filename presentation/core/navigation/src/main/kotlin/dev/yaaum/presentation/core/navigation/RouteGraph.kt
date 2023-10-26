@@ -30,4 +30,9 @@ sealed class RouteGraph : ScreenProvider {
      * `:presentation:feature:statistics`
      */
     data object PermissionsScreen : RouteGraph()
+
+    /**
+     * `:presentation:feature:health`
+     */
+    data object HealthScreen : RouteGraph()
 }
