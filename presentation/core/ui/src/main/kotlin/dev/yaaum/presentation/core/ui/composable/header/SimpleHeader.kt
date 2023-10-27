@@ -18,11 +18,12 @@ import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
 @Composable
 fun SimpleHeader(
+    modifier: Modifier = Modifier,
     icon: ImageVector,
     onClick: (() -> Unit)? = null,
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
             .background(YaaumTheme.colors.background)

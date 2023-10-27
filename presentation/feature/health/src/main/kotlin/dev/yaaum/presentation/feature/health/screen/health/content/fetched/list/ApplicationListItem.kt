@@ -1,7 +1,8 @@
-package dev.yaaum.presentation.feature.main.screen.main.content.fetched.list
+package dev.yaaum.presentation.feature.health.screen.health.content.fetched.list
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,22 +17,24 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.yaaum.presentation.core.ui.R
+import com.google.accompanist.drawablepainter.rememberDrawablePainter
+import dev.yaaum.presentation.core.models.ApplicationsUiModel
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun ApplicationListItem(
-    title: String,
-    description: String,
+    applicationsUiModel: ApplicationsUiModel,
+    onApplicationClick: ((ApplicationsUiModel) -> Unit)? = null,
 ) {
     Row(
         modifier = Modifier
@@ -39,7 +42,10 @@ fun ApplicationListItem(
             .wrapContentHeight()
             .clip(RoundedCornerShape(YaaumTheme.corners.medium))
             .background(YaaumTheme.colors.surface)
-            .padding(YaaumTheme.spacing.small),
+            .padding(YaaumTheme.spacing.small)
+            .clickable {
+                onApplicationClick?.invoke(applicationsUiModel)
+            },
     ) {
         // TODO: add sizes
         Box(
@@ -51,8 +57,11 @@ fun ApplicationListItem(
                 .align(Alignment.CenterVertically)
                 .background(YaaumTheme.colors.secondary),
         ) {
+            val icon = applicationsUiModel.packageName?.let { pn ->
+                LocalContext.current.packageManager.getApplicationIcon(pn)
+            }
             Image(
-                painter = painterResource(id = R.drawable.icon_fire_bold_24),
+                painter = rememberDrawablePainter(icon),
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxSize()
@@ -65,7 +74,8 @@ fun ApplicationListItem(
             modifier = Modifier,
         ) {
             Text(
-                text = title,
+                // TODO: fix
+                text = applicationsUiModel.applicationName ?: "SWW",
                 style = YaaumTheme.typography.title,
                 color = YaaumTheme.colors.onSurface,
                 maxLines = 1,
@@ -73,7 +83,8 @@ fun ApplicationListItem(
             )
             Spacer(modifier = Modifier.height(YaaumTheme.spacing.extraSmall))
             Text(
-                text = description,
+                // TODO: fix
+                text = applicationsUiModel.packageName ?: "SWW",
                 style = YaaumTheme.typography.caption,
                 color = YaaumTheme.colors.onSurface,
                 maxLines = 1,
@@ -89,8 +100,11 @@ fun Preview_ApplicationListItem_Dark() {
     val faker = Faker()
     YaaumTheme(useDarkTheme = true) {
         ApplicationListItem(
-            title = faker.quote.fortuneCookie(),
-            description = faker.quote.fortuneCookie(),
+            applicationsUiModel = ApplicationsUiModel(
+                uuid = 1,
+                packageName = faker.quote.fortuneCookie(),
+                applicationName = faker.quote.fortuneCookie(),
+            ),
         )
     }
 }
@@ -101,8 +115,11 @@ fun Preview_ApplicationListItem_Light() {
     val faker = Faker()
     YaaumTheme(useDarkTheme = false) {
         ApplicationListItem(
-            title = faker.quote.fortuneCookie(),
-            description = faker.quote.fortuneCookie(),
+            applicationsUiModel = ApplicationsUiModel(
+                uuid = 1,
+                packageName = faker.quote.fortuneCookie(),
+                applicationName = faker.quote.fortuneCookie(),
+            ),
         )
     }
 }

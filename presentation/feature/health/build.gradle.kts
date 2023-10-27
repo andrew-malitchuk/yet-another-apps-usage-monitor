@@ -22,6 +22,7 @@ dependencies {
     implementation(libs.arrow.core)
     implementation(libs.arrow.fx.coroutines)
     implementation(libs.arrow.optics)
+    implementation(libs.accompanist.drawablepainter)
     implementation(libs.accompanist.pager.indicators)
 
     implementation(project(":common:core"))
@@ -38,4 +39,5 @@ dependencies {
 
     implementation(project(":domain:core"))
     implementation(project(":domain:configuration"))
+    implementation(project(":domain:applications"))
 }

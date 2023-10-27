@@ -5,10 +5,12 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 /**
- * :presentation:feature:onboarding
+ * :presentation:feature:health
  */
 val healthFeatureModule = module {
     viewModel {
-        HealthViewModel()
+        HealthViewModel(
+            getAllAppsUseCase = get(),
+        )
     }
 }

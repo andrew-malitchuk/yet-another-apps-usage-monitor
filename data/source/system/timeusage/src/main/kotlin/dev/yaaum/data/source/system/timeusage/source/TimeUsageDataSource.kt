@@ -19,4 +19,7 @@ interface TimeUsageDataSource {
      */
     @Throws(BaseDataException::class)
     suspend fun getApplicationsUsage(): List<TimeUsageSystemModel>
+
+    @Throws(BaseDataException::class)
+    suspend fun getApplicationsUsage(beginTime: Long, endTime: Long): List<TimeUsageSystemModel>
 }

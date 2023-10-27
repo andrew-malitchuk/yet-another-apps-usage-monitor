@@ -16,6 +16,7 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.core.ktx)
     implementation(libs.compose.runtime)
+    implementation(libs.constraintlayout.compose)
 
     implementation(project(":common:core"))
 }

@@ -49,6 +49,7 @@ logcat = "0.1"
 accompanistDrawablepainter = "0.32.0"
 
 room = "2.5.0"
+constraintlayoutCompose = "1.1.0-alpha13"
 
 [libraries]
 # https://mvnrepository.com/artifact/androidx.core/core-ktx?repo=google
@@ -144,6 +145,8 @@ room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 # https://mvnrepository.com/artifact/androidx.room/room-ktx?repo=google
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+# https://mvnrepository.com/artifact/androidx.constraintlayout/constraintlayout-compose?repo=google
+constraintlayout-compose = { group = "androidx.constraintlayout", name = "constraintlayout-compose", version.ref = "constraintlayoutCompose" }
 
 [plugins]
 # https://mvnrepository.com/artifact/com.android.application/com.android.application.gradle.plugin

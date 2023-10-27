@@ -1,6 +1,7 @@
 package dev.yaaum.presentation.feature.health.screen.health
 
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.navigator.Navigator
 import com.theapache64.rebugger.Rebugger
@@ -21,6 +22,9 @@ fun HealthScreen(
     val mainScreen = rememberScreen(RouteGraph.MainScreen)
     val isDarkMode = hostViewModel.currentThemeUiModel.value?.isDarkMode() ?: false
 
+    val applicationList = healthViewModel.applicationStateFlow.collectAsStateWithLifecycle()
+    healthViewModel.load()
+
     Rebugger(
         trackMap = mapOf(
             "navigator" to navigator,
@@ -31,6 +35,8 @@ fun HealthScreen(
         ),
     )
     YaaumTheme(isDarkMode) {
-        HealthFetchedContent()
+        HealthFetchedContent(
+            applicationList = applicationList,
+        )
     }
 }

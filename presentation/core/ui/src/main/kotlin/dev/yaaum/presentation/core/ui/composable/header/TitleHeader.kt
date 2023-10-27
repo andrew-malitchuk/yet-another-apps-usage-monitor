@@ -23,12 +23,13 @@ import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun TitleHeader(
+    modifier: Modifier = Modifier,
     icon: ImageVector,
     title: String,
     onClick: (() -> Unit)? = null,
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
             .background(YaaumTheme.colors.background)
