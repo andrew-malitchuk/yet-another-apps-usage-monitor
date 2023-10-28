@@ -17,6 +17,7 @@ import dev.yaaum.presentation.feature.applications.di.applicationsFeatureModule
 import dev.yaaum.presentation.feature.health.di.healthFeatureModule
 import dev.yaaum.presentation.feature.host.navigation.navigationInit
 import dev.yaaum.presentation.feature.main.di.mainFeatureModule
+import dev.yaaum.presentation.feature.settings.di.settingsFeatureModule
 import dev.yaaum.repository.applications.impl.di.applicationsRepoModule
 import dev.yaaum.repository.configuration.impl.di.configurationRepoModule
 import dev.yaaum.repository.timeusage.impl.di.timeUsageRepoModule
@@ -62,6 +63,7 @@ class YauumApplication : Application() {
                     databaseModule,
                     applicationsDatabaseModule,
                     healthFeatureModule,
+                    settingsFeatureModule,
                 ),
             )
         }

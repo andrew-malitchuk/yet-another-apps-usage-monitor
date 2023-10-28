@@ -73,11 +73,11 @@ fun HealthFetchedContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1.0f)
-                .background(dev.yaaum.presentation.core.ui.theme.common.YaaumTheme.colors.background)
-                .padding(horizontal = dev.yaaum.presentation.core.ui.theme.common.YaaumTheme.spacing.medium),
+                .background(YaaumTheme.colors.background)
+                .padding(horizontal = YaaumTheme.spacing.medium),
             state = lazyScrollState,
             verticalArrangement = Arrangement
-                .spacedBy(dev.yaaum.presentation.core.ui.theme.common.YaaumTheme.spacing.small),
+                .spacedBy(YaaumTheme.spacing.small),
         ) {
             applicationList.value?.let {
                 items(
