@@ -22,6 +22,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yaaum.presentation.core.ui.R
+import dev.yaaum.presentation.core.ui.composable.button.various.SelectedTheme
+import dev.yaaum.presentation.core.ui.composable.button.various.ThemeButton
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
@@ -64,6 +66,11 @@ fun ThemeListItem() {
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier
                 .align(Alignment.CenterVertically),
+        )
+        Spacer(modifier = Modifier.weight(1f))
+        ThemeButton(
+            modifier = Modifier,
+            preselectedTheme = SelectedTheme.LIGHT,
         )
     }
 }
