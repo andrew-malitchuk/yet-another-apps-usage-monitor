@@ -1,6 +1,7 @@
 package dev.yaaum.presentation.feature.applications.di
 
 import dev.yaaum.presentation.feature.applications.screen.applications.ApplicationsViewModel
+import dev.yaaum.presentation.feature.applications.screen.detalization.ApplicationDetalizationViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -16,5 +17,8 @@ val applicationsFeatureModule = module {
             removeAppFromChosenUseCase = get(),
             filterAllApplicationWithChosenUseCase = get(),
         )
+    }
+    viewModel {
+        ApplicationDetalizationViewModel()
     }
 }
