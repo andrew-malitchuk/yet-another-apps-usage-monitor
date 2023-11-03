@@ -3,7 +3,7 @@ package dev.yaaum.presentation.core.ui.composable.various
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.gestures.ScrollableState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
@@ -18,7 +18,7 @@ import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 @Composable
 fun AnimatedDivider(
     modifier: Modifier = Modifier,
-    state: LazyListState,
+    state: ScrollableState,
     isInverted: Boolean = false,
 ) {
 //    val isVisible = (state.canScrollBackward && !isInverted)

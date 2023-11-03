@@ -10,22 +10,20 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import dev.yaaum.presentation.core.ui.composable.card.ApplicationDetalizationCard
+import dev.yaaum.presentation.core.ui.composable.various.AnimatedDivider
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
+import dev.yaaum.presentation.feature.main.screen.main.content.fetched.list.ApplicationListItem
 
 @Composable
 fun ApplicationDetalizationFetchedContent() {
     val lazyScrollState = rememberLazyListState()
 
-    val foo = remember { mutableStateOf(false) }
+//    val foo = remember { mutableStateOf(false) }
     val scrollState = rememberScrollState()
 
     Column(
@@ -42,8 +40,14 @@ fun ApplicationDetalizationFetchedContent() {
                     top = YaaumTheme.spacing.small,
                     bottom = YaaumTheme.spacing.small,
                 ),
-//            isFoo = (!lazyScrollState.canScrollBackward && !lazyScrollState.isScrollInProgress),
-            isFoo = foo.value,
+//            isFoo = (!scrollState.canScrollBackward && !scrollState.isScrollInProgress),
+            isFoo = (!lazyScrollState.canScrollBackward && !lazyScrollState.isScrollInProgress),
+//            isFoo = true
+        )
+        AnimatedDivider(
+            state = lazyScrollState,
+            modifier = Modifier
+                .fillMaxWidth(),
         )
         LazyColumn(
             modifier = Modifier
@@ -56,15 +60,52 @@ fun ApplicationDetalizationFetchedContent() {
                 .spacedBy(YaaumTheme.spacing.small),
         ) {
             item {
-                Button(
-                    onClick = {
-                        foo.value = foo.value.not()
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                ) {
-                    Text(text = "foobar")
-                }
+                ApplicationListItem(
+                    "foo",
+                    "bar",
+                )
+            }
+            item {
+                ApplicationListItem(
+                    "foo",
+                    "bar",
+                )
+            }
+            item {
+                ApplicationListItem(
+                    "foo",
+                    "bar",
+                )
+            }
+            item {
+                ApplicationListItem(
+                    "foo",
+                    "bar",
+                )
+            }
+            item {
+                ApplicationListItem(
+                    "foo",
+                    "bar",
+                )
+            }
+            item {
+                ApplicationListItem(
+                    "foo",
+                    "bar",
+                )
+            }
+            item {
+                ApplicationListItem(
+                    "foo",
+                    "bar",
+                )
+            }
+            item {
+                ApplicationListItem(
+                    "foo",
+                    "bar",
+                )
             }
         }
     }
