@@ -13,11 +13,15 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -28,6 +32,7 @@ import androidx.constraintlayout.compose.MotionScene
 import androidx.constraintlayout.compose.Transition
 import androidx.constraintlayout.compose.layoutId
 import dev.yaaum.presentation.core.ui.R
+import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumDefaultCircleButton
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
@@ -36,19 +41,23 @@ import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 fun ApplicationDetalizationCard(
     modifier: Modifier = Modifier,
     onClick: (() -> Unit)? = null,
-    isFoo: Boolean,
 ) {
+    val isFoo = remember {
+        mutableStateOf(true)
+    }
+
     val cardId = "card_id"
     val totalTitleId = "total_title_id"
     val packageNameId = "package_name_id"
     val applicationBoxId = "application_box_id"
+    val changeStateId = "change_state_id"
 
     val paddingMedium = YaaumTheme.spacing.medium
     val paddingSmall = YaaumTheme.spacing.small
 
     @Suppress("MagicNumber")
     val progress by animateFloatAsState(
-        targetValue = if (isFoo) 0f else 1f,
+        targetValue = if (isFoo.value) 0f else 1f,
         label = "",
     )
 
@@ -57,6 +66,7 @@ fun ApplicationDetalizationCard(
         val totalTitle = createRefFor(totalTitleId)
         val applicationBox = createRefFor(applicationBoxId)
         val packageName = createRefFor(packageNameId)
+        val changeState = createRefFor(changeStateId)
 
         constrain(card) {
             top.linkTo(parent.top)
@@ -90,6 +100,11 @@ fun ApplicationDetalizationCard(
             bottom.linkTo(card.bottom, paddingSmall)
             width = Dimension.wrapContent
         }
+
+        constrain(changeState) {
+            top.linkTo(card.top, paddingMedium)
+            end.linkTo(card.end, paddingSmall)
+        }
     }
 
     val constraintSetEnd = ConstraintSet {
@@ -97,6 +112,7 @@ fun ApplicationDetalizationCard(
         val totalTitle = createRefFor(totalTitleId)
         val applicationBox = createRefFor(applicationBoxId)
         val packageName = createRefFor(packageNameId)
+        val changeState = createRefFor(changeStateId)
 
         constrain(card) {
             top.linkTo(parent.top)
@@ -133,6 +149,11 @@ fun ApplicationDetalizationCard(
             width = Dimension.value(0.dp)
             height = Dimension.value(0.dp)
         }
+
+        constrain(changeState) {
+            top.linkTo(card.top, paddingMedium)
+            end.linkTo(card.end, paddingSmall)
+        }
     }
 
     val transition = Transition(
@@ -142,6 +163,7 @@ fun ApplicationDetalizationCard(
         val card = createRefFor(cardId)
         val totalTitle = createRefFor(totalTitleId)
         val packageName = createRefFor(packageNameId)
+        val changeState = createRefFor(changeStateId)
 
         @Suppress("MagicNumber")
         keyAttributes(packageName) {
@@ -150,6 +172,15 @@ fun ApplicationDetalizationCard(
             }
             frame(100) {
                 alpha = 0f
+            }
+        }
+        @Suppress("MagicNumber")
+        keyAttributes(changeState) {
+            frame(0) {
+                this.rotationZ = 0f
+            }
+            frame(100) {
+                this.rotationZ = 180f
             }
         }
     }
@@ -226,6 +257,16 @@ fun ApplicationDetalizationCard(
                     .padding(YaaumTheme.spacing.small),
             )
         }
+        YaaumDefaultCircleButton(
+            modifier = Modifier
+                // TODO: fix
+                .size(32.dp)
+                .layoutId(changeStateId),
+            icon = ImageVector.vectorResource(id = R.drawable.icon_caret_up_bold_24),
+            onClick = {
+                isFoo.value = isFoo.value.not()
+            },
+        )
     }
 }
 
@@ -233,7 +274,7 @@ fun ApplicationDetalizationCard(
 @Composable
 fun Preview_ApplicationDetalizationCard_Dark() {
     YaaumTheme(useDarkTheme = true) {
-        ApplicationDetalizationCard(isFoo = true)
+        ApplicationDetalizationCard()
     }
 }
 
@@ -241,6 +282,6 @@ fun Preview_ApplicationDetalizationCard_Dark() {
 @Composable
 fun Preview_ApplicationDetalizationCard_Light() {
     YaaumTheme(useDarkTheme = false) {
-        ApplicationDetalizationCard(isFoo = false)
+        ApplicationDetalizationCard()
     }
 }

@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import dev.yaaum.presentation.core.ui.composable.card.ApplicationDetalizationCard
+import dev.yaaum.presentation.core.ui.composable.card.DetailsHealthCard
 import dev.yaaum.presentation.core.ui.composable.various.AnimatedDivider
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
@@ -40,9 +41,6 @@ fun ApplicationDetalizationFetchedContent() {
                     top = YaaumTheme.spacing.small,
                     bottom = YaaumTheme.spacing.small,
                 ),
-//            isFoo = (!scrollState.canScrollBackward && !scrollState.isScrollInProgress),
-            isFoo = (!lazyScrollState.canScrollBackward && !lazyScrollState.isScrollInProgress),
-//            isFoo = true
         )
         AnimatedDivider(
             state = lazyScrollState,
@@ -59,6 +57,10 @@ fun ApplicationDetalizationFetchedContent() {
             verticalArrangement = Arrangement
                 .spacedBy(YaaumTheme.spacing.small),
         ) {
+            item {
+                DetailsHealthCard()
+            }
+
             item {
                 ApplicationListItem(
                     "foo",
