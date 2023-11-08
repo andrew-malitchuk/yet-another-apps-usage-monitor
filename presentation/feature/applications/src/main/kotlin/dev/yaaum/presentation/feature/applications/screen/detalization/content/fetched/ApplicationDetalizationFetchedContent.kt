@@ -10,10 +10,14 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import dev.yaaum.presentation.core.models.HealthSimplifiedUiModel
+import dev.yaaum.presentation.core.models.HealthStatus
 import dev.yaaum.presentation.core.ui.composable.card.ApplicationDetalizationCard
 import dev.yaaum.presentation.core.ui.composable.card.DetailsHealthCard
+import dev.yaaum.presentation.core.ui.composable.card.SimplifiedHealthCard
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun ApplicationDetalizationFetchedContent() {
@@ -31,6 +35,13 @@ fun ApplicationDetalizationFetchedContent() {
         ApplicationDetalizationCard(
             modifier = Modifier
                 .padding(top = YaaumTheme.spacing.small),
+        )
+        SimplifiedHealthCard(
+            healthStatus = HealthSimplifiedUiModel(
+                HealthStatus.WINK,
+                Faker().quote.fortuneCookie(),
+                Faker().quote.fortuneCookie(),
+            ),
         )
         DetailsHealthCard()
     }

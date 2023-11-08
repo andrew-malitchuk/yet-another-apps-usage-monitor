@@ -19,4 +19,5 @@ dependencies {
     implementation(libs.constraintlayout.compose)
 
     implementation(project(":common:core"))
+    implementation(project(":presentation:core:models"))
 }
