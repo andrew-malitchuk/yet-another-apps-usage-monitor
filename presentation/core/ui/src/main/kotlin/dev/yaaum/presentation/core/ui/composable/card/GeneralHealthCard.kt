@@ -23,10 +23,11 @@ import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
 @Composable
 fun GeneralHealthCard(
+    modifier: Modifier = Modifier,
     onClick: (() -> Unit)? = null,
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
             .clip(RoundedCornerShape(YaaumTheme.corners.medium))
