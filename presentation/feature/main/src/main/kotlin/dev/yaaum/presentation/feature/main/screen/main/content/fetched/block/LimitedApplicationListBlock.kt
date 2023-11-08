@@ -32,12 +32,13 @@ import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun LimitedApplicationListBlock(
+    modifier: Modifier = Modifier,
     title: String,
     list: State<List<TimeUsageUiModel>?>,
     onMoreClick: (() -> Unit)? = null,
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
             .background(YaaumTheme.colors.background),
