@@ -3,6 +3,7 @@ package dev.yaaum.presentation.feature.settings.screen.about.content.fetched
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -62,6 +63,8 @@ fun AboutFetchedContent() {
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight(),
+            horizontalArrangement = Arrangement
+                .spacedBy(YaaumTheme.spacing.small),
         ) {
             // TODO: add sizes
             Box(
@@ -77,6 +80,27 @@ fun AboutFetchedContent() {
             ) {
                 Image(
                     painter = painterResource(id = dev.yaaum.presentation.core.ui.R.drawable.icon_github_logo_bold_24),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .align(Alignment.Center)
+                        .padding(YaaumTheme.spacing.small),
+                )
+            }
+            // TODO: add sizes
+            Box(
+                modifier = Modifier
+                    .size(48.dp)
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .clip(RoundedCornerShape(YaaumTheme.corners.medium))
+                    .align(Alignment.CenterVertically)
+                    .background(YaaumTheme.colors.secondary)
+                    .clickable {
+                    },
+            ) {
+                Image(
+                    painter = painterResource(id = dev.yaaum.presentation.core.ui.R.drawable.icon_bug_droid_bold_24),
                     contentDescription = null,
                     modifier = Modifier
                         .fillMaxSize()

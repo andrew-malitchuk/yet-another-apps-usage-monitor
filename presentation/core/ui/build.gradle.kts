@@ -17,6 +17,7 @@ dependencies {
     implementation(libs.core.ktx)
     implementation(libs.compose.runtime)
     implementation(libs.constraintlayout.compose)
+    implementation(libs.foundation.android )
 
     implementation(project(":common:core"))
     implementation(project(":presentation:core:models"))

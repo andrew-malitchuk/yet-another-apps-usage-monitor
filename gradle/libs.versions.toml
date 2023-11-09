@@ -50,6 +50,7 @@ accompanistDrawablepainter = "0.32.0"
 
 room = "2.5.0"
 constraintlayoutCompose = "1.1.0-alpha13"
+foundationAndroid = "1.5.1"
 
 [libraries]
 # https://mvnrepository.com/artifact/androidx.core/core-ktx?repo=google
@@ -147,6 +148,9 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 # https://mvnrepository.com/artifact/androidx.constraintlayout/constraintlayout-compose?repo=google
 constraintlayout-compose = { group = "androidx.constraintlayout", name = "constraintlayout-compose", version.ref = "constraintlayoutCompose" }
+# https://mvnrepository.com/artifact/androidx.compose.foundation/foundation-android
+foundation-android = { group = "androidx.compose.foundation", name = "foundation-android", version.ref = "foundationAndroid" }
+
 
 [plugins]
 # https://mvnrepository.com/artifact/com.android.application/com.android.application.gradle.plugin
