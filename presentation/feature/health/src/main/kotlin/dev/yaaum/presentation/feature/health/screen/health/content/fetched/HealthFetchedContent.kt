@@ -15,13 +15,9 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import dev.yaaum.presentation.core.models.ApplicationsUiModel
-import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.card.ProgressHealthCard
-import dev.yaaum.presentation.core.ui.composable.header.SimpleHeader
 import dev.yaaum.presentation.core.ui.composable.various.AnimatedDivider
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
@@ -32,8 +28,6 @@ fun HealthFetchedContent(
     applicationList: State<List<ApplicationsUiModel>?>,
 ) {
     val scrollState = rememberScrollState()
-
-    val foo = remember { mutableStateOf(true) }
     val lazyScrollState = rememberLazyListState()
 
     Column(
@@ -42,24 +36,12 @@ fun HealthFetchedContent(
             .verticalScroll(scrollState)
             .background(YaaumTheme.colors.background),
     ) {
-        SimpleHeader(
-            modifier = Modifier
-                .padding(
-                    start = YaaumTheme.spacing.medium,
-                    end = YaaumTheme.spacing.medium,
-                    top = YaaumTheme.spacing.medium,
-                ),
-            icon = ImageVector.vectorResource(R.drawable.icon_gear_six_bold_24),
-            onClick = {
-                foo.value = foo.value.not()
-            },
-        )
         ProgressHealthCard(
             modifier = Modifier
                 .padding(
+                    top = YaaumTheme.spacing.medium,
                     start = YaaumTheme.spacing.medium,
                     end = YaaumTheme.spacing.medium,
-                    top = YaaumTheme.spacing.small,
                     bottom = YaaumTheme.spacing.small,
                 ),
             isFoo = (!lazyScrollState.canScrollBackward && !lazyScrollState.isScrollInProgress),

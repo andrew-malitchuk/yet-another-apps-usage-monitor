@@ -1,37 +1,30 @@
 package dev.yaaum.presentation.feature.settings.screen.about
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.navigator.Navigator
 import com.theapache64.rebugger.Rebugger
-import dev.yaaum.presentation.core.navigation.RouteGraph
+import dev.yaaum.presentation.core.models.isDarkMode
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
+import dev.yaaum.presentation.feature.main.screen.HostViewModel
+import dev.yaaum.presentation.feature.settings.screen.about.content.fetched.AboutFetchedContent
 
 @Composable
 fun AboutScreen(
     navigator: Navigator,
+    hostViewModel: HostViewModel,
+    @Suppress("unused")
+    aboutViewModel: AboutViewModel,
 ) {
-    val mainScreen = rememberScreen(RouteGraph.MainScreen)
-
+    val isDarkMode = hostViewModel.currentThemeUiModel.value?.isDarkMode() ?: false
     Rebugger(
-        trackMap = mapOf(),
+        trackMap = mapOf(
+            "navigator" to navigator,
+            "hostViewModel" to hostViewModel,
+            "aboutViewModel" to aboutViewModel,
+            "isDarkMode" to isDarkMode,
+        ),
     )
-    YaaumTheme {
-        Column(
-            modifier = Modifier
-                .fillMaxSize(),
-        ) {
-            Text(text = "About")
-            Button(onClick = {
-                navigator.push(mainScreen)
-            }) {
-                Text(text = "Main")
-            }
-        }
+    YaaumTheme(isDarkMode) {
+        AboutFetchedContent()
     }
 }

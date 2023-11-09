@@ -22,6 +22,7 @@ import dev.yaaum.presentation.feature.settings.screen.settings.content.fetched.i
 @Composable
 fun SettingsFetchedContent(
     onInfoClick: (() -> Unit)? = null,
+    onPermissionClick: (() -> Unit)? = null,
 ) {
     val scrollState = rememberScrollState()
 
@@ -51,8 +52,19 @@ fun SettingsFetchedContent(
             verticalArrangement = Arrangement
                 .spacedBy(YaaumTheme.spacing.small),
         ) {
-            SettingsListItem(title = "Language", icon = R.drawable.icon_translate_bold_24)
-            SettingsListItem(title = "Permission", icon = R.drawable.icon_lock_bold_24)
+            SettingsListItem(
+                title = "Language",
+                icon = R.drawable.icon_translate_bold_24,
+                onClick = {
+                },
+            )
+            SettingsListItem(
+                title = "Permission",
+                icon = R.drawable.icon_lock_bold_24,
+                onClick = {
+                    onPermissionClick?.invoke()
+                },
+            )
             ThemeListItem()
         }
     }

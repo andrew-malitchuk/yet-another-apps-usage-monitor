@@ -18,6 +18,10 @@ fun SettingsScreen(
     settingsViewModel: SettingsViewModel,
 ) {
     val mainScreen = rememberScreen(RouteGraph.MainScreen)
+    val permissionScreen = rememberScreen(RouteGraph.PermissionsScreen)
+    val aboutScreen = rememberScreen(RouteGraph.AboutScreen)
+//    val permissionScreen = rememberScreen(RouteGraph)
+
     val isDarkMode = hostViewModel.currentThemeUiModel.value?.isDarkMode() ?: false
 
     Rebugger(
@@ -25,10 +29,19 @@ fun SettingsScreen(
             "navigator" to navigator,
             "hostViewModel" to hostViewModel,
             "mainScreen" to mainScreen,
+            "permissionScreen" to permissionScreen,
+            "aboutScreen" to aboutScreen,
             "isDarkMode" to isDarkMode,
         ),
     )
     YaaumTheme(isDarkMode) {
-        SettingsFetchedContent()
+        SettingsFetchedContent(
+            onPermissionClick = {
+                navigator.push(permissionScreen)
+            },
+            onInfoClick = {
+                navigator.push(aboutScreen)
+            },
+        )
     }
 }
