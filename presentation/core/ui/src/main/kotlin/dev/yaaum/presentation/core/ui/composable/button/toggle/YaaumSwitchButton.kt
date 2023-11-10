@@ -29,6 +29,7 @@ import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
 @Composable
 fun YaaumSwitchButton(
+    modifier: Modifier = Modifier,
     width: Dp = 72.dp,
     height: Dp = 40.dp,
     checkedTrackColor: Color = YaaumTheme.colors.primary,
@@ -48,7 +49,7 @@ fun YaaumSwitchButton(
     }
     val alignment by animateAlignmentAsState(if (onSideChangeState) 1f else -1f)
     Box(
-        modifier = Modifier
+        modifier = modifier
             .size(width = width, height = height)
             .border(
                 width = borderWidth,

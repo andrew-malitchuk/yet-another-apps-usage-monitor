@@ -18,7 +18,8 @@ fun SettingsScreen(
     settingsViewModel: SettingsViewModel,
 ) {
     val mainScreen = rememberScreen(RouteGraph.MainScreen)
-    val permissionScreen = rememberScreen(RouteGraph.PermissionsScreen)
+//    val permissionScreen = rememberScreen(RouteGraph.PermissionsScreen)
+    val permissionScreen = rememberScreen(RouteGraph.PermissionScreen)
     val aboutScreen = rememberScreen(RouteGraph.AboutScreen)
 //    val permissionScreen = rememberScreen(RouteGraph)
 

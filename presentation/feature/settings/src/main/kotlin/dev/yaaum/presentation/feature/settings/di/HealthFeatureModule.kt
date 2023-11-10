@@ -1,6 +1,7 @@
 package dev.yaaum.presentation.feature.settings.di
 
 import dev.yaaum.presentation.feature.settings.screen.about.AboutViewModel
+import dev.yaaum.presentation.feature.settings.screen.permission.PermissionViewModel
 import dev.yaaum.presentation.feature.settings.screen.settings.SettingsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -14,5 +15,8 @@ val settingsFeatureModule = module {
     }
     viewModel {
         AboutViewModel()
+    }
+    viewModel {
+        PermissionViewModel()
     }
 }
