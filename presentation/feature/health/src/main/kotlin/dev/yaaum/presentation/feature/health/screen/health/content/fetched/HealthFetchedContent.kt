@@ -26,6 +26,8 @@ import dev.yaaum.presentation.feature.health.screen.health.content.fetched.list.
 @Composable
 fun HealthFetchedContent(
     applicationList: State<List<ApplicationsUiModel>?>,
+    onActionClick: (() -> Unit)? = null,
+    onApplicationClick: ((ApplicationsUiModel) -> Unit)? = null,
 ) {
     val scrollState = rememberScrollState()
     val lazyScrollState = rememberLazyListState()
@@ -45,6 +47,7 @@ fun HealthFetchedContent(
                     bottom = YaaumTheme.spacing.small,
                 ),
             isFoo = (!lazyScrollState.canScrollBackward && !lazyScrollState.isScrollInProgress),
+            onClick = onActionClick,
         )
         AnimatedDivider(
             state = lazyScrollState,
@@ -67,6 +70,7 @@ fun HealthFetchedContent(
                 ) { index ->
                     ApplicationListItem(
                         applicationsUiModel = it[index],
+                        onApplicationClick = onApplicationClick,
                     )
                 }
             }

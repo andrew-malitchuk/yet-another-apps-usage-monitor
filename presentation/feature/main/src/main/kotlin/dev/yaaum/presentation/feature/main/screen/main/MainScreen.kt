@@ -20,16 +20,19 @@ fun MainScreen(
     val isDarkMode = hostViewModel.currentThemeUiModel.value?.isDarkMode() ?: false
     val settingsScreen = rememberScreen(RouteGraph.SettingsScreen)
 //    val applicationsScreen = rememberScreen(RouteGraph.ApplicationsScreen)
-    val applicationsScreen = rememberScreen(RouteGraph.ApplicationDetalizationScreen)
+    val applicationsScreen = rememberScreen(RouteGraph.ApplicationsScreen)
     val healthScreen = rememberScreen(RouteGraph.HealthScreen)
+    val applicationDetalizationScreen = rememberScreen(RouteGraph.ApplicationDetalizationScreen)
 
-    val topAppsWithHighestUsage = mainViewModel.topAppsWithHighestUsageStateFlow.collectAsStateWithLifecycle()
+    val topAppsWithHighestUsage =
+        mainViewModel.topAppsWithHighestUsageStateFlow.collectAsStateWithLifecycle()
 
     Rebugger(
         trackMap = mapOf(
             "navigator" to navigator,
             "isDarkMode" to isDarkMode,
             "topAppsWithHighestUsageStateFlow" to topAppsWithHighestUsage,
+            "applicationDetalizationScreen" to applicationDetalizationScreen,
         ),
     )
     YaaumTheme(useDarkTheme = isDarkMode) {
@@ -40,7 +43,6 @@ fun MainScreen(
         FetchedContent(
             topAppsWithHighestUsage = topAppsWithHighestUsage,
             onSettingsClick = {
-//                navigator.push(settingsScreen)
                 navigator.push(settingsScreen)
             },
             onMoreClick = {
@@ -48,6 +50,9 @@ fun MainScreen(
             },
             onHealthClick = {
                 navigator.push(healthScreen)
+            },
+            onAppClick = {
+                navigator.push(applicationDetalizationScreen)
             },
         )
     }

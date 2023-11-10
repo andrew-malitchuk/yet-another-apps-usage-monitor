@@ -18,6 +18,7 @@ import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 import dev.yaaum.presentation.feature.settings.screen.settings.content.fetched.item.SettingsListItem
 import dev.yaaum.presentation.feature.settings.screen.settings.content.fetched.item.ThemeListItem
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun SettingsFetchedContent(
@@ -35,6 +36,7 @@ fun SettingsFetchedContent(
         SimpleHeader(
             icon = ImageVector.vectorResource(R.drawable.icon_info_bold_24),
             onClick = onInfoClick,
+            title = Faker().quote.fortuneCookie(),
             modifier = Modifier
                 .padding(
                     start = YaaumTheme.spacing.medium,

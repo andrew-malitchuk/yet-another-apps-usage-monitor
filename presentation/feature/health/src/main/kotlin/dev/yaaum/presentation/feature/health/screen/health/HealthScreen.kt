@@ -21,6 +21,8 @@ fun HealthScreen(
 ) {
     val mainScreen = rememberScreen(RouteGraph.MainScreen)
     val isDarkMode = hostViewModel.currentThemeUiModel.value?.isDarkMode() ?: false
+    val applicationsScreen = rememberScreen(RouteGraph.ApplicationsScreen)
+    val applicationDetalizationScreen = rememberScreen(RouteGraph.ApplicationDetalizationScreen)
 
     val applicationList = healthViewModel.applicationStateFlow.collectAsStateWithLifecycle()
     healthViewModel.load()
@@ -31,12 +33,19 @@ fun HealthScreen(
             "hostViewModel" to hostViewModel,
             "healthViewModel" to healthViewModel,
             "mainScreen" to mainScreen,
+            "applicationsScreen" to applicationsScreen,
             "isDarkMode" to isDarkMode,
         ),
     )
     YaaumTheme(isDarkMode) {
         HealthFetchedContent(
             applicationList = applicationList,
+            onActionClick = {
+                navigator.push(applicationsScreen)
+            },
+            onApplicationClick = {
+                navigator.push(applicationDetalizationScreen)
+            },
         )
     }
 }

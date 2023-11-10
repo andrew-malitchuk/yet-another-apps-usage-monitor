@@ -2,6 +2,7 @@ package dev.yaaum.presentation.feature.main.screen.main.content.fetched.list
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -32,6 +33,7 @@ import io.github.serpro69.kfaker.Faker
 fun ApplicationListItem(
     title: String,
     description: String,
+    onClick: (() -> Unit)? = null,
 ) {
     Row(
         modifier = Modifier
@@ -39,6 +41,9 @@ fun ApplicationListItem(
             .wrapContentHeight()
             .clip(RoundedCornerShape(YaaumTheme.corners.medium))
             .background(YaaumTheme.colors.surface)
+            .clickable {
+                onClick?.invoke()
+            }
             .padding(YaaumTheme.spacing.small),
     ) {
         // TODO: add sizes

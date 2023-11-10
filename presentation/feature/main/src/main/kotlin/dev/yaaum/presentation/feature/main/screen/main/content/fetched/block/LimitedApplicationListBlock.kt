@@ -36,6 +36,7 @@ fun LimitedApplicationListBlock(
     title: String,
     list: State<List<TimeUsageUiModel>?>,
     onMoreClick: (() -> Unit)? = null,
+    onAppClick: (() -> Unit)? = null,
 ) {
     Column(
         modifier = modifier
@@ -92,6 +93,7 @@ fun LimitedApplicationListBlock(
                     ApplicationListItem(
                         title = item?.packageName ?: "SWW",
                         description = item?.totalTimeInForegroundHumanReadable ?: "SWW",
+                        onClick = onAppClick,
                     )
                 }
             }

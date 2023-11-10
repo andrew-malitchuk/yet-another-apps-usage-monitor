@@ -17,11 +17,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
+import dev.yaaum.presentation.core.models.HealthSimplifiedUiModel
+import dev.yaaum.presentation.core.models.HealthStatus
 import dev.yaaum.presentation.core.models.RecommendationUiModel
 import dev.yaaum.presentation.core.models.TimeUsageUiModel
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.card.GeneralHealthCard
-import dev.yaaum.presentation.core.ui.composable.header.SimpleHeader
+import dev.yaaum.presentation.core.ui.composable.header.MainHeader
 import dev.yaaum.presentation.core.ui.composable.various.pulltorefresh.YaaumPullToRefreshLayout
 import dev.yaaum.presentation.core.ui.composable.various.pulltorefresh.YaaumPullToRefreshLayoutState
 import dev.yaaum.presentation.core.ui.composable.various.pulltorefresh.YaaumRefreshIndicatorState
@@ -41,6 +43,7 @@ fun FetchedContent(
     onSettingsClick: (() -> Unit)? = null,
     onHealthClick: (() -> Unit)? = null,
     onMoreClick: (() -> Unit)? = null,
+    onAppClick: (() -> Unit)? = null,
     topAppsWithHighestUsage: State<List<TimeUsageUiModel>?>,
 ) {
     val scrollState = rememberScrollState()
@@ -73,11 +76,16 @@ fun FetchedContent(
                 .padding(vertical = YaaumTheme.spacing.medium),
             verticalArrangement = Arrangement.spacedBy(YaaumTheme.spacing.small),
         ) {
-            SimpleHeader(
+            MainHeader(
                 modifier = Modifier
                     .padding(horizontal = YaaumTheme.spacing.medium),
                 icon = ImageVector.vectorResource(R.drawable.icon_gear_six_bold_24),
                 onClick = onSettingsClick,
+                healthStatus = HealthSimplifiedUiModel(
+                    HealthStatus.WINK,
+                    Faker().quote.fortuneCookie(),
+                    Faker().quote.fortuneCookie(),
+                ),
             )
             GeneralHealthCard(
                 modifier = Modifier
@@ -90,6 +98,7 @@ fun FetchedContent(
                 title = Faker().quote.fortuneCookie(),
                 list = topAppsWithHighestUsage,
                 onMoreClick = onMoreClick,
+                onAppClick = onAppClick,
             )
             RecommendationBlock(
                 title = Faker().quote.fortuneCookie(),
