@@ -16,15 +16,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.OnboardingViewModel
 import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.item.OnboardingItem
 import dev.yaaum.presentation.core.localisation.UiText
 import dev.yaaum.presentation.core.ui.R
-import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumDefaultCircleButton
-import dev.yaaum.presentation.core.ui.composable.button.ordinary.YaaumDefaultOrdinaryButton
+import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumCircleButton
+import dev.yaaum.presentation.core.ui.composable.button.ordinary.YaaumOrdinaryButton
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 import kotlinx.coroutines.launch
@@ -72,11 +71,13 @@ fun OnboardingContent(
                 .fillMaxWidth()
                 .padding(YaaumTheme.spacing.medium),
         ) {
-            YaaumDefaultOrdinaryButton(
+            YaaumOrdinaryButton(
+                title = "Next",
                 modifier = Modifier
                     .weight(1f)
                     .alpha(buttonAlphaAnimation.value),
-                text = "Next",
+                defaultBackgroundColor = YaaumTheme.colors.primary,
+                pressedBackgroundColor = YaaumTheme.colors.secondary,
                 onClick = {
                     if (state.currentPage == (state.pageCount - 1)) {
                         onDoneClick?.invoke()
@@ -84,13 +85,17 @@ fun OnboardingContent(
                 },
             )
             Spacer(modifier = Modifier.width(YaaumTheme.spacing.medium))
-            YaaumDefaultCircleButton(
-                modifier = Modifier,
+            YaaumCircleButton(
                 icon = if ((state.currentPage != (state.pageCount - 1))) {
-                    ImageVector.vectorResource(R.drawable.icon_arrow_right_bold_24)
+                    R.drawable.icon_arrow_right_bold_24
                 } else {
-                    ImageVector.vectorResource(R.drawable.icon_info_bold_24)
+                    R.drawable.icon_info_bold_24
                 },
+                modifier = Modifier,
+                defaultBackgroundColor = YaaumTheme.colors.primary,
+                pressedBackgroundColor = YaaumTheme.colors.secondary,
+                // TODO: fix
+                iconSize = 24.dp,
                 onClick = {
                     if (state.currentPage != (state.pageCount - 1)) {
                         goToNextPageScope.launch {

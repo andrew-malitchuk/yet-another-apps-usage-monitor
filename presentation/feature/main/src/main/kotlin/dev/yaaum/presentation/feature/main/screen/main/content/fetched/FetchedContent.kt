@@ -1,6 +1,5 @@
 package dev.yaaum.presentation.feature.main.screen.main.content.fetched
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,14 +7,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import dev.yaaum.presentation.core.models.HealthSimplifiedUiModel
 import dev.yaaum.presentation.core.models.HealthStatus
@@ -37,7 +33,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun FetchedContent(
     onSettingsClick: (() -> Unit)? = null,
@@ -79,7 +74,7 @@ fun FetchedContent(
             MainHeader(
                 modifier = Modifier
                     .padding(horizontal = YaaumTheme.spacing.medium),
-                icon = ImageVector.vectorResource(R.drawable.icon_gear_six_bold_24),
+                icon = R.drawable.icon_gear_six_bold_24,
                 onClick = onSettingsClick,
                 healthStatus = HealthSimplifiedUiModel(
                     HealthStatus.WINK,

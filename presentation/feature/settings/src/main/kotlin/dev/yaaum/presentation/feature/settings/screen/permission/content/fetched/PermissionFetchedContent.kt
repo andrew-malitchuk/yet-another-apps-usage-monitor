@@ -9,8 +9,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.header.SimpleHeader
@@ -32,7 +30,7 @@ fun PermissionFetchedContent(
             .background(YaaumTheme.colors.background),
     ) {
         SimpleHeader(
-            icon = ImageVector.vectorResource(R.drawable.icon_info_bold_24),
+            icon = R.drawable.icon_info_bold_24,
             onClick = onInfoClick,
             title = Faker().quote.fortuneCookie(),
             modifier = Modifier

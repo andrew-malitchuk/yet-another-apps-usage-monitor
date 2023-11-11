@@ -23,7 +23,7 @@ import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
 @Composable
-fun ThemeButton(
+fun YaaumThemeButton(
     modifier: Modifier = Modifier,
     onThemeSelected: ((SelectedTheme) -> Unit)? = null,
     preselectedTheme: SelectedTheme? = null,
@@ -109,7 +109,7 @@ enum class SelectedTheme {
 @Composable
 fun Preview_ThemeButton_Dark() {
     YaaumTheme(useDarkTheme = true) {
-        ThemeButton()
+        YaaumThemeButton()
     }
 }
 
@@ -117,6 +117,6 @@ fun Preview_ThemeButton_Dark() {
 @Composable
 fun Preview_ThemeButton_Light() {
     YaaumTheme(useDarkTheme = false) {
-        ThemeButton()
+        YaaumThemeButton()
     }
 }

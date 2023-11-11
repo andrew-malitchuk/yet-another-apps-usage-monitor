@@ -17,14 +17,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yaaum.presentation.core.models.RecommendationUiModel
 import dev.yaaum.presentation.core.ui.R
-import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumDefaultCircleButton
+import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumCircleButton
 import dev.yaaum.presentation.core.ui.composable.indicator.YaaumPageIndicator
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
@@ -66,12 +64,13 @@ fun RecommendationBlock(
                     .weight(1f),
             )
             Spacer(modifier = Modifier.width(YaaumTheme.spacing.small))
-            YaaumDefaultCircleButton(
-                modifier = Modifier
-                    // TODO: fix
-                    .size(32.dp)
-                    .align(Alignment.CenterVertically),
-                icon = ImageVector.vectorResource(id = R.drawable.icon_close_bold_24),
+            YaaumCircleButton(
+                icon = R.drawable.icon_close_bold_24,
+                modifier = Modifier,
+                defaultBackgroundColor = YaaumTheme.colors.primary,
+                pressedBackgroundColor = YaaumTheme.colors.secondary,
+                // TODO: fix
+                iconSize = 16.dp,
                 onClick = {
                     onMoreClick?.invoke()
                 },

@@ -17,16 +17,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yaaum.presentation.core.models.HealthSimplifiedUiModel
 import dev.yaaum.presentation.core.models.HealthStatus
 import dev.yaaum.presentation.core.ui.R
-import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumDefaultCircleButton
+import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumCircleButton
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 import io.github.serpro69.kfaker.Faker
@@ -34,7 +32,7 @@ import io.github.serpro69.kfaker.Faker
 @Composable
 fun MainHeader(
     modifier: Modifier = Modifier,
-    icon: ImageVector,
+    icon: Int,
     healthStatus: HealthSimplifiedUiModel,
     onClick: (() -> Unit)? = null,
 ) {
@@ -75,22 +73,26 @@ fun MainHeader(
                     .padding(YaaumTheme.spacing.small),
             )
         }
-        Spacer(modifier = Modifier.width(YaaumTheme.spacing.extraSmall))
+        Spacer(modifier = Modifier.width(YaaumTheme.spacing.small))
         Text(
             modifier = Modifier
                 .align(Alignment.CenterVertically)
                 .weight(1f),
             text = healthStatus.title,
-            style = YaaumTheme.typography.headline,
+            style = YaaumTheme.typography.title,
             color = YaaumTheme.colors.onBackground,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )
-        Spacer(modifier = Modifier.width(YaaumTheme.spacing.extraSmall))
-        YaaumDefaultCircleButton(
+        Spacer(modifier = Modifier.width(YaaumTheme.spacing.small))
+        YaaumCircleButton(
+            icon = icon,
             modifier = Modifier
                 .align(Alignment.CenterVertically),
-            icon = icon,
+            defaultBackgroundColor = YaaumTheme.colors.primary,
+            pressedBackgroundColor = YaaumTheme.colors.secondary,
+            // TODO: fix
+            iconSize = 32.dp,
             onClick = {
                 onClick?.invoke()
             },
@@ -104,7 +106,7 @@ fun Preview_MainHeader_Dark() {
     val faker = Faker()
     YaaumTheme(useDarkTheme = true) {
         MainHeader(
-            icon = ImageVector.vectorResource(R.drawable.icon_gear_six_bold_24),
+            icon = R.drawable.icon_gear_six_bold_24,
             healthStatus = HealthSimplifiedUiModel(
                 HealthStatus.WINK,
                 faker.quote.fortuneCookie(),
@@ -120,7 +122,7 @@ fun Preview_MainHeader_Light() {
     val faker = Faker()
     YaaumTheme(useDarkTheme = false) {
         MainHeader(
-            icon = ImageVector.vectorResource(R.drawable.icon_gear_six_bold_24),
+            icon = R.drawable.icon_gear_six_bold_24,
             healthStatus = HealthSimplifiedUiModel(
                 HealthStatus.WINK,
                 faker.quote.fortuneCookie(),

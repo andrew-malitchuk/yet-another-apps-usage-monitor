@@ -15,7 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import dev.yaaum.presentation.core.ui.composable.button.ordinary.YaaumDefaultOrdinaryButton
+import dev.yaaum.presentation.core.ui.composable.button.ordinary.YaaumOrdinaryButton
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 import io.github.serpro69.kfaker.Faker
@@ -53,11 +53,15 @@ fun ErrorContent(
                 overflow = TextOverflow.Ellipsis,
             )
             Spacer(modifier = Modifier.height(YaaumTheme.spacing.extraMedium))
-            YaaumDefaultOrdinaryButton(
+            YaaumOrdinaryButton(
+                title = "Next",
                 modifier = Modifier
                     .fillMaxWidth(),
-                text = "Next",
-                onClick = { onClick?.invoke() },
+                defaultBackgroundColor = YaaumTheme.colors.primary,
+                pressedBackgroundColor = YaaumTheme.colors.secondary,
+                onClick = {
+                    onClick?.invoke()
+                },
             )
         }
     }

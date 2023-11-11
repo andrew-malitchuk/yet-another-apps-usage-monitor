@@ -18,10 +18,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -32,7 +30,7 @@ import androidx.constraintlayout.compose.MotionScene
 import androidx.constraintlayout.compose.Transition
 import androidx.constraintlayout.compose.layoutId
 import dev.yaaum.presentation.core.ui.R
-import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumDefaultCircleButton
+import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumCircleButton
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
@@ -257,12 +255,14 @@ fun ApplicationDetalizationCard(
                     .padding(YaaumTheme.spacing.small),
             )
         }
-        YaaumDefaultCircleButton(
+        YaaumCircleButton(
+            icon = R.drawable.icon_caret_up_bold_24,
             modifier = Modifier
-                // TODO: fix
-                .size(32.dp)
                 .layoutId(changeStateId),
-            icon = ImageVector.vectorResource(id = R.drawable.icon_caret_up_bold_24),
+            defaultBackgroundColor = YaaumTheme.colors.primary,
+            pressedBackgroundColor = YaaumTheme.colors.secondary,
+            // TODO: fix
+            iconSize = 24.dp,
             onClick = {
                 isFoo.value = isFoo.value.not()
             },

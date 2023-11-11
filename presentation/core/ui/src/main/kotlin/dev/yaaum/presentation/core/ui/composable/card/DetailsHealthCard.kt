@@ -4,7 +4,6 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -13,9 +12,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.layoutId
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -26,7 +23,7 @@ import androidx.constraintlayout.compose.MotionScene
 import androidx.constraintlayout.compose.Transition
 import androidx.constraintlayout.compose.layoutId
 import dev.yaaum.presentation.core.ui.R
-import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumDefaultCircleButton
+import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumCircleButton
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
@@ -245,39 +242,52 @@ fun DetailsHealthCard(
                 .layoutId(totalTitleId),
         )
 
-        YaaumDefaultCircleButton(
+        YaaumCircleButton(
+            icon = R.drawable.icon_caret_up_bold_24,
             modifier = Modifier
-                // TODO: fix
-                .size(32.dp)
                 .layoutId(changeStateId),
-            icon = ImageVector.vectorResource(id = R.drawable.icon_caret_up_bold_24),
+            defaultBackgroundColor = YaaumTheme.colors.primary,
+            pressedBackgroundColor = YaaumTheme.colors.secondary,
+            // TODO: fix
+            iconSize = 24.dp,
             onClick = {
                 isFoo.value = isFoo.value.not()
             },
         )
-        YaaumDefaultCircleButton(
+
+        YaaumCircleButton(
+            icon = R.drawable.icon_fire_bold_24,
             modifier = Modifier
-                // TODO: fix
-                .size(32.dp)
                 .layoutId(weekId),
-            icon = ImageVector.vectorResource(id = R.drawable.icon_fire_bold_24),
-            onClick = {},
+            defaultBackgroundColor = YaaumTheme.colors.primary,
+            pressedBackgroundColor = YaaumTheme.colors.secondary,
+            // TODO: fix
+            iconSize = 24.dp,
+            onClick = {
+            },
         )
-        YaaumDefaultCircleButton(
+
+        YaaumCircleButton(
+            icon = R.drawable.icon_fire_bold_24,
             modifier = Modifier
-                // TODO: fix
-                .size(32.dp)
                 .layoutId(monthId),
-            icon = ImageVector.vectorResource(id = R.drawable.icon_fire_bold_24),
-            onClick = {},
+            defaultBackgroundColor = YaaumTheme.colors.primary,
+            pressedBackgroundColor = YaaumTheme.colors.secondary,
+            // TODO: fix
+            iconSize = 24.dp,
+            onClick = {
+            },
         )
-        YaaumDefaultCircleButton(
+        YaaumCircleButton(
+            icon = R.drawable.icon_fire_bold_24,
             modifier = Modifier
-                // TODO: fix
-                .size(32.dp)
                 .layoutId(yearId),
-            icon = ImageVector.vectorResource(id = R.drawable.icon_fire_bold_24),
-            onClick = {},
+            defaultBackgroundColor = YaaumTheme.colors.primary,
+            pressedBackgroundColor = YaaumTheme.colors.secondary,
+            // TODO: fix
+            iconSize = 24.dp,
+            onClick = {
+            },
         )
     }
 }

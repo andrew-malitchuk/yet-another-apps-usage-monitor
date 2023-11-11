@@ -19,8 +19,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import dev.yaaum.presentation.core.models.ApplicationsUiModel
 import dev.yaaum.presentation.core.ui.R
@@ -46,10 +44,14 @@ fun ApplicationsContent(
     var text by remember { mutableStateOf("") }
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(YaaumTheme.colors.background)
+            .padding(vertical = YaaumTheme.spacing.medium),
     ) {
         TitleHeader(
-            icon = ImageVector.vectorResource(R.drawable.icon_caret_left_bold_24),
+            modifier = Modifier.padding(vertical = YaaumTheme.spacing.small),
+            icon = R.drawable.icon_caret_left_bold_24,
             title = Faker().quote.fortuneCookie(),
             onClick = onBackClick,
         )
@@ -81,17 +83,18 @@ fun ApplicationsContent(
         }
         AnimatedDivider(
             state = lazyScrollState,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally),
         )
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1.0f)
-                .background(dev.yaaum.presentation.core.ui.theme.common.YaaumTheme.colors.background)
-                .padding(horizontal = dev.yaaum.presentation.core.ui.theme.common.YaaumTheme.spacing.medium),
+                .background(YaaumTheme.colors.background)
+                .padding(horizontal = YaaumTheme.spacing.medium),
             state = lazyScrollState,
             verticalArrangement = Arrangement
-                .spacedBy(dev.yaaum.presentation.core.ui.theme.common.YaaumTheme.spacing.small),
+                .spacedBy(YaaumTheme.spacing.small),
         ) {
             applicationList.value?.let {
                 items(
@@ -104,7 +107,12 @@ fun ApplicationsContent(
                 }
             }
         }
-        AnimatedDivider(state = lazyScrollState, isInverted = true)
+        AnimatedDivider(
+            state = lazyScrollState,
+            isInverted = true,
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally),
+        )
     }
 }
 

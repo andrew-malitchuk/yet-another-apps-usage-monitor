@@ -3,7 +3,6 @@ package dev.yaaum.presentation.feature.settings.screen.settings.content.fetched.
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -23,58 +22,64 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.yaaum.presentation.core.ui.composable.item.YaaumBaseListContainer
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun SettingsListItem(
+    modifier: Modifier = Modifier,
     title: String,
     @DrawableRes
     icon: Int,
     onClick: (() -> Unit)? = null,
 ) {
-    Row(
-        modifier = Modifier
+    YaaumBaseListContainer(
+        modifier = modifier
             .fillMaxWidth()
-            .wrapContentHeight()
-            .clip(RoundedCornerShape(YaaumTheme.corners.medium))
-            .background(YaaumTheme.colors.surface)
-            .padding(YaaumTheme.spacing.small)
-            .clickable {
-                onClick?.invoke()
-            },
+            .wrapContentHeight(),
+        onClick = {
+            onClick?.invoke()
+        },
     ) {
-        // TODO: add sizes
-        Box(
+        Row(
             modifier = Modifier
-                .size(48.dp)
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .clip(RoundedCornerShape(YaaumTheme.corners.medium))
-                .align(Alignment.CenterVertically)
-                .background(YaaumTheme.colors.secondary),
+                .padding(YaaumTheme.spacing.small),
         ) {
-            Image(
-                painter = painterResource(id = icon),
-                contentDescription = null,
+            // TODO: add sizes
+            Box(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .align(Alignment.Center)
-                    .padding(YaaumTheme.spacing.small),
+                    .size(48.dp)
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .clip(RoundedCornerShape(YaaumTheme.corners.medium))
+                    .align(Alignment.CenterVertically)
+                    .background(YaaumTheme.colors.secondary),
+            ) {
+                Image(
+                    painter = painterResource(id = icon),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .align(Alignment.Center)
+                        .padding(YaaumTheme.spacing.small),
+                )
+            }
+            Spacer(modifier = Modifier.width(YaaumTheme.spacing.small))
+            Text(
+                // TODO: fix
+                text = title,
+                style = YaaumTheme.typography.title,
+                color = YaaumTheme.colors.onSurface,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier
+                    .align(Alignment.CenterVertically),
             )
         }
-        Spacer(modifier = Modifier.width(YaaumTheme.spacing.small))
-        Text(
-            // TODO: fix
-            text = title,
-            style = YaaumTheme.typography.title,
-            color = YaaumTheme.colors.onSurface,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier
-                .align(Alignment.CenterVertically),
-        )
     }
 }
 

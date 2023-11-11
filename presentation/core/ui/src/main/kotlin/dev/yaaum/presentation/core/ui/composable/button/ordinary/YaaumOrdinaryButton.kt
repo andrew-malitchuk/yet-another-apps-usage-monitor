@@ -1,0 +1,174 @@
+package dev.yaaum.presentation.core.ui.composable.button.ordinary
+
+import android.util.Log
+import androidx.annotation.DrawableRes
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import dev.yaaum.presentation.core.ui.R
+import dev.yaaum.presentation.core.ui.theme.YaaumTheme
+import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
+import io.github.serpro69.kfaker.Faker
+
+@Composable
+fun YaaumOrdinaryButton(
+    modifier: Modifier = Modifier,
+    title: String? = null,
+    @DrawableRes
+    icon: Int? = null,
+    onClick: (() -> Unit)? = null,
+    // TODO: fix
+    iconSize: Dp = 32.dp,
+    iconPadding: Dp = 0.dp,
+    defaultCorners: Dp = YaaumTheme.corners.medium,
+    pressedCorners: Dp = YaaumTheme.corners.small,
+    defaultBackgroundColor: Color = YaaumTheme.colors.secondary,
+    pressedBackgroundColor: Color = YaaumTheme.colors.primary,
+    defaultForegroundColor: Color = YaaumTheme.colors.onSecondary,
+    pressedForegroundColor: Color = YaaumTheme.colors.onPrimary,
+    textStyle: TextStyle = YaaumTheme.typography.title,
+    textSpacing: Dp = YaaumTheme.spacing.small,
+    contentSpacing: Dp = YaaumTheme.spacing.small,
+) {
+    var isPressed by remember {
+        mutableStateOf(false)
+    }
+
+    val corner by animateFloatAsState(
+        targetValue = if (isPressed) {
+            pressedCorners.value
+        } else {
+            defaultCorners.value
+        },
+        label = "",
+    )
+
+    Log.d("foo", corner.toString())
+
+    val backgroundColor by animateColorAsState(
+        if (isPressed) {
+            pressedBackgroundColor
+        } else {
+            defaultBackgroundColor
+        },
+        label = "",
+    )
+
+    val foregroundColor by animateColorAsState(
+        if (isPressed) {
+            pressedForegroundColor
+        } else {
+            defaultForegroundColor
+        },
+        label = "",
+    )
+
+    Row(
+        modifier = modifier
+            .wrapContentWidth()
+            .wrapContentHeight()
+            .clip(RoundedCornerShape(corner.dp))
+            .background(backgroundColor)
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null,
+                onClick = {},
+            )
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onPress = {
+                        try {
+                            isPressed = true
+                            awaitRelease()
+                        } finally {
+                            isPressed = false
+                            onClick?.invoke()
+                        }
+                    },
+                )
+            }
+            .padding(contentSpacing),
+    ) {
+        icon?.let {
+            Image(
+                painter = painterResource(id = icon),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(iconSize)
+                    .align(Alignment.CenterVertically)
+                    .padding(iconPadding),
+                colorFilter = ColorFilter.tint(foregroundColor),
+            )
+        }
+        title?.let {
+            Spacer(
+                modifier = Modifier
+                    .width(textSpacing),
+            )
+            Text(
+                text = it,
+                style = textStyle,
+                color = foregroundColor,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier
+                    .weight(1f)
+                    .align(Alignment.CenterVertically),
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_YaaumOrdinaryButton_Dark() {
+    val faker = Faker()
+    YaaumTheme(useDarkTheme = true) {
+        YaaumOrdinaryButton(
+            icon = R.drawable.icon_fire_bold_24,
+            title = faker.quote.fortuneCookie(),
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_YaaumOrdinaryButton_Light() {
+    val faker = Faker()
+    YaaumTheme(useDarkTheme = false) {
+        YaaumOrdinaryButton(
+            icon = R.drawable.icon_fire_bold_24,
+            title = faker.quote.fortuneCookie(),
+        )
+    }
+}

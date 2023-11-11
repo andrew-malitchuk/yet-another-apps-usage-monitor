@@ -1,15 +1,16 @@
 package dev.yaaum.presentation.core.ui.composable.various
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.gestures.ScrollableState
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
@@ -21,16 +22,18 @@ fun AnimatedDivider(
     state: ScrollableState,
     isInverted: Boolean = false,
 ) {
-//    val isVisible = (state.canScrollBackward && !isInverted)
     val isVisible = if (isInverted) {
         state.canScrollForward
     } else {
         state.canScrollBackward
     }
 
+    val currentWidth =
+        LocalConfiguration.current.screenWidthDp
+
     val animatedDpValue by animateDpAsState(
         targetValue = if (isVisible) {
-            YaaumTheme.dividers.extraSmall
+            currentWidth.dp
         } else {
             0.dp
         },
@@ -42,16 +45,25 @@ fun AnimatedDivider(
         label = "animatedAlpha",
     )
 
-    AnimatedVisibility(
-        visible = isVisible,
-    ) {
-        Divider(
-            modifier = modifier
-                .alpha(animatedAlpha),
-            thickness = animatedDpValue,
-            color = YaaumTheme.colors.surface,
-        )
-    }
+//
+//    AnimatedVisibility(
+//        visible = isVisible,
+//    ) {
+//        Divider(
+//            modifier = modifier
+//                .alpha(animatedAlpha),
+//            thickness = animatedDpValue,
+//            color = YaaumTheme.colors.surface,
+//        )
+//    }
+
+    Divider(
+        modifier = modifier
+            .width(animatedDpValue)
+            .alpha(animatedAlpha),
+        thickness = YaaumTheme.dividers.extraSmall,
+        color = YaaumTheme.colors.surface,
+    )
 }
 
 @Preview(showBackground = true)

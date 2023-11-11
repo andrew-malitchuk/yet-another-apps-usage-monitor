@@ -27,12 +27,10 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import dev.yaaum.presentation.core.ui.R
-import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumDefaultCircleButton
+import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumCircleButton
 import dev.yaaum.presentation.core.ui.composable.ext.clearFocusOnKeyboardDismiss
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
@@ -106,7 +104,8 @@ fun YaaumBasicTextField(
                 ) {
                     innerTextField()
                 }
-                YaaumDefaultCircleButton(
+                YaaumCircleButton(
+                    icon = R.drawable.icon_caret_right_bold_24,
                     modifier = Modifier
                         // TODO: fix
                         .size(32.dp)
@@ -118,9 +117,11 @@ fun YaaumBasicTextField(
                                 1f
                             },
                         ),
-                    icon = ImageVector.vectorResource(id = R.drawable.icon_caret_right_bold_24),
+                    defaultBackgroundColor = YaaumTheme.colors.primary,
+                    pressedBackgroundColor = YaaumTheme.colors.secondary,
+                    // TODO: fix
+                    iconSize = 24.dp,
                     onClick = {
-//                        onMoreClick?.invoke()
                     },
                 )
             }
