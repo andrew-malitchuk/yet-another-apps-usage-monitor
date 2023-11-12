@@ -21,6 +21,7 @@ import io.github.serpro69.kfaker.Faker
 @Composable
 fun SettingsFetchedContent(
     onInfoClick: (() -> Unit)? = null,
+    onBackClick: (() -> Unit)? = null,
     onPermissionClick: (() -> Unit)? = null,
 ) {
     val scrollState = rememberScrollState()
@@ -33,7 +34,8 @@ fun SettingsFetchedContent(
     ) {
         SimpleHeader(
             icon = R.drawable.icon_info_bold_24,
-            onClick = onInfoClick,
+            onActionClick = onInfoClick,
+            onBackClick = onBackClick,
             title = Faker().quote.fortuneCookie(),
             modifier = Modifier
                 .padding(

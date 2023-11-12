@@ -51,9 +51,8 @@ fun ApplicationsContent(
     ) {
         TitleHeader(
             modifier = Modifier.padding(vertical = YaaumTheme.spacing.small),
-            icon = R.drawable.icon_caret_left_bold_24,
             title = Faker().quote.fortuneCookie(),
-            onClick = onBackClick,
+            onBackClick = onBackClick,
         )
         Row(
             modifier = Modifier

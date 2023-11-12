@@ -1,6 +1,5 @@
 package dev.yaaum.presentation.core.ui.composable.header
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -16,7 +15,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yaaum.presentation.core.ui.R
-import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumCircleButton
+import dev.yaaum.presentation.core.ui.composable.button.ordinary.YaaumOrdinaryButton
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 import io.github.serpro69.kfaker.Faker
@@ -24,10 +23,8 @@ import io.github.serpro69.kfaker.Faker
 @Composable
 fun TitleHeader(
     modifier: Modifier = Modifier,
-    @DrawableRes
-    icon: Int,
     title: String,
-    onClick: (() -> Unit)? = null,
+    onBackClick: (() -> Unit)? = null,
 ) {
     Row(
         modifier = modifier
@@ -36,15 +33,16 @@ fun TitleHeader(
             .background(YaaumTheme.colors.background)
             .padding(horizontal = YaaumTheme.spacing.medium),
     ) {
-        YaaumCircleButton(
-            icon = icon,
-            modifier = Modifier,
-            defaultBackgroundColor = YaaumTheme.colors.primary,
-            pressedBackgroundColor = YaaumTheme.colors.secondary,
+        YaaumOrdinaryButton(
+            icon = R.drawable.icon_caret_left_bold_24,
+            modifier = Modifier
+                .align(Alignment.CenterVertically),
+            defaultBackgroundColor = YaaumTheme.colors.secondary,
+            pressedBackgroundColor = YaaumTheme.colors.primary,
             // TODO: fix
             iconSize = 32.dp,
             onClick = {
-                onClick?.invoke()
+                onBackClick?.invoke()
             },
         )
         Spacer(modifier = Modifier.width(YaaumTheme.spacing.small))
@@ -67,7 +65,6 @@ fun Preview_TitleHeader_Dark() {
     val faker = Faker()
     YaaumTheme(useDarkTheme = true) {
         TitleHeader(
-            icon = R.drawable.icon_gear_six_bold_24,
             title = faker.quote.fortuneCookie(),
         )
     }
@@ -79,7 +76,6 @@ fun Preview_TitleHeader_Light() {
     val faker = Faker()
     YaaumTheme(useDarkTheme = false) {
         TitleHeader(
-            icon = R.drawable.icon_gear_six_bold_24,
             title = faker.quote.fortuneCookie(),
         )
     }

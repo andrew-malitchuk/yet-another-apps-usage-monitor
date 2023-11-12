@@ -25,6 +25,10 @@ fun PermissionScreen(
         ),
     )
     YaaumTheme(isDarkMode) {
-        PermissionFetchedContent()
+        PermissionFetchedContent(
+            onBackClick = {
+                navigator.pop()
+            },
+        )
     }
 }

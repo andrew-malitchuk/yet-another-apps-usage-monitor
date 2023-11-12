@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumCircleButton
+import dev.yaaum.presentation.core.ui.composable.button.ordinary.YaaumOrdinaryButton
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 import io.github.serpro69.kfaker.Faker
@@ -27,7 +28,8 @@ fun SimpleHeader(
     @DrawableRes
     icon: Int,
     title: String,
-    onClick: (() -> Unit)? = null,
+    onActionClick: (() -> Unit)? = null,
+    onBackClick: (() -> Unit)? = null,
 ) {
     Row(
         modifier = modifier
@@ -36,6 +38,19 @@ fun SimpleHeader(
             .background(YaaumTheme.colors.background)
             .padding(vertical = YaaumTheme.spacing.small),
     ) {
+        YaaumOrdinaryButton(
+            icon = R.drawable.icon_caret_left_bold_24,
+            modifier = Modifier
+                .align(Alignment.CenterVertically),
+            defaultBackgroundColor = YaaumTheme.colors.secondary,
+            pressedBackgroundColor = YaaumTheme.colors.primary,
+            // TODO: fix
+            iconSize = 32.dp,
+            onClick = {
+                onBackClick?.invoke()
+            },
+        )
+        Spacer(modifier = Modifier.width(YaaumTheme.spacing.small))
         Text(
             modifier = Modifier
                 .align(Alignment.CenterVertically)
@@ -56,7 +71,7 @@ fun SimpleHeader(
             // TODO: fix
             iconSize = 32.dp,
             onClick = {
-                onClick?.invoke()
+                onActionClick?.invoke()
             },
         )
     }

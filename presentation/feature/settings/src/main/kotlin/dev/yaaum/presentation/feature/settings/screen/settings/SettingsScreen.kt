@@ -43,6 +43,9 @@ fun SettingsScreen(
             onInfoClick = {
                 navigator.push(aboutScreen)
             },
+            onBackClick = {
+                navigator.pop()
+            },
         )
     }
 }
