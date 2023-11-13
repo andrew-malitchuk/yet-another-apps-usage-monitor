@@ -1,18 +1,18 @@
 package dev.yaaum.presentation.core.ui.composable.card
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.yaaum.presentation.core.ui.composable.chart.donut.Chart
 import dev.yaaum.presentation.core.ui.composable.item.YaaumBaseListContainer
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
@@ -30,20 +30,26 @@ fun GeneralHealthCard(
             onClick?.invoke()
         },
     ) {
-        Box(
+        Row(
             modifier = Modifier
-                .width(128.dp)
-                .height(128.dp)
-                .background(YaaumTheme.colors.primary),
-        )
-        Spacer(
-            modifier = Modifier
-                .width(YaaumTheme.spacing.medium),
-        )
-        Column(
-            modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxWidth()
+                .wrapContentHeight(),
         ) {
+            Chart(
+                modifier = Modifier
+                    .height(128.dp),
+            )
+
+            Spacer(
+                modifier = Modifier
+                    .weight(1f)
+                    .background(Color.Cyan),
+            )
+            Column(
+                modifier = Modifier
+                    .weight(1f),
+            ) {
+            }
         }
     }
 }
