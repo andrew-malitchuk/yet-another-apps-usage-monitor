@@ -12,10 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.yaaum.presentation.core.ui.composable.chart.donut.Chart
+import dev.yaaum.presentation.core.ui.composable.chart.CircleChartModel
+import dev.yaaum.presentation.core.ui.composable.chart.donut.YaaumChartDonut
 import dev.yaaum.presentation.core.ui.composable.item.YaaumBaseListContainer
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
-import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
 @Composable
 fun GeneralHealthCard(
@@ -35,7 +35,13 @@ fun GeneralHealthCard(
                 .fillMaxWidth()
                 .wrapContentHeight(),
         ) {
-            Chart(
+            @Suppress("MagicNumber")
+            YaaumChartDonut(
+                entries = listOf(
+                    CircleChartModel(Color.Red, 0.5f),
+                    CircleChartModel(Color.Green, 0.3f),
+                    CircleChartModel(Color.Blue, 0.2f),
+                ),
                 modifier = Modifier
                     .height(128.dp),
             )

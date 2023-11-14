@@ -4,6 +4,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -12,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -25,6 +27,8 @@ import androidx.constraintlayout.compose.Transition
 import androidx.constraintlayout.compose.layoutId
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumCircleButton
+import dev.yaaum.presentation.core.ui.composable.chart.CircleChartModel
+import dev.yaaum.presentation.core.ui.composable.chart.pie.YaaumPieChart
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
@@ -342,10 +346,14 @@ fun ProgressHealthCard(
             modifier = Modifier
                 .layoutId(deltaValueId),
         )
-
-        Box(
+        @Suppress("MagicNumber")
+        YaaumPieChart(
+            entries = listOf(
+                CircleChartModel(Color.Red, 0.5f),
+                CircleChartModel(Color.Green, 0.3f),
+                CircleChartModel(Color.Blue, 0.2f),
+            ),
             modifier = Modifier
-                .background(YaaumTheme.colors.background)
                 .layoutId(chartId),
         )
 
