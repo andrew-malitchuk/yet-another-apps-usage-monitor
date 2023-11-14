@@ -2,7 +2,6 @@ package dev.yaaum.presentation.feature.main.screen.main.content.fetched.list
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,65 +24,71 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yaaum.presentation.core.ui.R
+import dev.yaaum.presentation.core.ui.composable.item.YaaumBaseListContainer
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun ApplicationListItem(
+    modifier: Modifier = Modifier,
     title: String,
     description: String,
     onClick: (() -> Unit)? = null,
 ) {
-    Row(
-        modifier = Modifier
+    YaaumBaseListContainer(
+        modifier = modifier
             .fillMaxWidth()
-            .wrapContentHeight()
-            .clip(RoundedCornerShape(YaaumTheme.corners.medium))
-            .background(YaaumTheme.colors.surface)
-            .clickable {
-                onClick?.invoke()
-            }
-            .padding(YaaumTheme.spacing.small),
+            .wrapContentHeight(),
+        onClick = {
+            onClick?.invoke()
+        },
     ) {
-        // TODO: add sizes
-        Box(
+        Row(
             modifier = Modifier
-                .size(48.dp)
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .clip(RoundedCornerShape(YaaumTheme.corners.medium))
-                .align(Alignment.CenterVertically)
-                .background(YaaumTheme.colors.secondary),
+                .padding(YaaumTheme.spacing.small),
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.icon_fire_bold_24),
-                contentDescription = null,
+            // TODO: add sizes
+            Box(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .align(Alignment.Center)
-                    .padding(YaaumTheme.spacing.small),
-            )
-        }
-        Spacer(modifier = Modifier.width(YaaumTheme.spacing.small))
-        Column(
-            modifier = Modifier,
-        ) {
-            Text(
-                text = title,
-                style = YaaumTheme.typography.title,
-                color = YaaumTheme.colors.onSurface,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
-            Spacer(modifier = Modifier.height(YaaumTheme.spacing.extraSmall))
-            Text(
-                text = description,
-                style = YaaumTheme.typography.caption,
-                color = YaaumTheme.colors.onSurface,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
+                    .size(48.dp)
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .clip(RoundedCornerShape(YaaumTheme.corners.medium))
+                    .align(Alignment.CenterVertically)
+                    .background(YaaumTheme.colors.secondary),
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.icon_fire_bold_24),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .align(Alignment.Center)
+                        .padding(YaaumTheme.spacing.small),
+                )
+            }
+            Spacer(modifier = Modifier.width(YaaumTheme.spacing.small))
+            Column(
+                modifier = Modifier,
+            ) {
+                Text(
+                    text = title,
+                    style = YaaumTheme.typography.title,
+                    color = YaaumTheme.colors.onSurface,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                )
+                Spacer(modifier = Modifier.height(YaaumTheme.spacing.extraSmall))
+                Text(
+                    text = description,
+                    style = YaaumTheme.typography.caption,
+                    color = YaaumTheme.colors.onSurface,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                )
+            }
         }
     }
 }

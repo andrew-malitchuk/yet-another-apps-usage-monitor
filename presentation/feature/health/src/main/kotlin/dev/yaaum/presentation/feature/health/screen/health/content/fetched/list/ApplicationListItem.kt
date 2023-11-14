@@ -2,7 +2,6 @@ package dev.yaaum.presentation.feature.health.screen.health.content.fetched.list
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,69 +26,76 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import dev.yaaum.presentation.core.models.ApplicationsUiModel
+import dev.yaaum.presentation.core.ui.composable.item.YaaumBaseListContainer
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun ApplicationListItem(
+    modifier: Modifier = Modifier,
     applicationsUiModel: ApplicationsUiModel,
     onApplicationClick: ((ApplicationsUiModel) -> Unit)? = null,
 ) {
-    Row(
-        modifier = Modifier
+    YaaumBaseListContainer(
+        modifier = modifier
             .fillMaxWidth()
-            .wrapContentHeight()
-            .clip(RoundedCornerShape(YaaumTheme.corners.medium))
-            .background(YaaumTheme.colors.surface)
-            .padding(YaaumTheme.spacing.small)
-            .clickable {
-                onApplicationClick?.invoke(applicationsUiModel)
-            },
+            .wrapContentHeight(),
+        onClick = {
+            onApplicationClick?.invoke(applicationsUiModel)
+        },
     ) {
-        // TODO: add sizes
-        Box(
+        Row(
             modifier = Modifier
-                .size(48.dp)
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .clip(RoundedCornerShape(YaaumTheme.corners.medium))
-                .align(Alignment.CenterVertically)
-                .background(YaaumTheme.colors.secondary),
+                .padding(YaaumTheme.spacing.small),
+
         ) {
-            val icon = applicationsUiModel.packageName?.let { pn ->
-                LocalContext.current.packageManager.getApplicationIcon(pn)
-            }
-            Image(
-                painter = rememberDrawablePainter(icon),
-                contentDescription = null,
+            // TODO: add sizes
+            Box(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .align(Alignment.Center)
-                    .padding(YaaumTheme.spacing.small),
-            )
-        }
-        Spacer(modifier = Modifier.width(YaaumTheme.spacing.small))
-        Column(
-            modifier = Modifier,
-        ) {
-            Text(
-                // TODO: fix
-                text = applicationsUiModel.applicationName ?: "SWW",
-                style = YaaumTheme.typography.title,
-                color = YaaumTheme.colors.onSurface,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
-            Spacer(modifier = Modifier.height(YaaumTheme.spacing.extraSmall))
-            Text(
-                // TODO: fix
-                text = applicationsUiModel.packageName ?: "SWW",
-                style = YaaumTheme.typography.caption,
-                color = YaaumTheme.colors.onSurface,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
+                    .size(48.dp)
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .clip(RoundedCornerShape(YaaumTheme.corners.medium))
+                    .align(Alignment.CenterVertically)
+                    .background(YaaumTheme.colors.secondary),
+            ) {
+                val icon = applicationsUiModel.packageName?.let { pn ->
+                    LocalContext.current.packageManager.getApplicationIcon(pn)
+                }
+                Image(
+                    painter = rememberDrawablePainter(icon),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .align(Alignment.Center)
+                        .padding(YaaumTheme.spacing.small),
+                )
+            }
+            Spacer(modifier = Modifier.width(YaaumTheme.spacing.small))
+            Column(
+                modifier = Modifier,
+            ) {
+                Text(
+                    // TODO: fix
+                    text = applicationsUiModel.applicationName ?: "SWW",
+                    style = YaaumTheme.typography.title,
+                    color = YaaumTheme.colors.onSurface,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                )
+                Spacer(modifier = Modifier.height(YaaumTheme.spacing.extraSmall))
+                Text(
+                    // TODO: fix
+                    text = applicationsUiModel.packageName ?: "SWW",
+                    style = YaaumTheme.typography.caption,
+                    color = YaaumTheme.colors.onSurface,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                )
+            }
         }
     }
 }

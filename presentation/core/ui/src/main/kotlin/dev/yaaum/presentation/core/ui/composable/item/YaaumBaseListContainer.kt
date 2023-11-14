@@ -66,7 +66,7 @@ fun YaaumBaseListContainer(
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = null,
-                onClick = {},
+                onClick = { },
             )
             .pointerInput(Unit) {
                 detectTapGestures(
@@ -74,9 +74,9 @@ fun YaaumBaseListContainer(
                         try {
                             isPressed = true
                             awaitRelease()
+                            onClick?.invoke()
                         } finally {
                             isPressed = false
-                            onClick?.invoke()
                         }
                     },
                 )
