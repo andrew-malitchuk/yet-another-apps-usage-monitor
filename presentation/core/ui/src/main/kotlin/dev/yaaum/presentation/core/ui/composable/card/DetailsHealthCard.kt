@@ -1,5 +1,8 @@
+@file:OptIn(ExperimentalAnimationApi::class)
+
 package dev.yaaum.presentation.core.ui.composable.card
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -12,7 +15,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -24,6 +26,7 @@ import androidx.constraintlayout.compose.Transition
 import androidx.constraintlayout.compose.layoutId
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumCircleButton
+import dev.yaaum.presentation.core.ui.composable.chart.bar.YaaumBarChart
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
@@ -226,10 +229,22 @@ fun DetailsHealthCard(
                 .clip(RoundedCornerShape(YaaumTheme.corners.medium))
                 .background(YaaumTheme.colors.surface),
         )
-        Box(
+        @Suppress("MagicNumber")
+        YaaumBarChart(
             modifier = Modifier
-                .layoutId(chartId)
-                .background(YaaumTheme.colors.onBackground),
+                .layoutId(chartId),
+            data = mapOf(
+                Pair("Jan", 6f),
+                Pair("Feb", 0.25f),
+                Pair("Mar", 9f),
+                Pair("Apr", 7f),
+                Pair("May", 8f),
+                Pair("Jun", 9f),
+                Pair("Jul", 3f),
+                Pair("Aug", 11f),
+                Pair("Sep", 15f),
+            ),
+            height = 250.dp,
         )
 
         Text(

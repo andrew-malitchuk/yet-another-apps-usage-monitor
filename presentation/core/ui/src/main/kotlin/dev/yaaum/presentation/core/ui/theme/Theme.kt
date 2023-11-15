@@ -26,6 +26,7 @@ fun YaaumTheme(
         LocalYaaumShape provides shapes,
         LocalYaaumSpacing provides spacing,
         LocalYaaumTypography provides typography,
+        LocalYaaumFontSize provides fontSize,
         content = content,
     )
 
