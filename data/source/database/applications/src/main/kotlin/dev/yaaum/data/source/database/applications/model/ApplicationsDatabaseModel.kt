@@ -7,6 +7,9 @@ import androidx.room.PrimaryKey
 import dev.yaaum.data.source.database.applications.Table
 import dev.yaaum.data.source.database.core.model.base.BaseDatabaseModel
 
+/**
+ * Represent information about application
+ */
 @Entity(
     tableName = Table.APPLICATIONS,
     indices = [

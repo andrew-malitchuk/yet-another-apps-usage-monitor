@@ -35,6 +35,12 @@ fun Long.asDate(
     }
 }
 
+/**
+ * Convert time value in long (milliseconds) into hours
+ *
+ * @return hours as a String
+ */
+// TODO: test
 fun Long.asHours(): String {
     val hours = TimeUnit.MILLISECONDS.toMinutes(this)
     return hours.toString()

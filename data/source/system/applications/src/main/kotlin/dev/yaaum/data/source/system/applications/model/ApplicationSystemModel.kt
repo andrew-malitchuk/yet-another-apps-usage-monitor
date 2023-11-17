@@ -6,6 +6,9 @@ import android.content.pm.ResolveInfo
 import android.content.res.Resources
 import dev.yaaum.data.source.system.core.model.base.BaseSystemModel
 
+/**
+ * Represent information about application
+ */
 data class ApplicationSystemModel(
     val uuid: Int?,
     val packageName: String?,

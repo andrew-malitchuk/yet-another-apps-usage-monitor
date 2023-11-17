@@ -12,6 +12,7 @@ import kotlin.coroutines.suspendCoroutine
 class TimeUsageDataSourceImpl(
     private val context: Context,
 ) : TimeUsageDataSource {
+
     override suspend fun getApplicationsUsage(): List<TimeUsageSystemModel> {
         return suspendCoroutine { continuation ->
             val lUsageStatsMap =
@@ -27,6 +28,7 @@ class TimeUsageDataSourceImpl(
             continuation.resume(result)
         }
     }
+
     override suspend fun getApplicationsUsage(beginTime: Long, endTime: Long): List<TimeUsageSystemModel> {
         return suspendCoroutine { continuation ->
             val lUsageStatsMap =

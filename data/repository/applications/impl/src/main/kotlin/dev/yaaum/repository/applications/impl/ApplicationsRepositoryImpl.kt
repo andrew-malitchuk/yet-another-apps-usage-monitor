@@ -12,6 +12,7 @@ class ApplicationsRepositoryImpl(
     private val applicationsDataSource: ApplicationsDataSource,
     private val applicationsDatabaseSource: ApplicationsDatabaseSource,
 ) : ApplicationsRepository {
+
     override suspend fun getAllApplications(): List<ApplicationsRepoModel> {
         return applicationsDataSource.getAllApplications().map { it.toRepoModel() }
     }

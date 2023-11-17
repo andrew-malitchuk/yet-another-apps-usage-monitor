@@ -12,6 +12,7 @@ import dev.yaaum.domain.core.model.SortOrder
 class FilterAllApplicationWithChosenUseCaseImpl(
     private val applicationsRepository: ApplicationsRepository,
 ) : FilterAllApplicationWithChosenUseCase {
+
     override suspend fun invoke(
         query: String?,
         sortOrder: SortOrder,
@@ -21,26 +22,26 @@ class FilterAllApplicationWithChosenUseCaseImpl(
             val userChosenApps =
                 applicationsRepository.getAllChosenApplications().map { it.toDomainModel() }
 
-            var foo = allApps.filter {
+            var validApps = allApps.filter {
                 (it.packageName?.contains(query ?: "") ?: false)
             }
-            foo = if (sortOrder == SortOrder.ASC) {
-                foo.sortedBy {
+            validApps = if (sortOrder == SortOrder.ASC) {
+                validApps.sortedBy {
                     it.packageName
                 }
             } else {
-                foo.sortedByDescending {
+                validApps.sortedByDescending {
                     it.packageName
                 }
             }
 
             userChosenApps.forEach { chosen ->
-                foo.firstOrNull { it.packageName == chosen.packageName }?.let {
+                validApps.firstOrNull { it.packageName == chosen.packageName }?.let {
                     it.isChosen = true
                 }
             }
             Either.Right(
-                foo,
+                validApps,
             )
         } catch (ex: Exception) {
             Either.Left(

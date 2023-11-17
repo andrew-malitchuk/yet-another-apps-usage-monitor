@@ -18,20 +18,20 @@ class FilterAllAppsUseCaseImpl(
     ): Either<BaseDomainError, List<ApplicationsDomainModel>> {
         return try {
             val all = applicationsRepository.getUserApplications()
-            var foo = all.filter {
+            var validApps = all.filter {
                 (it.applicationName?.contains(query ?: "") ?: false)
             }
-            foo = if (sortOrder == SortOrder.ASC) {
-                foo.sortedBy {
+            validApps = if (sortOrder == SortOrder.ASC) {
+                validApps.sortedBy {
                     it.applicationName
                 }
             } else {
-                foo.sortedByDescending {
+                validApps.sortedByDescending {
                     it.applicationName
                 }
             }
             Either.Right(
-                foo.map { it.toDomainModel() },
+                validApps.map { it.toDomainModel() },
             )
         } catch (ex: Exception) {
             Either.Left(

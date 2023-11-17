@@ -6,6 +6,9 @@ import dev.yaaum.data.source.database.db.YaaumDatabase
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
+/**
+ * `:data:source:database:db`
+ */
 val databaseModule = module {
 
     single {
@@ -20,10 +23,7 @@ val databaseModule = module {
             .build()
     }
 
-    single { params ->
-
+    single { _ ->
         (get() as YaaumDatabase).getApplicationsDatabaseDao()
-
-//        (params.get() as YaaumDatabase).getApplicationsDatabaseDao()
     }
 }

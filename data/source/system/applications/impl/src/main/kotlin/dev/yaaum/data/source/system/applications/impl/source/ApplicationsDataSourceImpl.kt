@@ -31,6 +31,7 @@ class ApplicationsDataSourceImpl(
         }
     }
 
+    @Suppress("SpellCheckingInspection")
     override suspend fun getUserApplications(): List<ApplicationSystemModel> {
         return suspendCoroutine { continuation ->
             val mainIntent = Intent(Intent.ACTION_MAIN, null).also {
