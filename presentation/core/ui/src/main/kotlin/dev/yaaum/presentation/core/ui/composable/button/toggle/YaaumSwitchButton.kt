@@ -23,10 +23,26 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
+/**
+ * Switch button
+ *
+ * @param modifier
+ * @param width
+ * @param height
+ * @param checkedTrackColor
+ * @param uncheckedTrackColor
+ * @param gapBetweenThumbAndTrackEdge
+ * @param borderWidth
+ * @param cornerSize
+ * @param iconInnerPadding
+ * @param thumbSize
+ */
 @Composable
 fun YaaumSwitchButton(
     modifier: Modifier = Modifier,
@@ -86,6 +102,23 @@ fun YaaumSwitchButton(
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+fun Preview_YaaumSwitchButton_Dark() {
+    YaaumTheme(useDarkTheme = true) {
+        YaaumSwitchButton()
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_YaaumSwitchButton_Light() {
+    YaaumTheme(useDarkTheme = false) {
+        YaaumSwitchButton()
+    }
+}
+
+// TODO: move me
 @Composable
 private fun animateAlignmentAsState(
     targetBiasValue: Float,

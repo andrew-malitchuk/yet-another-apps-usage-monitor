@@ -1,5 +1,6 @@
 package dev.yaaum.presentation.core.ui.composable.button.swipe
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -22,10 +23,20 @@ import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
+/**
+ * Switch button
+ *
+ * @param modifier
+ * @param sideA icon on the side A
+ * @param sideB icon on the side B
+ * @param onSideChange lambda
+ */
 @Composable
 fun YaaumDoubleSideButton(
     modifier: Modifier = Modifier,
+    @DrawableRes
     sideA: Int,
+    @DrawableRes
     sideB: Int,
     onSideChange: ((Boolean) -> Unit)? = null,
 ) {
@@ -68,7 +79,7 @@ fun YaaumDoubleSideButton(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_Foo_Dark() {
+fun Preview_YaaumDoubleSideButton_Dark() {
     YaaumTheme(useDarkTheme = true) {
         YaaumDoubleSideButton(
             sideA = R.drawable.icon_fire_bold_24,
@@ -79,7 +90,7 @@ fun Preview_Foo_Dark() {
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_Foo_Light() {
+fun Preview_YaaumDoubleSideButton_Light() {
     YaaumTheme(useDarkTheme = false) {
         YaaumDoubleSideButton(
             sideA = R.drawable.icon_fire_bold_24,

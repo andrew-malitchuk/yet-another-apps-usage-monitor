@@ -4,14 +4,14 @@ import dev.yaaum.domain.applications.AddAppToChosenUseCase
 import dev.yaaum.domain.applications.FilterAllApplicationWithChosenUseCase
 import dev.yaaum.domain.applications.FilterAllAppsUseCase
 import dev.yaaum.domain.applications.GetAllAppsUseCase
-import dev.yaaum.domain.applications.GetApplicationWithChosenCase
+import dev.yaaum.domain.applications.GetApplicationWithChosenUseCase
 import dev.yaaum.domain.applications.GetUserAppsUseCase
 import dev.yaaum.domain.applications.RemoveAppFromChosenUseCase
 import dev.yaaum.domain.applications.impl.AddAppToChosenUseCaseImpl
 import dev.yaaum.domain.applications.impl.FilterAllApplicationWithChosenUseCaseImpl
 import dev.yaaum.domain.applications.impl.FilterAllAppsUseCaseImpl
 import dev.yaaum.domain.applications.impl.GetAllAppsUseCaseImpl
-import dev.yaaum.domain.applications.impl.GetApplicationWithChosenCaseImpl
+import dev.yaaum.domain.applications.impl.GetApplicationWithChosenUseCaseImpl
 import dev.yaaum.domain.applications.impl.GetUserAppsUseCaseImpl
 import dev.yaaum.domain.applications.impl.RemoveAppFromChosenUseCaseImpl
 import org.koin.dsl.module
@@ -45,8 +45,8 @@ val applicationsDomainModule = module {
             applicationsRepository = get(),
         )
     }
-    single<GetApplicationWithChosenCase> {
-        GetApplicationWithChosenCaseImpl(
+    single<GetApplicationWithChosenUseCase> {
+        GetApplicationWithChosenUseCaseImpl(
             applicationsRepository = get(),
         )
     }

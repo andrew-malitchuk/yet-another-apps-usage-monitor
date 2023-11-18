@@ -3,6 +3,9 @@ package dev.yaaum.presentation.core.models
 import dev.yaaum.domain.applications.model.ApplicationsDomainModel
 import dev.yaaum.domain.core.model.BaseDomainModel
 
+/**
+ * Represent information about application
+ */
 data class ApplicationsUiModel(
     val uuid: Int?,
     val packageName: String?,

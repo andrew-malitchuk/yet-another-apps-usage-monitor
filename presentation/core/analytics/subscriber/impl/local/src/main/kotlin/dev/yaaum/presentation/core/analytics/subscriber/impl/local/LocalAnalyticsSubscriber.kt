@@ -5,6 +5,9 @@ import dev.yaaum.presentation.core.analytics.core.model.base.BaseAnalyticPropert
 import dev.yaaum.presentation.core.analytics.subscriber.AnalyticsSubscriber
 import logcat.logcat
 
+/**
+ * Implementation of [AnalyticsSubscriber]; perform local analytic logging.
+ */
 class LocalAnalyticsSubscriber : AnalyticsSubscriber {
 
     override fun logEvent(event: BaseAnalyticEvent) {

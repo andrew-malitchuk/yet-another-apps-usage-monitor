@@ -22,6 +22,13 @@ import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
+/**
+ * Button which displays theme according to [SelectedTheme]
+ *
+ * @param modifier
+ * @param onThemeSelected lambda
+ * @param preselectedTheme init theme
+ */
 @Composable
 fun YaaumThemeButton(
     modifier: Modifier = Modifier,
@@ -40,7 +47,6 @@ fun YaaumThemeButton(
                 onSideChangeState?.let { onThemeSelected?.invoke(it) }
             }
             // TODO: fix
-//            .clip(RoundedCornerShape(YaaumTheme.corners.medium))
             .clip(CircleShape)
             .background(YaaumTheme.colors.primary)
             // TODO: fix
@@ -92,7 +98,14 @@ fun YaaumThemeButton(
 }
 
 enum class SelectedTheme {
-    LIGHT, DARK, AUTO, MATERIALU, NI;
+    LIGHT,
+    DARK,
+    AUTO,
+
+    @Suppress("SpellCheckingInspection")
+    MATERIALU,
+    NI,
+    ;
 
     fun next(): SelectedTheme {
         return when (this) {

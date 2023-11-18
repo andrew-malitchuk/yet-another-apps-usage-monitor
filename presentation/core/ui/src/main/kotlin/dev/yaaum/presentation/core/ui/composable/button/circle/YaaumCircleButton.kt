@@ -38,6 +38,23 @@ import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 import io.github.serpro69.kfaker.Faker
 
+/**
+ * Circle button with optional [title] or/and [icon]
+ *
+ * @param modifier
+ * @param title text to display on button
+ * @param icon icon to display on button
+ * @param onClick lambda
+ * @param iconSize size of the [icon]
+ * @param iconPadding padding between [icon] and borders
+ * @param defaultBackgroundColor
+ * @param pressedBackgroundColor
+ * @param defaultForegroundColor
+ * @param pressedForegroundColor
+ * @param textStyle style of the [title]
+ * @param textSpacing padding [icon] and borders
+ * @param contentSpacing padding between borders and content
+ */
 @Composable
 fun YaaumCircleButton(
     modifier: Modifier = Modifier,
