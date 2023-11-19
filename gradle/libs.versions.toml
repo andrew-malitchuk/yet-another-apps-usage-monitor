@@ -8,6 +8,7 @@ kotlin = "1.9.0"
 detektGradlePlugin = "1.23.1"
 kotlinterGradle = "3.16.0"
 lint = "31.1.1"
+navigationCompose = "2.7.3"
 
 kotlinxCollectionsImmutable = "0.3.5"
 kotlinxCoroutines = "1.7.3"
@@ -34,7 +35,7 @@ koinAndroid = "3.3.1"
 koinCompose = "3.4.0"
 
 arrow = "1.2.0"
-composeMaterial = "1.5.1"
+composeMaterial = "1.5.3"
 
 junit = "4.13.2"
 mockitoCore = "5.5.0"
@@ -44,6 +45,12 @@ konsist = "0.12.1"
 faker = "1.14.0"
 accompanistPager = "0.32.0"
 lifecycleRuntimeCompose = "2.6.2"
+logcat = "0.1"
+accompanistDrawablepainter = "0.32.0"
+
+room = "2.5.0"
+constraintlayoutCompose = "1.1.0-alpha13"
+foundationAndroid = "1.5.1"
 
 [libraries]
 # https://mvnrepository.com/artifact/androidx.core/core-ktx?repo=google
@@ -83,6 +90,7 @@ voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.
 voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
 voyager-androidx = { module = "cafe.adriel.voyager:voyager-androidx", version.ref = "voyager" }
 voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager" }
+voyager-tab-navigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyager" }
 # https://mvnrepository.com/artifact/androidx.core/core-splashscreen
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidxCoreSplashscreen" }
 # https://mvnrepository.com/artifact/io.insert-koin
@@ -126,6 +134,23 @@ faker = { group = "io.github.serpro69", name = "kotlin-faker", version.ref = "fa
 accompanist-pager-indicators = { group = "com.google.accompanist", name = "accompanist-pager-indicators", version.ref = "accompanistPager" }
 # https://mvnrepository.com/artifact/androidx.lifecycle/lifecycle-runtime-compose?repo=google
 lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycleRuntimeCompose" }
+# https://mvnrepository.com/artifact/com.squareup.logcat/logcat
+squareup-logcat = { group = "com.squareup.logcat", name = "logcat", version.ref = "logcat" }
+# https://mvnrepository.com/artifact/androidx.navigation/navigation-compose?repo=google
+navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+# https://mvnrepository.com/artifact/com.google.accompanist/accompanist-drawablepainter
+accompanist-drawablepainter = { group = "com.google.accompanist", name = "accompanist-drawablepainter", version.ref = "accompanistDrawablepainter" }
+# https://mvnrepository.com/artifact/androidx.room/room-runtime?repo=google
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+# https://mvnrepository.com/artifact/androidx.room/room-compiler
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+# https://mvnrepository.com/artifact/androidx.room/room-ktx?repo=google
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+# https://mvnrepository.com/artifact/androidx.constraintlayout/constraintlayout-compose?repo=google
+constraintlayout-compose = { group = "androidx.constraintlayout", name = "constraintlayout-compose", version.ref = "constraintlayoutCompose" }
+# https://mvnrepository.com/artifact/androidx.compose.foundation/foundation-android
+foundation-android = { group = "androidx.compose.foundation", name = "foundation-android", version.ref = "foundationAndroid" }
+
 
 [plugins]
 # https://mvnrepository.com/artifact/com.android.application/com.android.application.gradle.plugin

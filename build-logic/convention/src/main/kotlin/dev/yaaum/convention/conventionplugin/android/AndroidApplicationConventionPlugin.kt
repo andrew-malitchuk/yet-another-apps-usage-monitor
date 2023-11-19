@@ -54,6 +54,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
         with(libs) {
             dependencies {
                 implementDependency("core.ktx")
+                implementDependency("squareup.logcat")
             }
         }
 

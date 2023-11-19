@@ -92,4 +92,15 @@ abstract class BaseViewModel : ViewModel() {
     fun logEvent(staffToTrack: () -> BaseAnalyticModel) {
         analyticsLogger.logEvent(staffToTrack)
     }
+
+    var isDataLoaded: Boolean = false
+
+    open fun load() = Unit
+
+    open fun reset() = Unit
+
+    fun reload() {
+        isDataLoaded = false
+        load()
+    }
 }

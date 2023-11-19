@@ -2,6 +2,8 @@ package dev.yaaum.presentation.feature.settings.navigation
 
 import cafe.adriel.voyager.core.registry.screenModule
 import dev.yaaum.presentation.core.navigation.RouteGraph
+import dev.yaaum.presentation.feature.settings.navigation.route.AboutRoute
+import dev.yaaum.presentation.feature.settings.navigation.route.PermissionRoute
 import dev.yaaum.presentation.feature.settings.navigation.route.SettingsRoute
 
 /**
@@ -10,5 +12,11 @@ import dev.yaaum.presentation.feature.settings.navigation.route.SettingsRoute
 val settingsScreenModule = screenModule {
     register<RouteGraph.SettingsScreen> {
         SettingsRoute()
+    }
+    register<RouteGraph.AboutScreen> {
+        AboutRoute()
+    }
+    register<RouteGraph.PermissionScreen> {
+        PermissionRoute()
     }
 }

@@ -10,7 +10,7 @@ import dev.yaaum.presentation.core.navigation.RouteGraph
 import dev.yaaum.presentation.core.platform.activity.BaseActivity
 import dev.yaaum.presentation.core.ui.splash.exitAnimation
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
-import dev.yaaum.presentation.feature.main.screen.composable.HostViewModel
+import dev.yaaum.presentation.feature.main.screen.HostViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HostActivity : BaseActivity() {

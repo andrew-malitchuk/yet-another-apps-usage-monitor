@@ -17,6 +17,7 @@ dependencies {
     implementation(libs.voyager.transitions)
     implementation(libs.voyager.androidx)
     implementation(libs.voyager.koin)
+    implementation(libs.voyager.tab.navigator)
 
     implementation(libs.arrow.core)
     implementation(libs.arrow.fx.coroutines)
@@ -32,6 +33,9 @@ dependencies {
     implementation(project(":presentation:feature:main"))
     implementation(project(":presentation:feature:onboarding"))
     implementation(project(":presentation:feature:settings"))
+    implementation(project(":presentation:feature:applications"))
+    implementation(project(":presentation:feature:statistics"))
+    implementation(project(":presentation:feature:health"))
 
     implementation(project(":common:core"))
 

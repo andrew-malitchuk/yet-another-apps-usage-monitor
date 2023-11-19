@@ -24,6 +24,9 @@ dependencies {
     implementation(project(":presentation:feature:main"))
     implementation(project(":presentation:feature:onboarding"))
     implementation(project(":presentation:feature:settings"))
+    implementation(project(":presentation:feature:applications"))
+    implementation(project(":presentation:feature:statistics"))
+    implementation(project(":presentation:feature:health"))
     implementation(project(":presentation:core:navigation"))
     implementation(project(":presentation:core:analytics:core"))
     implementation(project(":presentation:core:analytics:logger"))
@@ -35,18 +38,28 @@ dependencies {
 
     implementation(project(":data:source:system:timeusage"))
     implementation(project(":data:source:system:timeusage:impl"))
+    implementation(project(":data:source:system:applications"))
+    implementation(project(":data:source:system:applications:impl"))
     implementation(project(":data:source:datastore:configuration"))
     implementation(project(":data:source:datastore:configuration:impl"))
+    implementation(project(":data:source:database:core"))
+    implementation(project(":data:source:database:db"))
+    implementation(project(":data:source:database:applications"))
+    implementation(project(":data:source:database:applications:impl"))
     implementation(project(":data:repository:timeusage:impl"))
     implementation(project(":data:repository:timeusage"))
     implementation(project(":data:repository:configuration:impl"))
     implementation(project(":data:repository:configuration"))
+    implementation(project(":data:repository:applications:impl"))
+    implementation(project(":data:repository:applications"))
 
     implementation(project(":domain:core"))
     implementation(project(":domain:timeusage"))
     implementation(project(":domain:timeusage:impl"))
     implementation(project(":domain:configuration"))
     implementation(project(":domain:configuration:impl"))
+    implementation(project(":domain:applications"))
+    implementation(project(":domain:applications:impl"))
 }
 
 // Necessary for context receiver
