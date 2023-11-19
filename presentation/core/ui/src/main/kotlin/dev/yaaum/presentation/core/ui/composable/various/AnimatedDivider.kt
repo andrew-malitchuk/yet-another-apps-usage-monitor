@@ -16,6 +16,13 @@ import androidx.compose.ui.unit.dp
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
+/**
+ * Animated divider for scrollable content
+ *
+ * @param modifier
+ * @param state
+ * @param isInverted
+ */
 @Composable
 fun AnimatedDivider(
     modifier: Modifier = Modifier,
@@ -44,18 +51,6 @@ fun AnimatedDivider(
         targetValue = if (isVisible) 1.0f else 0f,
         label = "animatedAlpha",
     )
-
-//
-//    AnimatedVisibility(
-//        visible = isVisible,
-//    ) {
-//        Divider(
-//            modifier = modifier
-//                .alpha(animatedAlpha),
-//            thickness = animatedDpValue,
-//            color = YaaumTheme.colors.surface,
-//        )
-//    }
 
     Divider(
         modifier = modifier

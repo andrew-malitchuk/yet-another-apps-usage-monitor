@@ -29,6 +29,9 @@ import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 import io.github.serpro69.kfaker.Faker
 
+/**
+ * Simplified health card
+ */
 @Composable
 fun SimplifiedHealthCard(
     modifier: Modifier = Modifier,

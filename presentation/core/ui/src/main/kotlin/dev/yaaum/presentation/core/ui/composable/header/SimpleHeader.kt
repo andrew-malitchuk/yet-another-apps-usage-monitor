@@ -22,6 +22,15 @@ import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 import io.github.serpro69.kfaker.Faker
 
+/**
+ * Simple type of header; contains back button, action buttons and title
+ *
+ * @param modifier
+ * @param icon icon to set
+ * @param title text to set
+ * @param onActionClick lambda
+ * @param onBackClick lambda
+ */
 @Composable
 fun SimpleHeader(
     modifier: Modifier = Modifier,

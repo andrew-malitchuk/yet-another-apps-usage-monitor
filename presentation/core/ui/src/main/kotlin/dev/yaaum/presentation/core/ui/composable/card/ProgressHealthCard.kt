@@ -4,7 +4,6 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -14,7 +13,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,12 +30,15 @@ import dev.yaaum.presentation.core.ui.composable.chart.pie.YaaumPieChart
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
+/**
+ * Detalization for screen usage
+ */
 @Composable
 @Suppress("LongMethod", "UnusedParameter", "UNUSED_VARIABLE")
 fun ProgressHealthCard(
     modifier: Modifier = Modifier,
     onClick: (() -> Unit)? = null,
-    isFoo: Boolean,
+    isOpened: Boolean,
 ) {
     val cardId = "card_id"
     val totalTitleId = "total_title_id"
@@ -57,8 +58,7 @@ fun ProgressHealthCard(
 
     @Suppress("MagicNumber")
     val progress by animateFloatAsState(
-        targetValue = if (isFoo) 0f else 1f,
-//        tween(500),
+        targetValue = if (isOpened) 0f else 1f,
         label = "",
     )
 
@@ -400,7 +400,7 @@ fun ProgressHealthCard(
 @Composable
 fun Preview_ProgressHealthCard_Dark() {
     YaaumTheme(useDarkTheme = true) {
-        ProgressHealthCard(isFoo = true)
+        ProgressHealthCard(isOpened = true)
     }
 }
 
@@ -408,6 +408,6 @@ fun Preview_ProgressHealthCard_Dark() {
 @Composable
 fun Preview_ProgressHealthCard_Light() {
     YaaumTheme(useDarkTheme = false) {
-        ProgressHealthCard(isFoo = false)
+        ProgressHealthCard(isOpened = false)
     }
 }

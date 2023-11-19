@@ -29,10 +29,18 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import kotlin.math.hypot
 
+/**
+ * Reveal effect for changing theme which wrap-up content
+ *
+ * @param modifier
+ * @param targetState
+ * @param animationSpec
+ * @param content
+ */
 @Composable
 fun <T> CircularReveal(
-    targetState: T,
     modifier: Modifier = Modifier,
+    targetState: T,
     animationSpec: FiniteAnimationSpec<Float> = tween(),
     content: @Composable (T) -> Unit,
 ) {
@@ -40,6 +48,13 @@ fun <T> CircularReveal(
     transition.CircularReveal(modifier, animationSpec, content = content)
 }
 
+/**
+ * Reveal effect for changing theme
+ *
+ * @param modifier
+ * @param animationSpec
+ * @param content
+ */
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun <T> Transition<T>.CircularReveal(

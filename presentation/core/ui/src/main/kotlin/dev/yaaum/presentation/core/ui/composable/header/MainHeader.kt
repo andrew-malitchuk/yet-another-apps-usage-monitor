@@ -1,5 +1,6 @@
 package dev.yaaum.presentation.core.ui.composable.header
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -29,9 +30,18 @@ import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 import io.github.serpro69.kfaker.Faker
 
+/**
+ * Main type of header; contains back, action buttons and title
+ *
+ * @param modifier
+ * @param icon icon to set
+ * @param healthStatus display icon which depends on health status
+ * @param onClick lambda
+ */
 @Composable
 fun MainHeader(
     modifier: Modifier = Modifier,
+    @DrawableRes
     icon: Int,
     healthStatus: HealthSimplifiedUiModel,
     onClick: (() -> Unit)? = null,

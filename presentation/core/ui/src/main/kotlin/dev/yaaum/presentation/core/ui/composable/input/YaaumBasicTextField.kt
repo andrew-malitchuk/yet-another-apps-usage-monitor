@@ -28,12 +28,26 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumCircleButton
 import dev.yaaum.presentation.core.ui.composable.ext.clearFocusOnKeyboardDismiss
+import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
+/**
+ * Customized edittext
+ *
+ * @param modifier
+ * @param text
+ * @param onTextChanged
+ * @param keyboardOptions
+ * @param keyboardActions
+ * @param singleLine
+ * @param maxLines
+ * @param minLines
+ */
 @Composable
 fun YaaumBasicTextField(
     modifier: Modifier = Modifier,
@@ -127,4 +141,22 @@ fun YaaumBasicTextField(
             }
         },
     )
+}
+
+@Suppress("MagicNumber")
+@Preview(showBackground = true)
+@Composable
+fun Preview_YaaumBasicTextField_Dark() {
+    YaaumTheme(useDarkTheme = true) {
+        YaaumBasicTextField()
+    }
+}
+
+@Suppress("MagicNumber")
+@Preview(showBackground = true)
+@Composable
+fun Preview_YaaumBasicTextField_Light() {
+    YaaumTheme(useDarkTheme = false) {
+        YaaumBasicTextField()
+    }
 }

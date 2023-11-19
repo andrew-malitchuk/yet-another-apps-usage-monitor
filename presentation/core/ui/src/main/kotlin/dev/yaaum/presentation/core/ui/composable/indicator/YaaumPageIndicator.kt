@@ -22,12 +22,22 @@ import androidx.compose.ui.unit.dp
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
+/**
+ * Page indicator for pager
+ *
+ * @param modifier
+ * @param pagerState
+ * @param indicatorColor
+ * @param spacing
+ * @param height
+ * @param selectPageMultiplier
+ */
 @Suppress("MagicNumber")
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun YaaumPageIndicator(
-    pagerState: PagerState,
     modifier: Modifier = Modifier,
+    pagerState: PagerState,
     indicatorColor: Color = YaaumTheme.colors.primary,
     spacing: Dp = 4.dp,
     height: Dp = 8.dp,

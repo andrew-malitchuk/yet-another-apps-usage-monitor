@@ -30,13 +30,17 @@ import dev.yaaum.presentation.core.ui.composable.chart.bar.YaaumBarChart
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
+/**
+ * Display graph with usage statistic per day
+ */
+@OptIn(ExperimentalAnimationApi::class)
 @Suppress("LongMethod")
 @Composable
 fun DetailsHealthCard(
     modifier: Modifier =
         Modifier,
 ) {
-    val isFoo = remember {
+    val isOpened = remember {
         mutableStateOf(true)
     }
 
@@ -53,7 +57,7 @@ fun DetailsHealthCard(
 
     @Suppress("MagicNumber")
     val progress by animateFloatAsState(
-        targetValue = if (isFoo.value) 0f else 1f,
+        targetValue = if (isOpened.value) 0f else 1f,
         label = "",
     )
 
@@ -266,7 +270,7 @@ fun DetailsHealthCard(
             // TODO: fix
             iconSize = 24.dp,
             onClick = {
-                isFoo.value = isFoo.value.not()
+                isOpened.value = isOpened.value.not()
             },
         )
 

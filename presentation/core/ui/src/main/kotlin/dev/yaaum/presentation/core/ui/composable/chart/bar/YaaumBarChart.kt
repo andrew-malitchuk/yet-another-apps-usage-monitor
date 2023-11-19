@@ -31,11 +31,24 @@ import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 import kotlinx.coroutines.delay
 
+/**
+ * Customizable bar chart
+ *
+ * @param modifier
+ * @param data content to display
+ * @param barCornersRadius
+ * @param barColor
+ * @param barWidth
+ * @param height
+ * @param labelOffset
+ */
 @Suppress("MagicNumber", "LongMethod")
 @ExperimentalAnimationApi
 @Composable
@@ -125,7 +138,7 @@ fun YaaumBarChart(
                         x = spaceStep,
                         y = size.height - item.value * barScale - labelOffset,
                     )
-                    // --------------------(draw bars)--------------------//
+                    // Bars
                     drawRoundRect(
                         color = barColor,
                         topLeft = topLeft,
@@ -135,14 +148,14 @@ fun YaaumBarChart(
                         ),
                         cornerRadius = CornerRadius(barCornersRadius, barCornersRadius),
                     )
-                    // --------------------(showing the x axis labels)--------------------//
+                    // X
                     drawContext.canvas.nativeCanvas.drawText(
                         item.key.toString(),
                         spaceStep + barWidth / 2,
                         size.height,
                         paint,
                     )
-                    // --------------------(showing the bar label)--------------------//
+                    // Labels
                     if (chosenBarKey == item.key.toString()) {
                         drawRoundRect(
                             color = localLabelColor,
@@ -180,6 +193,7 @@ fun YaaumBarChart(
     }
 }
 
+// TODO: move me
 private fun detectPosition(screenSize: Size, offset: Offset, listSize: Int, itemWidth: Float): Int {
     val spaceBetweenBars =
         (screenSize.width - (listSize * itemWidth)) / (listSize - 1)
@@ -191,4 +205,52 @@ private fun detectPosition(screenSize: Size, offset: Offset, listSize: Int, item
         spaceStep += spaceBetweenBars + itemWidth
     }
     return -1
+}
+
+@Suppress("MagicNumber")
+@OptIn(ExperimentalAnimationApi::class)
+@Preview(showBackground = true)
+@Composable
+fun Preview_YaaumBarChart_Dark() {
+    YaaumTheme(useDarkTheme = true) {
+        YaaumBarChart(
+            modifier = Modifier,
+            data = mapOf(
+                Pair("Jan", 6f),
+                Pair("Feb", 0.25f),
+                Pair("Mar", 9f),
+                Pair("Apr", 7f),
+                Pair("May", 8f),
+                Pair("Jun", 9f),
+                Pair("Jul", 3f),
+                Pair("Aug", 11f),
+                Pair("Sep", 15f),
+            ),
+            height = 250.dp,
+        )
+    }
+}
+
+@Suppress("MagicNumber")
+@OptIn(ExperimentalAnimationApi::class)
+@Preview(showBackground = true)
+@Composable
+fun Preview_YaaumBarChart_Light() {
+    YaaumTheme(useDarkTheme = false) {
+        YaaumBarChart(
+            modifier = Modifier,
+            data = mapOf(
+                Pair("Jan", 6f),
+                Pair("Feb", 0.25f),
+                Pair("Mar", 9f),
+                Pair("Apr", 7f),
+                Pair("May", 8f),
+                Pair("Jun", 9f),
+                Pair("Jul", 3f),
+                Pair("Aug", 11f),
+                Pair("Sep", 15f),
+            ),
+            height = 250.dp,
+        )
+    }
 }

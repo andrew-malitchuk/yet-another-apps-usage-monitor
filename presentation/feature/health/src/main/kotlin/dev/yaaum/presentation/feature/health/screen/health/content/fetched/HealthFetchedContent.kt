@@ -47,7 +47,7 @@ fun HealthFetchedContent(
                     end = YaaumTheme.spacing.medium,
                     bottom = YaaumTheme.spacing.small,
                 ),
-            isFoo = (!lazyScrollState.canScrollBackward && !lazyScrollState.isScrollInProgress),
+            isOpened = (!lazyScrollState.canScrollBackward && !lazyScrollState.isScrollInProgress),
             onClick = onActionClick,
         )
         AnimatedDivider(

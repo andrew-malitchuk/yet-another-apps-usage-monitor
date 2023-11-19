@@ -2,20 +2,31 @@ package dev.yaaum.presentation.core.ui.composable.chart.donut
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import dev.yaaum.presentation.core.ui.composable.chart.CircleChartModel
 import dev.yaaum.presentation.core.ui.composable.chart.calculateStartAngles
+import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 
+/**
+ * Chart diagram
+ *
+ * @param modifier
+ * @param entries content to display
+ */
 @Suppress("MagicNumber")
 @Composable
 fun YaaumChartDonut(
-    entries: List<CircleChartModel>,
     modifier: Modifier = Modifier,
+    entries: List<CircleChartModel>,
 ) {
     Canvas(
         modifier = modifier
@@ -39,4 +50,38 @@ fun YaaumChartDonut(
             }
         },
     )
+}
+
+@Suppress("MagicNumber")
+@Preview(showBackground = true)
+@Composable
+fun Preview_YaaumChartDonut_Dark() {
+    YaaumTheme(useDarkTheme = true) {
+        YaaumChartDonut(
+            entries = listOf(
+                CircleChartModel(Color.Red, 0.5f),
+                CircleChartModel(Color.Green, 0.3f),
+                CircleChartModel(Color.Blue, 0.2f),
+            ),
+            modifier = Modifier
+                .height(128.dp),
+        )
+    }
+}
+
+@Suppress("MagicNumber")
+@Preview(showBackground = true)
+@Composable
+fun Preview_YaaumChartDonut_Light() {
+    YaaumTheme(useDarkTheme = false) {
+        YaaumChartDonut(
+            entries = listOf(
+                CircleChartModel(Color.Red, 0.5f),
+                CircleChartModel(Color.Green, 0.3f),
+                CircleChartModel(Color.Blue, 0.2f),
+            ),
+            modifier = Modifier
+                .height(128.dp),
+        )
+    }
 }

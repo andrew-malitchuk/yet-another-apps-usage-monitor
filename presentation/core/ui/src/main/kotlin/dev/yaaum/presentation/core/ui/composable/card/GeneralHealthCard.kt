@@ -27,6 +27,9 @@ import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 import io.github.serpro69.kfaker.Faker
 
+/**
+ * General information about "user's health"
+ */
 @Suppress("LongMethod")
 @Composable
 fun GeneralHealthCard(

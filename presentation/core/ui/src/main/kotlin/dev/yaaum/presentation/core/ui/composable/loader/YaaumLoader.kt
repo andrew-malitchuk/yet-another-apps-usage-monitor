@@ -16,6 +16,9 @@ import androidx.compose.ui.geometry.lerp
 import androidx.compose.ui.unit.dp
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
+/**
+ * Simple loader
+ */
 @Suppress("MagicNumber")
 @Composable
 fun YaaumLoader(
@@ -76,4 +79,5 @@ fun YaaumLoader(
     }
 }
 
+// TODO: move me
 internal fun lerp(min: Float, max: Float, fraction: Float) = min + (max - min) * fraction

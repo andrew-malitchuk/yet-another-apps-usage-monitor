@@ -18,7 +18,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,13 +33,16 @@ import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumCircleButton
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
+/**
+ * Contains general information about application
+ */
 @Composable
 @Suppress("LongMethod", "UnusedParameter", "UNUSED_VARIABLE")
 fun ApplicationDetalizationCard(
     modifier: Modifier = Modifier,
     onClick: (() -> Unit)? = null,
 ) {
-    val isFoo = remember {
+    val isOpened = remember {
         mutableStateOf(true)
     }
 
@@ -55,7 +57,7 @@ fun ApplicationDetalizationCard(
 
     @Suppress("MagicNumber")
     val progress by animateFloatAsState(
-        targetValue = if (isFoo.value) 0f else 1f,
+        targetValue = if (isOpened.value) 0f else 1f,
         label = "",
     )
 
@@ -125,10 +127,6 @@ fun ApplicationDetalizationCard(
             top.linkTo(card.top, paddingSmall)
             start.linkTo(card.start, paddingSmall)
             bottom.linkTo(card.bottom, paddingSmall)
-//            width =  Dimension.fillToConstraints
-//            height =  Dimension.fillToConstraints
-//            width = Dimension.value(64.dp)
-//            height = Dimension.value(64.dp)
         }
 
         constrain(totalTitle) {
@@ -243,9 +241,6 @@ fun ApplicationDetalizationCard(
                 .background(YaaumTheme.colors.secondary)
                 .layoutId(applicationBoxId),
         ) {
-//            val icon = applicationsUiModel.packageName?.let { pn ->
-//                LocalContext.current.packageManager.getApplicationIcon(pn)
-//            }
             Image(
                 painter = painterResource(id = R.drawable.icon_palette_regular_24),
                 contentDescription = null,
@@ -264,7 +259,7 @@ fun ApplicationDetalizationCard(
             // TODO: fix
             iconSize = 24.dp,
             onClick = {
-                isFoo.value = isFoo.value.not()
+                isOpened.value = isOpened.value.not()
             },
         )
     }
