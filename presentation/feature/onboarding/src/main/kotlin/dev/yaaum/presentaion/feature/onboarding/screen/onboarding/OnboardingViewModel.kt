@@ -5,7 +5,7 @@ import arrow.core.raise.recover
 import dev.yaaum.domain.configuration.SetOnboardingFinishedUseCase
 import dev.yaaum.presentaion.feature.onboarding.analytics.UserPassOnboardingAnalyticsEvent
 import dev.yaaum.presentation.core.localisation.UiText
-import dev.yaaum.presentation.core.platform.viewmodel.BaseViewModel
+import dev.yaaum.presentation.core.platform.vm.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 

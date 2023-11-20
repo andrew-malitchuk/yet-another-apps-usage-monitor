@@ -1,37 +1,44 @@
-package dev.yaaum.presentation.core.platform.viewmodel
+package dev.yaaum.presentation.core.platform.vm
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
+import dev.yaaum.common.core.error.SwwError
 import dev.yaaum.presentation.core.analytics.core.model.base.BaseAnalyticModel
 import dev.yaaum.presentation.core.analytics.logger.AnalyticsLogger
+import dev.yaaum.presentation.core.platform.mvi.Contract
+import dev.yaaum.presentation.core.platform.mvi.Effect
+import dev.yaaum.presentation.core.platform.mvi.Error
+import dev.yaaum.presentation.core.platform.mvi.Intent
+import dev.yaaum.presentation.core.platform.mvi.Loading
+import dev.yaaum.presentation.core.platform.mvi.State
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.koin.android.ext.android.inject
-import org.koin.java.KoinJavaComponent.inject
+import org.koin.java.KoinJavaComponent
 import kotlin.coroutines.CoroutineContext
 
-/**
- * Just for avoiding boilerplate.
- *
- * Contains safe coroutine launcher and other re-usable stuff suitable for all VMs in this project.
- */
-@Suppress("unused")
-abstract class BaseViewModel : ViewModel() {
+abstract class UnidirectionalViewModel<STATE : State, INTENT : Intent, EFFECT : Effect> :
+    ViewModel(),
+    Contract<STATE, INTENT, EFFECT> {
 
-    val analyticsLogger: AnalyticsLogger by inject(AnalyticsLogger::class.java)
+    abstract override val state: StateFlow<STATE>
 
-    /**
-     * Container for hypothetical errors which might happens in [launch]
-     */
-    val errorChannel = Channel<Throwable?>(Channel.BUFFERED)
+    abstract override val effect: SharedFlow<EFFECT>
+
+    abstract override fun event(event: INTENT)
+
+    @Suppress("MemberVisibilityCanBePrivate")
+    val analyticsLogger: AnalyticsLogger by KoinJavaComponent.inject(AnalyticsLogger::class.java)
 
     /**
      * Error-safe coroutine launcher.
@@ -47,7 +54,7 @@ abstract class BaseViewModel : ViewModel() {
      * @return Coroutine Job
      */
     @Suppress("TooGenericExceptionCaught")
-    fun <T> launch(
+    fun <T> call(
         context: CoroutineContext = Dispatchers.IO,
         scope: CoroutineScope = viewModelScope,
         debounce: Long? = null,
@@ -62,11 +69,13 @@ abstract class BaseViewModel : ViewModel() {
                     delay(it)
                 }
                 loading?.invoke(true)
+                state.setValue(Loading())
                 withContext(context) { request() }.apply {
                     this.let { result?.invoke(it) }
                 }
             } catch (e: Throwable) {
                 errorBlock?.invoke(e)
+                state.setValue(Error(SwwError(throwable = e)))
                 loading?.invoke(false)
             } finally {
                 loading?.invoke(false)
@@ -93,14 +102,34 @@ abstract class BaseViewModel : ViewModel() {
         analyticsLogger.logEvent(staffToTrack)
     }
 
-    var isDataLoaded: Boolean = false
-
-    open fun load() = Unit
+    abstract fun load()
 
     open fun reset() = Unit
 
-    fun reload() {
-        isDataLoaded = false
+    open fun reload() {
         load()
     }
 }
+
+@Composable
+inline fun <reified STATE : State, INTENT : Intent, EFFECT : Effect> use(
+    viewModel: UnidirectionalViewModel<STATE, INTENT, EFFECT>,
+): StateDispatchEffect<STATE, INTENT, EFFECT> {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+
+    val dispatch: (INTENT) -> Unit = { event ->
+        viewModel.event(event)
+    }
+
+    return StateDispatchEffect(
+        state = state,
+        effectFlow = viewModel.effect,
+        dispatch = dispatch,
+    )
+}
+
+data class StateDispatchEffect<STATE, EVENT, EFFECT>(
+    val state: STATE,
+    val dispatch: (EVENT) -> Unit,
+    val effectFlow: SharedFlow<EFFECT>,
+)

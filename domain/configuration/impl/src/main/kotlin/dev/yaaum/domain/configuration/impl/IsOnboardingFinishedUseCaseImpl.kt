@@ -15,7 +15,8 @@ class IsOnboardingFinishedUseCaseImpl(
     override suspend fun invoke(): Either<BaseDomainError, Boolean> {
         return try {
             configurationRepository.getCurrentConfiguration()?.toDomainModel()?.run {
-                Either.Right(this.isOnboardingFinished ?: false)
+//                Either.Right(this.isOnboardingFinished ?: false)
+                Either.Right(false)
             } ?: run {
                 Either.Left(
                     NoDataError(),

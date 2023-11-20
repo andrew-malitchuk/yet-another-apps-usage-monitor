@@ -16,7 +16,7 @@ class GetCurrentConfigurationUseCaseImpl(
     override suspend fun invoke(): Either<BaseDomainError, ConfigurationDomainModel> {
         return try {
             configurationRepository.getCurrentConfiguration()?.toDomainModel()?.run {
-                Either.Right(this)
+                Either.Right(this.copy(isOnboardingFinished = false))
             } ?: run {
                 Either.Left(
                     NoDataError(),
