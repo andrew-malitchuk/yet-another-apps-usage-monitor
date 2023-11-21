@@ -4,55 +4,24 @@ import androidx.annotation.DrawableRes
 import dev.yaaum.domain.configuration.SetOnboardingFinishedUseCase
 import dev.yaaum.presentation.core.localisation.UiText
 import dev.yaaum.presentation.core.platform.vm.UnidirectionalViewModel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.StateFlow
 
 class FooViewModel(
     @Suppress("UnusedPrivateProperty")
     private val setOnboardingFinishedUseCase: SetOnboardingFinishedUseCase,
 ) :
-    UnidirectionalViewModel<OnboardingState, OnboardingIntent, OnboardingEffect>() {
+    UnidirectionalViewModel<OnboardingState<List<FooViewModel.OnboardingPage>>, OnboardingEvent, OnboardingEffect>() {
 
-    override val state: StateFlow<OnboardingState> = MutableStateFlow(OnboardingLoading())
-
-    override val effect: SharedFlow<OnboardingEffect> = MutableSharedFlow()
-
-    override fun load() {
-        event(
-            OnboardingIntent.GetOnboardingPagesIntent,
-        )
+    override fun createInitialState(): OnboardingState<List<OnboardingPage>> {
+        return OnboardingState()
     }
 
-    override fun event(event: OnboardingIntent) {
-        @Suppress("OptionalWhenBraces")
-        when (event) {
-            is OnboardingIntent.GetOnboardingPagesIntent -> {
-                getOnboardingPages()
-            }
-        }
-    }
+    override fun handleEvent(event: OnboardingEvent) = Unit
 
-    private fun getOnboardingPages() {
-        call(
-            request = {
-                @Suppress("MagicNumber")
-                delay(5_000L)
-                state.setValue(
-                    OnboardingFetched(
-                        content = onboardingPages,
-                    ),
-                )
-            },
-        )
-    }
-
-    //
+    //region
     /**
      * Onboarding pages
      */
+    @Suppress("UnusedPrivateProperty")
     private var onboardingPages = listOf(
         OnboardingPage(
             dev.yaaum.presentation.core.ui.R.drawable.icon_fire_bold_24,
@@ -77,5 +46,5 @@ class FooViewModel(
         val header: UiText,
         val caption: UiText,
     )
-    //
+    //endregion
 }

@@ -1,42 +1,79 @@
 package dev.yaaum.presentation.core.platform.vm
 
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
-import dev.yaaum.common.core.error.SwwError
 import dev.yaaum.presentation.core.analytics.core.model.base.BaseAnalyticModel
 import dev.yaaum.presentation.core.analytics.logger.AnalyticsLogger
-import dev.yaaum.presentation.core.platform.mvi.Contract
 import dev.yaaum.presentation.core.platform.mvi.Effect
-import dev.yaaum.presentation.core.platform.mvi.Error
-import dev.yaaum.presentation.core.platform.mvi.Intent
-import dev.yaaum.presentation.core.platform.mvi.Loading
+import dev.yaaum.presentation.core.platform.mvi.Event
 import dev.yaaum.presentation.core.platform.mvi.State
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.java.KoinJavaComponent
 import kotlin.coroutines.CoroutineContext
 
-abstract class UnidirectionalViewModel<STATE : State, INTENT : Intent, EFFECT : Effect> :
-    ViewModel(),
-    Contract<STATE, INTENT, EFFECT> {
+abstract class UnidirectionalViewModel<STATE : State<*>, EVENT : Event, EFFECT : Effect> :
+    ViewModel() {
 
-    abstract override val state: StateFlow<STATE>
+    private val initialState: STATE by lazy { createInitialState() }
+    abstract fun createInitialState(): STATE
 
-    abstract override val effect: SharedFlow<EFFECT>
+    val currentState: STATE
+        get() = uiState.value
 
-    abstract override fun event(event: INTENT)
+    private val _uiState: MutableStateFlow<STATE> = MutableStateFlow(initialState)
+    val uiState = _uiState.asStateFlow()
 
+    private val _event: MutableSharedFlow<EVENT> = MutableSharedFlow()
+    val event = _event.asSharedFlow()
+
+    private val _effect: Channel<EFFECT> = Channel()
+    val effect = _effect.receiveAsFlow()
+
+    init {
+        subscribeEvents()
+    }
+
+    private fun subscribeEvents() {
+        viewModelScope.launch {
+            event.collect {
+                handleEvent(it)
+            }
+        }
+    }
+
+    abstract fun handleEvent(event: EVENT)
+
+    fun setEvent(event: EVENT) {
+        val newEvent = event
+        viewModelScope.launch { _event.emit(newEvent) }
+    }
+
+    protected fun setState(reduce: STATE.() -> STATE) {
+        val newState = currentState.reduce()
+        _uiState.value = newState
+    }
+
+    protected fun setEffect(builder: () -> EFFECT) {
+        val effectValue = builder()
+        viewModelScope.launch { _effect.send(effectValue) }
+    }
+
+    //
     @Suppress("MemberVisibilityCanBePrivate")
     val analyticsLogger: AnalyticsLogger by KoinJavaComponent.inject(AnalyticsLogger::class.java)
 
@@ -69,13 +106,11 @@ abstract class UnidirectionalViewModel<STATE : State, INTENT : Intent, EFFECT : 
                     delay(it)
                 }
                 loading?.invoke(true)
-                state.setValue(Loading())
                 withContext(context) { request() }.apply {
                     this.let { result?.invoke(it) }
                 }
             } catch (e: Throwable) {
                 errorBlock?.invoke(e)
-                state.setValue(Error(SwwError(throwable = e)))
                 loading?.invoke(false)
             } finally {
                 loading?.invoke(false)
@@ -101,32 +136,24 @@ abstract class UnidirectionalViewModel<STATE : State, INTENT : Intent, EFFECT : 
     fun logEvent(staffToTrack: () -> BaseAnalyticModel) {
         analyticsLogger.logEvent(staffToTrack)
     }
-
-    abstract fun load()
-
-    open fun reset() = Unit
-
-    open fun reload() {
-        load()
-    }
 }
 
-@Composable
-inline fun <reified STATE : State, INTENT : Intent, EFFECT : Effect> use(
-    viewModel: UnidirectionalViewModel<STATE, INTENT, EFFECT>,
-): StateDispatchEffect<STATE, INTENT, EFFECT> {
-    val state by viewModel.state.collectAsStateWithLifecycle()
-
-    val dispatch: (INTENT) -> Unit = { event ->
-        viewModel.event(event)
-    }
-
-    return StateDispatchEffect(
-        state = state,
-        effectFlow = viewModel.effect,
-        dispatch = dispatch,
-    )
-}
+// @Composable
+// inline fun <reified STATE : State<*>, INTENT : Event, EFFECT : Effect> use(
+//    viewModel: UnidirectionalViewModel<STATE, INTENT, EFFECT>,
+// ): StateDispatchEffect<STATE, INTENT, EFFECT> {
+//    val state by viewModel.state.collectAsStateWithLifecycle()
+//
+//    val dispatch: (INTENT) -> Unit = { event ->
+//        viewModel.event(event)
+//    }
+//
+//    return StateDispatchEffect(
+//        state = state,
+//        effectFlow = viewModel.effect,
+//        dispatch = dispatch,
+//    )
+// }
 
 data class StateDispatchEffect<STATE, EVENT, EFFECT>(
     val state: STATE,
