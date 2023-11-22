@@ -24,6 +24,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
         plugins {
             +"com.android.library"
             +"org.jetbrains.kotlin.android"
+            +"kotlin-parcelize"
         }
 
         lib {

@@ -1,3 +1,3 @@
 package dev.yaaum.presentation.core.platform.mvi
 
-abstract class Event
+interface Event
