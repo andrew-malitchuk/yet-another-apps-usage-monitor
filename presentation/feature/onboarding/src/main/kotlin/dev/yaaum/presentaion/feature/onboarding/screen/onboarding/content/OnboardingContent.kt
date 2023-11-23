@@ -18,10 +18,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.OnboardingViewModel
 import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.item.OnboardingItem
-import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.FooViewModel
-import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.OnboardingFetched
-import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.OnboardingState
+import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.OnboardingMviState
 import dev.yaaum.presentation.core.localisation.UiText
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumCircleButton
@@ -33,12 +32,12 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun OnboardingContent(
-    state: OnboardingState,
+    state: OnboardingMviState,
     onInfoClick: (() -> Unit)? = null,
     onDoneClick: (() -> Unit)? = null,
 ) {
     val pagerState = rememberPagerState(pageCount = {
-        (state as OnboardingFetched<*>).content.size
+        state.data.size
     })
     val goToNextPageScope = rememberCoroutineScope()
     val buttonAlphaAnimation = animateFloatAsState(
@@ -60,7 +59,7 @@ fun OnboardingContent(
             modifier = Modifier
                 .weight(1f, true),
         ) { page ->
-            val currentPage = (state as OnboardingFetched<*>).content[page]
+            val currentPage = state.data[page]
             OnboardingItem(
                 image = currentPage.image,
                 header = currentPage.header.asString(),
@@ -117,14 +116,26 @@ fun OnboardingContent(
 fun Preview_OnboardingContent_Dark() {
     YaaumTheme(useDarkTheme = true) {
         OnboardingContent(
-            state = OnboardingFetched(
-                listOf(
-                    FooViewModel.OnboardingPage(
-                        R.drawable.illustration_call_waiting_1500,
-                        UiText.DynamicString("foobar"),
-                        UiText.DynamicString("foobar"),
+            state = OnboardingMviState(
+                loading = false,
+                data = listOf(
+                    OnboardingViewModel.OnboardingPage(
+                        R.drawable.icon_fire_bold_24,
+                        UiText.DynamicString("header1"),
+                        UiText.DynamicString("caption1"),
+                    ),
+                    OnboardingViewModel.OnboardingPage(
+                        R.drawable.icon_fire_bold_24,
+                        UiText.DynamicString("header2"),
+                        UiText.DynamicString("caption2"),
+                    ),
+                    OnboardingViewModel.OnboardingPage(
+                        R.drawable.icon_fire_bold_24,
+                        UiText.DynamicString("header3"),
+                        UiText.DynamicString("caption3"),
                     ),
                 ),
+                error = null,
             ),
         )
     }
@@ -135,14 +146,26 @@ fun Preview_OnboardingContent_Dark() {
 fun Preview_OnboardingContent_Light() {
     YaaumTheme(useDarkTheme = false) {
         OnboardingContent(
-            state = OnboardingFetched(
-                listOf(
-                    FooViewModel.OnboardingPage(
-                        R.drawable.illustration_call_waiting_1500,
-                        UiText.DynamicString("foobar"),
-                        UiText.DynamicString("foobar"),
+            state = OnboardingMviState(
+                loading = false,
+                data = listOf(
+                    OnboardingViewModel.OnboardingPage(
+                        R.drawable.icon_fire_bold_24,
+                        UiText.DynamicString("header1"),
+                        UiText.DynamicString("caption1"),
+                    ),
+                    OnboardingViewModel.OnboardingPage(
+                        R.drawable.icon_fire_bold_24,
+                        UiText.DynamicString("header2"),
+                        UiText.DynamicString("caption2"),
+                    ),
+                    OnboardingViewModel.OnboardingPage(
+                        R.drawable.icon_fire_bold_24,
+                        UiText.DynamicString("header3"),
+                        UiText.DynamicString("caption3"),
                     ),
                 ),
+                error = null,
             ),
         )
     }

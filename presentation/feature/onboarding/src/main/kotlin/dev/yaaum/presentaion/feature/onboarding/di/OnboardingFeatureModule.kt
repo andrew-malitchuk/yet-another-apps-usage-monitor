@@ -1,7 +1,7 @@
 package dev.yaaum.presentaion.feature.onboarding.di
 
 import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.OnboardingViewModel
-import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.FooViewModel
+import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.FooMvi
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -15,8 +15,6 @@ val onboardingFeatureModule = module {
         )
     }
     viewModel {
-        FooViewModel(
-            setOnboardingFinishedUseCase = get(),
-        )
+        FooMvi()
     }
 }
