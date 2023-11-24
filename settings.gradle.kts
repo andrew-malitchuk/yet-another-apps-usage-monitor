@@ -94,5 +94,6 @@ include(":presentation:feature:settings")
 include(":presentation:feature:applications")
 include(":presentation:feature:statistics")
 include(":presentation:feature:health")
+include(":presentation:feature:demo")
 //endregion Feature
 //endregion Presentation

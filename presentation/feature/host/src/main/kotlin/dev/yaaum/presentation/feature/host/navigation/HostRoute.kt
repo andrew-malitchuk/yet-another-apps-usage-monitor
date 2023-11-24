@@ -1,6 +1,7 @@
 package dev.yaaum.presentation.feature.host.navigation
 
 import cafe.adriel.voyager.core.registry.ScreenRegistry
+import dev.yaaum.presentaion.feature.demo.navigation.demoScreenModule
 import dev.yaaum.presentaion.feature.onboarding.navigation.onboardingScreenModule
 import dev.yaaum.presentaion.feature.statistics.navigation.statisticsScreenModule
 import dev.yaaum.presentation.feature.applications.navigation.applicationsScreenModule
@@ -16,6 +17,7 @@ import dev.yaaum.presentation.feature.settings.navigation.settingsScreenModule
  * - `presentation:feature:applications`;
  * - `presentation:feature:statistics`;
  * - `presentation:feature:health`;
+ * - `presentation:feature:demo`;
  */
 fun navigationInit() = ScreenRegistry {
     onboardingScreenModule()
@@ -24,4 +26,5 @@ fun navigationInit() = ScreenRegistry {
     applicationsScreenModule()
     statisticsScreenModule()
     healthScreenModule()
+    demoScreenModule()
 }
