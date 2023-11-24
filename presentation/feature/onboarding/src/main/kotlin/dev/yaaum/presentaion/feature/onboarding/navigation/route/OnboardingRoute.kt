@@ -7,7 +7,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.OnboardingScreen
-import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.FooMvi
+import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.OnboardingMvi
 import dev.yaaum.presentation.feature.main.screen.HostViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -18,8 +18,7 @@ class OnboardingRoute : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-//        val onboardingViewModel: OnboardingViewModel = koinViewModel()
-        val onboardingViewModel: FooMvi = koinViewModel()
+        val onboardingMvi: OnboardingMvi = koinViewModel()
         val hostViewModel: HostViewModel = koinViewModel(
             viewModelStoreOwner = LocalContext.current as ComponentActivity,
         )
@@ -27,7 +26,7 @@ class OnboardingRoute : Screen {
         OnboardingScreen(
             navigator = navigator,
             hostViewModel = hostViewModel,
-            onboardingMvi = onboardingViewModel,
+            onboardingMvi = onboardingMvi,
         )
     }
 }

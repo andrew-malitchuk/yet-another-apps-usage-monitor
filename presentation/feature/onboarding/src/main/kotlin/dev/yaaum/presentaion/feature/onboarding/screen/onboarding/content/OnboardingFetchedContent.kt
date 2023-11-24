@@ -18,8 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.OnboardingViewModel
 import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.item.OnboardingItem
+import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.OnboardingMvi
 import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.OnboardingMviState
 import dev.yaaum.presentation.core.localisation.UiText
 import dev.yaaum.presentation.core.ui.R
@@ -31,7 +31,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OnboardingContent(
+fun OnboardingFetchedContent(
     state: OnboardingMviState,
     onInfoClick: (() -> Unit)? = null,
     onDoneClick: (() -> Unit)? = null,
@@ -115,21 +115,21 @@ fun OnboardingContent(
 @Composable
 fun Preview_OnboardingContent_Dark() {
     YaaumTheme(useDarkTheme = true) {
-        OnboardingContent(
+        OnboardingFetchedContent(
             state = OnboardingMviState(
                 loading = false,
                 data = listOf(
-                    OnboardingViewModel.OnboardingPage(
+                    OnboardingMvi.OnboardingPage(
                         R.drawable.icon_fire_bold_24,
                         UiText.DynamicString("header1"),
                         UiText.DynamicString("caption1"),
                     ),
-                    OnboardingViewModel.OnboardingPage(
+                    OnboardingMvi.OnboardingPage(
                         R.drawable.icon_fire_bold_24,
                         UiText.DynamicString("header2"),
                         UiText.DynamicString("caption2"),
                     ),
-                    OnboardingViewModel.OnboardingPage(
+                    OnboardingMvi.OnboardingPage(
                         R.drawable.icon_fire_bold_24,
                         UiText.DynamicString("header3"),
                         UiText.DynamicString("caption3"),
@@ -145,21 +145,21 @@ fun Preview_OnboardingContent_Dark() {
 @Composable
 fun Preview_OnboardingContent_Light() {
     YaaumTheme(useDarkTheme = false) {
-        OnboardingContent(
+        OnboardingFetchedContent(
             state = OnboardingMviState(
                 loading = false,
                 data = listOf(
-                    OnboardingViewModel.OnboardingPage(
+                    OnboardingMvi.OnboardingPage(
                         R.drawable.icon_fire_bold_24,
                         UiText.DynamicString("header1"),
                         UiText.DynamicString("caption1"),
                     ),
-                    OnboardingViewModel.OnboardingPage(
+                    OnboardingMvi.OnboardingPage(
                         R.drawable.icon_fire_bold_24,
                         UiText.DynamicString("header2"),
                         UiText.DynamicString("caption2"),
                     ),
-                    OnboardingViewModel.OnboardingPage(
+                    OnboardingMvi.OnboardingPage(
                         R.drawable.icon_fire_bold_24,
                         UiText.DynamicString("header3"),
                         UiText.DynamicString("caption3"),

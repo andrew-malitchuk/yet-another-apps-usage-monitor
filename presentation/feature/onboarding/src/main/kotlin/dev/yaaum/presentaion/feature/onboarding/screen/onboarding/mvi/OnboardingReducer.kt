@@ -7,8 +7,6 @@ class OnboardingReducer(initial: OnboardingMviState) : MviReducer<OnboardingMviS
         when (event) {
             is OnboardingMviEvent.GetPagesMviEvent ->
                 setState(oldState.copy(loading = false, data = event.data))
-
-            else -> {}
         }
     }
 }

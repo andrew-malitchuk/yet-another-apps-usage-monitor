@@ -1,6 +1,6 @@
 package dev.yaaum.presentation.core.platform.mvi.timecapsule.impl
 
-import dev.yaaum.presentation.core.platform.mvi.MviState
+import dev.yaaum.presentation.core.platform.mvi.state.MviState
 import dev.yaaum.presentation.core.platform.mvi.timecapsule.TimeCapsule
 
 class TimeCapsuleImpl<S : MviState>(

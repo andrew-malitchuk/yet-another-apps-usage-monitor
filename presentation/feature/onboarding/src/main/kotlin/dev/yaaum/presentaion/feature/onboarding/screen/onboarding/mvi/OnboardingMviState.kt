@@ -2,13 +2,12 @@ package dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi
 
 import androidx.compose.runtime.Immutable
 import dev.yaaum.common.core.error.base.BaseError
-import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.OnboardingViewModel
-import dev.yaaum.presentation.core.platform.mvi.MviState
+import dev.yaaum.presentation.core.platform.mvi.state.MviState
 
 @Immutable
 data class OnboardingMviState(
     val loading: Boolean,
-    val data: List<OnboardingViewModel.OnboardingPage>,
+    val data: List<OnboardingMvi.OnboardingPage>,
     val error: BaseError?,
 ) : MviState {
 

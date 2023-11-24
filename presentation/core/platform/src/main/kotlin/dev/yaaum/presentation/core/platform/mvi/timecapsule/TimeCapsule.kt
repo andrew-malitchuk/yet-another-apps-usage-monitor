@@ -1,6 +1,6 @@
 package dev.yaaum.presentation.core.platform.mvi.timecapsule
 
-import dev.yaaum.presentation.core.platform.mvi.MviState
+import dev.yaaum.presentation.core.platform.mvi.state.MviState
 
 interface TimeCapsule<S : MviState> {
     fun addState(state: S)

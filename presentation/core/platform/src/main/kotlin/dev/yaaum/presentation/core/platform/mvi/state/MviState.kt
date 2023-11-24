@@ -1,4 +1,6 @@
-package dev.yaaum.presentation.core.platform.mvi
+package dev.yaaum.presentation.core.platform.mvi.state
+
+import dev.yaaum.presentation.core.platform.mvi.MviPartialState
 
 interface MviState {
 

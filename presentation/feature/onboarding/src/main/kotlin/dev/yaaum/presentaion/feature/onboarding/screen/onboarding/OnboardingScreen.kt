@@ -6,12 +6,13 @@ import androidx.compose.runtime.getValue
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.navigator.Navigator
 import com.theapache64.rebugger.Rebugger
-import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.content.OnboardingContent
-import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.FooMvi
+import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.content.OnboardingFetchedContent
+import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.OnboardingMvi
 import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.OnboardingMviEffect
 import dev.yaaum.presentation.core.models.isDarkMode
 import dev.yaaum.presentation.core.navigation.RouteGraph
 import dev.yaaum.presentation.core.platform.mvi.MviPartialState
+import dev.yaaum.presentation.core.ui.composable.content.empty.DefaultLoadingContent
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.feature.main.screen.HostViewModel
 
@@ -22,7 +23,7 @@ fun OnboardingScreen(
     hostViewModel: HostViewModel,
     //    onboardingViewModel: OnboardingViewModel,
     @Suppress("unused")
-    onboardingMvi: FooMvi,
+    onboardingMvi: OnboardingMvi,
 ) {
     val mainScreen = rememberScreen(RouteGraph.MainScreen)
     val isDarkMode = hostViewModel.currentThemeUiModel.value?.isDarkMode() ?: false
@@ -44,7 +45,7 @@ fun OnboardingScreen(
     YaaumTheme(isDarkMode) {
         when (state.partialState) {
             MviPartialState.FETCHED -> {
-                OnboardingContent(
+                OnboardingFetchedContent(
                     state = state,
                     onDoneClick = {
                         onboardingMvi.sendEffect(OnboardingMviEffect.GoToMainScreenMviEffect)
@@ -55,6 +56,7 @@ fun OnboardingScreen(
             }
 
             MviPartialState.LOADING -> {
+                DefaultLoadingContent()
             }
 
             MviPartialState.ERROR -> {
