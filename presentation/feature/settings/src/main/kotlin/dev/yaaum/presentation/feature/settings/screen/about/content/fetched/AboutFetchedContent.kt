@@ -27,7 +27,9 @@ import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 import io.github.serpro69.kfaker.Faker
 
 @Composable
-fun AboutFetchedContent() {
+fun AboutFetchedContent(
+    onDemoClick: (() -> Unit)? = null,
+) {
     val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
@@ -77,6 +79,7 @@ fun AboutFetchedContent() {
                 pressedBackgroundColor = YaaumTheme.colors.primary,
                 // TODO: fix
                 iconSize = 32.dp,
+                onClick = onDemoClick,
             )
         }
         Spacer(modifier = Modifier.weight(1f))
