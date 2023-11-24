@@ -12,7 +12,7 @@ import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.Onboarding
 import dev.yaaum.presentation.core.models.isDarkMode
 import dev.yaaum.presentation.core.navigation.RouteGraph
 import dev.yaaum.presentation.core.platform.mvi.MviPartialState
-import dev.yaaum.presentation.core.ui.composable.content.empty.DefaultLoadingContent
+import dev.yaaum.presentation.core.ui.composable.content.loading.DefaultLoadingContent
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.feature.main.screen.HostViewModel
 

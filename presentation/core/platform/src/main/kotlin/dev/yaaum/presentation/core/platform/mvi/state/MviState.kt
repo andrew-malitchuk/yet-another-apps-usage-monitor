@@ -2,6 +2,9 @@ package dev.yaaum.presentation.core.platform.mvi.state
 
 import dev.yaaum.presentation.core.platform.mvi.MviPartialState
 
+/**
+ * Declare top-hierarchy for ui-state
+ */
 interface MviState {
 
     val partialState: MviPartialState

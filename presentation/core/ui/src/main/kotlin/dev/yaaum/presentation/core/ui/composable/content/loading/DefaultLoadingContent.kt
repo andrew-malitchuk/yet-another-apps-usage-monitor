@@ -1,4 +1,4 @@
-package dev.yaaum.presentation.core.ui.composable.content.empty
+package dev.yaaum.presentation.core.ui.composable.content.loading
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -16,6 +16,9 @@ import dev.yaaum.presentation.core.ui.composable.loader.YaaumLoader
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
+/**
+ * Display default loading screen
+ */
 @Composable
 fun DefaultLoadingContent(
     modifier: Modifier = Modifier,
