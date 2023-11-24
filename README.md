@@ -32,5 +32,6 @@ Please, execute `./gradlew installGitHookTask` to move `config/githook/pre-commi
 
 Pre-commit tasks:
 
+
 - `./gradlew detekt`;
 - `./gradlew lintKotlin`.

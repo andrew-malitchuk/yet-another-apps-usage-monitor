@@ -3,7 +3,7 @@ package dev.yaaum.presentation.feature.main.screen.main
 import dev.yaaum.domain.timeusage.GetTopAppsWithHighestUsageUseCase
 import dev.yaaum.presentation.core.models.TimeUsageUiModel
 import dev.yaaum.presentation.core.models.toUiModel
-import dev.yaaum.presentation.core.platform.viewmodel.BaseViewModel
+import dev.yaaum.presentation.core.platform.vm.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 

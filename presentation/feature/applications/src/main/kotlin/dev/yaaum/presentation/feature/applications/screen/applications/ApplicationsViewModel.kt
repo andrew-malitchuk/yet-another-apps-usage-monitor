@@ -1,7 +1,6 @@
 package dev.yaaum.presentation.feature.applications.screen.applications
 
 import androidx.lifecycle.viewModelScope
-import arrow.core.raise.fold
 import dev.yaaum.domain.applications.AddAppToChosenUseCase
 import dev.yaaum.domain.applications.FilterAllApplicationWithChosenUseCase
 import dev.yaaum.domain.applications.FilterAllAppsUseCase
@@ -11,7 +10,7 @@ import dev.yaaum.domain.core.model.SortOrder
 import dev.yaaum.presentation.core.models.ApplicationsUiModel
 import dev.yaaum.presentation.core.models.toDomainModel
 import dev.yaaum.presentation.core.models.toUiModel
-import dev.yaaum.presentation.core.platform.viewmodel.BaseViewModel
+import dev.yaaum.presentation.core.platform.vm.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest

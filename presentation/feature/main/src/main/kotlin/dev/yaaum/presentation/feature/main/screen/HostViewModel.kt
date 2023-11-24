@@ -7,7 +7,7 @@ import dev.yaaum.domain.configuration.model.ConfigurationDomainModel
 import dev.yaaum.presentation.core.models.ConfigurationUiModel
 import dev.yaaum.presentation.core.models.ThemeUiModel
 import dev.yaaum.presentation.core.models.toUiModel
-import dev.yaaum.presentation.core.platform.viewmodel.BaseViewModel
+import dev.yaaum.presentation.core.platform.vm.BaseViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

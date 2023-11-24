@@ -1,6 +1,6 @@
 package dev.yaaum.domain.core.error.base
 
-import dev.yaaum.common.core.error.BaseError
+import dev.yaaum.common.core.error.base.BaseError
 
 /**
  * Base class for :domain level errors

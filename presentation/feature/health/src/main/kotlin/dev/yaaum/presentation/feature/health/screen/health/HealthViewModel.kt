@@ -3,7 +3,7 @@ package dev.yaaum.presentation.feature.health.screen.health
 import dev.yaaum.domain.applications.GetUserAppsUseCase
 import dev.yaaum.presentation.core.models.ApplicationsUiModel
 import dev.yaaum.presentation.core.models.toUiModel
-import dev.yaaum.presentation.core.platform.viewmodel.BaseViewModel
+import dev.yaaum.presentation.core.platform.vm.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 

@@ -1,37 +1,72 @@
-package dev.yaaum.presentation.core.platform.viewmodel
+package dev.yaaum.presentation.core.platform.mvi
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.yaaum.presentation.core.analytics.core.model.base.BaseAnalyticModel
 import dev.yaaum.presentation.core.analytics.logger.AnalyticsLogger
+import dev.yaaum.presentation.core.platform.mvi.effect.MviEffect
+import dev.yaaum.presentation.core.platform.mvi.event.MviEvent
+import dev.yaaum.presentation.core.platform.mvi.state.MviState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.koin.android.ext.android.inject
-import org.koin.java.KoinJavaComponent.inject
+import org.koin.java.KoinJavaComponent
 import kotlin.coroutines.CoroutineContext
 
-/**
- * Just for avoiding boilerplate.
- *
- * Contains safe coroutine launcher and other re-usable stuff suitable for all VMs in this project.
- */
-@Suppress("unused")
-abstract class BaseViewModel : ViewModel() {
+// TODO: doc
+abstract class BaseMvi<STATE : MviState, in EVENT : MviEvent, EFFECT : MviEffect> : ViewModel() {
 
-    val analyticsLogger: AnalyticsLogger by inject(AnalyticsLogger::class.java)
+    abstract val state: Flow<STATE>
+
+    abstract val effect: SharedFlow<EFFECT?>
+
+    abstract val reducer: MviReducer<STATE, @UnsafeVariance EVENT>
+
+    // TODO: doc
+    val analyticsLogger: AnalyticsLogger by KoinJavaComponent.inject(AnalyticsLogger::class.java)
+
+    open fun sendEvent(event: EVENT) = reducer.sendEvent(event)
+
+    open fun sendEffect(effect: EFFECT) {
+        innerEffectProcessing(effect)
+        viewModelScope.launch {
+            this@BaseMvi.effect.lazyEmit(effect)
+        }
+    }
+
+    abstract fun innerEffectProcessing(effect: EFFECT)
 
     /**
-     * Container for hypothetical errors which might happens in [launch]
+     * To avoid boilerplate (private MutableStateFlow & public StateFlow), this extension has been
+     * created
      */
-    val errorChannel = Channel<Throwable?>(Channel.BUFFERED)
+    protected fun <T> StateFlow<T>.setValue(value: T) {
+        (this as? MutableStateFlow)?.update {
+            value
+        }
+    }
+
+    protected suspend fun <T> SharedFlow<T>.lazyEmit(value: T) {
+        (this as? MutableSharedFlow)?.emit(value)
+    }
+
+    /**
+     * Log analytics event in DSL way
+     *
+     * @param staffToTrack some analytic event
+     */
+    fun logEvent(staffToTrack: () -> BaseAnalyticModel) {
+        analyticsLogger.logEvent(staffToTrack)
+    }
 
     /**
      * Error-safe coroutine launcher.
@@ -72,35 +107,5 @@ abstract class BaseViewModel : ViewModel() {
                 loading?.invoke(false)
             }
         }
-    }
-
-    /**
-     * To avoid boilerplate (private MutableStateFlow & public StateFlow), this extension has been
-     * created
-     */
-    protected fun <T> StateFlow<T>.setValue(value: T) {
-        (this as? MutableStateFlow)?.update {
-            value
-        }
-    }
-
-    /**
-     * Log analytics event in DSL way
-     *
-     * @param staffToTrack some analytic event
-     */
-    fun logEvent(staffToTrack: () -> BaseAnalyticModel) {
-        analyticsLogger.logEvent(staffToTrack)
-    }
-
-    var isDataLoaded: Boolean = false
-
-    open fun load() = Unit
-
-    open fun reset() = Unit
-
-    fun reload() {
-        isDataLoaded = false
-        load()
     }
 }
