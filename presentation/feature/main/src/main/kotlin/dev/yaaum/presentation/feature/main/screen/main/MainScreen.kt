@@ -10,6 +10,8 @@ import dev.yaaum.presentation.core.navigation.RouteGraph
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.feature.main.screen.HostViewModel
 import dev.yaaum.presentation.feature.main.screen.main.content.fetched.FetchedContent
+import io.getstream.log.StreamLog
+import io.getstream.log.streamLog
 
 @Composable
 fun MainScreen(
@@ -26,6 +28,10 @@ fun MainScreen(
 
     val topAppsWithHighestUsage =
         mainViewModel.topAppsWithHighestUsageStateFlow.collectAsStateWithLifecycle()
+
+    StreamLog.streamLog {
+        "foobarfoobar"
+    }
 
     Rebugger(
         trackMap = mapOf(
