@@ -21,7 +21,7 @@ class KotlinLibraryConventionPlugin : Plugin<Project> {
         }
         with(libs) {
             dependencies {
-                implementDependency("squareup.logcat")
+                implementDependency("stream.log.android")
             }
         }
     }

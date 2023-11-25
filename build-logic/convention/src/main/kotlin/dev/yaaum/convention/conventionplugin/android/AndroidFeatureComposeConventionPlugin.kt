@@ -40,6 +40,7 @@ class AndroidFeatureComposeConventionPlugin : Plugin<Project> {
                 implementDependency("github.theapache64")
                 implementDependency("lifecycle.runtime.compose")
                 implementDependency("faker")
+                implementDependency("stream.log.android")
             }
         }
     }

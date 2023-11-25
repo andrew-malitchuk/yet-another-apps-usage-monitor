@@ -21,8 +21,7 @@ import dev.yaaum.presentation.feature.settings.di.settingsFeatureModule
 import dev.yaaum.repository.applications.impl.di.applicationsRepoModule
 import dev.yaaum.repository.configuration.impl.di.configurationRepoModule
 import dev.yaaum.repository.timeusage.impl.di.timeUsageRepoModule
-import logcat.AndroidLogcatLogger
-import logcat.LogPriority
+import io.getstream.log.android.AndroidStreamLogger
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -36,7 +35,7 @@ class YauumApplication : Application() {
     }
 
     private fun loggerInit() {
-        AndroidLogcatLogger.installOnDebuggableApp(this, minPriority = LogPriority.VERBOSE)
+        AndroidStreamLogger.installOnDebuggableApp(this)
     }
 
     private fun diInit() {

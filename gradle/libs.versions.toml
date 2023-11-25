@@ -45,12 +45,12 @@ konsist = "0.12.1"
 faker = "1.14.0"
 accompanistPager = "0.32.0"
 lifecycleRuntimeCompose = "2.6.2"
-logcat = "0.1"
 accompanistDrawablepainter = "0.32.0"
 
 room = "2.5.0"
 constraintlayoutCompose = "1.1.0-alpha13"
 foundationAndroid = "1.5.1"
+streamLogAndroid = "1.1.4"
 
 [libraries]
 # https://mvnrepository.com/artifact/androidx.core/core-ktx?repo=google
@@ -134,8 +134,6 @@ faker = { group = "io.github.serpro69", name = "kotlin-faker", version.ref = "fa
 accompanist-pager-indicators = { group = "com.google.accompanist", name = "accompanist-pager-indicators", version.ref = "accompanistPager" }
 # https://mvnrepository.com/artifact/androidx.lifecycle/lifecycle-runtime-compose?repo=google
 lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycleRuntimeCompose" }
-# https://mvnrepository.com/artifact/com.squareup.logcat/logcat
-squareup-logcat = { group = "com.squareup.logcat", name = "logcat", version.ref = "logcat" }
 # https://mvnrepository.com/artifact/androidx.navigation/navigation-compose?repo=google
 navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 # https://mvnrepository.com/artifact/com.google.accompanist/accompanist-drawablepainter
@@ -150,7 +148,8 @@ room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 constraintlayout-compose = { group = "androidx.constraintlayout", name = "constraintlayout-compose", version.ref = "constraintlayoutCompose" }
 # https://mvnrepository.com/artifact/androidx.compose.foundation/foundation-android
 foundation-android = { group = "androidx.compose.foundation", name = "foundation-android", version.ref = "foundationAndroid" }
-
+# https://mvnrepository.com/artifact/io.getstream/stream-log-android
+stream-log-android = { group = "io.getstream", name = "stream-log-android", version.ref = "streamLogAndroid" }
 
 [plugins]
 # https://mvnrepository.com/artifact/com.android.application/com.android.application.gradle.plugin
