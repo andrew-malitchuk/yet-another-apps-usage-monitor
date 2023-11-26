@@ -5,8 +5,8 @@ import dev.yaaum.data.repository.configuration.ConfigurationRepository
 import dev.yaaum.domain.configuration.GetCurrentConfigurationUseCase
 import dev.yaaum.domain.configuration.model.ConfigurationDomainModel
 import dev.yaaum.domain.configuration.model.toDomainModel
-import dev.yaaum.domain.core.error.NoDataError
-import dev.yaaum.domain.core.error.SomethingHappensError
+import dev.yaaum.domain.core.error.NoDataDomainError
+import dev.yaaum.domain.core.error.SwwDomainError
 import dev.yaaum.domain.core.error.base.BaseDomainError
 
 class GetCurrentConfigurationUseCaseImpl(
@@ -19,12 +19,12 @@ class GetCurrentConfigurationUseCaseImpl(
                 Either.Right(this)
             } ?: run {
                 Either.Left(
-                    NoDataError(),
+                    NoDataDomainError(),
                 )
             }
         } catch (ex: Exception) {
             Either.Left(
-                SomethingHappensError(
+                SwwDomainError(
                     exception = ex,
                 ),
             )
