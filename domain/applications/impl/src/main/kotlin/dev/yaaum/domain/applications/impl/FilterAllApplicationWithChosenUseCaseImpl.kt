@@ -5,7 +5,7 @@ import dev.yaaum.data.repository.applications.ApplicationsRepository
 import dev.yaaum.domain.applications.FilterAllApplicationWithChosenUseCase
 import dev.yaaum.domain.applications.model.ApplicationsDomainModel
 import dev.yaaum.domain.applications.model.toDomainModel
-import dev.yaaum.domain.core.error.SomethingHappensError
+import dev.yaaum.domain.core.error.SwwDomainError
 import dev.yaaum.domain.core.error.base.BaseDomainError
 import dev.yaaum.domain.core.model.SortOrder
 
@@ -45,7 +45,7 @@ class FilterAllApplicationWithChosenUseCaseImpl(
             )
         } catch (ex: Exception) {
             Either.Left(
-                SomethingHappensError(
+                SwwDomainError(
                     exception = ex,
                 ),
             )

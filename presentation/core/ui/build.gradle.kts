@@ -21,4 +21,5 @@ dependencies {
 
     implementation(project(":common:core"))
     implementation(project(":presentation:core:models"))
+    implementation(project(":presentation:core:localisation"))
 }

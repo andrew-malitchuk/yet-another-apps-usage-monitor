@@ -5,7 +5,7 @@ import dev.yaaum.data.repository.applications.ApplicationsRepository
 import dev.yaaum.domain.applications.AddAppToChosenUseCase
 import dev.yaaum.domain.applications.model.ApplicationsDomainModel
 import dev.yaaum.domain.applications.model.toRepoModel
-import dev.yaaum.domain.core.error.SomethingHappensError
+import dev.yaaum.domain.core.error.SwwDomainError
 import dev.yaaum.domain.core.error.base.BaseDomainError
 
 class AddAppToChosenUseCaseImpl(
@@ -20,7 +20,7 @@ class AddAppToChosenUseCaseImpl(
             }
         } catch (ex: Exception) {
             raise(
-                SomethingHappensError(
+                SwwDomainError(
                     exception = ex,
                 ),
             )

@@ -5,7 +5,7 @@ import dev.yaaum.data.repository.configuration.ConfigurationRepository
 import dev.yaaum.domain.configuration.SetOrUpdateConfigurationUseCase
 import dev.yaaum.domain.configuration.model.ConfigurationDomainModel
 import dev.yaaum.domain.configuration.model.toRepoModel
-import dev.yaaum.domain.core.error.SomethingHappensError
+import dev.yaaum.domain.core.error.SwwDomainError
 import dev.yaaum.domain.core.error.base.BaseDomainError
 
 class SetOrUpdateConfigurationUseCaseImpl(
@@ -20,7 +20,7 @@ class SetOrUpdateConfigurationUseCaseImpl(
             )
         } catch (ex: Exception) {
             raise(
-                SomethingHappensError(
+                SwwDomainError(
                     exception = ex,
                 ),
             )

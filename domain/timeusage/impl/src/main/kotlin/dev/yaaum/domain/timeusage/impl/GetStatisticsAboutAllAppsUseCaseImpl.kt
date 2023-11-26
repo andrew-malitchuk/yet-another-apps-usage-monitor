@@ -2,7 +2,7 @@ package dev.yaaum.domain.timeusage.impl
 
 import arrow.core.Either
 import dev.yaaum.data.repository.timeusage.TimeUsageRepository
-import dev.yaaum.domain.core.error.SomethingHappensError
+import dev.yaaum.domain.core.error.SwwDomainError
 import dev.yaaum.domain.core.error.base.BaseDomainError
 import dev.yaaum.domain.timeusage.GetStatisticsAboutAllAppsUseCase
 import dev.yaaum.domain.timeusage.model.TimeUsageDomainModel
@@ -24,7 +24,7 @@ class GetStatisticsAboutAllAppsUseCaseImpl(
             Either.Right(timeUsageRepository.getApplicationsUsage().map { it.toDomainModel() })
         } catch (ex: Exception) {
             Either.Left(
-                SomethingHappensError(
+                SwwDomainError(
                     exception = ex,
                 ),
             )
