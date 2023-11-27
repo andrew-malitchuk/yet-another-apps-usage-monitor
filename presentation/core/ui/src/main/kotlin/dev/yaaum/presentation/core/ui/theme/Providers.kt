@@ -5,6 +5,7 @@ import dev.yaaum.presentation.core.ui.theme.common.YaaumColors
 import dev.yaaum.presentation.core.ui.theme.common.YaaumCorners
 import dev.yaaum.presentation.core.ui.theme.common.YaaumDividers
 import dev.yaaum.presentation.core.ui.theme.common.YaaumFontSize
+import dev.yaaum.presentation.core.ui.theme.common.YaaumIcons
 import dev.yaaum.presentation.core.ui.theme.common.YaaumLineHeight
 import dev.yaaum.presentation.core.ui.theme.common.YaaumShape
 import dev.yaaum.presentation.core.ui.theme.common.YaaumSpacing
@@ -41,5 +42,9 @@ internal val LocalYaaumSpacing = staticCompositionLocalOf<YaaumSpacing> {
 }
 
 internal val LocalYaaumTypography = staticCompositionLocalOf<YaaumTypography> {
+    error("No implementation")
+}
+
+internal val LocalYaaumIcons = staticCompositionLocalOf<YaaumIcons> {
     error("No implementation")
 }

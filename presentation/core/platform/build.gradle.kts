@@ -14,4 +14,5 @@ dependencies{
     implementation(project(":common:core"))
     implementation(project(":presentation:core:analytics:core"))
     implementation(project(":presentation:core:analytics:logger"))
+    implementation(project(mapOf("path" to ":presentation:core:ui")))
 }

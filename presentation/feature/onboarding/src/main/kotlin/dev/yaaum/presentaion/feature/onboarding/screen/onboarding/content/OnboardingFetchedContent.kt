@@ -16,8 +16,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.item.OnboardingItem
 import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.OnboardingMvi
 import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.OnboardingMviState
@@ -27,6 +27,7 @@ import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumCircleButton
 import dev.yaaum.presentation.core.ui.composable.button.ordinary.YaaumOrdinaryButton
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
+import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -46,7 +47,7 @@ fun OnboardingFetchedContent(
         } else {
             0f
         },
-        label = "btn_letsgo",
+        label = "buttonAlphaAnimation",
     )
 
     Column(
@@ -73,7 +74,8 @@ fun OnboardingFetchedContent(
                 .padding(YaaumTheme.spacing.medium),
         ) {
             YaaumOrdinaryButton(
-                title = "Next",
+                title = UiText.StringResource(dev.yaaum.presentation.core.localisation.R.string.various_next)
+                    .asString(LocalContext.current),
                 modifier = Modifier
                     .weight(1f)
                     .alpha(buttonAlphaAnimation.value),
@@ -95,8 +97,7 @@ fun OnboardingFetchedContent(
                 modifier = Modifier,
                 defaultBackgroundColor = YaaumTheme.colors.primary,
                 pressedBackgroundColor = YaaumTheme.colors.secondary,
-                // TODO: fix
-                iconSize = 24.dp,
+                iconSize = YaaumTheme.icons.small,
                 onClick = {
                     if (pagerState.currentPage != (pagerState.pageCount - 1)) {
                         goToNextPageScope.launch {
@@ -113,7 +114,8 @@ fun OnboardingFetchedContent(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_OnboardingContent_Dark() {
+fun Preview_OnboardingFetchedContent_Dark() {
+    val faker = Faker()
     YaaumTheme(useDarkTheme = true) {
         OnboardingFetchedContent(
             state = OnboardingMviState(
@@ -121,18 +123,18 @@ fun Preview_OnboardingContent_Dark() {
                 data = listOf(
                     OnboardingMvi.OnboardingPage(
                         R.drawable.icon_fire_bold_24,
-                        UiText.DynamicString("header1"),
-                        UiText.DynamicString("caption1"),
+                        UiText.DynamicString(faker.quote.fortuneCookie()),
+                        UiText.DynamicString(faker.quote.fortuneCookie()),
                     ),
                     OnboardingMvi.OnboardingPage(
                         R.drawable.icon_fire_bold_24,
-                        UiText.DynamicString("header2"),
-                        UiText.DynamicString("caption2"),
+                        UiText.DynamicString(faker.quote.fortuneCookie()),
+                        UiText.DynamicString(faker.quote.fortuneCookie()),
                     ),
                     OnboardingMvi.OnboardingPage(
                         R.drawable.icon_fire_bold_24,
-                        UiText.DynamicString("header3"),
-                        UiText.DynamicString("caption3"),
+                        UiText.DynamicString(faker.quote.fortuneCookie()),
+                        UiText.DynamicString(faker.quote.fortuneCookie()),
                     ),
                 ),
                 error = null,
@@ -143,7 +145,8 @@ fun Preview_OnboardingContent_Dark() {
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_OnboardingContent_Light() {
+fun Preview_OnboardingFetchedContent_Light() {
+    val faker = Faker()
     YaaumTheme(useDarkTheme = false) {
         OnboardingFetchedContent(
             state = OnboardingMviState(
@@ -151,18 +154,18 @@ fun Preview_OnboardingContent_Light() {
                 data = listOf(
                     OnboardingMvi.OnboardingPage(
                         R.drawable.icon_fire_bold_24,
-                        UiText.DynamicString("header1"),
-                        UiText.DynamicString("caption1"),
+                        UiText.DynamicString(faker.quote.fortuneCookie()),
+                        UiText.DynamicString(faker.quote.fortuneCookie()),
                     ),
                     OnboardingMvi.OnboardingPage(
                         R.drawable.icon_fire_bold_24,
-                        UiText.DynamicString("header2"),
-                        UiText.DynamicString("caption2"),
+                        UiText.DynamicString(faker.quote.fortuneCookie()),
+                        UiText.DynamicString(faker.quote.fortuneCookie()),
                     ),
                     OnboardingMvi.OnboardingPage(
                         R.drawable.icon_fire_bold_24,
-                        UiText.DynamicString("header3"),
-                        UiText.DynamicString("caption3"),
+                        UiText.DynamicString(faker.quote.fortuneCookie()),
+                        UiText.DynamicString(faker.quote.fortuneCookie()),
                     ),
                 ),
                 error = null,

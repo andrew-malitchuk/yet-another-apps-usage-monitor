@@ -5,7 +5,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 /**
- * :presentation:feature:onboarding
+ * `:presentation:feature:onboarding`
  */
 val onboardingFeatureModule = module {
     viewModel {

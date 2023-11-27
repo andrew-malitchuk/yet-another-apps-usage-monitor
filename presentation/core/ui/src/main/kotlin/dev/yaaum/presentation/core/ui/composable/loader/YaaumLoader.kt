@@ -31,7 +31,7 @@ fun YaaumLoader(
         targetValue = 1f,
         animationSpec = infiniteRepeatable(
             animation = keyframes {
-                durationMillis = 500
+                durationMillis = 250
                 0F atFraction 0.11F with EaseInOut
                 1F atFraction 1F
             },
@@ -44,7 +44,7 @@ fun YaaumLoader(
         targetValue = YaaumTheme.colors.primary,
         animationSpec = infiniteRepeatable(
             animation = keyframes {
-                durationMillis = 500
+                durationMillis = 250
             },
         ),
         label = "",

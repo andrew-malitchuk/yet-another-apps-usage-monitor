@@ -1,14 +1,14 @@
 package dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi
 
 import androidx.compose.runtime.Immutable
-import dev.yaaum.common.core.error.base.BaseError
 import dev.yaaum.presentation.core.platform.mvi.state.MviState
+import dev.yaaum.presentation.core.ui.error.base.BaseUiError
 
 @Immutable
 data class OnboardingMviState(
     val loading: Boolean,
     val data: List<OnboardingMvi.OnboardingPage>,
-    val error: BaseError?,
+    val error: BaseUiError?,
 ) : MviState {
 
     companion object {
@@ -17,6 +17,22 @@ data class OnboardingMviState(
             data = emptyList(),
             error = null,
         )
+
+        fun error(error: BaseUiError?): OnboardingMviState {
+            return OnboardingMviState(
+                loading = false,
+                data = emptyList(),
+                error = error,
+            )
+        }
+
+        fun loading(): OnboardingMviState {
+            return OnboardingMviState(
+                loading = true,
+                data = emptyList(),
+                error = null,
+            )
+        }
     }
 
     override val isFetched: Boolean

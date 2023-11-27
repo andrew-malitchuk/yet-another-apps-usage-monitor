@@ -1,6 +1,5 @@
 package dev.yaaum.presentation.core.ui.composable.button.ordinary
 
-import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
@@ -91,8 +90,6 @@ fun YaaumOrdinaryButton(
         },
         label = "",
     )
-
-    Log.d("foo", corner.toString())
 
     val backgroundColor by animateColorAsState(
         if (isPressed) {
