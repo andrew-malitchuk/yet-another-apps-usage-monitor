@@ -9,7 +9,7 @@ import org.koin.dsl.module
 /**
  * `:data:source:database:db`
  */
-val databaseModule = module {
+val databaseDataModule = module {
 
     single {
         Room
