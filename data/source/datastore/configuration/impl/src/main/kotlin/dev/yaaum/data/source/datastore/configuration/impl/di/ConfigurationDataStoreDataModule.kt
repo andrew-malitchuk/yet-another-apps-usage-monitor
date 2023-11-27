@@ -9,7 +9,7 @@ import org.koin.dsl.module
 /**
  * `:data:source:datastore:configuration:impl`
  */
-val configurationDataStoreModule = module {
+val configurationDataStoreDataModule = module {
 
     fun provideConfigurationDataStoreDao(context: Context): ConfigurationDataStoreDao {
         return ConfigurationDataStoreDao(context)

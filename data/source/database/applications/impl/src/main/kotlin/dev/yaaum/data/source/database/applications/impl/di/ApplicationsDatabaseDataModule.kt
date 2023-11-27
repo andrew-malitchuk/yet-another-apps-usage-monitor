@@ -7,7 +7,7 @@ import org.koin.dsl.module
 /**
  * :data:source:database:applications:impl
  */
-val applicationsDatabaseModule = module {
+val applicationsDatabaseDataModule = module {
     single<ApplicationsDatabaseSource> {
         ApplicationsDatabaseSourceImpl(
             applicationsDatabaseDao = get(),

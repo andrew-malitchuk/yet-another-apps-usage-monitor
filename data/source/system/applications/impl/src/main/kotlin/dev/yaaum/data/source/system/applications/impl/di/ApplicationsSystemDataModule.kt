@@ -8,7 +8,7 @@ import org.koin.dsl.module
 /**
  * `:data:system:applications:impl`
  */
-val applicationsSystemModule = module {
+val applicationsSystemDataModule = module {
     single<ApplicationsDataSource> {
         ApplicationsDataSourceImpl(androidContext())
     }

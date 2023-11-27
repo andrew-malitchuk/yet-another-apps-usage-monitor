@@ -19,7 +19,7 @@ class GetTopAppsWithHighestUsageUseCaseImpl(
         } catch (ex: Exception) {
             Either.Left(
                 SwwDomainError(
-                    exception = ex,
+                    throwable = ex,
                 ),
             )
         }

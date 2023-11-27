@@ -21,7 +21,7 @@ class AddAppToChosenUseCaseImpl(
         } catch (ex: Exception) {
             raise(
                 SwwDomainError(
-                    exception = ex,
+                    throwable = ex,
                 ),
             )
         }

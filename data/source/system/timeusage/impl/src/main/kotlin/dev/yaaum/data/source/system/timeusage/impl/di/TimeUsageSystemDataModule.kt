@@ -8,7 +8,7 @@ import org.koin.dsl.module
 /**
  * `:data:system:timeusage:impl`
  */
-val timeUsageSystemModule = module {
+val timeUsageSystemDataModule = module {
     single<TimeUsageDataSource> {
         TimeUsageDataSourceImpl(androidContext())
     }
