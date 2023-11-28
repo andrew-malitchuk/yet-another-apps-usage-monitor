@@ -1,4 +1,4 @@
-package dev.yaaum.presentaion.feature.onboarding.screen.onboarding.content
+package dev.yaaum.presentaion.feature.onboarding.screen.onboarding.content.fetched
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.ExperimentalFoundationApi

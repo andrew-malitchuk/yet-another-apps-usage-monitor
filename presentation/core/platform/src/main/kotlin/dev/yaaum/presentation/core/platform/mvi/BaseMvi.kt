@@ -46,7 +46,7 @@ abstract class BaseMvi<STATE : MviState, in EVENT : MviEvent, EFFECT : MviEffect
         }
     }
 
-    protected abstract fun innerEventProcessing(event: EVENT)
+    protected open fun innerEventProcessing(event: EVENT) = Unit
 
     protected open fun innerEffectProcessing(effect: EFFECT) = Unit
 

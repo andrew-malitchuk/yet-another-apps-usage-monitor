@@ -6,7 +6,7 @@ import androidx.compose.runtime.getValue
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.navigator.Navigator
 import com.theapache64.rebugger.Rebugger
-import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.content.OnboardingFetchedContent
+import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.content.fetched.OnboardingFetchedContent
 import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.OnboardingMvi
 import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.OnboardingMviEffect
 import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.OnboardingMviEvent

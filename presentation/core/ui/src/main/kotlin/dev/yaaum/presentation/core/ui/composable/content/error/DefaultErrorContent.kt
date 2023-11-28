@@ -26,7 +26,7 @@ import io.github.serpro69.kfaker.Faker
 @Composable
 fun DefaultErrorContent(
     modifier: Modifier = Modifier,
-    error: BaseUiError,
+    error: BaseUiError?,
     onClick: (() -> Unit)? = null,
 ) {
     Box(
@@ -49,7 +49,7 @@ fun DefaultErrorContent(
             // TODO: fix
             Text(
                 text =
-                error.message?.asString(LocalContext.current)
+                error?.message?.asString(LocalContext.current)
                     ?: UiText.StringResource(R.string.error_unknown).asString(LocalContext.current),
                 style = YaaumTheme.typography.title,
                 color = YaaumTheme.colors.onBackground,

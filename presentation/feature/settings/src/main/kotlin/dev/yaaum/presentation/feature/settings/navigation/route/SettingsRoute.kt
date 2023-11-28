@@ -22,7 +22,6 @@ class SettingsRoute : Screen {
         val hostViewModel: HostViewModel = koinViewModel(
             viewModelStoreOwner = LocalContext.current as ComponentActivity,
         )
-
         SettingsScreen(
             navigator = navigator,
             hostViewModel = hostViewModel,

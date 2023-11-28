@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 
-@Suppress("UnusedPrivateMember")
 class OnboardingMvi(
     private val setOnboardingFinishedUseCase: SetOnboardingFinishedUseCase,
 ) : BaseMvi<OnboardingMviState, OnboardingMviEvent, OnboardingMviEffect>() {

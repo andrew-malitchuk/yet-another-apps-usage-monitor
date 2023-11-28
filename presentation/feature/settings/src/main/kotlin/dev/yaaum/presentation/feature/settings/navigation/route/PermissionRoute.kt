@@ -22,7 +22,6 @@ class PermissionRoute : Screen {
         val hostViewModel: HostViewModel = koinViewModel(
             viewModelStoreOwner = LocalContext.current as ComponentActivity,
         )
-
         PermissionScreen(
             navigator = navigator,
             hostViewModel = hostViewModel,
