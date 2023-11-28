@@ -1,6 +1,5 @@
 package dev.yaaum.presentation.core.ui.composable.item
 
-import android.util.Log
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
@@ -47,8 +46,6 @@ fun YaaumBaseListContainer(
         },
         label = "",
     )
-
-    Log.d("foo", corner.toString())
 
     val backgroundColor by animateColorAsState(
         if (isPressed) {

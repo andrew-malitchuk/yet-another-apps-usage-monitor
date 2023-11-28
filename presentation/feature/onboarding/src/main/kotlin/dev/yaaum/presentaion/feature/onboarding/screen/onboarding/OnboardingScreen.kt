@@ -9,25 +9,25 @@ import com.theapache64.rebugger.Rebugger
 import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.content.OnboardingFetchedContent
 import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.OnboardingMvi
 import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.OnboardingMviEffect
+import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.OnboardingMviEvent
 import dev.yaaum.presentation.core.models.isDarkMode
 import dev.yaaum.presentation.core.navigation.RouteGraph
 import dev.yaaum.presentation.core.platform.mvi.MviPartialState
+import dev.yaaum.presentation.core.ui.composable.content.empty.DefaultEmptyContent
+import dev.yaaum.presentation.core.ui.composable.content.error.DefaultErrorContent
 import dev.yaaum.presentation.core.ui.composable.content.loading.DefaultLoadingContent
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.feature.main.screen.HostViewModel
 
 @Composable
-@Suppress("UnusedParameter", "UnusedPrivateProperty")
+@Suppress("UnusedPrivateProperty")
 fun OnboardingScreen(
     navigator: Navigator,
     hostViewModel: HostViewModel,
-    //    onboardingViewModel: OnboardingViewModel,
-    @Suppress("unused")
     onboardingMvi: OnboardingMvi,
 ) {
     val mainScreen = rememberScreen(RouteGraph.MainScreen)
     val isDarkMode = hostViewModel.currentThemeUiModel.value?.isDarkMode() ?: false
-//    val onboardingPages = onboardingViewModel.onboardingPages
 
     val state by onboardingMvi.state.collectAsState()
     val effect by onboardingMvi.effect.collectAsState(null)
@@ -39,37 +39,39 @@ fun OnboardingScreen(
             "onboardingMvi" to onboardingMvi,
             "mainScreen" to mainScreen,
             "isDarkMode" to isDarkMode,
+            "state" to state,
+            "effect" to effect,
         ),
     )
-    @Suppress("OptionalWhenBraces")
+
     YaaumTheme(isDarkMode) {
         when (state.partialState) {
-            MviPartialState.FETCHED -> {
+            MviPartialState.FETCHED ->
                 OnboardingFetchedContent(
                     state = state,
                     onDoneClick = {
-                        onboardingMvi.sendEffect(OnboardingMviEffect.GoToMainScreenMviEffect)
+                        onboardingMvi.sendEvent(OnboardingMviEvent.OnDoneMviEvent)
                     },
                     onInfoClick = {
+                        TODO()
                     },
                 )
-            }
 
-            MviPartialState.LOADING -> {
+            MviPartialState.LOADING ->
                 DefaultLoadingContent()
-            }
 
-            MviPartialState.ERROR -> {
-            }
+            MviPartialState.ERROR ->
+                state.error?.let {
+                    DefaultErrorContent(error = it)
+                }
 
-            MviPartialState.EMPTY -> {
-            }
+            MviPartialState.EMPTY ->
+                DefaultEmptyContent()
         }
     }
 
     when (effect) {
         OnboardingMviEffect.GoToMainScreenMviEffect -> navigator.replace(mainScreen)
-
         null -> Unit
     }
 }

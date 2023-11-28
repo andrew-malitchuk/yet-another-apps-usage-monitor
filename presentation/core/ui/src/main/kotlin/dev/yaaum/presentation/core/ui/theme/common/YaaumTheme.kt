@@ -5,6 +5,7 @@ import dev.yaaum.presentation.core.ui.theme.LocalYaaumColors
 import dev.yaaum.presentation.core.ui.theme.LocalYaaumCorners
 import dev.yaaum.presentation.core.ui.theme.LocalYaaumDividers
 import dev.yaaum.presentation.core.ui.theme.LocalYaaumFontSize
+import dev.yaaum.presentation.core.ui.theme.LocalYaaumIcons
 import dev.yaaum.presentation.core.ui.theme.LocalYaaumLineHeight
 import dev.yaaum.presentation.core.ui.theme.LocalYaaumShape
 import dev.yaaum.presentation.core.ui.theme.LocalYaaumSpacing
@@ -39,4 +40,7 @@ object YaaumTheme {
     val typography: YaaumTypography
         @Composable
         get() = LocalYaaumTypography.current
+    val icons: YaaumIcons
+        @Composable
+        get() = LocalYaaumIcons.current
 }

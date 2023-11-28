@@ -13,12 +13,14 @@ android {
 }
 
 dependencies {
+    // TODO: fix me
     implementation(libs.voyager.navigator)
     implementation(libs.voyager.transitions)
     implementation(libs.voyager.androidx)
     implementation(libs.voyager.koin)
     implementation(libs.voyager.tab.navigator)
 
+    // TODO: fix me
     implementation(libs.arrow.core)
     implementation(libs.arrow.fx.coroutines)
     implementation(libs.arrow.optics)

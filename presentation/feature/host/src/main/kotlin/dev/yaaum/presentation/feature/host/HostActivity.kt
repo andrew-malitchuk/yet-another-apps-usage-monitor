@@ -39,7 +39,8 @@ class HostActivity : BaseActivity() {
         if (isSetupLoading.value == false) {
             shouldKeepSplash = false
             YaaumTheme(isDarkMode) {
-                val destinationAfterSplash = if (isOnboardingFinished.value == true) {
+//                val destinationAfterSplash = if (isOnboardingFinished.value == true) {
+                val destinationAfterSplash = if (false) {
                     rememberScreen(RouteGraph.MainScreen)
                 } else {
                     rememberScreen(RouteGraph.OnboardingScreen)
@@ -48,14 +49,4 @@ class HostActivity : BaseActivity() {
             }
         }
     }
-
-//    override fun observeLoading() {
-//        lifecycleScope.launch {
-//            hostViewModel.isSetupLoadingStateFlow.collect { isLoading ->
-//                isLoading?.let {
-//                    shouldKeepSplash = it
-//                }
-//            }
-//        }
-//    }
 }

@@ -3,4 +3,5 @@
     <string name="error_no_data">No data!</string>
     <string name="error_permissions">Permissions are missed</string>
     <string name="error_sww">Something went wrong</string>
+    <string name="error_unknown">Unknown error</string>
 </resources>

@@ -22,7 +22,6 @@ class OnboardingRoute : Screen {
         val hostViewModel: HostViewModel = koinViewModel(
             viewModelStoreOwner = LocalContext.current as ComponentActivity,
         )
-
         OnboardingScreen(
             navigator = navigator,
             hostViewModel = hostViewModel,

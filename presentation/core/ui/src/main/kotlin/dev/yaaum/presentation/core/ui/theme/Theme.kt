@@ -50,6 +50,7 @@ fun YaaumTheme(
         LocalYaaumSpacing provides spacing,
         LocalYaaumTypography provides typography,
         LocalYaaumFontSize provides fontSize,
+        LocalYaaumIcons provides icons,
         content = content,
     )
 

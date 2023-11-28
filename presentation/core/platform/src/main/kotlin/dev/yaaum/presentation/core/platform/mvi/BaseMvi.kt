@@ -34,7 +34,10 @@ abstract class BaseMvi<STATE : MviState, in EVENT : MviEvent, EFFECT : MviEffect
     // TODO: doc
     val analyticsLogger: AnalyticsLogger by KoinJavaComponent.inject(AnalyticsLogger::class.java)
 
-    open fun sendEvent(event: EVENT) = reducer.sendEvent(event)
+    open fun sendEvent(event: EVENT) {
+        innerEventProcessing(event)
+        reducer.sendEvent(event)
+    }
 
     open fun sendEffect(effect: EFFECT) {
         innerEffectProcessing(effect)
@@ -43,7 +46,9 @@ abstract class BaseMvi<STATE : MviState, in EVENT : MviEvent, EFFECT : MviEffect
         }
     }
 
-    abstract fun innerEffectProcessing(effect: EFFECT)
+    protected abstract fun innerEventProcessing(event: EVENT)
+
+    protected open fun innerEffectProcessing(effect: EFFECT) = Unit
 
     /**
      * To avoid boilerplate (private MutableStateFlow & public StateFlow), this extension has been
