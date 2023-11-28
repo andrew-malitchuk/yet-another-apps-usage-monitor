@@ -8,8 +8,6 @@ import dev.yaaum.presentation.core.localisation.UiText
 import dev.yaaum.presentation.core.platform.mvi.BaseMvi
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.error.SwwUiError
-import io.getstream.log.StreamLog
-import io.getstream.log.streamLog
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -30,7 +28,7 @@ class OnboardingMvi(
         when (event) {
             // TODO: fix
             is OnboardingMviEvent.GetPagesMviEvent -> Unit
-            OnboardingMviEvent.OnDoneMviEvent -> foo()
+            OnboardingMviEvent.OnDoneMviEvent -> setOnboardingFinished()
         }
     }
 
@@ -40,10 +38,7 @@ class OnboardingMvi(
         }
     }
 
-    private fun foo() {
-        StreamLog.streamLog {
-            "its me foo"
-        }
+    private fun setOnboardingFinished() {
         launch(
             request = {
                 // TODO: fix this ugly
@@ -65,13 +60,6 @@ class OnboardingMvi(
                         )
                     },
                 )
-            },
-            loading = {
-                if (it) {
-                    reducer.setState(
-                        OnboardingMviState.loading(),
-                    )
-                }
             },
             errorBlock = {
                 reducer.setState(
