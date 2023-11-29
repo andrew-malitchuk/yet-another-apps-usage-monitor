@@ -3,9 +3,13 @@ package dev.yaaum.presentaion.feature.onboarding.screen.onboarding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.navigator.Navigator
 import com.theapache64.rebugger.Rebugger
+import dev.yaaum.presentaion.feature.onboarding.dialog.OnboardingDialogContent
 import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.content.fetched.OnboardingFetchedContent
 import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.OnboardingMvi
 import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.OnboardingMviEffect
@@ -16,6 +20,7 @@ import dev.yaaum.presentation.core.platform.mvi.MviPartialState
 import dev.yaaum.presentation.core.ui.composable.content.empty.DefaultEmptyContent
 import dev.yaaum.presentation.core.ui.composable.content.error.DefaultErrorContent
 import dev.yaaum.presentation.core.ui.composable.content.loading.DefaultLoadingContent
+import dev.yaaum.presentation.core.ui.composable.dialog.YaaumBottomSheetDialog
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.feature.main.screen.HostViewModel
 
@@ -32,6 +37,8 @@ fun OnboardingScreen(
     val state by onboardingMvi.state.collectAsState()
     val effect by onboardingMvi.effect.collectAsState(null)
 
+    var showSheet by remember { mutableStateOf(false) }
+
     Rebugger(
         trackMap = mapOf(
             "navigator" to navigator,
@@ -44,6 +51,20 @@ fun OnboardingScreen(
         ),
     )
 
+    if (showSheet) {
+        YaaumBottomSheetDialog(
+            onDismiss = {
+                showSheet = false
+            },
+        ) {
+            OnboardingDialogContent(
+                onDismiss = {
+                    showSheet = false
+                },
+            )
+        }
+    }
+
     YaaumTheme(isDarkMode) {
         when (state.partialState) {
             MviPartialState.FETCHED ->
@@ -53,7 +74,7 @@ fun OnboardingScreen(
                         onboardingMvi.sendEvent(OnboardingMviEvent.OnDoneMviEvent)
                     },
                     onInfoClick = {
-                        TODO()
+                        showSheet = true
                     },
                 )
 
@@ -72,6 +93,7 @@ fun OnboardingScreen(
 
     when (effect) {
         OnboardingMviEffect.GoToMainScreenMviEffect -> navigator.replace(mainScreen)
+
         null -> Unit
     }
 }

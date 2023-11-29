@@ -6,4 +6,6 @@
     <string name="onboarding_page_2_description">There is a description for the 2nd page</string>
     <string name="onboarding_page_3_title">There is a title for the 3rd page</string>
     <string name="onboarding_page_3_description">There is a description for the 3rd page</string>
+    <string name="onboarding_dialog_title">@string/settings_about_title</string>
+    <string name="onboarding_dialog_description">@string/settings_about_description</string>
 </resources>
