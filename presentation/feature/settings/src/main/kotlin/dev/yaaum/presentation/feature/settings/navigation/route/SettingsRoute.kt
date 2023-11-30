@@ -8,7 +8,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import dev.yaaum.presentation.feature.main.screen.HostViewModel
 import dev.yaaum.presentation.feature.settings.screen.settings.SettingsScreen
-import dev.yaaum.presentation.feature.settings.screen.settings.SettingsViewModel
+import dev.yaaum.presentation.feature.settings.screen.settings.mvi.SettingsMvi
 import org.koin.androidx.compose.koinViewModel
 
 /**
@@ -18,14 +18,14 @@ class SettingsRoute : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val settingsViewModel: SettingsViewModel = koinViewModel()
+        val settingsMvi: SettingsMvi = koinViewModel()
         val hostViewModel: HostViewModel = koinViewModel(
             viewModelStoreOwner = LocalContext.current as ComponentActivity,
         )
         SettingsScreen(
             navigator = navigator,
             hostViewModel = hostViewModel,
-            settingsViewModel = settingsViewModel,
+            settingsMvi = settingsMvi,
         )
     }
 }

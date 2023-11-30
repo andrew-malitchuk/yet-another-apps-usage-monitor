@@ -1,4 +1,4 @@
-package dev.yaaum.presentation.feature.settings.screen.settings.content.fetched.item
+package dev.yaaum.presentation.feature.settings.screen.settings.item
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -17,10 +17,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import dev.yaaum.presentation.core.localisation.UiText
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.button.various.SelectedTheme
 import dev.yaaum.presentation.core.ui.composable.button.various.YaaumThemeButton
@@ -37,10 +39,9 @@ fun ThemeListItem() {
             .background(YaaumTheme.colors.surface)
             .padding(YaaumTheme.spacing.small),
     ) {
-        // TODO: add sizes
         Box(
             modifier = Modifier
-                .size(48.dp)
+                .size(YaaumTheme.icons.medium)
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .clip(RoundedCornerShape(YaaumTheme.corners.medium))
@@ -49,6 +50,7 @@ fun ThemeListItem() {
         ) {
             Image(
                 painter = painterResource(id = R.drawable.icon_paint_roller_bold_24),
+                colorFilter = ColorFilter.tint(YaaumTheme.colors.onSurface),
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxSize()
@@ -58,8 +60,9 @@ fun ThemeListItem() {
         }
         Spacer(modifier = Modifier.width(YaaumTheme.spacing.small))
         Text(
-            // TODO: fix
-            text = "Theme",
+            text = UiText
+                .StringResource(dev.yaaum.presentation.core.localisation.R.string.settings_theme)
+                .asString(LocalContext.current),
             style = YaaumTheme.typography.title,
             color = YaaumTheme.colors.onSurface,
             maxLines = 1,
