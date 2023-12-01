@@ -91,7 +91,7 @@ fun OnboardingItem(
                     )
                     .scale(scaleValue)
                     .alpha(alphaValue),
-                colorFilter = ColorFilter.tint(YaaumTheme.colors.background),
+                colorFilter = ColorFilter.tint(YaaumTheme.colors.primary),
                 contentScale = ContentScale.Fit,
             )
             Spacer(

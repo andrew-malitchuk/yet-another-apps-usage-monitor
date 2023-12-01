@@ -1,15 +1,13 @@
-package dev.yaaum.presentation.feature.settings.screen.permission.content.fetched.list
+package dev.yaaum.presentation.feature.settings.screen.permission.item
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -17,14 +15,15 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.button.toggle.YaaumSwitchButton
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
@@ -36,6 +35,7 @@ fun PermissionListItem(
     @DrawableRes
     icon: Int,
     onPermissionClick: ((Boolean) -> Unit)? = null,
+    initValue: Boolean,
 ) {
     Row(
         modifier = Modifier
@@ -43,15 +43,11 @@ fun PermissionListItem(
             .wrapContentHeight()
             .clip(RoundedCornerShape(YaaumTheme.corners.medium))
             .background(YaaumTheme.colors.surface)
-            .clickable {
-                onPermissionClick?.invoke(true)
-            }
             .padding(YaaumTheme.spacing.small),
     ) {
-        // TODO: add sizes
         Box(
             modifier = Modifier
-                .size(48.dp)
+                .size(YaaumTheme.icons.medium)
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .clip(RoundedCornerShape(YaaumTheme.corners.medium))
@@ -60,6 +56,7 @@ fun PermissionListItem(
         ) {
             Image(
                 painter = painterResource(id = icon),
+                colorFilter = ColorFilter.tint(YaaumTheme.colors.onSurface),
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxSize()
@@ -69,7 +66,6 @@ fun PermissionListItem(
         }
         Spacer(modifier = Modifier.width(YaaumTheme.spacing.small))
         Text(
-            // TODO: fix
             text = permission,
             style = YaaumTheme.typography.title,
             color = YaaumTheme.colors.onSurface,
@@ -80,12 +76,15 @@ fun PermissionListItem(
                 .weight(1f),
         )
         Spacer(modifier = Modifier.width(YaaumTheme.spacing.small))
+        // TODO fix
         YaaumSwitchButton(
             modifier = Modifier
                 .align(Alignment.CenterVertically),
             width = 48.dp,
             height = 32.dp,
             thumbSize = 16.dp,
+            initValue = initValue,
+            onStateChange = onPermissionClick,
         )
     }
 }
@@ -97,7 +96,8 @@ fun Preview_PermissionListItem_Dark() {
     YaaumTheme(useDarkTheme = true) {
         PermissionListItem(
             permission = faker.quote.fortuneCookie(),
-            icon = dev.yaaum.presentation.core.ui.R.drawable.icon_fire_bold_24,
+            icon = R.drawable.icon_fire_bold_24,
+            initValue = true,
         )
     }
 }
@@ -109,7 +109,8 @@ fun Preview_PermissionListItem_Light() {
     YaaumTheme(useDarkTheme = false) {
         PermissionListItem(
             permission = faker.quote.fortuneCookie(),
-            icon = dev.yaaum.presentation.core.ui.R.drawable.icon_fire_bold_24,
+            icon = R.drawable.icon_fire_bold_24,
+            initValue = false,
         )
     }
 }

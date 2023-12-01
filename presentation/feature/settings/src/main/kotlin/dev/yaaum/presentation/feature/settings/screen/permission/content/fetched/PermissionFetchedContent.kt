@@ -9,18 +9,23 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import dev.yaaum.presentation.core.localisation.UiText
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.header.SimpleHeader
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
-import dev.yaaum.presentation.feature.settings.screen.permission.content.fetched.list.PermissionListItem
-import io.github.serpro69.kfaker.Faker
+import dev.yaaum.presentation.feature.settings.screen.permission.item.PermissionListItem
+import dev.yaaum.presentation.feature.settings.screen.permission.mvi.PermissionConfigure
+import dev.yaaum.presentation.feature.settings.screen.permission.mvi.PermissionMviState
 
 @Composable
 fun PermissionFetchedContent(
+    state: PermissionMviState,
     onInfoClick: (() -> Unit)? = null,
     onBackClick: (() -> Unit)? = null,
+    onPermissionChangeState: ((PermissionChangeState) -> Unit)? = null,
 ) {
     val scrollState = rememberScrollState()
 
@@ -34,7 +39,9 @@ fun PermissionFetchedContent(
             icon = R.drawable.icon_info_bold_24,
             onActionClick = onInfoClick,
             onBackClick = onBackClick,
-            title = Faker().quote.fortuneCookie(),
+            title = UiText
+                .StringResource(dev.yaaum.presentation.core.localisation.R.string.settings_permission_title)
+                .asString(LocalContext.current),
             modifier = Modifier
                 .padding(
                     start = YaaumTheme.spacing.medium,
@@ -53,24 +60,54 @@ fun PermissionFetchedContent(
                 .spacedBy(YaaumTheme.spacing.small),
         ) {
             PermissionListItem(
-                // TODO: fix
-                permission = "Notification",
+                permission = UiText
+                    .StringResource(dev.yaaum.presentation.core.localisation.R.string.settings_permission_notification)
+                    .asString(LocalContext.current),
                 icon = R.drawable.icon_notification_bold_24,
+                initValue = state.data?.isNotificationPermissionGranted ?: false,
+                onPermissionClick = {
+                    onPermissionChangeState?.invoke(
+                        PermissionChangeState.OnNotificationStateChanged(
+                            isGranted = it,
+                        ),
+                    )
+                },
             )
             PermissionListItem(
-                // TODO: fix
-                permission = "Usage",
+                permission = UiText
+                    .StringResource(dev.yaaum.presentation.core.localisation.R.string.settings_permission_usage)
+                    .asString(LocalContext.current),
                 icon = R.drawable.icon_chart_pie_slice_bold_24,
+                initValue = state.data?.isAppUsagePermissionGranted ?: false,
+                onPermissionClick = {
+                    onPermissionChangeState?.invoke(
+                        PermissionChangeState.OnAppUsageStateChanged(
+                            isGranted = it,
+                        ),
+                    )
+                },
             )
         }
     }
+}
+
+sealed class PermissionChangeState {
+    class OnNotificationStateChanged(val isGranted: Boolean) : PermissionChangeState()
+    class OnAppUsageStateChanged(val isGranted: Boolean) : PermissionChangeState()
 }
 
 @Preview(showBackground = true)
 @Composable
 fun Preview_PermissionFetchedContent_Dark() {
     YaaumTheme(useDarkTheme = true) {
-        PermissionFetchedContent()
+        PermissionFetchedContent(
+            state = PermissionMviState.fetched(
+                PermissionConfigure(
+                    isNotificationPermissionGranted = true,
+                    isAppUsagePermissionGranted = false,
+                ),
+            ),
+        )
     }
 }
 
@@ -78,6 +115,13 @@ fun Preview_PermissionFetchedContent_Dark() {
 @Composable
 fun Preview_PermissionFetchedContent_Light() {
     YaaumTheme(useDarkTheme = false) {
-        PermissionFetchedContent()
+        PermissionFetchedContent(
+            state = PermissionMviState.fetched(
+                PermissionConfigure(
+                    isNotificationPermissionGranted = true,
+                    isAppUsagePermissionGranted = false,
+                ),
+            ),
+        )
     }
 }

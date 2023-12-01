@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_about_title">Yet Another Apps Usage Monitor</string>
+    <string name="settings_about_description">An Android application designed to effortlessly gather and visually present comprehensive statistics on app usage, empowering users to gain insights into their digital habits for better time management and productivity.</string>
+</resources>

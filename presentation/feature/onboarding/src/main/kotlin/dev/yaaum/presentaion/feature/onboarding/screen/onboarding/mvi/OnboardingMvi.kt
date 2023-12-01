@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 
-@Suppress("UnusedPrivateMember")
 class OnboardingMvi(
     private val setOnboardingFinishedUseCase: SetOnboardingFinishedUseCase,
 ) : BaseMvi<OnboardingMviState, OnboardingMviEvent, OnboardingMviEffect>() {
@@ -80,17 +79,17 @@ class OnboardingMvi(
      */
     private var onboardingPages = listOf(
         OnboardingPage(
-            R.drawable.icon_fire_bold_24,
+            R.drawable.icon_hourglass_high_bold_24,
             UiText.StringResource(dev.yaaum.presentation.core.localisation.R.string.onboarding_page_1_title),
             UiText.StringResource(dev.yaaum.presentation.core.localisation.R.string.onboarding_page_1_description),
         ),
         OnboardingPage(
-            R.drawable.icon_battery_charging_bold_24,
+            R.drawable.icon_calendar_bold_24,
             UiText.StringResource(dev.yaaum.presentation.core.localisation.R.string.onboarding_page_2_title),
             UiText.StringResource(dev.yaaum.presentation.core.localisation.R.string.onboarding_page_2_description),
         ),
         OnboardingPage(
-            R.drawable.icon_calendar_bold_24,
+            R.drawable.icon_fire_bold_24,
             UiText.StringResource(dev.yaaum.presentation.core.localisation.R.string.onboarding_page_3_title),
             UiText.StringResource(dev.yaaum.presentation.core.localisation.R.string.onboarding_page_3_description),
         ),

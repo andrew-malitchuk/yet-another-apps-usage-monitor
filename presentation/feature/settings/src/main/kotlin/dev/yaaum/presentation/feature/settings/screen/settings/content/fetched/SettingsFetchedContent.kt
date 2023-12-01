@@ -9,14 +9,15 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import dev.yaaum.presentation.core.localisation.UiText
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.header.SimpleHeader
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
-import dev.yaaum.presentation.feature.settings.screen.settings.content.fetched.item.SettingsListItem
-import dev.yaaum.presentation.feature.settings.screen.settings.content.fetched.item.ThemeListItem
-import io.github.serpro69.kfaker.Faker
+import dev.yaaum.presentation.feature.settings.screen.settings.item.SettingsListItem
+import dev.yaaum.presentation.feature.settings.screen.settings.item.ThemeListItem
 
 @Composable
 fun SettingsFetchedContent(
@@ -36,7 +37,9 @@ fun SettingsFetchedContent(
             icon = R.drawable.icon_info_bold_24,
             onActionClick = onInfoClick,
             onBackClick = onBackClick,
-            title = Faker().quote.fortuneCookie(),
+            title = UiText
+                .StringResource(dev.yaaum.presentation.core.localisation.R.string.settings_title)
+                .asString(LocalContext.current),
             modifier = Modifier
                 .padding(
                     start = YaaumTheme.spacing.medium,
@@ -55,13 +58,17 @@ fun SettingsFetchedContent(
                 .spacedBy(YaaumTheme.spacing.small),
         ) {
             SettingsListItem(
-                title = "Language",
+                title = UiText
+                    .StringResource(dev.yaaum.presentation.core.localisation.R.string.settings_language)
+                    .asString(LocalContext.current),
                 icon = R.drawable.icon_translate_bold_24,
                 onClick = {
                 },
             )
             SettingsListItem(
-                title = "Permission",
+                title = UiText
+                    .StringResource(dev.yaaum.presentation.core.localisation.R.string.settings_permission)
+                    .asString(LocalContext.current),
                 icon = R.drawable.icon_lock_bold_24,
                 onClick = {
                     onPermissionClick?.invoke()

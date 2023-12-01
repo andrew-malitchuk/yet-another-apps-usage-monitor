@@ -17,17 +17,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import dev.yaaum.feature.settings.R
+import dev.yaaum.presentation.core.localisation.UiText
 import dev.yaaum.presentation.core.ui.composable.button.ordinary.YaaumOrdinaryButton
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
-import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun AboutFetchedContent(
+    onGithubClick: (() -> Unit)? = null,
     onDemoClick: (() -> Unit)? = null,
 ) {
     val scrollState = rememberScrollState()
@@ -45,13 +45,24 @@ fun AboutFetchedContent(
         )
         Spacer(modifier = Modifier.height(YaaumTheme.spacing.medium))
         Text(
-            text = Faker().quote.fortuneCookie(),
+            text = UiText.StringResource(
+                dev.yaaum.presentation.core.localisation.R.string.settings_about_title,
+            ).asString(
+                LocalContext.current,
+            ),
             style = YaaumTheme.typography.display,
             color = YaaumTheme.colors.primary,
         )
-        Spacer(modifier = Modifier.height(YaaumTheme.spacing.medium))
+        Spacer(
+            modifier = Modifier
+                .height(YaaumTheme.spacing.medium),
+        )
         Text(
-            text = Faker().quote.fortuneCookie(),
+            text = UiText.StringResource(
+                dev.yaaum.presentation.core.localisation.R.string.settings_about_description,
+            ).asString(
+                LocalContext.current,
+            ),
             style = YaaumTheme.typography.title,
             color = YaaumTheme.colors.onBackground,
         )
@@ -68,8 +79,8 @@ fun AboutFetchedContent(
                 modifier = Modifier,
                 defaultBackgroundColor = YaaumTheme.colors.secondary,
                 pressedBackgroundColor = YaaumTheme.colors.primary,
-                // TODO: fix
-                iconSize = 32.dp,
+                iconSize = YaaumTheme.icons.smallMedium,
+                onClick = onGithubClick,
             )
 
             YaaumOrdinaryButton(
@@ -77,14 +88,16 @@ fun AboutFetchedContent(
                 modifier = Modifier,
                 defaultBackgroundColor = YaaumTheme.colors.secondary,
                 pressedBackgroundColor = YaaumTheme.colors.primary,
-                // TODO: fix
-                iconSize = 32.dp,
+                iconSize = YaaumTheme.icons.smallMedium,
                 onClick = onDemoClick,
             )
         }
         Spacer(modifier = Modifier.weight(1f))
         Text(
-            text = "some-version-code",
+            text = LocalContext.current.packageManager.getPackageInfo(
+                LocalContext.current.packageName,
+                0,
+            ).versionName,
             style = YaaumTheme.typography.caption,
             color = YaaumTheme.colors.onBackground,
         )

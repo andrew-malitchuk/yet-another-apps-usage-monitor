@@ -1,4 +1,4 @@
-package dev.yaaum.presentation.feature.settings.screen.settings.content.fetched.item
+package dev.yaaum.presentation.feature.settings.screen.settings.item
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -18,10 +18,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.item.YaaumBaseListContainer
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
@@ -49,10 +50,9 @@ fun SettingsListItem(
                 .wrapContentHeight()
                 .padding(YaaumTheme.spacing.small),
         ) {
-            // TODO: add sizes
             Box(
                 modifier = Modifier
-                    .size(48.dp)
+                    .size(YaaumTheme.icons.medium)
                     .fillMaxWidth()
                     .wrapContentHeight()
                     .clip(RoundedCornerShape(YaaumTheme.corners.medium))
@@ -61,6 +61,7 @@ fun SettingsListItem(
             ) {
                 Image(
                     painter = painterResource(id = icon),
+                    colorFilter = ColorFilter.tint(YaaumTheme.colors.onSurface),
                     contentDescription = null,
                     modifier = Modifier
                         .fillMaxSize()
@@ -70,7 +71,6 @@ fun SettingsListItem(
             }
             Spacer(modifier = Modifier.width(YaaumTheme.spacing.small))
             Text(
-                // TODO: fix
                 text = title,
                 style = YaaumTheme.typography.title,
                 color = YaaumTheme.colors.onSurface,
@@ -90,7 +90,7 @@ fun Preview_SettingsListItem_Dark() {
     YaaumTheme(useDarkTheme = true) {
         SettingsListItem(
             title = faker.quote.fortuneCookie(),
-            icon = dev.yaaum.presentation.core.ui.R.drawable.icon_gear_six_bold_24,
+            icon = R.drawable.icon_gear_six_bold_24,
         )
     }
 }
@@ -102,7 +102,7 @@ fun Preview_SettingsListItem_Light() {
     YaaumTheme(useDarkTheme = false) {
         SettingsListItem(
             title = faker.quote.fortuneCookie(),
-            icon = dev.yaaum.presentation.core.ui.R.drawable.icon_gear_six_bold_24,
+            icon = R.drawable.icon_gear_six_bold_24,
         )
     }
 }

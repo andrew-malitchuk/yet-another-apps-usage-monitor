@@ -42,6 +42,7 @@ import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
  * @param cornerSize
  * @param iconInnerPadding
  * @param thumbSize
+ * @param initValue
  */
 @Composable
 fun YaaumSwitchButton(
@@ -56,12 +57,14 @@ fun YaaumSwitchButton(
     iconInnerPadding: Dp = YaaumTheme.spacing.extraSmall,
     // TODO: fix
     thumbSize: Dp = 24.dp,
+    initValue: Boolean = false,
+    onStateChange: ((Boolean) -> Unit)? = null,
 ) {
     val interactionSource = remember {
         MutableInteractionSource()
     }
     var onSideChangeState by remember {
-        mutableStateOf(true)
+        mutableStateOf(initValue)
     }
     val alignment by animateAlignmentAsState(if (onSideChangeState) 1f else -1f)
     Box(
@@ -77,6 +80,7 @@ fun YaaumSwitchButton(
                 interactionSource = interactionSource,
             ) {
                 onSideChangeState = onSideChangeState.not()
+                onStateChange?.invoke(onSideChangeState)
             },
         contentAlignment = Alignment.Center,
     ) {
