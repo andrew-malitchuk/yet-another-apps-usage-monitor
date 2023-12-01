@@ -1,6 +1,5 @@
 package dev.yaaum.presentation.feature.settings.screen.settings
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -45,7 +44,6 @@ fun SettingsScreen(
             "effect" to effect,
         ),
     )
-    Log.d("foo", state.toString())
 
     YaaumTheme(isDarkMode) {
         when (state.partialState) {

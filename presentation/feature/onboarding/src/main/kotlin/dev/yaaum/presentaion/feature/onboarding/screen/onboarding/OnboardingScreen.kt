@@ -48,6 +48,7 @@ fun OnboardingScreen(
             "isDarkMode" to isDarkMode,
             "state" to state,
             "effect" to effect,
+            "showSheet" to showSheet,
         ),
     )
 

@@ -8,7 +8,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import dev.yaaum.presentation.feature.main.screen.HostViewModel
 import dev.yaaum.presentation.feature.settings.screen.permission.PermissionScreen
-import dev.yaaum.presentation.feature.settings.screen.permission.PermissionViewModel
+import dev.yaaum.presentation.feature.settings.screen.permission.mvi.PermissionMvi
 import org.koin.androidx.compose.koinViewModel
 
 /**
@@ -18,14 +18,14 @@ class PermissionRoute : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val permissionViewModel: PermissionViewModel = koinViewModel()
+        val permissionMvi: PermissionMvi = koinViewModel()
         val hostViewModel: HostViewModel = koinViewModel(
             viewModelStoreOwner = LocalContext.current as ComponentActivity,
         )
         PermissionScreen(
             navigator = navigator,
             hostViewModel = hostViewModel,
-            permissionViewModel = permissionViewModel,
+            permissionMvi = permissionMvi,
         )
     }
 }

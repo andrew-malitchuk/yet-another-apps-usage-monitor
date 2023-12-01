@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_permission_title">Permission</string>
+    <string name="settings_permission_notification">Notification</string>
+    <string name="settings_permission_usage">Usage</string>
+    <string name="settings_permission_dialog_title">Enable Essential Permissions</string>
+    <string name="settings_permission_dialog_description">To provide you with the best YAAUM experience, we require your permission to access some essential features. Rest assured, we prioritize your privacy and only seek access to what is necessary for seamless functionality. </string>
+</resources>
