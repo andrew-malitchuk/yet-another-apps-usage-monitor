@@ -17,11 +17,11 @@ data class ApplicationSystemModel(
 
 fun ApplicationInfo.toApplicationSystemModel(context: Context): ApplicationSystemModel {
     val applicationName = try {
-        context.getString(labelRes)
+        context.packageManager.getApplicationInfo(packageName, 0).loadLabel(context.packageManager)
+            .toString()
     } catch (ex: Resources.NotFoundException) {
         null
     }
-
     return ApplicationSystemModel(
         uuid = uid,
         packageName = this.packageName,

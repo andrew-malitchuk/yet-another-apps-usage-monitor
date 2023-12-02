@@ -1,10 +1,11 @@
-package dev.yaaum.presentation.feature.applications.screen.applications.content.list
+package dev.yaaum.presentation.feature.applications.screen.applications.item
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -41,8 +42,8 @@ fun ApplicationListItem(
     applicationsUiModel: ApplicationsUiModel,
     onApplicationClick: ((ApplicationsUiModel, Boolean) -> Unit)? = null,
 ) {
-    // TODO:Fix
     val isChosen = remember { mutableStateOf(applicationsUiModel.isChosen) }
+
     val animatedDpValue by animateDpAsState(
         targetValue = if (isChosen.value) {
             YaaumTheme.dividers.extraSmall
@@ -68,15 +69,19 @@ fun ApplicationListItem(
             )
             .background(YaaumTheme.colors.surface)
             .padding(YaaumTheme.spacing.small)
-            .clickable {
-                isChosen.value = isChosen.value.not()
-                onApplicationClick?.invoke(applicationsUiModel, isChosen.value)
-            },
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null,
+                onClick = {
+                    isChosen.value = isChosen.value.not()
+                    onApplicationClick?.invoke(applicationsUiModel, isChosen.value)
+                },
+            ),
     ) {
         // TODO: add sizes
         Box(
             modifier = Modifier
-                .size(48.dp)
+                .size(YaaumTheme.icons.medium)
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .clip(RoundedCornerShape(YaaumTheme.corners.medium))

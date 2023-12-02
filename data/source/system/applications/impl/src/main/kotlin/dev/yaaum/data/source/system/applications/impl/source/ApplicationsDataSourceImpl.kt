@@ -26,7 +26,9 @@ class ApplicationsDataSourceImpl(
                 context.packageManager.getInstalledApplications(0)
             }
             continuation.resume(
-                applications.map { it.toApplicationSystemModel(context) },
+                applications.map { it.toApplicationSystemModel(context) }.filterNot {
+                    it.applicationName == it.packageName
+                },
             )
         }
     }

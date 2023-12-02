@@ -1,16 +1,20 @@
 package dev.yaaum.presentation.feature.applications.screen.applications
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.navigator.Navigator
 import com.theapache64.rebugger.Rebugger
 import dev.yaaum.presentation.core.models.isDarkMode
 import dev.yaaum.presentation.core.navigation.RouteGraph
+import dev.yaaum.presentation.core.platform.mvi.MviPartialState
+import dev.yaaum.presentation.core.ui.composable.content.empty.DefaultEmptyContent
+import dev.yaaum.presentation.core.ui.composable.content.error.DefaultErrorContent
+import dev.yaaum.presentation.core.ui.composable.content.loading.DefaultLoadingContent
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
-import dev.yaaum.presentation.feature.applications.screen.applications.content.ApplicationsContent
+import dev.yaaum.presentation.feature.applications.screen.applications.content.fetched.ApplicationsFetchedContent
+import dev.yaaum.presentation.feature.applications.screen.applications.mvi.ApplicationsMvi
 import dev.yaaum.presentation.feature.main.screen.HostViewModel
 
 @Composable
@@ -18,28 +22,38 @@ import dev.yaaum.presentation.feature.main.screen.HostViewModel
 fun ApplicationsScreen(
     navigator: Navigator,
     hostViewModel: HostViewModel,
-    @Suppress("unused")
-    applicationsViewModel: ApplicationsViewModel,
+    applicationsMvi: ApplicationsMvi,
 ) {
     val mainScreen = rememberScreen(RouteGraph.MainScreen)
     val isDarkMode = hostViewModel.currentThemeUiModel.value?.isDarkMode() ?: false
 
-//    val applicationList = applicationsViewModel.applicationStateFlow.collectAsStateWithLifecycle()
-    val applicationList = applicationsViewModel.filterFlow.collectAsStateWithLifecycle()
-    applicationsViewModel.load()
+    val state by applicationsMvi.state.collectAsState()
+    val effect by applicationsMvi.effect.collectAsState(null)
 
     Rebugger(
         trackMap = mapOf(
             "navigator" to navigator,
             "hostViewModel" to hostViewModel,
-            "applicationsViewModel" to applicationsViewModel,
+            "applicationsMvi" to applicationsMvi,
             "mainScreen" to mainScreen,
             "isDarkMode" to isDarkMode,
-            "applicationList" to applicationList,
+            "state" to state,
+            "effect" to effect,
         ),
     )
+
     YaaumTheme(isDarkMode) {
-        ApplicationsContent(
+        when (state.partialState) {
+            MviPartialState.FETCHED -> ApplicationsFetchedContent(
+                state = state,
+            )
+
+            MviPartialState.LOADING -> DefaultLoadingContent()
+            MviPartialState.ERROR -> DefaultErrorContent(error = state.error)
+            MviPartialState.EMPTY -> DefaultEmptyContent()
+        }
+
+        /*ApplicationsFetchedContent(
             applicationList = applicationList,
             onBackClick = {
                 applicationsViewModel.reset()
@@ -48,6 +62,6 @@ fun ApplicationsScreen(
             onTextChange = applicationsViewModel::updateFilterQuery,
             onSideChange = applicationsViewModel::updateFilterSort,
             onApplicationClick = applicationsViewModel::changeApplicationStatus,
-        )
+        )*/
     }
 }

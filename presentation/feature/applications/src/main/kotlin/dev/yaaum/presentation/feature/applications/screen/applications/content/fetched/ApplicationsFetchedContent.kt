@@ -1,4 +1,4 @@
-package dev.yaaum.presentation.feature.applications.screen.applications.content
+package dev.yaaum.presentation.feature.applications.screen.applications.content.fetched
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -12,14 +12,15 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import dev.yaaum.presentation.core.localisation.UiText
 import dev.yaaum.presentation.core.models.ApplicationsUiModel
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.button.swipe.YaaumDoubleSideButton
@@ -28,13 +29,14 @@ import dev.yaaum.presentation.core.ui.composable.input.YaaumBasicTextField
 import dev.yaaum.presentation.core.ui.composable.various.AnimatedDivider
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
-import dev.yaaum.presentation.feature.applications.screen.applications.content.list.ApplicationListItem
+import dev.yaaum.presentation.feature.applications.screen.applications.item.ApplicationListItem
+import dev.yaaum.presentation.feature.applications.screen.applications.mvi.ApplicationsMviState
 import io.github.serpro69.kfaker.Faker
 
 @Suppress("EmptyFunctionBlock")
 @Composable
-fun ApplicationsContent(
-    applicationList: State<List<ApplicationsUiModel>?>,
+fun ApplicationsFetchedContent(
+    state: ApplicationsMviState,
     onBackClick: (() -> Unit)? = null,
     onTextChange: ((String) -> Unit)? = null,
     onSideChange: ((Boolean) -> Unit)? = null,
@@ -51,7 +53,9 @@ fun ApplicationsContent(
     ) {
         TitleHeader(
             modifier = Modifier.padding(vertical = YaaumTheme.spacing.small),
-            title = Faker().quote.fortuneCookie(),
+            title = UiText
+                .StringResource(dev.yaaum.presentation.core.localisation.R.string.applications_title)
+                .asString(LocalContext.current),
             onBackClick = onBackClick,
         )
         Row(
@@ -95,15 +99,13 @@ fun ApplicationsContent(
             verticalArrangement = Arrangement
                 .spacedBy(YaaumTheme.spacing.small),
         ) {
-            applicationList.value?.let {
-                items(
-                    count = it.size,
-                ) { index ->
-                    ApplicationListItem(
-                        applicationsUiModel = it[index],
-                        onApplicationClick = onApplicationClick,
-                    )
-                }
+            items(
+                count = state.data.size,
+            ) { index ->
+                ApplicationListItem(
+                    applicationsUiModel = state.data[index],
+                    onApplicationClick = onApplicationClick,
+                )
             }
         }
         AnimatedDivider(
@@ -117,20 +119,40 @@ fun ApplicationsContent(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_ApplicationsContent_Dark() {
+fun Preview_ApplicationsFetchedContent_Dark() {
+    val faker = Faker()
     YaaumTheme(useDarkTheme = true) {
-        ApplicationsContent(
-            applicationList = remember { mutableStateOf(emptyList()) },
+        ApplicationsFetchedContent(
+            state = ApplicationsMviState.fetched(
+                listOf(
+                    @Suppress("MagicNumber")
+                    ApplicationsUiModel(
+                        123,
+                        faker.quote.fortuneCookie(),
+                        faker.quote.fortuneCookie(),
+                    ),
+                ),
+            ),
         )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_ApplicationsContent_Light() {
+fun Preview_ApplicationsFetchedContent_Light() {
+    val faker = Faker()
     YaaumTheme(useDarkTheme = false) {
-        ApplicationsContent(
-            applicationList = remember { mutableStateOf(emptyList()) },
+        ApplicationsFetchedContent(
+            state = ApplicationsMviState.fetched(
+                listOf(
+                    @Suppress("MagicNumber")
+                    ApplicationsUiModel(
+                        123,
+                        faker.quote.fortuneCookie(),
+                        faker.quote.fortuneCookie(),
+                    ),
+                ),
+            ),
         )
     }
 }
