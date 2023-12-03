@@ -21,6 +21,14 @@ class ApplicationsMviReducer(initial: ApplicationsMviState) :
                     error = null,
                 ),
             )
+
+            else -> setState(
+                oldState.copy(
+                    loading = true,
+                    data = emptyList(),
+                    error = null,
+                ),
+            )
         }
     }
 }

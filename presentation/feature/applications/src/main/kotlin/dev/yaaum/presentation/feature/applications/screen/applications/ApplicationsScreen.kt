@@ -6,6 +6,7 @@ import androidx.compose.runtime.getValue
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.navigator.Navigator
 import com.theapache64.rebugger.Rebugger
+import dev.yaaum.domain.core.model.SortOrder
 import dev.yaaum.presentation.core.models.isDarkMode
 import dev.yaaum.presentation.core.navigation.RouteGraph
 import dev.yaaum.presentation.core.platform.mvi.MviPartialState
@@ -15,6 +16,7 @@ import dev.yaaum.presentation.core.ui.composable.content.loading.DefaultLoadingC
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.feature.applications.screen.applications.content.fetched.ApplicationsFetchedContent
 import dev.yaaum.presentation.feature.applications.screen.applications.mvi.ApplicationsMvi
+import dev.yaaum.presentation.feature.applications.screen.applications.mvi.ApplicationsMviEvent
 import dev.yaaum.presentation.feature.main.screen.HostViewModel
 
 @Composable
@@ -46,6 +48,20 @@ fun ApplicationsScreen(
         when (state.partialState) {
             MviPartialState.FETCHED -> ApplicationsFetchedContent(
                 state = state,
+                onSideChange = { isAsc ->
+                    applicationsMvi.sendEvent(
+                        ApplicationsMviEvent.OnSortChangedMviEvent(
+                            if (isAsc) {
+                                SortOrder.ASC
+                            } else {
+                                SortOrder.DESC
+                            },
+                        ),
+                    )
+                },
+                onTextChange = {
+                    applicationsMvi.onTextChange(it)
+                },
             )
 
             MviPartialState.LOADING -> DefaultLoadingContent()

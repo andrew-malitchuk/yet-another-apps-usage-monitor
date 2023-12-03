@@ -10,6 +10,7 @@ import dev.yaaum.presentation.core.localisation.UiText
 import dev.yaaum.presentation.core.models.toUiModel
 import dev.yaaum.presentation.core.platform.mvi.BaseMvi
 import dev.yaaum.presentation.core.ui.error.SwwUiError
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -34,6 +35,13 @@ class ApplicationsMvi(
         when (event) {
             is ApplicationsMviEvent.ApplicationsFetchedMviEvent -> Unit
             ApplicationsMviEvent.GetApplicationsMviEvent -> filter()
+            is ApplicationsMviEvent.OnSortChangedMviEvent -> filter(
+                order = event.sort,
+            )
+
+            is ApplicationsMviEvent.OnQueryChangedMviEvent -> filter(
+                query = event.query,
+            )
         }
     }
 
@@ -62,9 +70,26 @@ class ApplicationsMvi(
                         reducer.setState(
                             ApplicationsMviState.fetched(
                                 data = filter.map { it.toUiModel() },
+                                query = query,
                             ),
                         )
                     },
+                )
+            },
+        )
+    }
+
+    private var searchJob: Job? = null
+
+    fun onTextChange(query: String) {
+        searchJob?.cancel()
+        searchJob = launch(
+            debounce = 1_000L,
+            request = {
+                sendEvent(
+                    ApplicationsMviEvent.OnQueryChangedMviEvent(
+                        query = query,
+                    ),
                 )
             },
         )

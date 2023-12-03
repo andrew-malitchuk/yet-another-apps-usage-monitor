@@ -10,6 +10,7 @@ data class ApplicationsMviState(
     val loading: Boolean,
     val data: List<ApplicationsUiModel>,
     val error: BaseUiError?,
+    val query: String? = null,
 ) : MviState {
 
     companion object {
@@ -19,10 +20,14 @@ data class ApplicationsMviState(
             error = null,
         )
 
-        fun fetched(data: List<ApplicationsUiModel>) = ApplicationsMviState(
+        fun fetched(
+            data: List<ApplicationsUiModel>,
+            query: String?,
+        ) = ApplicationsMviState(
             loading = false,
             data = data,
             error = null,
+            query = query,
         )
 
         fun error(error: BaseUiError?): ApplicationsMviState {

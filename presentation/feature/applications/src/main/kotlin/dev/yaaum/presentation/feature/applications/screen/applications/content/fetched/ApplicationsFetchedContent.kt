@@ -43,7 +43,7 @@ fun ApplicationsFetchedContent(
     onApplicationClick: ((ApplicationsUiModel, Boolean) -> Unit)? = null,
 ) {
     val lazyScrollState = rememberLazyListState()
-    var text by remember { mutableStateOf("") }
+    var text by remember { mutableStateOf(state.query) }
 
     Column(
         modifier = Modifier
@@ -82,6 +82,7 @@ fun ApplicationsFetchedContent(
                 sideA = R.drawable.icon_sort_ascending_bold_24,
                 sideB = R.drawable.icon_sort_descending_bold_24,
                 onSideChange = onSideChange,
+
             )
         }
         AnimatedDivider(
@@ -132,6 +133,7 @@ fun Preview_ApplicationsFetchedContent_Dark() {
                         faker.quote.fortuneCookie(),
                     ),
                 ),
+                faker.quote.fortuneCookie(),
             ),
         )
     }
@@ -152,6 +154,7 @@ fun Preview_ApplicationsFetchedContent_Light() {
                         faker.quote.fortuneCookie(),
                     ),
                 ),
+                faker.quote.fortuneCookie(),
             ),
         )
     }
