@@ -22,7 +22,6 @@ import io.github.serpro69.kfaker.Faker
 @Composable
 fun ApplicationDetalizationFetchedContent() {
     val scrollState = rememberScrollState()
-
     Column(
         modifier = Modifier
             .fillMaxSize()
