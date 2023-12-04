@@ -7,6 +7,8 @@ import dev.yaaum.domain.applications.GetUserAppsUseCase
 import dev.yaaum.domain.applications.RemoveAppFromChosenUseCase
 import dev.yaaum.domain.core.model.SortOrder
 import dev.yaaum.presentation.core.localisation.UiText
+import dev.yaaum.presentation.core.models.ApplicationsUiModel
+import dev.yaaum.presentation.core.models.toDomainModel
 import dev.yaaum.presentation.core.models.toUiModel
 import dev.yaaum.presentation.core.platform.mvi.BaseMvi
 import dev.yaaum.presentation.core.ui.error.SwwUiError
@@ -31,6 +33,8 @@ class ApplicationsMvi(
 
     override val reducer = ApplicationsMviReducer(ApplicationsMviState.initial())
 
+    private var searchJob: Job? = null
+
     override fun innerEventProcessing(event: ApplicationsMviEvent) {
         when (event) {
             is ApplicationsMviEvent.ApplicationsFetchedMviEvent -> Unit
@@ -42,6 +46,12 @@ class ApplicationsMvi(
             is ApplicationsMviEvent.OnQueryChangedMviEvent -> filter(
                 query = event.query,
             )
+
+            is ApplicationsMviEvent.OnApplicationStatusChangedEvent ->
+                changeApplicationStatus(
+                    application = event.application,
+                    isChosen = event.isChosen,
+                )
         }
     }
 
@@ -79,8 +89,6 @@ class ApplicationsMvi(
         )
     }
 
-    private var searchJob: Job? = null
-
     fun onTextChange(query: String) {
         searchJob?.cancel()
         searchJob = launch(
@@ -91,6 +99,25 @@ class ApplicationsMvi(
                         query = query,
                     ),
                 )
+            },
+        )
+    }
+
+    fun changeApplicationStatus(application: ApplicationsUiModel, isChosen: Boolean) {
+        launch(
+            request = {
+                arrow.core.raise.recover({
+                    if (isChosen) {
+                        addAppToChosenUseCase(application.toDomainModel())
+                    } else {
+                        removeAppFromChosenUseCase(application.toDomainModel())
+                    }
+                    // TODO: fix
+                    sendEvent(ApplicationsMviEvent.GetApplicationsMviEvent)
+                }, {
+                    // TODO: fix
+                    it.toString()
+                })
             },
         )
     }

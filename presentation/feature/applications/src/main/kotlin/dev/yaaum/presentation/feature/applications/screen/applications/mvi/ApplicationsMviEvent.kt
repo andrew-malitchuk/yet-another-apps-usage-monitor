@@ -15,4 +15,9 @@ sealed class ApplicationsMviEvent : MviEvent {
     data class OnSortChangedMviEvent(val sort: SortOrder? = null) : ApplicationsMviEvent()
 
     data class OnQueryChangedMviEvent(val query: String? = null) : ApplicationsMviEvent()
+
+    data class OnApplicationStatusChangedEvent(
+        val application: ApplicationsUiModel,
+        val isChosen: Boolean,
+    ) : ApplicationsMviEvent()
 }

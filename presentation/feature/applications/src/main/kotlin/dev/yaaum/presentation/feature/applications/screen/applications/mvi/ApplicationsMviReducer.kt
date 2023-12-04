@@ -22,6 +22,14 @@ class ApplicationsMviReducer(initial: ApplicationsMviState) :
                 ),
             )
 
+            is ApplicationsMviEvent.OnApplicationStatusChangedEvent -> setState(
+                oldState.copy(
+                    loading = true,
+                    data = emptyList(),
+                    error = null,
+                ),
+            )
+
             else -> setState(
                 oldState.copy(
                     loading = true,

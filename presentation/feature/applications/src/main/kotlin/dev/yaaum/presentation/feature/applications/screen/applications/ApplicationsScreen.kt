@@ -62,6 +62,14 @@ fun ApplicationsScreen(
                 onTextChange = {
                     applicationsMvi.onTextChange(it)
                 },
+                onApplicationClick = { application, isChosen ->
+                    applicationsMvi.sendEvent(
+                        ApplicationsMviEvent.OnApplicationStatusChangedEvent(
+                            application = application,
+                            isChosen = isChosen,
+                        ),
+                    )
+                },
             )
 
             MviPartialState.LOADING -> DefaultLoadingContent()
