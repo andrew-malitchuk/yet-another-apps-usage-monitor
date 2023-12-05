@@ -18,7 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -28,10 +28,13 @@ import androidx.constraintlayout.compose.MotionLayout
 import androidx.constraintlayout.compose.MotionScene
 import androidx.constraintlayout.compose.Transition
 import androidx.constraintlayout.compose.layoutId
+import com.google.accompanist.drawablepainter.rememberDrawablePainter
+import dev.yaaum.presentation.core.models.ApplicationsUiModel
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumCircleButton
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
+import io.github.serpro69.kfaker.Faker
 
 /**
  * Contains general information about application
@@ -40,7 +43,7 @@ import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 @Suppress("LongMethod", "UnusedParameter", "UNUSED_VARIABLE")
 fun ApplicationDetalizationCard(
     modifier: Modifier = Modifier,
-    onClick: (() -> Unit)? = null,
+    applicationsUiModel: ApplicationsUiModel,
 ) {
     val isOpened = remember {
         mutableStateOf(true)
@@ -212,7 +215,7 @@ fun ApplicationDetalizationCard(
         }
 
         Text(
-            text = "application-name",
+            text = applicationsUiModel.applicationName ?: "SWW",
             style = YaaumTheme.typography.title,
             color = YaaumTheme.colors.onSurface,
             maxLines = 1,
@@ -222,8 +225,7 @@ fun ApplicationDetalizationCard(
         )
 
         Text(
-            // TODO: fix
-            text = "package-name",
+            text = applicationsUiModel.packageName ?: "SWW",
             style = YaaumTheme.typography.caption,
             color = YaaumTheme.colors.onSurface,
             maxLines = 1,
@@ -234,15 +236,18 @@ fun ApplicationDetalizationCard(
 
         Box(
             modifier = Modifier
-                .size(48.dp)
+                .size(YaaumTheme.icons.medium)
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .clip(RoundedCornerShape(YaaumTheme.corners.medium))
                 .background(YaaumTheme.colors.secondary)
                 .layoutId(applicationBoxId),
         ) {
+            val icon = applicationsUiModel.packageName?.let { pn ->
+                LocalContext.current.packageManager.getApplicationIcon(pn)
+            }
             Image(
-                painter = painterResource(id = R.drawable.icon_palette_regular_24),
+                painter = rememberDrawablePainter(icon),
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxSize()
@@ -256,8 +261,7 @@ fun ApplicationDetalizationCard(
                 .layoutId(changeStateId),
             defaultBackgroundColor = YaaumTheme.colors.primary,
             pressedBackgroundColor = YaaumTheme.colors.secondary,
-            // TODO: fix
-            iconSize = 24.dp,
+            iconSize = YaaumTheme.icons.small,
             onClick = {
                 isOpened.value = isOpened.value.not()
             },
@@ -268,15 +272,31 @@ fun ApplicationDetalizationCard(
 @Preview(showBackground = true)
 @Composable
 fun Preview_ApplicationDetalizationCard_Dark() {
+    val faker = Faker()
     YaaumTheme(useDarkTheme = true) {
-        ApplicationDetalizationCard()
+        ApplicationDetalizationCard(
+            applicationsUiModel = ApplicationsUiModel(
+                uuid = null,
+                packageName = faker.quote.fortuneCookie(),
+                applicationName = faker.quote.fortuneCookie(),
+                isChosen = false,
+            ),
+        )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun Preview_ApplicationDetalizationCard_Light() {
+    val faker = Faker()
     YaaumTheme(useDarkTheme = false) {
-        ApplicationDetalizationCard()
+        ApplicationDetalizationCard(
+            applicationsUiModel = ApplicationsUiModel(
+                uuid = null,
+                packageName = faker.quote.fortuneCookie(),
+                applicationName = faker.quote.fortuneCookie(),
+                isChosen = false,
+            ),
+        )
     }
 }

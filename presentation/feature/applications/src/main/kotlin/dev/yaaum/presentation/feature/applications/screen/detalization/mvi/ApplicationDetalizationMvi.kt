@@ -16,4 +16,8 @@ class ApplicationDetalizationMvi :
 
     override val reducer =
         ApplicationDetalizationMviReducer(ApplicationDetalizationMviState.initial())
+
+    init {
+        sendEvent(ApplicationDetalizationMviEvent.GetApplicationDetalizationMviEvent)
+    }
 }

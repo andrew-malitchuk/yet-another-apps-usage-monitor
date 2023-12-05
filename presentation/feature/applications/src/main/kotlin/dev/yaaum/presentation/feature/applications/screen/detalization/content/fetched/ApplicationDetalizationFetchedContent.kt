@@ -10,6 +10,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import dev.yaaum.presentation.core.models.ApplicationsUiModel
 import dev.yaaum.presentation.core.models.HealthSimplifiedUiModel
 import dev.yaaum.presentation.core.models.HealthStatus
 import dev.yaaum.presentation.core.ui.composable.card.ApplicationDetalizationCard
@@ -17,10 +18,13 @@ import dev.yaaum.presentation.core.ui.composable.card.DetailsHealthCard
 import dev.yaaum.presentation.core.ui.composable.card.SimplifiedHealthCard
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
+import dev.yaaum.presentation.feature.applications.screen.detalization.mvi.ApplicationDetalizationMviState
 import io.github.serpro69.kfaker.Faker
 
 @Composable
-fun ApplicationDetalizationFetchedContent() {
+fun ApplicationDetalizationFetchedContent(
+    state: ApplicationDetalizationMviState,
+) {
     val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
@@ -31,10 +35,13 @@ fun ApplicationDetalizationFetchedContent() {
         verticalArrangement = Arrangement
             .spacedBy(YaaumTheme.spacing.small),
     ) {
-        ApplicationDetalizationCard(
-            modifier = Modifier
-                .padding(top = YaaumTheme.spacing.small),
-        )
+        state.data?.let {
+            ApplicationDetalizationCard(
+                modifier = Modifier
+                    .padding(top = YaaumTheme.spacing.small),
+                applicationsUiModel = it,
+            )
+        }
         SimplifiedHealthCard(
             healthStatus = HealthSimplifiedUiModel(
                 HealthStatus.WINK,
@@ -49,15 +56,35 @@ fun ApplicationDetalizationFetchedContent() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_ApplicationDetalizationFetchedContent_Dark() {
+    val faker = Faker()
     YaaumTheme(useDarkTheme = true) {
-        ApplicationDetalizationFetchedContent()
+        ApplicationDetalizationFetchedContent(
+            state = ApplicationDetalizationMviState.fetched(
+                ApplicationsUiModel(
+                    uuid = null,
+                    packageName = faker.quote.fortuneCookie(),
+                    applicationName = faker.quote.fortuneCookie(),
+                    isChosen = false,
+                ),
+            ),
+        )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun Preview_ApplicationDetalizationFetchedContent_Light() {
+    val faker = Faker()
     YaaumTheme(useDarkTheme = false) {
-        ApplicationDetalizationFetchedContent()
+        ApplicationDetalizationFetchedContent(
+            state = ApplicationDetalizationMviState.fetched(
+                ApplicationsUiModel(
+                    uuid = null,
+                    packageName = faker.quote.fortuneCookie(),
+                    applicationName = faker.quote.fortuneCookie(),
+                    isChosen = false,
+                ),
+            ),
+        )
     }
 }
