@@ -18,6 +18,7 @@ import dev.yaaum.presentation.core.ui.composable.card.DetailsHealthCard
 import dev.yaaum.presentation.core.ui.composable.card.SimplifiedHealthCard
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
+import dev.yaaum.presentation.feature.applications.screen.detalization.mvi.ApplicationDetalizationContent
 import dev.yaaum.presentation.feature.applications.screen.detalization.mvi.ApplicationDetalizationMviState
 import io.github.serpro69.kfaker.Faker
 
@@ -35,7 +36,7 @@ fun ApplicationDetalizationFetchedContent(
         verticalArrangement = Arrangement
             .spacedBy(YaaumTheme.spacing.small),
     ) {
-        state.data?.let {
+        state.content?.data?.let {
             ApplicationDetalizationCard(
                 modifier = Modifier
                     .padding(top = YaaumTheme.spacing.small),
@@ -60,11 +61,13 @@ fun Preview_ApplicationDetalizationFetchedContent_Dark() {
     YaaumTheme(useDarkTheme = true) {
         ApplicationDetalizationFetchedContent(
             state = ApplicationDetalizationMviState.fetched(
-                ApplicationsUiModel(
-                    uuid = null,
-                    packageName = faker.quote.fortuneCookie(),
-                    applicationName = faker.quote.fortuneCookie(),
-                    isChosen = false,
+                content = ApplicationDetalizationContent(
+                    data = ApplicationsUiModel(
+                        uuid = null,
+                        packageName = faker.quote.fortuneCookie(),
+                        applicationName = faker.quote.fortuneCookie(),
+                        isChosen = false,
+                    ),
                 ),
             ),
         )
@@ -78,11 +81,13 @@ fun Preview_ApplicationDetalizationFetchedContent_Light() {
     YaaumTheme(useDarkTheme = false) {
         ApplicationDetalizationFetchedContent(
             state = ApplicationDetalizationMviState.fetched(
-                ApplicationsUiModel(
-                    uuid = null,
-                    packageName = faker.quote.fortuneCookie(),
-                    applicationName = faker.quote.fortuneCookie(),
-                    isChosen = false,
+                content = ApplicationDetalizationContent(
+                    data = ApplicationsUiModel(
+                        uuid = null,
+                        packageName = faker.quote.fortuneCookie(),
+                        applicationName = faker.quote.fortuneCookie(),
+                        isChosen = false,
+                    ),
                 ),
             ),
         )

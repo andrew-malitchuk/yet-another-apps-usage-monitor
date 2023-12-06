@@ -26,7 +26,9 @@ class SettingsMvi : BaseMvi<SettingsMviState, SettingsMviEvent, SettingsMviEffec
         reducer.setState(
             SettingsMviState(
                 loading = false,
-                data = theme,
+                content = SettingsMviContent(
+                    data = theme,
+                ),
                 error = null,
             ),
         )

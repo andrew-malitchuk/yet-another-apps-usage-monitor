@@ -1,31 +1,30 @@
 package dev.yaaum.presentation.feature.applications.screen.applications.mvi
 
 import androidx.compose.runtime.Immutable
-import dev.yaaum.presentation.core.models.ApplicationsUiModel
 import dev.yaaum.presentation.core.platform.mvi.state.MviState
 import dev.yaaum.presentation.core.ui.error.base.BaseUiError
 
 @Immutable
 data class ApplicationsMviState(
     val loading: Boolean,
-    val data: List<ApplicationsUiModel>,
+    override val content: ApplicationsMviContent?,
     val error: BaseUiError?,
     val query: String? = null,
-) : MviState {
+) : MviState() {
 
     companion object {
         fun initial() = ApplicationsMviState(
             loading = true,
-            data = emptyList(),
+            content = null,
             error = null,
         )
 
         fun fetched(
-            data: List<ApplicationsUiModel>,
+            content: ApplicationsMviContent?,
             query: String?,
         ) = ApplicationsMviState(
             loading = false,
-            data = data,
+            content = content,
             error = null,
             query = query,
         )
@@ -33,7 +32,7 @@ data class ApplicationsMviState(
         fun error(error: BaseUiError?): ApplicationsMviState {
             return ApplicationsMviState(
                 loading = false,
-                data = emptyList(),
+                content = null,
                 error = error,
             )
         }
@@ -41,7 +40,7 @@ data class ApplicationsMviState(
         fun loading(): ApplicationsMviState {
             return ApplicationsMviState(
                 loading = true,
-                data = emptyList(),
+                content = null,
                 error = null,
             )
         }
@@ -49,17 +48,17 @@ data class ApplicationsMviState(
 
     override val isFetched: Boolean
         get() {
-            return data.isNotEmpty() && !loading && error == null
+            return content != null && !loading && error == null
         }
 
     override val isEmpty: Boolean
         get() {
-            return data.isEmpty() && !loading && error == null
+            return content == null && !loading && error == null
         }
 
     override val isLoading: Boolean
         get() {
-            return data.isEmpty() && loading && error == null
+            return content == null && loading && error == null
         }
 
     override val isError: Boolean
@@ -68,6 +67,6 @@ data class ApplicationsMviState(
         }
 
     override fun toString(): String {
-        return "isLoading: $loading, data.size: ${data.size}, error: $error"
+        return "isLoading: $loading, content: $content, error: $error"
     }
 }

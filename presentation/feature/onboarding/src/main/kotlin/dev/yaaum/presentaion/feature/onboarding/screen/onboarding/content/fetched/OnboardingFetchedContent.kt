@@ -20,6 +20,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.item.OnboardingItem
 import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.OnboardingMvi
+import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.OnboardingMviContent
 import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.OnboardingMviState
 import dev.yaaum.presentation.core.localisation.UiText
 import dev.yaaum.presentation.core.ui.R
@@ -38,7 +39,7 @@ fun OnboardingFetchedContent(
     onDoneClick: (() -> Unit)? = null,
 ) {
     val pagerState = rememberPagerState(pageCount = {
-        state.data.size
+        state.content?.data?.size ?: 0
     })
     val goToNextPageScope = rememberCoroutineScope()
     val buttonAlphaAnimation = animateFloatAsState(
@@ -60,13 +61,14 @@ fun OnboardingFetchedContent(
             modifier = Modifier
                 .weight(1f, true),
         ) { page ->
-            val currentPage = state.data[page]
-            OnboardingItem(
-                image = currentPage.image,
-                header = currentPage.header.asString(),
-                caption = currentPage.caption.asString(),
-                state = pagerState,
-            )
+            state.content?.data?.get(page)?.let {
+                OnboardingItem(
+                    image = it.image,
+                    header = it.header.asString(),
+                    caption = it.caption.asString(),
+                    state = pagerState,
+                )
+            }
         }
         Row(
             modifier = Modifier
@@ -120,21 +122,23 @@ fun Preview_OnboardingFetchedContent_Dark() {
         OnboardingFetchedContent(
             state = OnboardingMviState(
                 loading = false,
-                data = listOf(
-                    OnboardingMvi.OnboardingPage(
-                        R.drawable.icon_fire_bold_24,
-                        UiText.DynamicString(faker.quote.fortuneCookie()),
-                        UiText.DynamicString(faker.quote.fortuneCookie()),
-                    ),
-                    OnboardingMvi.OnboardingPage(
-                        R.drawable.icon_fire_bold_24,
-                        UiText.DynamicString(faker.quote.fortuneCookie()),
-                        UiText.DynamicString(faker.quote.fortuneCookie()),
-                    ),
-                    OnboardingMvi.OnboardingPage(
-                        R.drawable.icon_fire_bold_24,
-                        UiText.DynamicString(faker.quote.fortuneCookie()),
-                        UiText.DynamicString(faker.quote.fortuneCookie()),
+                content = OnboardingMviContent(
+                    data = listOf(
+                        OnboardingMvi.OnboardingPage(
+                            R.drawable.icon_fire_bold_24,
+                            UiText.DynamicString(faker.quote.fortuneCookie()),
+                            UiText.DynamicString(faker.quote.fortuneCookie()),
+                        ),
+                        OnboardingMvi.OnboardingPage(
+                            R.drawable.icon_fire_bold_24,
+                            UiText.DynamicString(faker.quote.fortuneCookie()),
+                            UiText.DynamicString(faker.quote.fortuneCookie()),
+                        ),
+                        OnboardingMvi.OnboardingPage(
+                            R.drawable.icon_fire_bold_24,
+                            UiText.DynamicString(faker.quote.fortuneCookie()),
+                            UiText.DynamicString(faker.quote.fortuneCookie()),
+                        ),
                     ),
                 ),
                 error = null,
@@ -151,21 +155,23 @@ fun Preview_OnboardingFetchedContent_Light() {
         OnboardingFetchedContent(
             state = OnboardingMviState(
                 loading = false,
-                data = listOf(
-                    OnboardingMvi.OnboardingPage(
-                        R.drawable.icon_fire_bold_24,
-                        UiText.DynamicString(faker.quote.fortuneCookie()),
-                        UiText.DynamicString(faker.quote.fortuneCookie()),
-                    ),
-                    OnboardingMvi.OnboardingPage(
-                        R.drawable.icon_fire_bold_24,
-                        UiText.DynamicString(faker.quote.fortuneCookie()),
-                        UiText.DynamicString(faker.quote.fortuneCookie()),
-                    ),
-                    OnboardingMvi.OnboardingPage(
-                        R.drawable.icon_fire_bold_24,
-                        UiText.DynamicString(faker.quote.fortuneCookie()),
-                        UiText.DynamicString(faker.quote.fortuneCookie()),
+                content = OnboardingMviContent(
+                    data = listOf(
+                        OnboardingMvi.OnboardingPage(
+                            R.drawable.icon_fire_bold_24,
+                            UiText.DynamicString(faker.quote.fortuneCookie()),
+                            UiText.DynamicString(faker.quote.fortuneCookie()),
+                        ),
+                        OnboardingMvi.OnboardingPage(
+                            R.drawable.icon_fire_bold_24,
+                            UiText.DynamicString(faker.quote.fortuneCookie()),
+                            UiText.DynamicString(faker.quote.fortuneCookie()),
+                        ),
+                        OnboardingMvi.OnboardingPage(
+                            R.drawable.icon_fire_bold_24,
+                            UiText.DynamicString(faker.quote.fortuneCookie()),
+                            UiText.DynamicString(faker.quote.fortuneCookie()),
+                        ),
                     ),
                 ),
                 error = null,

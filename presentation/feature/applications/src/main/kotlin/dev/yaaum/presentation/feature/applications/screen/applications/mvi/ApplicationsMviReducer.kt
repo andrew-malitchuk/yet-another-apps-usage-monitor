@@ -8,8 +8,10 @@ class ApplicationsMviReducer(initial: ApplicationsMviState) :
         when (event) {
             is ApplicationsMviEvent.GetApplicationsMviEvent -> setState(
                 oldState.copy(
-                    loading = true,
-                    data = emptyList(),
+                    loading = false,
+                    content = ApplicationsMviContent(
+                        data = emptyList(),
+                    ),
                     error = null,
                 ),
             )
@@ -17,23 +19,29 @@ class ApplicationsMviReducer(initial: ApplicationsMviState) :
             is ApplicationsMviEvent.ApplicationsFetchedMviEvent -> setState(
                 oldState.copy(
                     loading = false,
-                    data = event.data,
+                    content = ApplicationsMviContent(
+                        data = event.data,
+                    ),
                     error = null,
                 ),
             )
 
             is ApplicationsMviEvent.OnApplicationStatusChangedEvent -> setState(
                 oldState.copy(
-                    loading = true,
-                    data = emptyList(),
+                    loading = false,
+                    content = ApplicationsMviContent(
+                        data = emptyList(),
+                    ),
                     error = null,
                 ),
             )
 
             else -> setState(
                 oldState.copy(
-                    loading = true,
-                    data = emptyList(),
+                    loading = false,
+                    content = ApplicationsMviContent(
+                        data = emptyList(),
+                    ),
                     error = null,
                 ),
             )

@@ -37,9 +37,11 @@ class PermissionMvi : BaseMvi<PermissionMviState, PermissionMviEvent, Permission
         val permission = true
         reducer.setState(
             PermissionMviState.fetched(
-                PermissionConfigure(
-                    isNotificationPermissionGranted = notification,
-                    isAppUsagePermissionGranted = permission,
+                permissionMviContent = PermissionMviContent(
+                    data = PermissionConfigure(
+                        isNotificationPermissionGranted = notification,
+                        isAppUsagePermissionGranted = permission,
+                    ),
                 ),
             ),
         )

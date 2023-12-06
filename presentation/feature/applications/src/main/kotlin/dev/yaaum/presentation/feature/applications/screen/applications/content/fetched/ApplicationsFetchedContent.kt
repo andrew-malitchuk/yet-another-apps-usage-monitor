@@ -30,6 +30,7 @@ import dev.yaaum.presentation.core.ui.composable.various.AnimatedDivider
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 import dev.yaaum.presentation.feature.applications.screen.applications.item.ApplicationListItem
+import dev.yaaum.presentation.feature.applications.screen.applications.mvi.ApplicationsMviContent
 import dev.yaaum.presentation.feature.applications.screen.applications.mvi.ApplicationsMviState
 import io.github.serpro69.kfaker.Faker
 
@@ -100,13 +101,15 @@ fun ApplicationsFetchedContent(
             verticalArrangement = Arrangement
                 .spacedBy(YaaumTheme.spacing.small),
         ) {
-            items(
-                count = state.data.size,
-            ) { index ->
-                ApplicationListItem(
-                    applicationsUiModel = state.data[index],
-                    onApplicationClick = onApplicationClick,
-                )
+            state.content?.data?.let { list ->
+                items(
+                    count = list.size ?: 0,
+                ) { index ->
+                    ApplicationListItem(
+                        applicationsUiModel = list[index],
+                        onApplicationClick = onApplicationClick,
+                    )
+                }
             }
         }
         AnimatedDivider(
@@ -125,12 +128,14 @@ fun Preview_ApplicationsFetchedContent_Dark() {
     YaaumTheme(useDarkTheme = true) {
         ApplicationsFetchedContent(
             state = ApplicationsMviState.fetched(
-                listOf(
-                    @Suppress("MagicNumber")
-                    ApplicationsUiModel(
-                        123,
-                        faker.quote.fortuneCookie(),
-                        faker.quote.fortuneCookie(),
+                content = ApplicationsMviContent(
+                    data = listOf(
+                        @Suppress("MagicNumber")
+                        ApplicationsUiModel(
+                            123,
+                            faker.quote.fortuneCookie(),
+                            faker.quote.fortuneCookie(),
+                        ),
                     ),
                 ),
                 faker.quote.fortuneCookie(),
@@ -146,12 +151,14 @@ fun Preview_ApplicationsFetchedContent_Light() {
     YaaumTheme(useDarkTheme = false) {
         ApplicationsFetchedContent(
             state = ApplicationsMviState.fetched(
-                listOf(
-                    @Suppress("MagicNumber")
-                    ApplicationsUiModel(
-                        123,
-                        faker.quote.fortuneCookie(),
-                        faker.quote.fortuneCookie(),
+                content = ApplicationsMviContent(
+                    data = listOf(
+                        @Suppress("MagicNumber")
+                        ApplicationsUiModel(
+                            123,
+                            faker.quote.fortuneCookie(),
+                            faker.quote.fortuneCookie(),
+                        ),
                     ),
                 ),
                 faker.quote.fortuneCookie(),

@@ -79,7 +79,9 @@ class ApplicationsMvi(
                     { filter ->
                         reducer.setState(
                             ApplicationsMviState.fetched(
-                                data = filter.map { it.toUiModel() },
+                                content = ApplicationsMviContent(
+                                    data = filter.map { it.toUiModel() },
+                                ),
                                 query = query,
                             ),
                         )

@@ -12,7 +12,9 @@ class ApplicationDetalizationMviReducer(initial: ApplicationDetalizationMviState
             is ApplicationDetalizationMviEvent.ApplicationsFetchedMviEvent -> setState(
                 ApplicationDetalizationMviState(
                     loading = false,
-                    data = event.data,
+                    content = ApplicationDetalizationContent(
+                        data = event.data,
+                    ),
                     error = null,
                 ),
             )
