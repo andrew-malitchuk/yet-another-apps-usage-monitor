@@ -19,6 +19,8 @@ val applicationsFeatureModule = module {
         )
     }
     viewModel {
-        ApplicationDetalizationMvi()
+        ApplicationDetalizationMvi(
+            getApplicationUseCase = get(),
+        )
     }
 }

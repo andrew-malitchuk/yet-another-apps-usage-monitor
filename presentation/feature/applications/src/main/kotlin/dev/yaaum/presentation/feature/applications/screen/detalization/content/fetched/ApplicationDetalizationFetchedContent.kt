@@ -18,7 +18,7 @@ import dev.yaaum.presentation.core.ui.composable.card.DetailsHealthCard
 import dev.yaaum.presentation.core.ui.composable.card.SimplifiedHealthCard
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
-import dev.yaaum.presentation.feature.applications.screen.detalization.mvi.ApplicationDetalizationContent
+import dev.yaaum.presentation.feature.applications.screen.detalization.mvi.ApplicationDetalizationMviContent
 import dev.yaaum.presentation.feature.applications.screen.detalization.mvi.ApplicationDetalizationMviState
 import io.github.serpro69.kfaker.Faker
 
@@ -61,13 +61,14 @@ fun Preview_ApplicationDetalizationFetchedContent_Dark() {
     YaaumTheme(useDarkTheme = true) {
         ApplicationDetalizationFetchedContent(
             state = ApplicationDetalizationMviState.fetched(
-                content = ApplicationDetalizationContent(
+                content = ApplicationDetalizationMviContent(
                     data = ApplicationsUiModel(
                         uuid = null,
                         packageName = faker.quote.fortuneCookie(),
                         applicationName = faker.quote.fortuneCookie(),
                         isChosen = false,
                     ),
+                    packageName = faker.quote.fortuneCookie(),
                 ),
             ),
         )
@@ -81,13 +82,14 @@ fun Preview_ApplicationDetalizationFetchedContent_Light() {
     YaaumTheme(useDarkTheme = false) {
         ApplicationDetalizationFetchedContent(
             state = ApplicationDetalizationMviState.fetched(
-                content = ApplicationDetalizationContent(
+                content = ApplicationDetalizationMviContent(
                     data = ApplicationsUiModel(
                         uuid = null,
                         packageName = faker.quote.fortuneCookie(),
                         applicationName = faker.quote.fortuneCookie(),
                         isChosen = false,
                     ),
+                    packageName = faker.quote.fortuneCookie(),
                 ),
             ),
         )

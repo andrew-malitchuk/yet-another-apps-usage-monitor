@@ -14,7 +14,9 @@ import org.koin.androidx.compose.koinViewModel
 /**
  * Route for ApplicationDetalizationRoute
  */
-class ApplicationDetalizationRoute : Screen {
+class ApplicationDetalizationRoute(
+    val packageName: String,
+) : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
@@ -22,6 +24,8 @@ class ApplicationDetalizationRoute : Screen {
         val hostViewModel: HostViewModel = koinViewModel(
             viewModelStoreOwner = LocalContext.current as ComponentActivity,
         )
+
+        applicationDetalizationMvi.packageName = packageName
 
         ApplicationDetalizationScreen(
             navigator = navigator,

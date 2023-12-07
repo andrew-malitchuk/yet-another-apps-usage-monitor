@@ -21,10 +21,11 @@ fun MainScreen(
 ) {
     val isDarkMode = hostViewModel.currentThemeUiModel.value?.isDarkMode() ?: false
     val settingsScreen = rememberScreen(RouteGraph.SettingsScreen)
-//    val applicationsScreen = rememberScreen(RouteGraph.ApplicationsScreen)
     val applicationsScreen = rememberScreen(RouteGraph.ApplicationsScreen)
     val healthScreen = rememberScreen(RouteGraph.HealthScreen)
-    val applicationDetalizationScreen = rememberScreen(RouteGraph.ApplicationDetalizationScreen)
+    val applicationDetalizationScreen = rememberScreen(
+        RouteGraph.ApplicationDetalizationScreen("foo"),
+    )
 
     val topAppsWithHighestUsage =
         mainViewModel.topAppsWithHighestUsageStateFlow.collectAsStateWithLifecycle()

@@ -12,7 +12,9 @@ val applicationsScreenModule = screenModule {
     register<RouteGraph.ApplicationsScreen> {
         ApplicationsRoute()
     }
-    register<RouteGraph.ApplicationDetalizationScreen> {
-        ApplicationDetalizationRoute()
+    register<RouteGraph.ApplicationDetalizationScreen> { provider ->
+        ApplicationDetalizationRoute(
+            packageName = provider.packageName,
+        )
     }
 }

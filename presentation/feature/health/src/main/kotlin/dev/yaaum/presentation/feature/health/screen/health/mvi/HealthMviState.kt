@@ -1,41 +1,41 @@
-package dev.yaaum.presentation.feature.applications.screen.detalization.mvi
+package dev.yaaum.presentation.feature.health.screen.health.mvi
 
 import androidx.compose.runtime.Immutable
 import dev.yaaum.presentation.core.platform.mvi.state.MviState
 import dev.yaaum.presentation.core.ui.error.base.BaseUiError
 
 @Immutable
-data class ApplicationDetalizationMviState(
+data class HealthMviState(
     val loading: Boolean,
-    override val content: ApplicationDetalizationMviContent?,
+    override val content: HealthMviContent?,
     val error: BaseUiError?,
 ) : MviState() {
 
     companion object {
-        fun initial() = ApplicationDetalizationMviState(
+        fun initial() = HealthMviState(
             loading = true,
             content = null,
             error = null,
         )
 
         fun fetched(
-            content: ApplicationDetalizationMviContent,
-        ) = ApplicationDetalizationMviState(
+            content: HealthMviContent,
+        ) = HealthMviState(
             loading = false,
             content = content,
             error = null,
         )
 
-        fun error(error: BaseUiError?): ApplicationDetalizationMviState {
-            return ApplicationDetalizationMviState(
+        fun error(error: BaseUiError?): HealthMviState {
+            return HealthMviState(
                 loading = false,
                 content = null,
                 error = error,
             )
         }
 
-        fun loading(): ApplicationDetalizationMviState {
-            return ApplicationDetalizationMviState(
+        fun loading(): HealthMviState {
+            return HealthMviState(
                 loading = true,
                 content = null,
                 error = null,

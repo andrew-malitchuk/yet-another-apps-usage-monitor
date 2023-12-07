@@ -1,51 +1,82 @@
 package dev.yaaum.presentation.feature.health.screen.health
 
 import androidx.compose.runtime.Composable
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.navigator.Navigator
 import com.theapache64.rebugger.Rebugger
 import dev.yaaum.presentation.core.models.isDarkMode
 import dev.yaaum.presentation.core.navigation.RouteGraph
+import dev.yaaum.presentation.core.platform.mvi.MviPartialState
+import dev.yaaum.presentation.core.ui.composable.content.error.DefaultErrorContent
+import dev.yaaum.presentation.core.ui.composable.content.loading.DefaultLoadingContent
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.feature.health.screen.health.content.fetched.HealthFetchedContent
+import dev.yaaum.presentation.feature.health.screen.health.mvi.HealthMvi
+import dev.yaaum.presentation.feature.health.screen.health.mvi.HealthMviEffect
 import dev.yaaum.presentation.feature.main.screen.HostViewModel
 
 @Composable
-@Suppress("UnusedParameter", "UnusedPrivateProperty")
+@Suppress("UnusedPrivateProperty")
 fun HealthScreen(
     navigator: Navigator,
     hostViewModel: HostViewModel,
-    @Suppress("unused")
-    healthViewModel: HealthViewModel,
+    healthMvi: HealthMvi,
 ) {
     val mainScreen = rememberScreen(RouteGraph.MainScreen)
     val isDarkMode = hostViewModel.currentThemeUiModel.value?.isDarkMode() ?: false
     val applicationsScreen = rememberScreen(RouteGraph.ApplicationsScreen)
-    val applicationDetalizationScreen = rememberScreen(RouteGraph.ApplicationDetalizationScreen)
 
-    val applicationList = healthViewModel.applicationStateFlow.collectAsStateWithLifecycle()
-    healthViewModel.load()
+    val state by healthMvi.state.collectAsState()
+    val effect by healthMvi.effect.collectAsState(null)
 
     Rebugger(
         trackMap = mapOf(
             "navigator" to navigator,
             "hostViewModel" to hostViewModel,
-            "healthViewModel" to healthViewModel,
+            "healthMvi" to healthMvi,
             "mainScreen" to mainScreen,
-            "applicationsScreen" to applicationsScreen,
             "isDarkMode" to isDarkMode,
+            "applicationsScreen" to applicationsScreen,
+            "state" to state,
+            "effect" to effect,
         ),
     )
     YaaumTheme(isDarkMode) {
-        HealthFetchedContent(
-            applicationList = applicationList,
-            onActionClick = {
-                navigator.push(applicationsScreen)
-            },
-            onApplicationClick = {
-                navigator.push(applicationDetalizationScreen)
-            },
-        )
+        when (state.partialState) {
+            MviPartialState.FETCHED -> HealthFetchedContent(
+                state = state,
+                onActionClick = {
+                    navigator.push(applicationsScreen)
+                },
+                onApplicationClick = { application ->
+                    application.packageName?.let {
+                        healthMvi.sendEffect(
+                            HealthMviEffect.OpenApplicationDetalizationMviEffect(
+                                packageName = it,
+                            ),
+                        )
+                    }
+                },
+            )
+
+            MviPartialState.LOADING -> DefaultLoadingContent()
+            // TODO: fix me
+            else -> DefaultErrorContent(error = null)
+        }
+    }
+
+    when (effect) {
+        is HealthMviEffect.OpenApplicationDetalizationMviEffect ->
+            navigator.push(
+                rememberScreen(
+                    RouteGraph.ApplicationDetalizationScreen(
+                        packageName = (effect as HealthMviEffect.OpenApplicationDetalizationMviEffect).packageName,
+                    ),
+                ),
+            )
+
+        null -> {}
     }
 }

@@ -1,4 +1,4 @@
-package dev.yaaum.presentation.feature.health.screen.health.content.fetched.list
+package dev.yaaum.presentation.feature.health.screen.health.item
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -16,14 +16,12 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import dev.yaaum.presentation.core.models.ApplicationsUiModel
 import dev.yaaum.presentation.core.ui.composable.item.YaaumBaseListContainer
@@ -55,7 +53,7 @@ fun ApplicationListItem(
             // TODO: add sizes
             Box(
                 modifier = Modifier
-                    .size(48.dp)
+                    .size(YaaumTheme.icons.medium)
                     .fillMaxWidth()
                     .wrapContentHeight()
                     .clip(RoundedCornerShape(YaaumTheme.corners.medium))

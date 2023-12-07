@@ -6,8 +6,12 @@ import dev.yaaum.presentation.core.platform.mvi.event.MviEvent
 
 @Immutable
 sealed class ApplicationDetalizationMviEvent : MviEvent {
-    data object GetApplicationDetalizationMviEvent : ApplicationDetalizationMviEvent()
+    data class GetApplicationDetalizationMviEvent(
+        val packageName: String,
+    ) : ApplicationDetalizationMviEvent()
 
-    data class ApplicationsFetchedMviEvent(val data: ApplicationsUiModel) :
-        ApplicationDetalizationMviEvent()
+    data class ApplicationsFetchedMviEvent(
+        val data: ApplicationsUiModel,
+        val packageName: String,
+    ) : ApplicationDetalizationMviEvent()
 }
