@@ -1,7 +1,10 @@
 package dev.yaaum.presentation.feature.health.screen.health.mvi
 
 import dev.yaaum.domain.applications.GetUserAppsUseCase
+import dev.yaaum.presentation.core.localisation.UiText
+import dev.yaaum.presentation.core.models.toUiModel
 import dev.yaaum.presentation.core.platform.mvi.BaseMvi
+import dev.yaaum.presentation.core.ui.error.SwwUiError
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -26,33 +29,32 @@ class HealthMvi(
     }
 
     private fun loadApplication() {
-//        sendEvent(HealthMviEvent.ApplicationsFetchedMviEvent(message = "foobar"))
-        reducer.setState(
-            HealthMviState.fetched(
-                content = HealthMviContent(
-                    message = "foobar",
-                ),
-            ),
-        )
-
-        /*launch(
+        launch(
             request = {
                 getAllAppsUseCase()
             },
             result = { result ->
                 result?.fold({ error ->
-                    areApplicationsFailedStateFlow.setValue(error)
-                }, { result ->
-                    applicationStateFlow.setValue(result.map { it.toUiModel() })
+                    reducer.setState(
+                        HealthMviState.error(
+                            // TODO: fix me
+                            SwwUiError(
+                                UiText.DynamicString(error.message ?: ""),
+                                error.throwable,
+                            ),
+                        ),
+                    )
+                }, { data ->
+                    reducer.setState(
+                        HealthMviState.fetched(
+                            content = HealthMviContent(
+                                data = data.map { it.toUiModel() },
+                            ),
+                        ),
+                    )
                 })
             },
-            loading = {
-                areApplicationsLoadingStateFlow.setValue(it)
-            },
-            errorBlock = {
-                areApplicationsFailedStateFlow.setValue(it)
-            },
-        )*/
+        )
     }
 
     init {

@@ -1,9 +1,12 @@
 package dev.yaaum.presentation.feature.health.screen.health.content.fetched
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -16,10 +19,10 @@ import dev.yaaum.presentation.core.ui.composable.card.ProgressHealthCard
 import dev.yaaum.presentation.core.ui.composable.various.AnimatedDivider
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
+import dev.yaaum.presentation.feature.health.screen.health.item.ApplicationListItem
 import dev.yaaum.presentation.feature.health.screen.health.mvi.HealthMviState
 
 @Composable
-@Suppress("UnusedParameter")
 fun HealthFetchedContent(
     state: HealthMviState,
     onActionClick: (() -> Unit)? = null,
@@ -50,27 +53,27 @@ fun HealthFetchedContent(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally),
         )
-        /* LazyColumn(
-             modifier = Modifier
-                 .fillMaxWidth()
-                 .weight(1.0f)
-                 .background(YaaumTheme.colors.background)
-                 .padding(horizontal = YaaumTheme.spacing.medium),
-             state = lazyScrollState,
-             verticalArrangement = Arrangement
-                 .spacedBy(YaaumTheme.spacing.small),
-         ) {
-             applicationList.value?.let {
-                 items(
-                     count = it.size,
-                 ) { index ->
-                     ApplicationListItem(
-                         applicationsUiModel = it[index],
-                         onApplicationClick = onApplicationClick,
-                     )
-                 }
-             }
-         }*/
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1.0f)
+                .background(YaaumTheme.colors.background)
+                .padding(horizontal = YaaumTheme.spacing.medium),
+            state = lazyScrollState,
+            verticalArrangement = Arrangement
+                .spacedBy(YaaumTheme.spacing.small),
+        ) {
+            state.content?.data?.let { list ->
+                items(
+                    count = list.size,
+                ) { index ->
+                    ApplicationListItem(
+                        applicationsUiModel = list[index],
+                        onApplicationClick = onApplicationClick,
+                    )
+                }
+            }
+        }
         AnimatedDivider(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally),

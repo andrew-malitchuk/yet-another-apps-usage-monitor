@@ -49,7 +49,9 @@ class ApplicationsDataSourceImpl(
                 context.packageManager.queryIntentActivities(mainIntent, 0)
             }
             continuation.resume(
-                resolvedInfos.map { it.toApplicationSystemModel() },
+                resolvedInfos.map { it.toApplicationSystemModel(context) }.filterNot {
+                    it.applicationName == it.packageName
+                },
             )
         }
     }

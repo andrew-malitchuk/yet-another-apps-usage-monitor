@@ -10,15 +10,17 @@ class HealthMviReducer(initial: HealthMviState) :
     ) {
         when (event) {
             is HealthMviEvent.ApplicationsFetchedMviEvent -> setState(
-                HealthMviState.fetched(
+                oldState.copy(
+                    loading = false,
                     content = HealthMviContent(
-                        message = event.message,
+                        data = event.data,
                     ),
+                    error = null,
                 ),
             )
 
             HealthMviEvent.GetHealthMviEvent -> setState(
-                HealthMviState(
+                oldState.copy(
                     loading = true,
                     content = null,
                     error = null,

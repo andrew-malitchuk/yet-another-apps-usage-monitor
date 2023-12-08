@@ -29,10 +29,16 @@ fun ApplicationInfo.toApplicationSystemModel(context: Context): ApplicationSyste
     )
 }
 
-fun ResolveInfo.toApplicationSystemModel(): ApplicationSystemModel {
+fun ResolveInfo.toApplicationSystemModel(context: Context): ApplicationSystemModel {
+    val applicationName = try {
+        context.packageManager.getApplicationInfo(this.activityInfo.packageName, 0).loadLabel(context.packageManager)
+            .toString()
+    } catch (ex: Resources.NotFoundException) {
+        null
+    }
     return ApplicationSystemModel(
         uuid = null,
-        packageName = this.resolvePackageName,
-        applicationName = this.activityInfo.packageName,
+        packageName = this.activityInfo.packageName,
+        applicationName = applicationName,
     )
 }
