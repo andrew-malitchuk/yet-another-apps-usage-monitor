@@ -1,11 +1,12 @@
 package dev.yaaum.presentation.feature.host
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.navigator.Navigator
-import dev.yaaum.presentation.core.models.isDarkMode
 import dev.yaaum.presentation.core.navigation.RouteGraph
 import dev.yaaum.presentation.core.platform.activity.BaseActivity
 import dev.yaaum.presentation.core.ui.splash.exitAnimation
@@ -32,13 +33,13 @@ class HostActivity : BaseActivity() {
 
     @Composable
     override fun ConfigureUi() {
-        val isDarkMode = hostViewModel.currentThemeUiModel.value?.isDarkMode() ?: false
+        val theme by hostViewModel.currentThemeUiModel.collectAsState()
         val isOnboardingFinished = hostViewModel.isOnboardingFinished.collectAsStateWithLifecycle()
         val isSetupLoading = hostViewModel.isSetupLoadingStateFlow.collectAsStateWithLifecycle(null)
 
         if (isSetupLoading.value == false) {
             shouldKeepSplash = false
-            YaaumTheme(isDarkMode) {
+            YaaumTheme(theme = theme) {
 //                val destinationAfterSplash = if (isOnboardingFinished.value == true) {
                 val destinationAfterSplash = if (false) {
                     rememberScreen(RouteGraph.MainScreen)

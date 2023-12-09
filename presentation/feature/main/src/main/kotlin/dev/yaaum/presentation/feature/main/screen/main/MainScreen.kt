@@ -1,11 +1,12 @@
 package dev.yaaum.presentation.feature.main.screen.main
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.navigator.Navigator
 import com.theapache64.rebugger.Rebugger
-import dev.yaaum.presentation.core.models.isDarkMode
 import dev.yaaum.presentation.core.navigation.RouteGraph
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.feature.main.screen.HostViewModel
@@ -19,7 +20,7 @@ fun MainScreen(
     hostViewModel: HostViewModel,
     mainViewModel: MainViewModel,
 ) {
-    val isDarkMode = hostViewModel.currentThemeUiModel.value?.isDarkMode() ?: false
+    val theme by hostViewModel.currentThemeUiModel.collectAsState()
     val settingsScreen = rememberScreen(RouteGraph.SettingsScreen)
     val applicationsScreen = rememberScreen(RouteGraph.ApplicationsScreen)
     val healthScreen = rememberScreen(RouteGraph.HealthScreen)
@@ -37,12 +38,12 @@ fun MainScreen(
     Rebugger(
         trackMap = mapOf(
             "navigator" to navigator,
-            "isDarkMode" to isDarkMode,
+            "theme" to theme,
             "topAppsWithHighestUsageStateFlow" to topAppsWithHighestUsage,
             "applicationDetalizationScreen" to applicationDetalizationScreen,
         ),
     )
-    YaaumTheme(useDarkTheme = isDarkMode) {
+    YaaumTheme(theme = theme) {
 //        ErrorContent(
 //            "Lorem ipsum",
 //            "Dolor sit amen"

@@ -6,7 +6,6 @@ import androidx.compose.runtime.getValue
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.navigator.Navigator
 import com.theapache64.rebugger.Rebugger
-import dev.yaaum.presentation.core.models.isDarkMode
 import dev.yaaum.presentation.core.navigation.RouteGraph
 import dev.yaaum.presentation.core.platform.mvi.MviPartialState
 import dev.yaaum.presentation.core.ui.composable.content.error.DefaultErrorContent
@@ -25,7 +24,7 @@ fun HealthScreen(
     healthMvi: HealthMvi,
 ) {
     val mainScreen = rememberScreen(RouteGraph.MainScreen)
-    val isDarkMode = hostViewModel.currentThemeUiModel.value?.isDarkMode() ?: false
+    val theme by hostViewModel.currentThemeUiModel.collectAsState()
     val applicationsScreen = rememberScreen(RouteGraph.ApplicationsScreen)
 
     val state by healthMvi.state.collectAsState()
@@ -37,13 +36,13 @@ fun HealthScreen(
             "hostViewModel" to hostViewModel,
             "healthMvi" to healthMvi,
             "mainScreen" to mainScreen,
-            "isDarkMode" to isDarkMode,
+            "theme" to theme,
             "applicationsScreen" to applicationsScreen,
             "state" to state,
             "effect" to effect,
         ),
     )
-    YaaumTheme(isDarkMode) {
+    YaaumTheme(theme = theme) {
         when (state.partialState) {
             MviPartialState.FETCHED -> HealthFetchedContent(
                 state = state,

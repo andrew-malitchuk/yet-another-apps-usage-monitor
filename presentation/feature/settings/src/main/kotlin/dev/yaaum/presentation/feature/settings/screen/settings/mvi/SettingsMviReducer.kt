@@ -8,7 +8,7 @@ class SettingsMviReducer(initial: SettingsMviState) :
         when (event) {
             is SettingsMviEvent.ChangeThemeMviEvent -> setState(
                 oldState.copy(
-                    loading = true,
+                    loading = false,
                     content = SettingsMviContent(
                         data = event.theme,
                     ),

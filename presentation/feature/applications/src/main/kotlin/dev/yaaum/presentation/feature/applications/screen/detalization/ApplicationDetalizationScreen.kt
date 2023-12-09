@@ -5,7 +5,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import cafe.adriel.voyager.navigator.Navigator
 import com.theapache64.rebugger.Rebugger
-import dev.yaaum.presentation.core.models.isDarkMode
 import dev.yaaum.presentation.core.platform.mvi.MviPartialState
 import dev.yaaum.presentation.core.ui.composable.content.loading.DefaultLoadingContent
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
@@ -20,7 +19,7 @@ fun ApplicationDetalizationScreen(
     hostViewModel: HostViewModel,
     applicationDetalizationMvi: ApplicationDetalizationMvi,
 ) {
-    val isDarkMode = hostViewModel.currentThemeUiModel.value?.isDarkMode() ?: false
+    val theme by hostViewModel.currentThemeUiModel.collectAsState()
 
     val state by applicationDetalizationMvi.state.collectAsState()
     val effect by applicationDetalizationMvi.effect.collectAsState(null)
@@ -30,13 +29,13 @@ fun ApplicationDetalizationScreen(
             "navigator" to navigator,
             "hostViewModel" to hostViewModel,
             "applicationDetalizationMvi" to applicationDetalizationMvi,
-            "isDarkMode" to isDarkMode,
+            "theme" to theme,
             "state" to state,
             "effect" to effect,
         ),
     )
 
-    YaaumTheme(isDarkMode) {
+    YaaumTheme(theme = theme) {
         when (state.partialState) {
             MviPartialState.FETCHED -> ApplicationDetalizationFetchedContent(state = state)
             else -> DefaultLoadingContent()

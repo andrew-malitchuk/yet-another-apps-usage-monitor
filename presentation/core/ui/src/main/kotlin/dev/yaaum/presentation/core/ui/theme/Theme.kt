@@ -8,17 +8,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import dev.yaaum.presentation.core.models.ThemeUiModel
 import dev.yaaum.presentation.core.ui.theme.ext.toYaaumColors
 
 @Composable
 @Suppress("FunctionNaming", "unused", "OptionalWhenBraces")
 fun YaaumTheme(
     useDarkTheme: Boolean = isSystemInDarkTheme(),
+    theme: ThemeUiModel? = null,
     content: @Composable () -> Unit,
 ) {
+    //region TODO: recode
     val systemUiController = rememberSystemUiController()
-
-    //
     val dynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
     val colorScheme = when {
         dynamicColor && useDarkTheme -> {
@@ -34,13 +35,17 @@ fun YaaumTheme(
         }
     }
     colorScheme?.toYaaumColors() ?: baseDarkColorPalette
-    //
-
-    val colors = if (useDarkTheme) {
-        baseDarkColorPalette
-    } else {
-        baseLightColorPalette
+    val colors = when (theme) {
+        ThemeUiModel.DARK -> baseDarkColorPalette
+        ThemeUiModel.LIGHT -> baseLightColorPalette
+        ThemeUiModel.DYNAMIC -> colorScheme?.toYaaumColors() ?: baseDarkColorPalette
+        else -> if (isSystemInDarkTheme()) {
+            baseDarkColorPalette
+        } else {
+            baseLightColorPalette
+        }
     }
+    //endregion TODO: recode
 
     CompositionLocalProvider(
         LocalYaaumColors provides colors,

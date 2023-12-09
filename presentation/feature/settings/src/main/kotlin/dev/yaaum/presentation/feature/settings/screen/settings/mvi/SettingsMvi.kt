@@ -1,11 +1,19 @@
 package dev.yaaum.presentation.feature.settings.screen.settings.mvi
 
+import arrow.core.raise.recover
+import dev.yaaum.domain.configuration.SetThemeUseCase
+import dev.yaaum.presentation.core.localisation.UiText
+import dev.yaaum.presentation.core.models.ThemeUiModel
 import dev.yaaum.presentation.core.platform.mvi.BaseMvi
+import dev.yaaum.presentation.core.ui.error.SwwUiError
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 
-class SettingsMvi : BaseMvi<SettingsMviState, SettingsMviEvent, SettingsMviEffect>() {
+class SettingsMvi(
+    private val setThemeUseCase: SetThemeUseCase,
+) : BaseMvi<SettingsMviState, SettingsMviEvent, SettingsMviEffect>() {
 
     override val state: StateFlow<SettingsMviState>
         get() = reducer.state
@@ -14,27 +22,52 @@ class SettingsMvi : BaseMvi<SettingsMviState, SettingsMviEvent, SettingsMviEffec
 
     override val reducer = SettingsMviReducer(SettingsMviState.loading())
 
+    var themeStateFlow = MutableStateFlow<ThemeUiModel?>(null)
+
     override fun innerEventProcessing(event: SettingsMviEvent) {
         when (event) {
-            is SettingsMviEvent.ChangeThemeMviEvent -> setTheme()
+            is SettingsMviEvent.ChangeThemeMviEvent -> updateTheme(event.theme)
             is SettingsMviEvent.GetThemeMviEvent -> getCurrentTheme()
-            is SettingsMviEvent.ThemeFetchedMviEvent -> updateTheme(event.theme)
+            is SettingsMviEvent.ThemeFetchedMviEvent -> Unit
         }
     }
 
     private fun updateTheme(theme: String) {
-        reducer.setState(
-            SettingsMviState(
-                loading = false,
-                content = SettingsMviContent(
-                    data = theme,
-                ),
-                error = null,
-            ),
+        launch(
+            request = {
+                recover(
+                    {
+                        setThemeUseCase(theme)
+                        this@SettingsMvi.themeStateFlow.setValue(
+                            ThemeUiModel.entries.firstOrNull { it.theme == theme },
+                        )
+                    },
+                    {
+                        reducer.setState(
+                            SettingsMviState.error(
+                                // TODO: fix me
+                                SwwUiError(
+                                    UiText.DynamicString(it.message ?: ""),
+                                    it.throwable,
+                                ),
+                            ),
+                        )
+                    },
+                )
+            },
+            errorBlock = {
+                reducer.setState(
+                    SettingsMviState.error(
+                        // TODO: fix me
+                        SwwUiError(
+                            UiText.DynamicString(it.message ?: ""),
+                            it,
+                        ),
+                    ),
+                )
+            },
         )
     }
-
-    private fun setTheme() = Unit
 
     private fun getCurrentTheme() {
         reducer.sendEvent(

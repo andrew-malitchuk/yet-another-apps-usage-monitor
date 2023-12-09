@@ -1,7 +1,5 @@
 package dev.yaaum.presentation.feature.main.screen
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import dev.yaaum.domain.configuration.GetCurrentConfigurationUseCase
 import dev.yaaum.domain.configuration.model.ConfigurationDomainModel
 import dev.yaaum.presentation.core.models.ConfigurationUiModel
@@ -25,8 +23,8 @@ class HostViewModel(
     // TODO: recode using combine when other stuff will be loaded soon
     var isSetupLoadingStateFlow: Flow<Boolean?> = isConfigurationLoadingStateFlow
 
-    var currentThemeUiModel: MutableState<ThemeUiModel?> =
-        mutableStateOf(null)
+    var currentThemeUiModel: StateFlow<ThemeUiModel?> =
+        MutableStateFlow(null)
 
     var isOnboardingFinished: StateFlow<Boolean?> = MutableStateFlow(null)
 
@@ -47,7 +45,7 @@ class HostViewModel(
                     isOnboardingFinished.setValue(it.isOnboardingFinished)
                 }
                 configurationStateFlow.setValue(result?.toUiModel())
-                currentThemeUiModel.value = result?.toUiModel()?.themeMode
+                currentThemeUiModel.setValue(result?.toUiModel()?.themeMode)
             },
             errorBlock = {
                 it.toString()
