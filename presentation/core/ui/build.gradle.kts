@@ -19,9 +19,10 @@ dependencies {
     implementation(libs.constraintlayout.compose)
     implementation(libs.foundation.android)
     implementation(libs.accompanist.drawablepainter)
-
+    implementation(libs.ui.util)
 
     implementation(project(":common:core"))
     implementation(project(":presentation:core:models"))
     implementation(project(":presentation:core:localisation"))
+
 }

@@ -1,4 +1,4 @@
-package dev.yaaum.presentation.feature.applications.screen.applications.item
+package dev.yaaum.presentation.feature.applications.screen.applications.item.fetched
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
@@ -38,7 +38,8 @@ import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 import io.github.serpro69.kfaker.Faker
 
 @Composable
-fun ApplicationListItem(
+fun ApplicationFetchedListItem(
+    modifier: Modifier = Modifier,
     applicationsUiModel: ApplicationsUiModel,
     onApplicationClick: ((ApplicationsUiModel, Boolean) -> Unit)? = null,
 ) {
@@ -54,7 +55,7 @@ fun ApplicationListItem(
     )
 
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
             .clip(RoundedCornerShape(YaaumTheme.corners.medium))
@@ -130,7 +131,7 @@ fun ApplicationListItem(
 fun Preview_ApplicationListItem_Dark() {
     val faker = Faker()
     YaaumTheme(useDarkTheme = true) {
-        ApplicationListItem(
+        ApplicationFetchedListItem(
             applicationsUiModel = ApplicationsUiModel(
                 uuid = 1,
                 packageName = faker.quote.fortuneCookie(),
@@ -145,7 +146,7 @@ fun Preview_ApplicationListItem_Dark() {
 fun Preview_ApplicationListItem_Light() {
     val faker = Faker()
     YaaumTheme(useDarkTheme = false) {
-        ApplicationListItem(
+        ApplicationFetchedListItem(
             applicationsUiModel = ApplicationsUiModel(
                 uuid = 1,
                 packageName = faker.quote.fortuneCookie(),

@@ -2,6 +2,7 @@ package dev.yaaum.presentation.feature.applications.screen.applications.content.
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -29,7 +30,8 @@ import dev.yaaum.presentation.core.ui.composable.input.YaaumBasicTextField
 import dev.yaaum.presentation.core.ui.composable.various.AnimatedDivider
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
-import dev.yaaum.presentation.feature.applications.screen.applications.item.ApplicationListItem
+import dev.yaaum.presentation.feature.applications.screen.applications.content.loading.ApplicationsLoadingContent
+import dev.yaaum.presentation.feature.applications.screen.applications.item.fetched.ApplicationFetchedListItem
 import dev.yaaum.presentation.feature.applications.screen.applications.mvi.ApplicationsMviContent
 import dev.yaaum.presentation.feature.applications.screen.applications.mvi.ApplicationsMviState
 import io.github.serpro69.kfaker.Faker
@@ -86,38 +88,57 @@ fun ApplicationsFetchedContent(
 
             )
         }
-        AnimatedDivider(
-            state = lazyScrollState,
+
+        Box(
             modifier = Modifier
-                .align(Alignment.CenterHorizontally),
-        )
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1.0f)
-                .background(YaaumTheme.colors.background)
-                .padding(horizontal = YaaumTheme.spacing.medium),
-            state = lazyScrollState,
-            verticalArrangement = Arrangement
-                .spacedBy(YaaumTheme.spacing.small),
+                .weight(1.0f),
         ) {
-            state.content?.data?.let { list ->
-                items(
-                    count = list.size ?: 0,
-                ) { index ->
-                    ApplicationListItem(
-                        applicationsUiModel = list[index],
-                        onApplicationClick = onApplicationClick,
+            if (state.content?.data?.isEmpty() == true) {
+                Column {
+                    AnimatedDivider(
+                        state = lazyScrollState,
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally),
+                    )
+                    ApplicationsLoadingContent()
+                }
+            } else {
+                Column {
+                    AnimatedDivider(
+                        state = lazyScrollState,
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally),
+                    )
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1.0f)
+                            .background(YaaumTheme.colors.background)
+                            .padding(horizontal = YaaumTheme.spacing.medium),
+                        state = lazyScrollState,
+                        verticalArrangement = Arrangement
+                            .spacedBy(YaaumTheme.spacing.small),
+                    ) {
+                        state.content?.data?.let { list ->
+                            items(
+                                count = list.size ?: 0,
+                            ) { index ->
+                                ApplicationFetchedListItem(
+                                    applicationsUiModel = list[index],
+                                    onApplicationClick = onApplicationClick,
+                                )
+                            }
+                        }
+                    }
+                    AnimatedDivider(
+                        state = lazyScrollState,
+                        isInverted = true,
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally),
                     )
                 }
             }
         }
-        AnimatedDivider(
-            state = lazyScrollState,
-            isInverted = true,
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally),
-        )
     }
 }
 
