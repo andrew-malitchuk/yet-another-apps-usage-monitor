@@ -10,7 +10,7 @@ class ApplicationsMviReducer(initial: ApplicationsMviState) :
                 oldState.copy(
                     loading = false,
                     content = ApplicationsMviContent(
-                        data = emptyList(),
+                        data = null,
                     ),
                     error = null,
                 ),
@@ -31,6 +31,16 @@ class ApplicationsMviReducer(initial: ApplicationsMviState) :
                     loading = false,
                     content = ApplicationsMviContent(
                         data = emptyList(),
+                    ),
+                    error = null,
+                ),
+            )
+
+            is ApplicationsMviEvent.OnQueryChangedMviEvent -> setState(
+                oldState.copy(
+                    loading = false,
+                    content = ApplicationsMviContent(
+                        data = null,
                     ),
                     error = null,
                 ),

@@ -30,13 +30,14 @@ import dev.yaaum.presentation.core.ui.composable.input.YaaumBasicTextField
 import dev.yaaum.presentation.core.ui.composable.various.AnimatedDivider
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
+import dev.yaaum.presentation.feature.applications.screen.applications.content.empty.ApplicationsEmptyContent
 import dev.yaaum.presentation.feature.applications.screen.applications.content.loading.ApplicationsLoadingContent
 import dev.yaaum.presentation.feature.applications.screen.applications.item.fetched.ApplicationFetchedListItem
 import dev.yaaum.presentation.feature.applications.screen.applications.mvi.ApplicationsMviContent
 import dev.yaaum.presentation.feature.applications.screen.applications.mvi.ApplicationsMviState
 import io.github.serpro69.kfaker.Faker
 
-@Suppress("EmptyFunctionBlock")
+@Suppress("EmptyFunctionBlock", "LongMethod")
 @Composable
 fun ApplicationsFetchedContent(
     state: ApplicationsMviState,
@@ -93,50 +94,62 @@ fun ApplicationsFetchedContent(
             modifier = Modifier
                 .weight(1.0f),
         ) {
-            if (state.content?.data?.isEmpty() == true) {
-                Column {
-                    AnimatedDivider(
-                        state = lazyScrollState,
-                        modifier = Modifier
-                            .align(Alignment.CenterHorizontally),
-                    )
-                    ApplicationsLoadingContent()
-                }
-            } else {
-                Column {
-                    AnimatedDivider(
-                        state = lazyScrollState,
-                        modifier = Modifier
-                            .align(Alignment.CenterHorizontally),
-                    )
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .weight(1.0f)
-                            .background(YaaumTheme.colors.background)
-                            .padding(horizontal = YaaumTheme.spacing.medium),
-                        state = lazyScrollState,
-                        verticalArrangement = Arrangement
-                            .spacedBy(YaaumTheme.spacing.small),
-                    ) {
-                        state.content?.data?.let { list ->
-                            items(
-                                count = list.size ?: 0,
-                            ) { index ->
-                                ApplicationFetchedListItem(
-                                    applicationsUiModel = list[index],
-                                    onApplicationClick = onApplicationClick,
-                                )
+            when {
+                (state.content?.data?.isEmpty() == true) ->
+                    Column {
+                        AnimatedDivider(
+                            state = lazyScrollState,
+                            modifier = Modifier
+                                .align(Alignment.CenterHorizontally),
+                        )
+                        ApplicationsEmptyContent()
+                    }
+
+                (state.content?.data == null) ->
+                    Column {
+                        AnimatedDivider(
+                            state = lazyScrollState,
+                            modifier = Modifier
+                                .align(Alignment.CenterHorizontally),
+                        )
+                        ApplicationsLoadingContent()
+                    }
+
+                else ->
+                    Column {
+                        AnimatedDivider(
+                            state = lazyScrollState,
+                            modifier = Modifier
+                                .align(Alignment.CenterHorizontally),
+                        )
+                        LazyColumn(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .weight(1.0f)
+                                .background(YaaumTheme.colors.background)
+                                .padding(horizontal = YaaumTheme.spacing.medium),
+                            state = lazyScrollState,
+                            verticalArrangement = Arrangement
+                                .spacedBy(YaaumTheme.spacing.small),
+                        ) {
+                            state.content?.data?.let { list ->
+                                items(
+                                    count = list.size ?: 0,
+                                ) { index ->
+                                    ApplicationFetchedListItem(
+                                        applicationsUiModel = list[index],
+                                        onApplicationClick = onApplicationClick,
+                                    )
+                                }
                             }
                         }
+                        AnimatedDivider(
+                            state = lazyScrollState,
+                            isInverted = true,
+                            modifier = Modifier
+                                .align(Alignment.CenterHorizontally),
+                        )
                     }
-                    AnimatedDivider(
-                        state = lazyScrollState,
-                        isInverted = true,
-                        modifier = Modifier
-                            .align(Alignment.CenterHorizontally),
-                    )
-                }
             }
         }
     }
