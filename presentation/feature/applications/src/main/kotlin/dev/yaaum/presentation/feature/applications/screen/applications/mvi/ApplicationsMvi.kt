@@ -52,6 +52,8 @@ class ApplicationsMvi(
                     application = event.application,
                     isChosen = event.isChosen,
                 )
+
+            is ApplicationsMviEvent.ApplicationsUpdatedFetchedMviEvent -> Unit
         }
     }
 
@@ -105,7 +107,7 @@ class ApplicationsMvi(
         )
     }
 
-    fun changeApplicationStatus(application: ApplicationsUiModel, isChosen: Boolean) {
+    private fun changeApplicationStatus(application: ApplicationsUiModel, isChosen: Boolean) {
         launch(
             request = {
                 arrow.core.raise.recover({
@@ -114,8 +116,10 @@ class ApplicationsMvi(
                     } else {
                         removeAppFromChosenUseCase(application.toDomainModel())
                     }
+
                     // TODO: fix
-                    sendEvent(ApplicationsMviEvent.GetApplicationsMviEvent)
+                    val foo = application.copy(isChosen = isChosen)
+                    sendEvent(ApplicationsMviEvent.ApplicationsUpdatedFetchedMviEvent(foo))
                 }, {
                     // TODO: fix
                     it.toString()

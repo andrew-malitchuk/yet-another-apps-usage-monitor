@@ -75,16 +75,5 @@ fun ApplicationsScreen(
             MviPartialState.ERROR -> DefaultErrorContent(error = state.error)
             MviPartialState.EMPTY -> DefaultEmptyContent()
         }
-
-        /*ApplicationsFetchedContent(
-            applicationList = applicationList,
-            onBackClick = {
-                applicationsViewModel.reset()
-                navigator.pop()
-            },
-            onTextChange = applicationsViewModel::updateFilterQuery,
-            onSideChange = applicationsViewModel::updateFilterSort,
-            onApplicationClick = applicationsViewModel::changeApplicationStatus,
-        )*/
     }
 }

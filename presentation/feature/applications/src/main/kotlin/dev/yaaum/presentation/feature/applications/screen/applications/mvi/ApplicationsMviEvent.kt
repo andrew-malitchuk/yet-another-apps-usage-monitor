@@ -20,4 +20,8 @@ sealed class ApplicationsMviEvent : MviEvent {
         val application: ApplicationsUiModel,
         val isChosen: Boolean,
     ) : ApplicationsMviEvent()
+
+    data class ApplicationsUpdatedFetchedMviEvent(
+        val application: ApplicationsUiModel,
+    ) : ApplicationsMviEvent()
 }
