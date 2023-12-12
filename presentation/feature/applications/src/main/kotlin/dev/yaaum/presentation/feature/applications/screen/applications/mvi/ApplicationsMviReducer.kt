@@ -33,6 +33,17 @@ class ApplicationsMviReducer(initial: ApplicationsMviState) :
                 ),
             )
 
+            is ApplicationsMviEvent.OnSortChangedMviEvent -> setState(
+                oldState.copy(
+                    loading = false,
+                    content = ApplicationsMviContent(
+                        data = null,
+                    ),
+                    error = null,
+                    sort = event.sort,
+                ),
+            )
+
             is ApplicationsMviEvent.OnQueryChangedMviEvent -> setState(
                 oldState.copy(
                     loading = false,
@@ -40,6 +51,7 @@ class ApplicationsMviReducer(initial: ApplicationsMviState) :
                         data = null,
                     ),
                     error = null,
+                    query = event.query,
                 ),
             )
 
@@ -64,16 +76,6 @@ class ApplicationsMviReducer(initial: ApplicationsMviState) :
                     ),
                 )
             }
-
-            else -> setState(
-                oldState.copy(
-                    loading = false,
-                    content = ApplicationsMviContent(
-                        data = emptyList(),
-                    ),
-                    error = null,
-                ),
-            )
         }
     }
 }

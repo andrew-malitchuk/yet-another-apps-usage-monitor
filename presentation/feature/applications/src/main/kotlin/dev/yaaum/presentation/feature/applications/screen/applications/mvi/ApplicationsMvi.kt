@@ -38,13 +38,13 @@ class ApplicationsMvi(
     override fun innerEventProcessing(event: ApplicationsMviEvent) {
         when (event) {
             is ApplicationsMviEvent.ApplicationsFetchedMviEvent -> Unit
-            ApplicationsMviEvent.GetApplicationsMviEvent -> filter()
+            ApplicationsMviEvent.GetApplicationsMviEvent -> filter(event)
             is ApplicationsMviEvent.OnSortChangedMviEvent -> filter(
-                order = event.sort,
+                event = event,
             )
 
             is ApplicationsMviEvent.OnQueryChangedMviEvent -> filter(
-                query = event.query,
+                event = event,
             )
 
             is ApplicationsMviEvent.OnApplicationStatusChangedEvent ->
@@ -57,13 +57,24 @@ class ApplicationsMvi(
         }
     }
 
-    private fun filter(query: String? = null, order: SortOrder? = null) {
+    private fun filter(event: ApplicationsMviEvent) {
         launch(
             request = {
-                filterAllApplicationWithChosenUseCase(
-                    query,
-                    order ?: SortOrder.ASC,
-                )
+                when (event) {
+                    is ApplicationsMviEvent.OnQueryChangedMviEvent,
+                    is ApplicationsMviEvent.OnSortChangedMviEvent,
+                    ->
+                        filterAllApplicationWithChosenUseCase(
+                            query = reducer.state.value.query,
+                            sortOrder = reducer.state.value.sort ?: SortOrder.ASC,
+                        )
+
+                    else ->
+                        filterAllApplicationWithChosenUseCase(
+                            query = "",
+                            sortOrder = SortOrder.ASC,
+                        )
+                }
             },
             result = { result ->
                 result?.fold(
@@ -84,7 +95,8 @@ class ApplicationsMvi(
                                 content = ApplicationsMviContent(
                                     data = filter.map { it.toUiModel() },
                                 ),
-                                query = query,
+                                query = reducer.state.value.query,
+                                sort = reducer.state.value.sort ?: SortOrder.ASC,
                             ),
                         )
                     },

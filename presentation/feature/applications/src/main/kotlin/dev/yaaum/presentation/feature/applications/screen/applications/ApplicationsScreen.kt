@@ -69,6 +69,9 @@ fun ApplicationsScreen(
                         ),
                     )
                 },
+                onBackClick = {
+                    navigator.pop()
+                },
             )
 
             MviPartialState.LOADING -> DefaultLoadingContent()

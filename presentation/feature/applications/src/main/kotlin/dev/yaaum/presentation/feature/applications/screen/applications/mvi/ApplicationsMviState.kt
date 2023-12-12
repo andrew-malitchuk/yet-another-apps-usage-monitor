@@ -1,6 +1,7 @@
 package dev.yaaum.presentation.feature.applications.screen.applications.mvi
 
 import androidx.compose.runtime.Immutable
+import dev.yaaum.domain.core.model.SortOrder
 import dev.yaaum.presentation.core.platform.mvi.state.MviState
 import dev.yaaum.presentation.core.ui.error.base.BaseUiError
 
@@ -10,6 +11,7 @@ data class ApplicationsMviState(
     override val content: ApplicationsMviContent?,
     val error: BaseUiError?,
     val query: String? = null,
+    val sort: SortOrder? = null,
 ) : MviState() {
 
     companion object {
@@ -22,11 +24,13 @@ data class ApplicationsMviState(
         fun fetched(
             content: ApplicationsMviContent?,
             query: String?,
+            sort: SortOrder?,
         ) = ApplicationsMviState(
             loading = false,
             content = content,
             error = null,
             query = query,
+            sort = sort,
         )
 
         fun error(error: BaseUiError?): ApplicationsMviState {

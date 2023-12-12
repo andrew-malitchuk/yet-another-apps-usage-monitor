@@ -35,9 +35,9 @@ import dev.yaaum.presentation.core.ui.composable.various.placeholder.shimmer
  * Remove focus from keyboard
  */
 @OptIn(ExperimentalLayoutApi::class)
-fun Modifier.clearFocusOnKeyboardDismiss(): Modifier = composed {
-    var isFocused by remember { mutableStateOf(false) }
-    var keyboardAppearedSinceLastFocused by remember { mutableStateOf(false) }
+fun Modifier.clearFocusOnKeyboardDismiss(initial: Boolean = false): Modifier = composed {
+    var isFocused by remember { mutableStateOf(initial) }
+    var keyboardAppearedSinceLastFocused by remember { mutableStateOf(initial) }
     if (isFocused) {
         val imeIsVisible = WindowInsets.isImeVisible
         val focusManager = LocalFocusManager.current

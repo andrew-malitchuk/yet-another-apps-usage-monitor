@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import dev.yaaum.domain.core.model.SortOrder
 import dev.yaaum.presentation.core.localisation.UiText
 import dev.yaaum.presentation.core.models.ApplicationsUiModel
 import dev.yaaum.presentation.core.ui.R
@@ -78,6 +79,10 @@ fun ApplicationsFetchedContent(
                     text = it
                     onTextChange?.invoke(it)
                 },
+                onCleanTextClick = {
+                    text = ""
+                    onTextChange?.invoke("")
+                },
             )
             Spacer(modifier = Modifier.width(YaaumTheme.spacing.extraSmall))
             YaaumDoubleSideButton(
@@ -86,7 +91,6 @@ fun ApplicationsFetchedContent(
                 sideA = R.drawable.icon_sort_ascending_bold_24,
                 sideB = R.drawable.icon_sort_descending_bold_24,
                 onSideChange = onSideChange,
-
             )
         }
 
@@ -132,9 +136,9 @@ fun ApplicationsFetchedContent(
                             verticalArrangement = Arrangement
                                 .spacedBy(YaaumTheme.spacing.small),
                         ) {
-                            state.content?.data?.let { list ->
+                            state.content.data.let { list ->
                                 items(
-                                    count = list.size ?: 0,
+                                    count = list.size,
                                 ) { index ->
                                     ApplicationFetchedListItem(
                                         applicationsUiModel = list[index],
@@ -172,7 +176,8 @@ fun Preview_ApplicationsFetchedContent_Dark() {
                         ),
                     ),
                 ),
-                faker.quote.fortuneCookie(),
+                query = faker.quote.fortuneCookie(),
+                sort = SortOrder.ASC,
             ),
         )
     }
@@ -195,7 +200,8 @@ fun Preview_ApplicationsFetchedContent_Light() {
                         ),
                     ),
                 ),
-                faker.quote.fortuneCookie(),
+                query = faker.quote.fortuneCookie(),
+                sort = SortOrder.ASC,
             ),
         )
     }
