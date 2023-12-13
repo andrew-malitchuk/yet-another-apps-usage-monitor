@@ -39,7 +39,7 @@ sealed class RouteGraph : ScreenProvider {
     /**
      * `:presentation:feature:applications`
      */
-    data object ApplicationDetalizationScreen : RouteGraph()
+    data class ApplicationDetalizationScreen(val packageName: String) : RouteGraph()
 
     /**
      * `:presentation:feature:statistics`

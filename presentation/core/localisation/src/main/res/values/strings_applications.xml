@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="applications_title">Your applications</string>
+    <string name="applications_empty_title">No result!</string>
+    <string name="applications_empty_description">Please, change your search query</string>
+</resources>

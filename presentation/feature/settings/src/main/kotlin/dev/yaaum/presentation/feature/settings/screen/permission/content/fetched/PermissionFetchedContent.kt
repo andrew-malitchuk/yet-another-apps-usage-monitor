@@ -18,6 +18,7 @@ import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 import dev.yaaum.presentation.feature.settings.screen.permission.item.PermissionListItem
 import dev.yaaum.presentation.feature.settings.screen.permission.mvi.PermissionConfigure
+import dev.yaaum.presentation.feature.settings.screen.permission.mvi.PermissionMviContent
 import dev.yaaum.presentation.feature.settings.screen.permission.mvi.PermissionMviState
 
 @Composable
@@ -64,7 +65,7 @@ fun PermissionFetchedContent(
                     .StringResource(dev.yaaum.presentation.core.localisation.R.string.settings_permission_notification)
                     .asString(LocalContext.current),
                 icon = R.drawable.icon_notification_bold_24,
-                initValue = state.data?.isNotificationPermissionGranted ?: false,
+                initValue = state.content?.data?.isNotificationPermissionGranted ?: false,
                 onPermissionClick = {
                     onPermissionChangeState?.invoke(
                         PermissionChangeState.OnNotificationStateChanged(
@@ -78,7 +79,7 @@ fun PermissionFetchedContent(
                     .StringResource(dev.yaaum.presentation.core.localisation.R.string.settings_permission_usage)
                     .asString(LocalContext.current),
                 icon = R.drawable.icon_chart_pie_slice_bold_24,
-                initValue = state.data?.isAppUsagePermissionGranted ?: false,
+                initValue = state.content?.data?.isAppUsagePermissionGranted ?: false,
                 onPermissionClick = {
                     onPermissionChangeState?.invoke(
                         PermissionChangeState.OnAppUsageStateChanged(
@@ -102,9 +103,11 @@ fun Preview_PermissionFetchedContent_Dark() {
     YaaumTheme(useDarkTheme = true) {
         PermissionFetchedContent(
             state = PermissionMviState.fetched(
-                PermissionConfigure(
-                    isNotificationPermissionGranted = true,
-                    isAppUsagePermissionGranted = false,
+                permissionMviContent = PermissionMviContent(
+                    data = PermissionConfigure(
+                        isNotificationPermissionGranted = true,
+                        isAppUsagePermissionGranted = false,
+                    ),
                 ),
             ),
         )
@@ -117,9 +120,11 @@ fun Preview_PermissionFetchedContent_Light() {
     YaaumTheme(useDarkTheme = false) {
         PermissionFetchedContent(
             state = PermissionMviState.fetched(
-                PermissionConfigure(
-                    isNotificationPermissionGranted = true,
-                    isAppUsagePermissionGranted = false,
+                permissionMviContent = PermissionMviContent(
+                    data = PermissionConfigure(
+                        isNotificationPermissionGranted = true,
+                        isAppUsagePermissionGranted = false,
+                    ),
                 ),
             ),
         )

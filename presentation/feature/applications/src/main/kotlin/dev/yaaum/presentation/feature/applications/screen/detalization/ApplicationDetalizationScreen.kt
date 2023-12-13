@@ -1,11 +1,15 @@
 package dev.yaaum.presentation.feature.applications.screen.detalization
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import cafe.adriel.voyager.navigator.Navigator
 import com.theapache64.rebugger.Rebugger
-import dev.yaaum.presentation.core.models.isDarkMode
+import dev.yaaum.presentation.core.platform.mvi.MviPartialState
+import dev.yaaum.presentation.core.ui.composable.content.loading.DefaultLoadingContent
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.feature.applications.screen.detalization.content.fetched.ApplicationDetalizationFetchedContent
+import dev.yaaum.presentation.feature.applications.screen.detalization.mvi.ApplicationDetalizationMvi
 import dev.yaaum.presentation.feature.main.screen.HostViewModel
 
 @Composable
@@ -13,20 +17,28 @@ import dev.yaaum.presentation.feature.main.screen.HostViewModel
 fun ApplicationDetalizationScreen(
     navigator: Navigator,
     hostViewModel: HostViewModel,
-    @Suppress("unused")
-    applicationDetalizationViewModel: ApplicationDetalizationViewModel,
+    applicationDetalizationMvi: ApplicationDetalizationMvi,
 ) {
-    val isDarkMode = hostViewModel.currentThemeUiModel.value?.isDarkMode() ?: false
+    val theme by hostViewModel.currentThemeUiModel.collectAsState()
+
+    val state by applicationDetalizationMvi.state.collectAsState()
+    val effect by applicationDetalizationMvi.effect.collectAsState(null)
 
     Rebugger(
         trackMap = mapOf(
             "navigator" to navigator,
             "hostViewModel" to hostViewModel,
-            "applicationDetalizationViewModel" to applicationDetalizationViewModel,
-            "isDarkMode" to isDarkMode,
+            "applicationDetalizationMvi" to applicationDetalizationMvi,
+            "theme" to theme,
+            "state" to state,
+            "effect" to effect,
         ),
     )
-    YaaumTheme(isDarkMode) {
-        ApplicationDetalizationFetchedContent()
+
+    YaaumTheme(theme = theme) {
+        when (state.partialState) {
+            MviPartialState.FETCHED -> ApplicationDetalizationFetchedContent(state = state)
+            else -> DefaultLoadingContent()
+        }
     }
 }

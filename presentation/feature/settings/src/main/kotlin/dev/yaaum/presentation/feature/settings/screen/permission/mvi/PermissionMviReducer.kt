@@ -9,8 +9,10 @@ class PermissionMviReducer(initial: PermissionMviState) :
             is PermissionMviEvent.CheckAppUsagePermissionMviEvent -> setState(
                 oldState.copy(
                     loading = false,
-                    data = oldState.data?.copy(
-                        isAppUsagePermissionGranted = event.isGranted,
+                    content = PermissionMviContent(
+                        data = oldState.content?.data?.copy(
+                            isAppUsagePermissionGranted = event.isGranted,
+                        ),
                     ),
                 ),
             )
@@ -18,8 +20,10 @@ class PermissionMviReducer(initial: PermissionMviState) :
             is PermissionMviEvent.CheckNotificationPermissionMviEvent -> setState(
                 oldState.copy(
                     loading = false,
-                    data = oldState.data?.copy(
-                        isNotificationPermissionGranted = event.isGranted,
+                    content = PermissionMviContent(
+                        data = oldState.content?.data?.copy(
+                            isNotificationPermissionGranted = event.isGranted,
+                        ),
                     ),
                 ),
             )
@@ -27,8 +31,10 @@ class PermissionMviReducer(initial: PermissionMviState) :
             is PermissionMviEvent.AppUsagePermissionStateChangedMviEvent -> setState(
                 oldState.copy(
                     loading = false,
-                    data = oldState.data?.copy(
-                        isAppUsagePermissionGranted = event.isGranted,
+                    content = PermissionMviContent(
+                        data = oldState.content?.data?.copy(
+                            isAppUsagePermissionGranted = event.isGranted,
+                        ),
                     ),
                 ),
             )
@@ -36,8 +42,10 @@ class PermissionMviReducer(initial: PermissionMviState) :
             is PermissionMviEvent.NotificationPermissionStateChangedMviEvent -> setState(
                 oldState.copy(
                     loading = false,
-                    data = oldState.data?.copy(
-                        isNotificationPermissionGranted = event.isGranted,
+                    content = PermissionMviContent(
+                        data = oldState.content?.data?.copy(
+                            isNotificationPermissionGranted = event.isGranted,
+                        ),
                     ),
                 ),
             )

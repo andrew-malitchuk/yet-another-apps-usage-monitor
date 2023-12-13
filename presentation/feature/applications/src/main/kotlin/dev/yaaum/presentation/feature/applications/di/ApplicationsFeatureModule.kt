@@ -1,7 +1,7 @@
 package dev.yaaum.presentation.feature.applications.di
 
-import dev.yaaum.presentation.feature.applications.screen.applications.ApplicationsViewModel
-import dev.yaaum.presentation.feature.applications.screen.detalization.ApplicationDetalizationViewModel
+import dev.yaaum.presentation.feature.applications.screen.applications.mvi.ApplicationsMvi
+import dev.yaaum.presentation.feature.applications.screen.detalization.mvi.ApplicationDetalizationMvi
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -10,7 +10,7 @@ import org.koin.dsl.module
  */
 val applicationsFeatureModule = module {
     viewModel {
-        ApplicationsViewModel(
+        ApplicationsMvi(
             getAllAppsUseCase = get(),
             filterAllAppsUseCase = get(),
             addAppToChosenUseCase = get(),
@@ -19,6 +19,8 @@ val applicationsFeatureModule = module {
         )
     }
     viewModel {
-        ApplicationDetalizationViewModel()
+        ApplicationDetalizationMvi(
+            getApplicationUseCase = get(),
+        )
     }
 }

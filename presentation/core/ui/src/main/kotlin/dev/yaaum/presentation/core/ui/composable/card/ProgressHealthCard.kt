@@ -34,7 +34,7 @@ import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
  * Detalization for screen usage
  */
 @Composable
-@Suppress("LongMethod", "UnusedParameter", "UNUSED_VARIABLE")
+@Suppress("LongMethod", "UNUSED_VARIABLE")
 fun ProgressHealthCard(
     modifier: Modifier = Modifier,
     onClick: (() -> Unit)? = null,
@@ -357,28 +357,28 @@ fun ProgressHealthCard(
                 .layoutId(chartId),
         )
 
-        // TODO: fix
         Icon(
             painter = painterResource(id = R.drawable.icon_sigma_bold_24),
             contentDescription = null,
+            tint = YaaumTheme.colors.onPrimary,
             modifier = Modifier
-                .size(24.dp)
+                .size(YaaumTheme.icons.small)
                 .layoutId(totalIconId),
         )
-        // TODO: fix
         Icon(
             painter = painterResource(id = R.drawable.icon_bookmarks_bold_24),
             contentDescription = null,
+            tint = YaaumTheme.colors.onPrimary,
             modifier = Modifier
-                .size(24.dp)
+                .size(YaaumTheme.icons.small)
                 .layoutId(selectedIconId),
         )
-        // TODO: fix
         Icon(
             painter = painterResource(id = R.drawable.icon_percent_bold_24),
             contentDescription = null,
+            tint = YaaumTheme.colors.onPrimary,
             modifier = Modifier
-                .size(24.dp)
+                .size(YaaumTheme.icons.small)
                 .layoutId(deltaIconId),
         )
         YaaumCircleButton(
@@ -387,8 +387,7 @@ fun ProgressHealthCard(
                 .layoutId(actionIconId),
             defaultBackgroundColor = YaaumTheme.colors.primary,
             pressedBackgroundColor = YaaumTheme.colors.secondary,
-            // TODO: fix
-            iconSize = 32.dp,
+            iconSize = YaaumTheme.icons.smallMedium,
             onClick = {
                 onClick?.invoke()
             },

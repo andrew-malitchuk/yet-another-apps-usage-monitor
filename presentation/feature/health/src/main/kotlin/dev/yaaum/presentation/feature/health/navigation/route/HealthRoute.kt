@@ -7,7 +7,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import dev.yaaum.presentation.feature.health.screen.health.HealthScreen
-import dev.yaaum.presentation.feature.health.screen.health.HealthViewModel
+import dev.yaaum.presentation.feature.health.screen.health.mvi.HealthMvi
 import dev.yaaum.presentation.feature.main.screen.HostViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -18,7 +18,7 @@ class HealthRoute : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val healthViewModel: HealthViewModel = koinViewModel()
+        val healthMvi: HealthMvi = koinViewModel()
         val hostViewModel: HostViewModel = koinViewModel(
             viewModelStoreOwner = LocalContext.current as ComponentActivity,
         )
@@ -26,7 +26,7 @@ class HealthRoute : Screen {
         HealthScreen(
             navigator = navigator,
             hostViewModel = hostViewModel,
-            healthViewModel = healthViewModel,
+            healthMvi = healthMvi,
         )
     }
 }

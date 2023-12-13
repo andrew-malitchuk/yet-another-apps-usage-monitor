@@ -23,15 +23,15 @@ class FilterAllApplicationWithChosenUseCaseImpl(
                 applicationsRepository.getAllChosenApplications().map { it.toDomainModel() }
 
             var validApps = allApps.filter {
-                (it.packageName?.contains(query ?: "") ?: false)
+                (it.applicationName?.lowercase()?.contains(query?.lowercase() ?: "") ?: false)
             }
             validApps = if (sortOrder == SortOrder.ASC) {
                 validApps.sortedBy {
-                    it.packageName
+                    it.applicationName
                 }
             } else {
                 validApps.sortedByDescending {
-                    it.packageName
+                    it.applicationName
                 }
             }
 

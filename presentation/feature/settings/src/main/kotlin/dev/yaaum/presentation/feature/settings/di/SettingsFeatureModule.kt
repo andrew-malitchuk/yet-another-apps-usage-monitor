@@ -11,7 +11,9 @@ import org.koin.dsl.module
  */
 val settingsFeatureModule = module {
     viewModel {
-        SettingsMvi()
+        SettingsMvi(
+            setThemeUseCase = get(),
+        )
     }
     viewModel {
         AboutMvi()

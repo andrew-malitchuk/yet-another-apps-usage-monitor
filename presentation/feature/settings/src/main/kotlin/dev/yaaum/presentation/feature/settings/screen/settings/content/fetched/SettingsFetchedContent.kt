@@ -12,7 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import dev.yaaum.presentation.core.localisation.UiText
+import dev.yaaum.presentation.core.models.ThemeUiModel
 import dev.yaaum.presentation.core.ui.R
+import dev.yaaum.presentation.core.ui.composable.button.various.SelectedTheme
 import dev.yaaum.presentation.core.ui.composable.header.SimpleHeader
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
@@ -21,9 +23,11 @@ import dev.yaaum.presentation.feature.settings.screen.settings.item.ThemeListIte
 
 @Composable
 fun SettingsFetchedContent(
+    theme: ThemeUiModel? = null,
     onInfoClick: (() -> Unit)? = null,
     onBackClick: (() -> Unit)? = null,
     onPermissionClick: (() -> Unit)? = null,
+    onThemeSelected: ((SelectedTheme) -> Unit)? = null,
 ) {
     val scrollState = rememberScrollState()
 
@@ -74,7 +78,10 @@ fun SettingsFetchedContent(
                     onPermissionClick?.invoke()
                 },
             )
-            ThemeListItem()
+            ThemeListItem(
+                theme = theme,
+                onThemeSelected = onThemeSelected,
+            )
         }
     }
 }

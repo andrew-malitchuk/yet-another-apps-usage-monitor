@@ -7,21 +7,21 @@ import dev.yaaum.presentation.core.ui.error.base.BaseUiError
 @Immutable
 data class OnboardingMviState(
     val loading: Boolean,
-    val data: List<OnboardingMvi.OnboardingPage>,
+    override val content: OnboardingMviContent?,
     val error: BaseUiError?,
-) : MviState {
+) : MviState() {
 
     companion object {
         fun initial() = OnboardingMviState(
             loading = true,
-            data = emptyList(),
+            content = null,
             error = null,
         )
 
         fun error(error: BaseUiError?): OnboardingMviState {
             return OnboardingMviState(
                 loading = false,
-                data = emptyList(),
+                content = null,
                 error = error,
             )
         }
@@ -29,7 +29,7 @@ data class OnboardingMviState(
         fun loading(): OnboardingMviState {
             return OnboardingMviState(
                 loading = true,
-                data = emptyList(),
+                content = null,
                 error = null,
             )
         }
@@ -37,17 +37,17 @@ data class OnboardingMviState(
 
     override val isFetched: Boolean
         get() {
-            return data.isNotEmpty() && !loading && error == null
+            return content != null && !loading && error == null
         }
 
     override val isEmpty: Boolean
         get() {
-            return data.isEmpty() && !loading && error == null
+            return content == null && !loading && error == null
         }
 
     override val isLoading: Boolean
         get() {
-            return data.isEmpty() && loading && error == null
+            return content == null && loading && error == null
         }
 
     override val isError: Boolean
@@ -56,6 +56,6 @@ data class OnboardingMviState(
         }
 
     override fun toString(): String {
-        return "isLoading: $loading, data.size: ${data.size}, error: $error"
+        return "isLoading: $loading, content: $content, error: $error"
     }
 }

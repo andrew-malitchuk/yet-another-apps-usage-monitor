@@ -23,14 +23,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import dev.yaaum.presentation.core.localisation.UiText
+import dev.yaaum.presentation.core.models.ThemeUiModel
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.button.various.SelectedTheme
 import dev.yaaum.presentation.core.ui.composable.button.various.YaaumThemeButton
+import dev.yaaum.presentation.core.ui.composable.button.various.toSelectedTheme
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
 @Composable
-fun ThemeListItem() {
+fun ThemeListItem(
+    theme: ThemeUiModel? = null,
+    onThemeSelected: ((SelectedTheme) -> Unit)? = null,
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -73,7 +78,8 @@ fun ThemeListItem() {
         Spacer(modifier = Modifier.weight(1f))
         YaaumThemeButton(
             modifier = Modifier,
-            preselectedTheme = SelectedTheme.LIGHT,
+            preselectedTheme = theme?.toSelectedTheme(),
+            onThemeSelected = onThemeSelected,
         )
     }
 }

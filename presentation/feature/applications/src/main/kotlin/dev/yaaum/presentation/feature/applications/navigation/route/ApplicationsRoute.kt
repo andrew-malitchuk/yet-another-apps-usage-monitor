@@ -7,7 +7,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import dev.yaaum.presentation.feature.applications.screen.applications.ApplicationsScreen
-import dev.yaaum.presentation.feature.applications.screen.applications.ApplicationsViewModel
+import dev.yaaum.presentation.feature.applications.screen.applications.mvi.ApplicationsMvi
 import dev.yaaum.presentation.feature.main.screen.HostViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -18,7 +18,7 @@ class ApplicationsRoute : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val applicationsViewModel: ApplicationsViewModel = koinViewModel()
+        val applicationsMvi: ApplicationsMvi = koinViewModel()
         val hostViewModel: HostViewModel = koinViewModel(
             viewModelStoreOwner = LocalContext.current as ComponentActivity,
         )
@@ -26,7 +26,7 @@ class ApplicationsRoute : Screen {
         ApplicationsScreen(
             navigator = navigator,
             hostViewModel = hostViewModel,
-            applicationsViewModel = applicationsViewModel,
+            applicationsMvi = applicationsMvi,
         )
     }
 }

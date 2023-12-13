@@ -1,16 +1,21 @@
 package dev.yaaum.presentation.feature.applications.screen.applications
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.navigator.Navigator
 import com.theapache64.rebugger.Rebugger
-import dev.yaaum.presentation.core.models.isDarkMode
+import dev.yaaum.domain.core.model.SortOrder
 import dev.yaaum.presentation.core.navigation.RouteGraph
+import dev.yaaum.presentation.core.platform.mvi.MviPartialState
+import dev.yaaum.presentation.core.ui.composable.content.empty.DefaultEmptyContent
+import dev.yaaum.presentation.core.ui.composable.content.error.DefaultErrorContent
+import dev.yaaum.presentation.core.ui.composable.content.loading.DefaultLoadingContent
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
-import dev.yaaum.presentation.feature.applications.screen.applications.content.ApplicationsContent
+import dev.yaaum.presentation.feature.applications.screen.applications.content.fetched.ApplicationsFetchedContent
+import dev.yaaum.presentation.feature.applications.screen.applications.mvi.ApplicationsMvi
+import dev.yaaum.presentation.feature.applications.screen.applications.mvi.ApplicationsMviEvent
 import dev.yaaum.presentation.feature.main.screen.HostViewModel
 
 @Composable
@@ -18,36 +23,60 @@ import dev.yaaum.presentation.feature.main.screen.HostViewModel
 fun ApplicationsScreen(
     navigator: Navigator,
     hostViewModel: HostViewModel,
-    @Suppress("unused")
-    applicationsViewModel: ApplicationsViewModel,
+    applicationsMvi: ApplicationsMvi,
 ) {
     val mainScreen = rememberScreen(RouteGraph.MainScreen)
-    val isDarkMode = hostViewModel.currentThemeUiModel.value?.isDarkMode() ?: false
+    val theme by hostViewModel.currentThemeUiModel.collectAsState()
 
-//    val applicationList = applicationsViewModel.applicationStateFlow.collectAsStateWithLifecycle()
-    val applicationList = applicationsViewModel.filterFlow.collectAsStateWithLifecycle()
-    applicationsViewModel.load()
+    val state by applicationsMvi.state.collectAsState()
+    val effect by applicationsMvi.effect.collectAsState(null)
 
     Rebugger(
         trackMap = mapOf(
             "navigator" to navigator,
             "hostViewModel" to hostViewModel,
-            "applicationsViewModel" to applicationsViewModel,
+            "applicationsMvi" to applicationsMvi,
             "mainScreen" to mainScreen,
-            "isDarkMode" to isDarkMode,
-            "applicationList" to applicationList,
+            "theme" to theme,
+            "state" to state,
+            "effect" to effect,
         ),
     )
-    YaaumTheme(isDarkMode) {
-        ApplicationsContent(
-            applicationList = applicationList,
-            onBackClick = {
-                applicationsViewModel.reset()
-                navigator.pop()
-            },
-            onTextChange = applicationsViewModel::updateFilterQuery,
-            onSideChange = applicationsViewModel::updateFilterSort,
-            onApplicationClick = applicationsViewModel::changeApplicationStatus,
-        )
+
+    YaaumTheme(theme = theme) {
+        when (state.partialState) {
+            MviPartialState.FETCHED -> ApplicationsFetchedContent(
+                state = state,
+                onSideChange = { isAsc ->
+                    applicationsMvi.sendEvent(
+                        ApplicationsMviEvent.OnSortChangedMviEvent(
+                            if (isAsc) {
+                                SortOrder.ASC
+                            } else {
+                                SortOrder.DESC
+                            },
+                        ),
+                    )
+                },
+                onTextChange = {
+                    applicationsMvi.onTextChange(it)
+                },
+                onApplicationClick = { application, isChosen ->
+                    applicationsMvi.sendEvent(
+                        ApplicationsMviEvent.OnApplicationStatusChangedEvent(
+                            application = application,
+                            isChosen = isChosen,
+                        ),
+                    )
+                },
+                onBackClick = {
+                    navigator.pop()
+                },
+            )
+
+            MviPartialState.LOADING -> DefaultLoadingContent()
+            MviPartialState.ERROR -> DefaultErrorContent(error = state.error)
+            MviPartialState.EMPTY -> DefaultEmptyContent()
+        }
     }
 }

@@ -29,7 +29,6 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumCircleButton
 import dev.yaaum.presentation.core.ui.composable.ext.clearFocusOnKeyboardDismiss
@@ -58,6 +57,7 @@ fun YaaumBasicTextField(
     singleLine: Boolean = false,
     maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
     minLines: Int = 1,
+    onCleanTextClick: (() -> Unit)? = null,
 ) {
     var textState by remember { mutableStateOf(text) }
     var isOnFocus by remember { mutableStateOf(true) }
@@ -77,7 +77,7 @@ fun YaaumBasicTextField(
             .onFocusChanged { state ->
                 isOnFocus = state.isFocused
             }
-            .clearFocusOnKeyboardDismiss(),
+            .clearFocusOnKeyboardDismiss(isOnFocus),
         value = textState ?: "",
         onValueChange = {
             onTextChanged?.invoke(it)
@@ -119,10 +119,9 @@ fun YaaumBasicTextField(
                     innerTextField()
                 }
                 YaaumCircleButton(
-                    icon = R.drawable.icon_caret_right_bold_24,
+                    icon = R.drawable.icon_cancel_regular_24,
                     modifier = Modifier
-                        // TODO: fix
-                        .size(32.dp)
+                        .size(YaaumTheme.icons.smallMedium)
                         .align(Alignment.CenterVertically)
                         .alpha(
                             if (textState.isNullOrEmpty()) {
@@ -133,9 +132,10 @@ fun YaaumBasicTextField(
                         ),
                     defaultBackgroundColor = YaaumTheme.colors.primary,
                     pressedBackgroundColor = YaaumTheme.colors.secondary,
-                    // TODO: fix
-                    iconSize = 24.dp,
+                    iconSize = YaaumTheme.icons.small,
                     onClick = {
+                        textState = ""
+                        onCleanTextClick?.invoke()
                     },
                 )
             }

@@ -7,7 +7,6 @@ import androidx.compose.ui.platform.LocalContext
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.navigator.Navigator
 import com.theapache64.rebugger.Rebugger
-import dev.yaaum.presentation.core.models.isDarkMode
 import dev.yaaum.presentation.core.navigation.RouteGraph
 import dev.yaaum.presentation.core.platform.ext.openLinkInBrowser
 import dev.yaaum.presentation.core.platform.mvi.MviPartialState
@@ -25,7 +24,7 @@ fun AboutScreen(
     aboutMvi: AboutMvi,
 ) {
     val demoScreen = rememberScreen(RouteGraph.DemoScreen)
-    val isDarkMode = hostViewModel.currentThemeUiModel.value?.isDarkMode() ?: false
+    val theme by hostViewModel.currentThemeUiModel.collectAsState()
 
     val state by aboutMvi.state.collectAsState()
     val effect by aboutMvi.effect.collectAsState(null)
@@ -36,10 +35,10 @@ fun AboutScreen(
             "hostViewModel" to hostViewModel,
             "aboutMvi" to aboutMvi,
             "demoScreen" to demoScreen,
-            "isDarkMode" to isDarkMode,
+            "theme" to theme,
         ),
     )
-    YaaumTheme(isDarkMode) {
+    YaaumTheme(theme = theme) {
         when (state.partialState) {
             MviPartialState.FETCHED -> AboutFetchedContent(
                 onGithubClick = {

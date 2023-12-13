@@ -51,6 +51,7 @@ room = "2.5.0"
 constraintlayoutCompose = "1.1.0-alpha13"
 foundationAndroid = "1.5.1"
 streamLogAndroid = "1.1.4"
+uiUtil="1.5.4"
 
 [libraries]
 # https://mvnrepository.com/artifact/androidx.core/core-ktx?repo=google
@@ -150,6 +151,8 @@ constraintlayout-compose = { group = "androidx.constraintlayout", name = "constr
 foundation-android = { group = "androidx.compose.foundation", name = "foundation-android", version.ref = "foundationAndroid" }
 # https://mvnrepository.com/artifact/io.getstream/stream-log-android
 stream-log-android = { group = "io.getstream", name = "stream-log-android", version.ref = "streamLogAndroid" }
+# https://mvnrepository.com/artifact/androidx.compose.ui/ui-util
+ui-util = {group = "androidx.compose.ui", name = "ui-util", version.ref = "uiUtil"}
 
 [plugins]
 # https://mvnrepository.com/artifact/com.android.application/com.android.application.gradle.plugin

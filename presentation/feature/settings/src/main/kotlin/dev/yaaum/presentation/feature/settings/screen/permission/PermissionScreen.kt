@@ -8,7 +8,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import cafe.adriel.voyager.navigator.Navigator
 import com.theapache64.rebugger.Rebugger
-import dev.yaaum.presentation.core.models.isDarkMode
 import dev.yaaum.presentation.core.platform.mvi.MviPartialState
 import dev.yaaum.presentation.core.ui.composable.content.error.DefaultErrorContent
 import dev.yaaum.presentation.core.ui.composable.content.loading.DefaultLoadingContent
@@ -27,7 +26,7 @@ fun PermissionScreen(
     hostViewModel: HostViewModel,
     permissionMvi: PermissionMvi,
 ) {
-    val isDarkMode = hostViewModel.currentThemeUiModel.value?.isDarkMode() ?: false
+    val theme by hostViewModel.currentThemeUiModel.collectAsState()
 
     val state by permissionMvi.state.collectAsState()
     val effect by permissionMvi.effect.collectAsState(null)
@@ -39,7 +38,7 @@ fun PermissionScreen(
             "navigator" to navigator,
             "hostViewModel" to hostViewModel,
             "permissionMvi" to permissionMvi,
-            "isDarkMode" to isDarkMode,
+            "theme" to theme,
             "state" to state,
             "effect" to effect,
             "showSheet" to showSheet,
@@ -60,7 +59,7 @@ fun PermissionScreen(
         }
     }
 
-    YaaumTheme(isDarkMode) {
+    YaaumTheme(theme = theme) {
         when (state.partialState) {
             MviPartialState.FETCHED ->
                 PermissionFetchedContent(

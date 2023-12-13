@@ -11,9 +11,6 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,11 +19,12 @@ import dev.yaaum.presentation.core.ui.composable.card.ProgressHealthCard
 import dev.yaaum.presentation.core.ui.composable.various.AnimatedDivider
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
-import dev.yaaum.presentation.feature.health.screen.health.content.fetched.list.ApplicationListItem
+import dev.yaaum.presentation.feature.health.screen.health.item.ApplicationListItem
+import dev.yaaum.presentation.feature.health.screen.health.mvi.HealthMviState
 
 @Composable
 fun HealthFetchedContent(
-    applicationList: State<List<ApplicationsUiModel>?>,
+    state: HealthMviState,
     onActionClick: (() -> Unit)? = null,
     onApplicationClick: ((ApplicationsUiModel) -> Unit)? = null,
 ) {
@@ -65,12 +63,12 @@ fun HealthFetchedContent(
             verticalArrangement = Arrangement
                 .spacedBy(YaaumTheme.spacing.small),
         ) {
-            applicationList.value?.let {
+            state.content?.data?.let { list ->
                 items(
-                    count = it.size,
+                    count = list.size,
                 ) { index ->
                     ApplicationListItem(
-                        applicationsUiModel = it[index],
+                        applicationsUiModel = list[index],
                         onApplicationClick = onApplicationClick,
                     )
                 }
@@ -90,7 +88,8 @@ fun HealthFetchedContent(
 fun Preview_HealthFetchedContent_Dark() {
     YaaumTheme(useDarkTheme = true) {
         HealthFetchedContent(
-            applicationList = remember { mutableStateOf(emptyList()) },
+            // TODO: fix me
+            state = HealthMviState.loading(),
         )
     }
 }
@@ -100,7 +99,8 @@ fun Preview_HealthFetchedContent_Dark() {
 fun Preview_HealthFetchedContent_Light() {
     YaaumTheme(useDarkTheme = false) {
         HealthFetchedContent(
-            applicationList = remember { mutableStateOf(emptyList()) },
+            // TODO: fix me
+            state = HealthMviState.loading(),
         )
     }
 }

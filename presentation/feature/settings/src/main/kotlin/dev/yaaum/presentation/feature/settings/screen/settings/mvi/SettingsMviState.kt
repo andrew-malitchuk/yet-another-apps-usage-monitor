@@ -7,27 +7,27 @@ import dev.yaaum.presentation.core.ui.error.base.BaseUiError
 @Immutable
 data class SettingsMviState(
     val loading: Boolean,
-    val data: String?,
+    override val content: SettingsMviContent?,
     val error: BaseUiError?,
-) : MviState {
+) : MviState() {
 
     companion object {
         fun initial() = SettingsMviState(
             loading = false,
-            data = null,
+            content = null,
             error = null,
         )
 
-        fun fetched(theme: String) = SettingsMviState(
+        fun fetched(content: SettingsMviContent) = SettingsMviState(
             loading = false,
-            data = theme,
+            content = content,
             error = null,
         )
 
         fun error(error: BaseUiError?): SettingsMviState {
             return SettingsMviState(
                 loading = false,
-                data = null,
+                content = null,
                 error = error,
             )
         }
@@ -35,7 +35,7 @@ data class SettingsMviState(
         fun loading(): SettingsMviState {
             return SettingsMviState(
                 loading = true,
-                data = null,
+                content = null,
                 error = null,
             )
         }
@@ -43,17 +43,17 @@ data class SettingsMviState(
 
     override val isFetched: Boolean
         get() {
-            return data != null && !loading && error == null
+            return content != null && !loading && error == null
         }
 
     override val isEmpty: Boolean
         get() {
-            return data == null && !loading && error == null
+            return content == null && !loading && error == null
         }
 
     override val isLoading: Boolean
         get() {
-            return data == null && loading && error == null
+            return content == null && loading && error == null
         }
 
     override val isError: Boolean
@@ -62,6 +62,6 @@ data class SettingsMviState(
         }
 
     override fun toString(): String {
-        return "isLoading: $loading, data.size: $data, error: $error"
+        return "isLoading: $loading, content: $content, error: $error"
     }
 }

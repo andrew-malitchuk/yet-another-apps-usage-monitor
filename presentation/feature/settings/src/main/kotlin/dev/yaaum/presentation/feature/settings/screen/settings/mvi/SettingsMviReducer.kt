@@ -8,8 +8,10 @@ class SettingsMviReducer(initial: SettingsMviState) :
         when (event) {
             is SettingsMviEvent.ChangeThemeMviEvent -> setState(
                 oldState.copy(
-                    loading = true,
-                    data = event.theme,
+                    loading = false,
+                    content = SettingsMviContent(
+                        data = event.theme,
+                    ),
                     error = null,
                 ),
             )
@@ -17,7 +19,7 @@ class SettingsMviReducer(initial: SettingsMviState) :
             SettingsMviEvent.GetThemeMviEvent -> setState(
                 oldState.copy(
                     loading = true,
-                    data = null,
+                    content = null,
                     error = null,
                 ),
             )
@@ -25,7 +27,9 @@ class SettingsMviReducer(initial: SettingsMviState) :
             is SettingsMviEvent.ThemeFetchedMviEvent -> setState(
                 oldState.copy(
                     loading = false,
-                    data = event.theme,
+                    content = SettingsMviContent(
+                        data = event.theme,
+                    ),
                     error = null,
                 ),
             )

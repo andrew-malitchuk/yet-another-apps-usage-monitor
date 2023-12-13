@@ -1,6 +1,6 @@
 package dev.yaaum.presentation.feature.health.di
 
-import dev.yaaum.presentation.feature.health.screen.health.HealthViewModel
+import dev.yaaum.presentation.feature.health.screen.health.mvi.HealthMvi
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -9,7 +9,7 @@ import org.koin.dsl.module
  */
 val healthFeatureModule = module {
     viewModel {
-        HealthViewModel(
+        HealthMvi(
             getAllAppsUseCase = get(),
         )
     }

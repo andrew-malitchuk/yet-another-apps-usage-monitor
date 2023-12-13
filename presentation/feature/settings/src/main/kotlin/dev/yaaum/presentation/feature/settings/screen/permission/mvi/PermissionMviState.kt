@@ -7,27 +7,27 @@ import dev.yaaum.presentation.core.ui.error.base.BaseUiError
 @Immutable
 data class PermissionMviState(
     val loading: Boolean,
-    val data: PermissionConfigure?,
+    override val content: PermissionMviContent?,
     val error: BaseUiError?,
-) : MviState {
+) : MviState() {
 
     companion object {
         fun initial() = PermissionMviState(
             loading = false,
-            data = null,
+            content = null,
             error = null,
         )
 
-        fun fetched(permissionConfigure: PermissionConfigure) = PermissionMviState(
+        fun fetched(permissionMviContent: PermissionMviContent) = PermissionMviState(
             loading = false,
-            data = permissionConfigure,
+            content = permissionMviContent,
             error = null,
         )
 
         fun error(error: BaseUiError?): PermissionMviState {
             return PermissionMviState(
                 loading = false,
-                data = null,
+                content = null,
                 error = error,
             )
         }
@@ -35,7 +35,7 @@ data class PermissionMviState(
         fun loading(): PermissionMviState {
             return PermissionMviState(
                 loading = true,
-                data = null,
+                content = null,
                 error = null,
             )
         }
@@ -43,17 +43,17 @@ data class PermissionMviState(
 
     override val isFetched: Boolean
         get() {
-            return data != null && !loading && error == null
+            return content != null && !loading && error == null
         }
 
     override val isEmpty: Boolean
         get() {
-            return data == null && !loading && error == null
+            return content == null && !loading && error == null
         }
 
     override val isLoading: Boolean
         get() {
-            return data == null && loading && error == null
+            return content == null && loading && error == null
         }
 
     override val isError: Boolean
@@ -62,7 +62,7 @@ data class PermissionMviState(
         }
 
     override fun toString(): String {
-        return "isLoading: $loading, data: $data, error: $error"
+        return "isLoading: $loading, content: $content, error: $error"
     }
 }
 

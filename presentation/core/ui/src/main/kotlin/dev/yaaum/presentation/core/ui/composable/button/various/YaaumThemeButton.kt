@@ -18,6 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.yaaum.presentation.core.models.ThemeUiModel
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
@@ -43,7 +44,7 @@ fun YaaumThemeButton(
             // TODO: fix
             .size(48.dp)
             .clickable {
-                onSideChangeState = (onSideChangeState ?: SelectedTheme.NI).next()
+                onSideChangeState = (onSideChangeState ?: SelectedTheme.AUTO).next()
                 onSideChangeState?.let { onThemeSelected?.invoke(it) }
             }
             // TODO: fix
@@ -74,7 +75,7 @@ fun YaaumThemeButton(
                 )
             }
 
-            SelectedTheme.MATERIALU -> {
+            SelectedTheme.DYNAMIC -> {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_palette_regular_24),
                     contentDescription = null,
@@ -97,24 +98,33 @@ fun YaaumThemeButton(
     }
 }
 
-enum class SelectedTheme {
-    LIGHT,
-    DARK,
-    AUTO,
+enum class SelectedTheme(val theme: String) {
+    DARK("dark"),
+    LIGHT("light"),
 
-    @Suppress("SpellCheckingInspection")
-    MATERIALU,
-    NI,
-    ;
+    /**
+     * According to system settings
+     */
+    AUTO("auto"),
+
+    /**
+     * Material U color palette will be chosen
+     */
+    DYNAMIC("dynamic"), ;
 
     fun next(): SelectedTheme {
         return when (this) {
             LIGHT -> DARK
             DARK -> AUTO
-            AUTO -> MATERIALU
-            MATERIALU -> LIGHT
-            NI -> LIGHT
+            AUTO -> DYNAMIC
+            DYNAMIC -> LIGHT
         }
+    }
+}
+
+fun ThemeUiModel.toSelectedTheme(): SelectedTheme? {
+    return SelectedTheme.entries.firstOrNull {
+        it.theme == this@toSelectedTheme.theme
     }
 }
 

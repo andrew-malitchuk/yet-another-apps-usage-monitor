@@ -7,12 +7,21 @@ class OnboardingReducer(initial: OnboardingMviState) :
     override fun reduce(oldState: OnboardingMviState, event: OnboardingMviEvent) {
         when (event) {
             is OnboardingMviEvent.GetPagesMviEvent ->
-                setState(oldState.copy(loading = false, data = event.data))
+                setState(
+                    oldState.copy(
+                        loading = false,
+                        content = OnboardingMviContent(
+                            data = event.data,
+                        ),
+                    ),
+                )
 
             OnboardingMviEvent.OnDoneMviEvent -> setState(
                 oldState.copy(
                     loading = true,
-                    data = emptyList(),
+                    content = OnboardingMviContent(
+                        data = emptyList(),
+                    ),
                     error = null,
                 ),
             )

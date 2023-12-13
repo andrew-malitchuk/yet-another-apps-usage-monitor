@@ -1,10 +1,11 @@
-package dev.yaaum.presentation.feature.applications.screen.applications.content.list
+package dev.yaaum.presentation.feature.applications.screen.applications.item.fetched
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -37,12 +38,13 @@ import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 import io.github.serpro69.kfaker.Faker
 
 @Composable
-fun ApplicationListItem(
+fun ApplicationFetchedListItem(
+    modifier: Modifier = Modifier,
     applicationsUiModel: ApplicationsUiModel,
     onApplicationClick: ((ApplicationsUiModel, Boolean) -> Unit)? = null,
 ) {
-    // TODO:Fix
     val isChosen = remember { mutableStateOf(applicationsUiModel.isChosen) }
+
     val animatedDpValue by animateDpAsState(
         targetValue = if (isChosen.value) {
             YaaumTheme.dividers.extraSmall
@@ -53,7 +55,7 @@ fun ApplicationListItem(
     )
 
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
             .clip(RoundedCornerShape(YaaumTheme.corners.medium))
@@ -68,15 +70,19 @@ fun ApplicationListItem(
             )
             .background(YaaumTheme.colors.surface)
             .padding(YaaumTheme.spacing.small)
-            .clickable {
-                isChosen.value = isChosen.value.not()
-                onApplicationClick?.invoke(applicationsUiModel, isChosen.value)
-            },
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null,
+                onClick = {
+                    isChosen.value = isChosen.value.not()
+                    onApplicationClick?.invoke(applicationsUiModel, isChosen.value)
+                },
+            ),
     ) {
         // TODO: add sizes
         Box(
             modifier = Modifier
-                .size(48.dp)
+                .size(YaaumTheme.icons.medium)
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .clip(RoundedCornerShape(YaaumTheme.corners.medium))
@@ -125,7 +131,7 @@ fun ApplicationListItem(
 fun Preview_ApplicationListItem_Dark() {
     val faker = Faker()
     YaaumTheme(useDarkTheme = true) {
-        ApplicationListItem(
+        ApplicationFetchedListItem(
             applicationsUiModel = ApplicationsUiModel(
                 uuid = 1,
                 packageName = faker.quote.fortuneCookie(),
@@ -140,7 +146,7 @@ fun Preview_ApplicationListItem_Dark() {
 fun Preview_ApplicationListItem_Light() {
     val faker = Faker()
     YaaumTheme(useDarkTheme = false) {
-        ApplicationListItem(
+        ApplicationFetchedListItem(
             applicationsUiModel = ApplicationsUiModel(
                 uuid = 1,
                 packageName = faker.quote.fortuneCookie(),

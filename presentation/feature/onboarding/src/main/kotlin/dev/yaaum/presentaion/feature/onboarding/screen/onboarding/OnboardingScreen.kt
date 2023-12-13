@@ -14,7 +14,6 @@ import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.content.fetche
 import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.OnboardingMvi
 import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.OnboardingMviEffect
 import dev.yaaum.presentaion.feature.onboarding.screen.onboarding.mvi.OnboardingMviEvent
-import dev.yaaum.presentation.core.models.isDarkMode
 import dev.yaaum.presentation.core.navigation.RouteGraph
 import dev.yaaum.presentation.core.platform.mvi.MviPartialState
 import dev.yaaum.presentation.core.ui.composable.content.empty.DefaultEmptyContent
@@ -32,7 +31,7 @@ fun OnboardingScreen(
     onboardingMvi: OnboardingMvi,
 ) {
     val mainScreen = rememberScreen(RouteGraph.MainScreen)
-    val isDarkMode = hostViewModel.currentThemeUiModel.value?.isDarkMode() ?: false
+    val theme by hostViewModel.currentThemeUiModel.collectAsState()
 
     val state by onboardingMvi.state.collectAsState()
     val effect by onboardingMvi.effect.collectAsState(null)
@@ -45,7 +44,7 @@ fun OnboardingScreen(
             "hostViewModel" to hostViewModel,
             "onboardingMvi" to onboardingMvi,
             "mainScreen" to mainScreen,
-            "isDarkMode" to isDarkMode,
+            "theme" to theme,
             "state" to state,
             "effect" to effect,
             "showSheet" to showSheet,
@@ -66,7 +65,7 @@ fun OnboardingScreen(
         }
     }
 
-    YaaumTheme(isDarkMode) {
+    YaaumTheme(theme = theme) {
         when (state.partialState) {
             MviPartialState.FETCHED ->
                 OnboardingFetchedContent(
