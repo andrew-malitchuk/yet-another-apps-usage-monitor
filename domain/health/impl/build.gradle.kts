@@ -7,22 +7,24 @@ plugins {
 }
 
 android {
-    namespace = "dev.yaaum.domain.timeusage.impl"
+    namespace = "dev.yaaum.domain.health.impl"
 }
 
-dependencies{
+dependencies {
     implementation(libs.kotlinx.coroutines.core)
 
     implementation(libs.arrow.core)
     implementation(libs.arrow.fx.coroutines)
     implementation(libs.arrow.optics)
     ksp(libs.arrow.optics.ksp.plugin)
-    
+
+    implementation(project(":domain:applications"))
     implementation(project(":domain:timeusage"))
+    implementation(project(":domain:health"))
     implementation(project(":domain:core"))
+    implementation(project(":common:core"))
     implementation(project(":data:repository:core"))
-    implementation(project(":data:repository:timeusage"))
-    implementation(project(":data:repository:applications"))
+    implementation(project(":data:repository:configuration"))
 }
 
 // Necessary for context receiver

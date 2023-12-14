@@ -13,6 +13,10 @@ val mainFeatureModule = module {
     viewModel {
         MainViewModel(
             getTopAppsWithHighestUsageUseCase = get(),
+            getTotalUsageOfAllApplicationUseCase = get(),
+            getTotalUsageOfUserApplicationsUseCase = get(),
+            getTotalUsageOfChosenApplicationUseCase = get(),
+            getGeneralTimeUsageStatisticUseCase = get(),
         )
     }
 }

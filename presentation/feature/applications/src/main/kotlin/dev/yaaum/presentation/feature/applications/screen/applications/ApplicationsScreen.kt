@@ -19,7 +19,7 @@ import dev.yaaum.presentation.feature.applications.screen.applications.mvi.Appli
 import dev.yaaum.presentation.feature.main.screen.HostViewModel
 
 @Composable
-@Suppress("UnusedParameter", "UnusedPrivateProperty")
+@Suppress("UnusedPrivateProperty")
 fun ApplicationsScreen(
     navigator: Navigator,
     hostViewModel: HostViewModel,

@@ -13,6 +13,7 @@ class ApplicationsMviReducer(initial: ApplicationsMviState) :
                         data = null,
                     ),
                     error = null,
+                    query = null,
                 ),
             )
 

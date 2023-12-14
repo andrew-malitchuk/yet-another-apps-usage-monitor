@@ -29,7 +29,10 @@ class TimeUsageDataSourceImpl(
         }
     }
 
-    override suspend fun getApplicationsUsage(beginTime: Long, endTime: Long): List<TimeUsageSystemModel> {
+    override suspend fun getApplicationsUsage(
+        beginTime: Long,
+        endTime: Long,
+    ): List<TimeUsageSystemModel> {
         return suspendCoroutine { continuation ->
             val lUsageStatsMap =
                 (context.getSystemService(ComponentActivity.USAGE_STATS_SERVICE) as? UsageStatsManager)

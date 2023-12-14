@@ -61,6 +61,8 @@ dependencies {
     implementation(project(":domain:configuration:impl"))
     implementation(project(":domain:applications"))
     implementation(project(":domain:applications:impl"))
+    implementation(project(":domain:health"))
+    implementation(project(":domain:health:impl"))
 }
 
 // Necessary for context receiver

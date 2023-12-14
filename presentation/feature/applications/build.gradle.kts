@@ -24,6 +24,8 @@ dependencies {
     implementation(libs.arrow.optics)
     implementation(libs.accompanist.pager.indicators)
     implementation(libs.accompanist.drawablepainter)
+    implementation(libs.lifecycle.runtime.compose)
+
 
     implementation(project(":common:core"))
     implementation(project(":presentation:core:ui"))
