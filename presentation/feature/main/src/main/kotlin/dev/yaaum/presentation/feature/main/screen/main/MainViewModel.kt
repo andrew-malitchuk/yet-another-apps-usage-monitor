@@ -1,6 +1,7 @@
 package dev.yaaum.presentation.feature.main.screen.main
 
 import dev.yaaum.domain.health.GetGeneralTimeUsageStatisticUseCase
+import dev.yaaum.domain.health.GetHealthStatusUseCase
 import dev.yaaum.domain.timeusage.GetTopAppsWithHighestUsageUseCase
 import dev.yaaum.domain.timeusage.GetTotalUsageOfAllApplicationUseCase
 import dev.yaaum.domain.timeusage.GetTotalUsageOfChosenApplicationUseCase
@@ -17,6 +18,7 @@ class MainViewModel(
     private val getTotalUsageOfUserApplicationsUseCase: GetTotalUsageOfUserApplicationsUseCase,
     private val getTotalUsageOfChosenApplicationUseCase: GetTotalUsageOfChosenApplicationUseCase,
     private val getGeneralTimeUsageStatisticUseCase: GetGeneralTimeUsageStatisticUseCase,
+    private val getHealthStatusUseCase: GetHealthStatusUseCase,
 ) : BaseViewModel() {
 
     var topAppsWithHighestUsageStateFlow: StateFlow<List<TimeUsageUiModel>?> =
@@ -35,6 +37,7 @@ class MainViewModel(
                 getTotalUsageOfUserApplicationsUseCase(0L, 0L)
                 getTotalUsageOfChosenApplicationUseCase(0L, 0L)
                 getGeneralTimeUsageStatisticUseCase(0L, 0L)
+                getHealthStatusUseCase(0L, 0L)
                 getTopAppsWithHighestUsageUseCase(TOP_APPS_COUNT)
             },
             result = { result ->

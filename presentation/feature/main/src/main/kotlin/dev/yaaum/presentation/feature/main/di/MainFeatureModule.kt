@@ -17,6 +17,7 @@ val mainFeatureModule = module {
             getTotalUsageOfUserApplicationsUseCase = get(),
             getTotalUsageOfChosenApplicationUseCase = get(),
             getGeneralTimeUsageStatisticUseCase = get(),
+            getHealthStatusUseCase = get(),
         )
     }
 }
