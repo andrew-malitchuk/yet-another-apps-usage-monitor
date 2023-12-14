@@ -24,9 +24,9 @@ class ApplicationsRoute : Screen {
         val hostViewModel: HostViewModel = koinViewModel(
             viewModelStoreOwner = LocalContext.current as ComponentActivity,
         )
-
         LifecycleEffect(
             onStarted = {
+                hostViewModel.updateTheme()
                 applicationsMvi.sendEvent(ApplicationsMviEvent.GetApplicationsMviEvent)
             },
             onDisposed = {

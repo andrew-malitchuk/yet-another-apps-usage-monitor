@@ -3,6 +3,7 @@ package dev.yaaum.presentation.feature.main.navigation.route
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import cafe.adriel.voyager.core.lifecycle.LifecycleEffect
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -24,6 +25,13 @@ class MainRoute : Screen {
             viewModelStoreOwner = LocalContext.current as ComponentActivity,
         )
         val navigator = LocalNavigator.currentOrThrow
+        LifecycleEffect(
+            onStarted = {
+                hostViewModel.updateTheme()
+            },
+            onDisposed = {
+            },
+        )
 
         MainScreen(
             navigator = navigator,

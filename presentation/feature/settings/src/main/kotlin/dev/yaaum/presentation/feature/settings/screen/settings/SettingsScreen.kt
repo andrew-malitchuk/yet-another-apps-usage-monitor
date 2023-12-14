@@ -6,6 +6,7 @@ import androidx.compose.runtime.getValue
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.navigator.Navigator
 import com.theapache64.rebugger.Rebugger
+import dev.yaaum.presentation.core.models.ThemeUiModel
 import dev.yaaum.presentation.core.navigation.RouteGraph
 import dev.yaaum.presentation.core.platform.mvi.MviPartialState
 import dev.yaaum.presentation.core.ui.composable.content.error.DefaultErrorContent
@@ -30,7 +31,11 @@ fun SettingsScreen(
     val state by settingsMvi.state.collectAsState()
     val effect by settingsMvi.effect.collectAsState(null)
 
-    val theme by settingsMvi.themeStateFlow.collectAsState()
+    val currentTheme by hostViewModel.currentThemeUiModel.collectAsState()
+
+    val theme by settingsMvi.themeStateFlow.collectAsState(
+        initial = currentTheme ?: ThemeUiModel.AUTO,
+    )
 
     Rebugger(
         trackMap = mapOf(

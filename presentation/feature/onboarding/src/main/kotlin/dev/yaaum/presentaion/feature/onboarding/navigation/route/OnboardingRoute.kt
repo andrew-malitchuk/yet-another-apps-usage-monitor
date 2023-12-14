@@ -3,6 +3,7 @@ package dev.yaaum.presentaion.feature.onboarding.navigation.route
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import cafe.adriel.voyager.core.lifecycle.LifecycleEffect
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -21,6 +22,13 @@ class OnboardingRoute : Screen {
         val onboardingMvi: OnboardingMvi = koinViewModel()
         val hostViewModel: HostViewModel = koinViewModel(
             viewModelStoreOwner = LocalContext.current as ComponentActivity,
+        )
+        LifecycleEffect(
+            onStarted = {
+                hostViewModel.updateTheme()
+            },
+            onDisposed = {
+            },
         )
         OnboardingScreen(
             navigator = navigator,
