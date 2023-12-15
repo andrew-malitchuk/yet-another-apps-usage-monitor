@@ -7,7 +7,6 @@ import dev.yaaum.presentation.core.models.ThemeUiModel
 import dev.yaaum.presentation.core.platform.mvi.BaseMvi
 import dev.yaaum.presentation.core.ui.error.SwwUiError
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -22,7 +21,7 @@ class SettingsMvi(
 
     override val reducer = SettingsMviReducer(SettingsMviState.loading())
 
-    var themeStateFlow = MutableStateFlow<ThemeUiModel?>(null)
+    var themeStateFlow = MutableSharedFlow<ThemeUiModel>()
 
     override fun innerEventProcessing(event: SettingsMviEvent) {
         when (event) {
@@ -38,8 +37,8 @@ class SettingsMvi(
                 recover(
                     {
                         setThemeUseCase(theme)
-                        this@SettingsMvi.themeStateFlow.setValue(
-                            ThemeUiModel.entries.firstOrNull { it.theme == theme },
+                        this@SettingsMvi.themeStateFlow.emit(
+                            ThemeUiModel.entries.first { it.theme == theme },
                         )
                     },
                     {
@@ -79,5 +78,9 @@ class SettingsMvi(
 
     init {
         getCurrentTheme()
+    }
+
+    companion object {
+        const val ANIMATION_DURATION = 500
     }
 }
