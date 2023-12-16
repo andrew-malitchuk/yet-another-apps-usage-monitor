@@ -6,38 +6,21 @@ class PermissionMviReducer(initial: PermissionMviState) :
     MviReducer<PermissionMviState, PermissionMviEvent>(initial) {
     override fun reduce(oldState: PermissionMviState, event: PermissionMviEvent) {
         when (event) {
-            is PermissionMviEvent.CheckAppUsagePermissionMviEvent -> setState(
-                oldState.copy(
-                    loading = false,
-                    content = PermissionMviContent(
-                        data = oldState.content?.data?.copy(
-                            isAppUsagePermissionGranted = event.isGranted,
+            is PermissionMviEvent.AppUsagePermissionStateChangedMviEvent -> {
+                val tempContent = oldState.content ?: PermissionMviContent(PermissionConfigure())
+                setState(
+                    oldState.copy(
+                        loading = false,
+                        content = PermissionMviContent(
+                            data = tempContent.data?.copy(
+                                isAppUsagePermissionGranted = event.isGranted,
+                                isNotificationPermissionGranted = true,
+                            ),
                         ),
+                        error = null,
                     ),
-                ),
-            )
-
-            is PermissionMviEvent.CheckNotificationPermissionMviEvent -> setState(
-                oldState.copy(
-                    loading = false,
-                    content = PermissionMviContent(
-                        data = oldState.content?.data?.copy(
-                            isNotificationPermissionGranted = event.isGranted,
-                        ),
-                    ),
-                ),
-            )
-
-            is PermissionMviEvent.AppUsagePermissionStateChangedMviEvent -> setState(
-                oldState.copy(
-                    loading = false,
-                    content = PermissionMviContent(
-                        data = oldState.content?.data?.copy(
-                            isAppUsagePermissionGranted = event.isGranted,
-                        ),
-                    ),
-                ),
-            )
+                )
+            }
 
             is PermissionMviEvent.NotificationPermissionStateChangedMviEvent -> setState(
                 oldState.copy(
@@ -47,6 +30,15 @@ class PermissionMviReducer(initial: PermissionMviState) :
                             isNotificationPermissionGranted = event.isGranted,
                         ),
                     ),
+                    error = null,
+                ),
+            )
+
+            PermissionMviEvent.CheckPermissionsMviEvent -> setState(
+                oldState.copy(
+                    loading = false,
+                    content = null,
+                    error = null,
                 ),
             )
         }

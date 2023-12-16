@@ -1,4 +1,4 @@
-package dev.yaaum.presentation.feature.settings.screen.permission.item
+package dev.yaaum.presentation.feature.settings.screen.permission.item.fetched
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -30,7 +30,7 @@ import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 import io.github.serpro69.kfaker.Faker
 
 @Composable
-fun PermissionListItem(
+fun PermissionFetchedListItem(
     permission: String,
     @DrawableRes
     icon: Int,
@@ -84,6 +84,7 @@ fun PermissionListItem(
             height = 32.dp,
             thumbSize = 16.dp,
             initValue = initValue,
+            foo = initValue,
             onStateChange = onPermissionClick,
         )
     }
@@ -91,10 +92,10 @@ fun PermissionListItem(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_PermissionListItem_Dark() {
+fun Preview_PermissionFetchedListItem_Dark() {
     val faker = Faker()
     YaaumTheme(useDarkTheme = true) {
-        PermissionListItem(
+        PermissionFetchedListItem(
             permission = faker.quote.fortuneCookie(),
             icon = R.drawable.icon_fire_bold_24,
             initValue = true,
@@ -104,10 +105,10 @@ fun Preview_PermissionListItem_Dark() {
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_PermissionListItem_Light() {
+fun Preview_PermissionFetchedListItem_Light() {
     val faker = Faker()
     YaaumTheme(useDarkTheme = false) {
-        PermissionListItem(
+        PermissionFetchedListItem(
             permission = faker.quote.fortuneCookie(),
             icon = R.drawable.icon_fire_bold_24,
             initValue = false,

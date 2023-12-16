@@ -27,8 +27,7 @@ class PermissionRoute : Screen {
             onStarted = {
                 hostViewModel.updateTheme()
             },
-            onDisposed = {
-            },
+            onDisposed = { },
         )
         PermissionScreen(
             navigator = navigator,

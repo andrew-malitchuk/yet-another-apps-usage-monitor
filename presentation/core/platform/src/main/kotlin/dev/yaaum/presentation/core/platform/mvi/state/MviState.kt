@@ -13,16 +13,14 @@ abstract class MviState {
     val partialState: MviPartialState
         get() {
             return when {
-                isFetched ->
-                    MviPartialState.FETCHED
-
                 isEmpty ->
                     MviPartialState.EMPTY
 
                 isLoading -> MviPartialState.LOADING
 
+                isError -> MviPartialState.ERROR
                 else ->
-                    MviPartialState.ERROR
+                    MviPartialState.FETCHED
             }
         }
 

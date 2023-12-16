@@ -1,8 +1,6 @@
 package dev.yaaum.presentation.feature.settings.screen.permission.mvi
 
 import dev.yaaum.presentation.core.platform.mvi.BaseMvi
-import io.getstream.log.StreamLog
-import io.getstream.log.streamLog
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,40 +12,15 @@ class PermissionMvi : BaseMvi<PermissionMviState, PermissionMviEvent, Permission
 
     override val effect: SharedFlow<PermissionMviEffect?> = MutableSharedFlow()
 
-    override val reducer = PermissionMviReducer(PermissionMviState.loading())
+    override val reducer = PermissionMviReducer(PermissionMviState.initial())
 
     override fun innerEventProcessing(event: PermissionMviEvent) {
         when (event) {
-            is PermissionMviEvent.CheckAppUsagePermissionMviEvent -> Unit
-            is PermissionMviEvent.CheckNotificationPermissionMviEvent -> Unit
-            is PermissionMviEvent.NotificationPermissionStateChangedMviEvent ->
-                StreamLog.streamLog {
-                    "permission: notification: ${event.isGranted}"
-                }
+            is PermissionMviEvent.NotificationPermissionStateChangedMviEvent -> Unit
 
-            is PermissionMviEvent.AppUsagePermissionStateChangedMviEvent ->
-                StreamLog.streamLog {
-                    "permission: appusage: ${event.isGranted}"
-                }
+            is PermissionMviEvent.AppUsagePermissionStateChangedMviEvent -> Unit
+
+            PermissionMviEvent.CheckPermissionsMviEvent -> Unit
         }
-    }
-
-    private fun getPermissionState() {
-        val notification = false
-        val permission = true
-        reducer.setState(
-            PermissionMviState.fetched(
-                permissionMviContent = PermissionMviContent(
-                    data = PermissionConfigure(
-                        isNotificationPermissionGranted = notification,
-                        isAppUsagePermissionGranted = permission,
-                    ),
-                ),
-            ),
-        )
-    }
-
-    init {
-        getPermissionState()
     }
 }

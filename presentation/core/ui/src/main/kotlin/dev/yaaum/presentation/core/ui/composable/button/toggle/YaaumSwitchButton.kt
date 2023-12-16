@@ -59,6 +59,7 @@ fun YaaumSwitchButton(
     thumbSize: Dp = 24.dp,
     initValue: Boolean = false,
     onStateChange: ((Boolean) -> Unit)? = null,
+    foo: Boolean? = null,
 ) {
     val interactionSource = remember {
         MutableInteractionSource()
@@ -66,6 +67,11 @@ fun YaaumSwitchButton(
     var onSideChangeState by remember {
         mutableStateOf(initValue)
     }
+
+    if (foo != null && foo != onSideChangeState) {
+        onSideChangeState = foo
+    }
+
     val alignment by animateAlignmentAsState(if (onSideChangeState) 1f else -1f)
     Box(
         modifier = modifier

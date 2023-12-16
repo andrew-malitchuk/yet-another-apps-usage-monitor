@@ -34,7 +34,7 @@ data class PermissionMviState(
 
         fun loading(): PermissionMviState {
             return PermissionMviState(
-                loading = true,
+                loading = false,
                 content = null,
                 error = null,
             )
@@ -43,18 +43,12 @@ data class PermissionMviState(
 
     override val isFetched: Boolean
         get() {
-            return content != null && !loading && error == null
+            return content != null && error == null
         }
 
-    override val isEmpty: Boolean
-        get() {
-            return content == null && !loading && error == null
-        }
+    override val isEmpty: Boolean = false
 
-    override val isLoading: Boolean
-        get() {
-            return content == null && loading && error == null
-        }
+    override val isLoading: Boolean = false
 
     override val isError: Boolean
         get() {
@@ -67,6 +61,8 @@ data class PermissionMviState(
 }
 
 data class PermissionConfigure(
-    val isNotificationPermissionGranted: Boolean?,
-    val isAppUsagePermissionGranted: Boolean?,
-)
+    val isNotificationPermissionGranted: Boolean? = null,
+    val isAppUsagePermissionGranted: Boolean? = null,
+) {
+    fun isValid() = isNotificationPermissionGranted != null && isAppUsagePermissionGranted != null
+}
