@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -16,7 +15,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import dev.yaaum.presentation.core.models.HealthSimplifiedUiModel
 import dev.yaaum.presentation.core.models.HealthStatus
 import dev.yaaum.presentation.core.models.RecommendationUiModel
-import dev.yaaum.presentation.core.models.TimeUsageUiModel
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.card.GeneralHealthCard
 import dev.yaaum.presentation.core.ui.composable.header.MainHeader
@@ -27,6 +25,7 @@ import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 import dev.yaaum.presentation.feature.main.screen.main.content.fetched.block.LimitedApplicationListBlock
 import dev.yaaum.presentation.feature.main.screen.main.content.fetched.block.RecommendationBlock
+import dev.yaaum.presentation.feature.main.screen.main.mvi.MainMviState
 import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -35,11 +34,13 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun FetchedContent(
+    @Suppress("UnusedParameter")
+    state: MainMviState,
     onSettingsClick: (() -> Unit)? = null,
     onHealthClick: (() -> Unit)? = null,
     onMoreClick: (() -> Unit)? = null,
     onAppClick: (() -> Unit)? = null,
-    topAppsWithHighestUsage: State<List<TimeUsageUiModel>?>,
+
 ) {
     val scrollState = rememberScrollState()
 

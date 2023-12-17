@@ -3,24 +3,29 @@ package dev.yaaum.presentation.feature.main.screen.main
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.navigator.Navigator
 import com.theapache64.rebugger.Rebugger
 import dev.yaaum.presentation.core.navigation.RouteGraph
+import dev.yaaum.presentation.core.platform.mvi.MviPartialState
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.feature.main.screen.HostViewModel
 import dev.yaaum.presentation.feature.main.screen.main.content.fetched.FetchedContent
-import io.getstream.log.StreamLog
-import io.getstream.log.streamLog
+import dev.yaaum.presentation.feature.main.screen.main.mvi.MainMvi
 
 @Composable
 fun MainScreen(
     navigator: Navigator,
     hostViewModel: HostViewModel,
-    mainViewModel: MainViewModel,
+    mainMvi: MainMvi,
 ) {
+    @Suppress("UnusedPrivateProperty")
+    val mainScreen = rememberScreen(RouteGraph.MainScreen)
     val theme by hostViewModel.currentThemeUiModel.collectAsState()
+
+    val state by mainMvi.state.collectAsState()
+    val effect by mainMvi.effect.collectAsState(null)
+
     val settingsScreen = rememberScreen(RouteGraph.SettingsScreen)
     val applicationsScreen = rememberScreen(RouteGraph.ApplicationsScreen)
     val healthScreen = rememberScreen(RouteGraph.HealthScreen)
@@ -28,40 +33,34 @@ fun MainScreen(
         RouteGraph.ApplicationDetalizationScreen("foo"),
     )
 
-    val topAppsWithHighestUsage =
-        mainViewModel.topAppsWithHighestUsageStateFlow.collectAsStateWithLifecycle()
-
-    StreamLog.streamLog {
-        "foobarfoobar"
-    }
-
     Rebugger(
         trackMap = mapOf(
             "navigator" to navigator,
             "theme" to theme,
-            "topAppsWithHighestUsageStateFlow" to topAppsWithHighestUsage,
-            "applicationDetalizationScreen" to applicationDetalizationScreen,
+            "state" to state,
+            "effect" to effect,
         ),
     )
     YaaumTheme(theme = theme) {
-//        ErrorContent(
-//            "Lorem ipsum",
-//            "Dolor sit amen"
-//        )
-        FetchedContent(
-            topAppsWithHighestUsage = topAppsWithHighestUsage,
-            onSettingsClick = {
-                navigator.push(settingsScreen)
-            },
-            onMoreClick = {
-                navigator.push(applicationsScreen)
-            },
-            onHealthClick = {
-                navigator.push(healthScreen)
-            },
-            onAppClick = {
-                navigator.push(applicationDetalizationScreen)
-            },
-        )
+        when (state.partialState) {
+            MviPartialState.FETCHED ->
+                FetchedContent(
+                    topAppsWithHighestUsage = topAppsWithHighestUsage,
+                    onSettingsClick = {
+                        navigator.push(settingsScreen)
+                    },
+                    onMoreClick = {
+                        navigator.push(applicationsScreen)
+                    },
+                    onHealthClick = {
+                        navigator.push(healthScreen)
+                    },
+                    onAppClick = {
+                        navigator.push(applicationDetalizationScreen)
+                    },
+                )
+
+            else -> Unit
+        }
     }
 }
