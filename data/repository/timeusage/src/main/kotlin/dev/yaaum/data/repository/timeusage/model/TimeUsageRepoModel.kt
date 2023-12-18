@@ -7,6 +7,7 @@ import dev.yaaum.data.source.system.timeusage.model.TimeUsageSystemModel
  * Container for app usage statistic. (In other words, wrapper over `UsageStats`).
  */
 data class TimeUsageRepoModel(
+    val applicationName: String?,
     val packageName: String?,
     val usageBegin: Long?,
     val usageEnd: Long?,
@@ -19,6 +20,7 @@ data class TimeUsageRepoModel(
  */
 fun TimeUsageSystemModel.toRepoModel() =
     TimeUsageRepoModel(
+        applicationName = this.applicationName,
         packageName = this.packageName,
         usageBegin = this.usageBegin,
         usageEnd = this.usageEnd,

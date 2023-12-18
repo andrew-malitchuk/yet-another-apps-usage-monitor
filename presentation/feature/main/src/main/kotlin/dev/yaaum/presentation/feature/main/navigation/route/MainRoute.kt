@@ -9,7 +9,8 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import dev.yaaum.presentation.feature.main.screen.HostViewModel
 import dev.yaaum.presentation.feature.main.screen.main.MainScreen
-import dev.yaaum.presentation.feature.main.screen.main.MainViewModel
+import dev.yaaum.presentation.feature.main.screen.main.mvi.MainMvi
+import dev.yaaum.presentation.feature.main.screen.main.mvi.MainMviEvent
 import org.koin.androidx.compose.koinViewModel
 
 /**
@@ -21,13 +22,14 @@ class MainRoute : Screen {
         val hostViewModel: HostViewModel = koinViewModel(
             viewModelStoreOwner = LocalContext.current as ComponentActivity,
         )
-        val mainViewModel: MainViewModel = koinViewModel(
+        val mainMvi: MainMvi = koinViewModel(
             viewModelStoreOwner = LocalContext.current as ComponentActivity,
         )
         val navigator = LocalNavigator.currentOrThrow
         LifecycleEffect(
             onStarted = {
                 hostViewModel.updateTheme()
+                mainMvi.sendEvent(MainMviEvent.UpdateContent)
             },
             onDisposed = {
             },
@@ -36,7 +38,7 @@ class MainRoute : Screen {
         MainScreen(
             navigator = navigator,
             hostViewModel = hostViewModel,
-            mainViewModel = mainViewModel,
+            mainMvi = mainMvi,
         )
     }
 }

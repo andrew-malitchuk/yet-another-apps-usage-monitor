@@ -7,6 +7,7 @@ import dev.yaaum.domain.core.model.BaseDomainModel
  * Container for app usage statistic. (In other words, wrapper over `UsageStats`).
  */
 data class TimeUsageDomainModel(
+    val applicationName: String?,
     val packageName: String?,
     val usageBegin: Long?,
     val usageEnd: Long?,
@@ -19,6 +20,7 @@ data class TimeUsageDomainModel(
  */
 fun TimeUsageRepoModel.toDomainModel() =
     TimeUsageDomainModel(
+        applicationName = this.applicationName,
         packageName = this.packageName,
         usageBegin = this.usageBegin,
         usageEnd = this.usageEnd,

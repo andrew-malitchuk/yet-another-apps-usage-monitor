@@ -1,12 +1,10 @@
-package dev.yaaum.presentation.feature.main.screen.main.content.fetched.list
+package dev.yaaum.presentation.feature.main.screen.main.item.loading
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -19,64 +17,48 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import dev.yaaum.presentation.core.ui.R
+import dev.yaaum.presentation.core.ui.composable.ext.placeholder
 import dev.yaaum.presentation.core.ui.composable.item.YaaumBaseListContainer
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
-import io.github.serpro69.kfaker.Faker
 
 @Composable
-fun ApplicationListItem(
+fun ApplicationLoadingListItem(
     modifier: Modifier = Modifier,
-    title: String,
-    description: String,
-    onClick: (() -> Unit)? = null,
 ) {
     YaaumBaseListContainer(
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight(),
-        onClick = {
-            onClick?.invoke()
-        },
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
+                .placeholder(
+                    backgroundColor = YaaumTheme.colors.surface,
+                    isLoading = true,
+                    shape = RoundedCornerShape(YaaumTheme.corners.medium),
+                )
                 .padding(YaaumTheme.spacing.small),
         ) {
-            // TODO: add sizes
             Box(
                 modifier = Modifier
-                    .size(48.dp)
+                    .size(YaaumTheme.icons.medium)
                     .fillMaxWidth()
                     .wrapContentHeight()
                     .clip(RoundedCornerShape(YaaumTheme.corners.medium))
                     .align(Alignment.CenterVertically)
                     .background(YaaumTheme.colors.secondary),
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.icon_fire_bold_24),
-                    contentDescription = null,
-                    colorFilter = ColorFilter.tint(YaaumTheme.colors.primary),
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .align(Alignment.Center)
-                        .padding(YaaumTheme.spacing.small),
-                )
-            }
+            )
             Spacer(modifier = Modifier.width(YaaumTheme.spacing.small))
             Column(
                 modifier = Modifier,
             ) {
                 Text(
-                    text = title,
+                    text = "",
                     style = YaaumTheme.typography.title,
                     color = YaaumTheme.colors.onSurface,
                     maxLines = 1,
@@ -84,7 +66,7 @@ fun ApplicationListItem(
                 )
                 Spacer(modifier = Modifier.height(YaaumTheme.spacing.extraSmall))
                 Text(
-                    text = description,
+                    text = "",
                     style = YaaumTheme.typography.caption,
                     color = YaaumTheme.colors.onSurface,
                     maxLines = 1,
@@ -97,24 +79,16 @@ fun ApplicationListItem(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_ApplicationListItem_Dark() {
-    val faker = Faker()
+fun Preview_ApplicationLoadingListItem_Dark() {
     YaaumTheme(useDarkTheme = true) {
-        ApplicationListItem(
-            title = faker.quote.fortuneCookie(),
-            description = faker.quote.fortuneCookie(),
-        )
+        ApplicationLoadingListItem()
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_ApplicationListItem_Light() {
-    val faker = Faker()
+fun Preview_ApplicationLoadingListItem_Light() {
     YaaumTheme(useDarkTheme = false) {
-        ApplicationListItem(
-            title = faker.quote.fortuneCookie(),
-            description = faker.quote.fortuneCookie(),
-        )
+        ApplicationLoadingListItem()
     }
 }

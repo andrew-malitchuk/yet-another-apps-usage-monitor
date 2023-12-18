@@ -23,7 +23,11 @@ class TimeUsageDataSourceImpl(
                     )
             val result = ArrayList<TimeUsageSystemModel>()
             lUsageStatsMap?.forEach { (_, u) ->
-                result.add(u.toSystemModel())
+                try {
+                    result.add(u.toSystemModel(context = context))
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
+                }
             }
             continuation.resume(result)
         }
@@ -42,7 +46,7 @@ class TimeUsageDataSourceImpl(
                     )
             val result = ArrayList<TimeUsageSystemModel>()
             lUsageStatsMap?.forEach { (_, u) ->
-                result.add(u.toSystemModel())
+                result.add(u.toSystemModel(context = context))
             }
             continuation.resume(result)
         }

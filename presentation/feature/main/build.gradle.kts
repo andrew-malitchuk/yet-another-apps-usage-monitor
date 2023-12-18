@@ -27,10 +27,12 @@ dependencies {
     implementation(libs.navigation.compose)
     implementation(libs.compose.material)
 //    implementation("androidx.compose.material:material:1.5.2")
+    implementation(libs.accompanist.drawablepainter)
 
     implementation(project(":presentation:core:ui"))
     implementation(project(":presentation:core:platform"))
     implementation(project(":presentation:core:models"))
+    implementation(project(":presentation:core:localisation"))
     implementation(project(":presentation:core:navigation"))
 
     implementation(project(":common:core"))

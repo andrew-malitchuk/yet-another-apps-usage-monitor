@@ -7,7 +7,6 @@ import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.navigator.Navigator
 import com.theapache64.rebugger.Rebugger
 import dev.yaaum.presentation.core.navigation.RouteGraph
-import dev.yaaum.presentation.core.platform.mvi.MviPartialState
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.feature.main.screen.HostViewModel
 import dev.yaaum.presentation.feature.main.screen.main.content.fetched.FetchedContent
@@ -28,6 +27,7 @@ fun MainScreen(
 
     val settingsScreen = rememberScreen(RouteGraph.SettingsScreen)
     val applicationsScreen = rememberScreen(RouteGraph.ApplicationsScreen)
+    val permissionsScreen = rememberScreen(RouteGraph.PermissionsScreen)
     val healthScreen = rememberScreen(RouteGraph.HealthScreen)
     val applicationDetalizationScreen = rememberScreen(
         RouteGraph.ApplicationDetalizationScreen("foo"),
@@ -42,25 +42,30 @@ fun MainScreen(
         ),
     )
     YaaumTheme(theme = theme) {
-        when (state.partialState) {
-            MviPartialState.FETCHED ->
-                FetchedContent(
-                    topAppsWithHighestUsage = topAppsWithHighestUsage,
-                    onSettingsClick = {
-                        navigator.push(settingsScreen)
-                    },
-                    onMoreClick = {
-                        navigator.push(applicationsScreen)
-                    },
-                    onHealthClick = {
-                        navigator.push(healthScreen)
-                    },
-                    onAppClick = {
-                        navigator.push(applicationDetalizationScreen)
-                    },
-                )
-
-            else -> Unit
-        }
+//        when (state.partialState) {
+//            MviPartialState.FETCHED ->
+        FetchedContent(
+            state = state,
+            onSettingsClick = {
+                navigator.push(settingsScreen)
+            },
+            onMoreClick = {
+                navigator.push(applicationsScreen)
+            },
+            onHealthClick = {
+                navigator.push(healthScreen)
+            },
+            onApplicationClick = {
+                navigator.push(applicationDetalizationScreen)
+            },
+            onPermissionClick = {
+                navigator.push(permissionsScreen)
+            },
+        )
+//            MviPartialState.LOADING->
+//                DefaultLoadingContent()
+//
+//            else -> Unit
+//        }
     }
 }

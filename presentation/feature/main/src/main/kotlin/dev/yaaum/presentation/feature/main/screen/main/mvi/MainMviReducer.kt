@@ -8,12 +8,38 @@ class MainMviReducer(initial: MainMviState) :
         when (event) {
             is MainMviEvent.GetMainMviEvent -> setState(
                 oldState.copy(
-                    loading = false,
+                    loading = true,
                     content = MainMviContent(
-                        data = null,
+                        topUsageApps = null,
                     ),
                     error = null,
-                    query = null,
+                ),
+            )
+
+            MainMviEvent.GetTopAppsUsage -> setState(
+                oldState.copy(
+                    loading = false,
+                    content = MainMviContent(
+                        topUsageApps = null,
+                    ),
+                    error = null,
+                ),
+            )
+
+            is MainMviEvent.OnTopAppsUsageFetched -> setState(
+                oldState.copy(
+                    loading = false,
+                    content = MainMviContent(
+                        topUsageApps = event.apps,
+                    ),
+                    error = null,
+                ),
+            )
+
+            MainMviEvent.UpdateContent -> setState(
+                oldState.copy(
+                    loading = false,
+                    error = null,
                 ),
             )
         }
