@@ -32,6 +32,7 @@ class MainMvi(
             MainMviEvent.GetTopAppsUsage -> getTopAppsUsage()
             is MainMviEvent.OnTopAppsUsageFetched -> Unit
             MainMviEvent.UpdateContent -> update()
+            MainMviEvent.GetHealthStatus -> getHealthStatus()
         }
     }
 
@@ -43,6 +44,48 @@ class MainMvi(
         launch(
             request = {
                 getTopAppsWithHighestUsageUseCase(TOP_APPS_COUNT)
+            },
+            result = { result ->
+                result?.fold({ error ->
+                    reducer.setState(
+                        MainMviState.error(
+                            // TODO: fix me
+                            SwwUiError(
+                                UiText.DynamicString(error.message ?: ""),
+                                error.throwable,
+                            ),
+                        ),
+                    )
+                }, { result ->
+                    reducer.setState(
+                        MainMviState.fetched(
+                            content = MainMviContent(
+                                topUsageApps = result.map { it.toUiModel() },
+                            ),
+                        ),
+                    )
+                })
+            },
+            loading = {
+            },
+        ) {
+            reducer.setState(
+                MainMviState.error(
+                    // TODO: fix me
+                    SwwUiError(
+                        UiText.DynamicString(it.message ?: ""),
+                        it,
+                    ),
+                ),
+            )
+        }
+    }
+
+    fun getHealthStatus() {
+        launch(
+            request = {
+                // TODO: fix
+                getHealthStatusUseCase(0L, 0L)
             },
             result = { result ->
                 result?.fold({ error ->

@@ -5,4 +5,5 @@ import dev.yaaum.presentation.core.platform.mvi.state.content.MviContent
 
 data class MainMviContent(
     val topUsageApps: List<TimeUsageUiModel>?,
+    val healthStatus: HealthStatusUiModel?,
 ) : MviContent

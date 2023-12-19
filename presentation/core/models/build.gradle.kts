@@ -13,5 +13,6 @@ dependencies {
     implementation(project(":domain:timeusage"))
     implementation(project(":domain:configuration"))
     implementation(project(":domain:applications"))
+    implementation(project(":domain:health"))
     implementation(project(":common:core"))
 }

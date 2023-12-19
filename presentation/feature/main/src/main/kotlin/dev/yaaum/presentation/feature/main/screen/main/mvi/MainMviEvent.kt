@@ -9,5 +9,6 @@ sealed class MainMviEvent : MviEvent {
     data object UpdateContent : MainMviEvent()
     data object GetMainMviEvent : MainMviEvent()
     data object GetTopAppsUsage : MainMviEvent()
+    data object GetHealthStatus : MainMviEvent()
     data class OnTopAppsUsageFetched(val apps: List<TimeUsageUiModel>?) : MainMviEvent()
 }
