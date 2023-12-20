@@ -33,11 +33,13 @@ class MainMvi(
             is MainMviEvent.OnTopAppsUsageFetched -> Unit
             MainMviEvent.UpdateContent -> update()
             MainMviEvent.GetHealthStatus -> getHealthStatus()
+            is MainMviEvent.OnHealthStatusFetched -> Unit
         }
     }
 
     private fun update() {
         getTopAppsUsage()
+        getHealthStatus()
     }
 
     private fun getTopAppsUsage() {
@@ -59,9 +61,8 @@ class MainMvi(
                 }, { result ->
                     reducer.setState(
                         MainMviState.fetched(
-                            content = MainMviContent(
-                                topUsageApps = result.map { it.toUiModel() },
-                            ),
+                            content = (reducer.state.value.content ?: MainMviContent())
+                                .copy(topUsageApps = result.map { it.toUiModel() }),
                         ),
                     )
                 })
@@ -81,7 +82,7 @@ class MainMvi(
         }
     }
 
-    fun getHealthStatus() {
+    private fun getHealthStatus() {
         launch(
             request = {
                 // TODO: fix
@@ -101,9 +102,10 @@ class MainMvi(
                 }, { result ->
                     reducer.setState(
                         MainMviState.fetched(
-                            content = MainMviContent(
-                                topUsageApps = result.map { it.toUiModel() },
-                            ),
+                            content = (reducer.state.value.content ?: MainMviContent())
+                                .copy(
+                                    healthStatus = result.toUiModel(),
+                                ),
                         ),
                     )
                 })

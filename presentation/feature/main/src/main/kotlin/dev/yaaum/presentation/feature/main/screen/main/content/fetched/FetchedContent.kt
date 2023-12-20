@@ -10,8 +10,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import dev.yaaum.presentation.core.models.HealthSimplifiedUiModel
-import dev.yaaum.presentation.core.models.HealthStatus
 import dev.yaaum.presentation.core.models.RecommendationUiModel
 import dev.yaaum.presentation.core.models.TimeUsageUiModel
 import dev.yaaum.presentation.core.ui.R
@@ -77,11 +75,7 @@ fun FetchedContent(
                     .padding(horizontal = YaaumTheme.spacing.medium),
                 icon = R.drawable.icon_gear_six_bold_24,
                 onClick = onSettingsClick,
-                healthStatus = HealthSimplifiedUiModel(
-                    HealthStatus.WINK,
-                    Faker().quote.fortuneCookie(),
-                    Faker().quote.fortuneCookie(),
-                ),
+                healthStatus = state.content?.healthStatus,
             )
             GeneralHealthCard(
                 modifier = Modifier

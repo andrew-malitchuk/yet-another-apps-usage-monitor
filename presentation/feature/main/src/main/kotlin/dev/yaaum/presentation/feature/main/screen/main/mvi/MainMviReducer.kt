@@ -11,30 +11,37 @@ class MainMviReducer(initial: MainMviState) :
                     loading = true,
                     content = MainMviContent(
                         topUsageApps = null,
+                        healthStatus = null,
                     ),
                     error = null,
                 ),
             )
 
-            MainMviEvent.GetTopAppsUsage -> setState(
-                oldState.copy(
-                    loading = false,
-                    content = MainMviContent(
-                        topUsageApps = null,
+            MainMviEvent.GetTopAppsUsage -> {
+                val previous = oldState.content ?: MainMviContent()
+                setState(
+                    oldState.copy(
+                        loading = false,
+                        content = previous.copy(
+                            topUsageApps = null,
+                        ),
+                        error = null,
                     ),
-                    error = null,
-                ),
-            )
+                )
+            }
 
-            is MainMviEvent.OnTopAppsUsageFetched -> setState(
-                oldState.copy(
-                    loading = false,
-                    content = MainMviContent(
-                        topUsageApps = event.apps,
+            is MainMviEvent.OnTopAppsUsageFetched -> {
+                val previous = oldState.content ?: MainMviContent()
+                setState(
+                    oldState.copy(
+                        loading = false,
+                        content = previous.copy(
+                            topUsageApps = event.apps,
+                        ),
+                        error = null,
                     ),
-                    error = null,
-                ),
-            )
+                )
+            }
 
             MainMviEvent.UpdateContent -> setState(
                 oldState.copy(
@@ -42,6 +49,32 @@ class MainMviReducer(initial: MainMviState) :
                     error = null,
                 ),
             )
+
+            MainMviEvent.GetHealthStatus -> {
+                val previous = oldState.content ?: MainMviContent()
+                setState(
+                    oldState.copy(
+                        loading = false,
+                        content = previous.copy(
+                            healthStatus = null,
+                        ),
+                        error = null,
+                    ),
+                )
+            }
+
+            is MainMviEvent.OnHealthStatusFetched -> {
+                val previous = oldState.content ?: MainMviContent()
+                setState(
+                    oldState.copy(
+                        loading = false,
+                        content = previous.copy(
+                            healthStatus = event.status,
+                        ),
+                        error = null,
+                    ),
+                )
+            }
         }
     }
 }

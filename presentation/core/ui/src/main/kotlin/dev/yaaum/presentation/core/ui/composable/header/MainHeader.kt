@@ -22,14 +22,13 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import dev.yaaum.presentation.core.models.HealthSimplifiedUiModel
 import dev.yaaum.presentation.core.models.HealthStatus
+import dev.yaaum.presentation.core.models.HealthStatusUiModel
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumCircleButton
+import dev.yaaum.presentation.core.ui.composable.ext.placeholder
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
-import io.github.serpro69.kfaker.Faker
 
 /**
  * Main type of header; contains back, action buttons and title
@@ -39,90 +38,152 @@ import io.github.serpro69.kfaker.Faker
  * @param healthStatus display icon which depends on health status
  * @param onClick lambda
  */
+@Suppress("LongMethod")
+// TODO: recode me
 @Composable
 fun MainHeader(
     modifier: Modifier = Modifier,
     @DrawableRes
     icon: Int,
-    healthStatus: HealthSimplifiedUiModel,
+    healthStatus: HealthStatusUiModel?,
     onClick: (() -> Unit)? = null,
 ) {
-    val iconHealth = when (healthStatus.status) {
-        HealthStatus.NERVOUS -> R.drawable.icon_smiley_nervous_bold_24
-        HealthStatus.SMILEY -> R.drawable.icon_smiley_bold_24
-        HealthStatus.ANGRY -> R.drawable.icon_smiley_angry_bold_24
-        HealthStatus.BLANK -> R.drawable.icon_smiley_blank_bold_24
-        HealthStatus.MEH -> R.drawable.icon_smiley_meh_bold_24
-        HealthStatus.SAD -> R.drawable.icon_smiley_sad_bold_24
-        HealthStatus.WINK -> R.drawable.icon_smiley_wink_bold_24
-        HealthStatus.DAMN -> R.drawable.icon_smiley_x_eyes_bold_24
-    }
+    when (healthStatus) {
+        null ->
+            Row(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .background(YaaumTheme.colors.background)
+                    .padding(vertical = YaaumTheme.spacing.small),
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(YaaumTheme.icons.medium)
+                        .fillMaxWidth()
+                        .wrapContentHeight()
+                        .clip(RoundedCornerShape(YaaumTheme.corners.medium))
+                        .align(Alignment.CenterVertically)
+                        .background(YaaumTheme.colors.secondary)
+                        .placeholder(
+                            backgroundColor = YaaumTheme.colors.surface,
+                            isLoading = true,
+                            shape = RoundedCornerShape(YaaumTheme.corners.medium),
+                        ),
+                ) {
+                    Image(
+                        colorFilter = ColorFilter.tint(YaaumTheme.colors.onPrimary),
+                        painter = painterResource(id = R.drawable.icon_fire_bold_24),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .align(Alignment.Center)
+                            .padding(YaaumTheme.spacing.small),
+                    )
+                }
+                Spacer(modifier = Modifier.weight(1f))
+                YaaumCircleButton(
+                    icon = icon,
+                    modifier = Modifier
+                        .align(Alignment.CenterVertically),
+                    defaultBackgroundColor = YaaumTheme.colors.primary,
+                    pressedBackgroundColor = YaaumTheme.colors.secondary,
+                    iconSize = YaaumTheme.icons.smallMedium,
+                    onClick = {
+                        onClick?.invoke()
+                    },
+                )
+            }
 
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .background(YaaumTheme.colors.background)
-            .padding(vertical = YaaumTheme.spacing.small),
-    ) {
-        // TODO: add sizes
-        Box(
-            modifier = Modifier
-                .size(48.dp)
-                .fillMaxWidth()
-                .wrapContentHeight()
-                .clip(RoundedCornerShape(YaaumTheme.corners.medium))
-                .align(Alignment.CenterVertically)
-                .background(YaaumTheme.colors.secondary),
-        ) {
-            Image(
-                colorFilter = ColorFilter.tint(YaaumTheme.colors.onPrimary),
-                painter = painterResource(id = iconHealth),
-                contentDescription = null,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .align(Alignment.Center)
-                    .padding(YaaumTheme.spacing.small),
-            )
+        else -> {
+            val iconHealth = when (healthStatus?.status) {
+                HealthStatus.NERVOUS -> R.drawable.icon_smiley_nervous_bold_24
+                HealthStatus.SMILEY -> R.drawable.icon_smiley_bold_24
+                HealthStatus.ANGRY -> R.drawable.icon_smiley_angry_bold_24
+                HealthStatus.BLANK -> R.drawable.icon_smiley_blank_bold_24
+                HealthStatus.MEH -> R.drawable.icon_smiley_meh_bold_24
+                HealthStatus.SAD -> R.drawable.icon_smiley_sad_bold_24
+                HealthStatus.WINK -> R.drawable.icon_smiley_wink_bold_24
+                HealthStatus.DAMN -> R.drawable.icon_smiley_x_eyes_bold_24
+                else -> R.drawable.icon_info_bold_24
+            }
+
+            val titleHealth = when (healthStatus?.status) {
+                HealthStatus.NERVOUS -> "NERVOUS"
+                HealthStatus.SMILEY -> "SMILEY"
+                HealthStatus.ANGRY -> "ANGRY"
+                HealthStatus.BLANK -> "BLANK"
+                HealthStatus.MEH -> "MEH"
+                HealthStatus.SAD -> "SAD"
+                HealthStatus.WINK -> "WINK"
+                HealthStatus.DAMN -> "DAMN"
+                else -> "SWW"
+            }
+
+            Row(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .background(YaaumTheme.colors.background)
+                    .padding(vertical = YaaumTheme.spacing.small),
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(YaaumTheme.icons.medium)
+                        .fillMaxWidth()
+                        .wrapContentHeight()
+                        .clip(RoundedCornerShape(YaaumTheme.corners.medium))
+                        .align(Alignment.CenterVertically)
+                        .background(YaaumTheme.colors.secondary),
+                ) {
+                    Image(
+                        colorFilter = ColorFilter.tint(YaaumTheme.colors.onPrimary),
+                        painter = painterResource(id = iconHealth),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .align(Alignment.Center)
+                            .padding(YaaumTheme.spacing.small),
+                    )
+                }
+                Spacer(modifier = Modifier.width(YaaumTheme.spacing.small))
+                Text(
+                    modifier = Modifier
+                        .align(Alignment.CenterVertically)
+                        .weight(1f),
+                    text = titleHealth,
+                    style = YaaumTheme.typography.title,
+                    color = YaaumTheme.colors.onBackground,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                )
+                Spacer(modifier = Modifier.width(YaaumTheme.spacing.small))
+                YaaumCircleButton(
+                    icon = icon,
+                    modifier = Modifier
+                        .align(Alignment.CenterVertically),
+                    defaultBackgroundColor = YaaumTheme.colors.primary,
+                    pressedBackgroundColor = YaaumTheme.colors.secondary,
+                    iconSize = YaaumTheme.icons.smallMedium,
+                    onClick = {
+                        onClick?.invoke()
+                    },
+                )
+            }
         }
-        Spacer(modifier = Modifier.width(YaaumTheme.spacing.small))
-        Text(
-            modifier = Modifier
-                .align(Alignment.CenterVertically)
-                .weight(1f),
-            text = healthStatus.title,
-            style = YaaumTheme.typography.title,
-            color = YaaumTheme.colors.onBackground,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-        )
-        Spacer(modifier = Modifier.width(YaaumTheme.spacing.small))
-        YaaumCircleButton(
-            icon = icon,
-            modifier = Modifier
-                .align(Alignment.CenterVertically),
-            defaultBackgroundColor = YaaumTheme.colors.primary,
-            pressedBackgroundColor = YaaumTheme.colors.secondary,
-            // TODO: fix
-            iconSize = 32.dp,
-            onClick = {
-                onClick?.invoke()
-            },
-        )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_MainHeader_Dark() {
-    val faker = Faker()
+fun Preview_MainHeader_Fetched_Dark() {
     YaaumTheme(useDarkTheme = true) {
+        @Suppress("MagicNumber")
         MainHeader(
             icon = R.drawable.icon_gear_six_bold_24,
-            healthStatus = HealthSimplifiedUiModel(
+            healthStatus = HealthStatusUiModel(
+                10f,
                 HealthStatus.WINK,
-                faker.quote.fortuneCookie(),
-                faker.quote.fortuneCookie(),
             ),
         )
     }
@@ -130,16 +191,37 @@ fun Preview_MainHeader_Dark() {
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_MainHeader_Light() {
-    val faker = Faker()
+fun Preview_MainHeader_Fetched_Light() {
     YaaumTheme(useDarkTheme = false) {
         MainHeader(
             icon = R.drawable.icon_gear_six_bold_24,
-            healthStatus = HealthSimplifiedUiModel(
+            healthStatus = null,
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_MainHeader_Loading_Dark() {
+    YaaumTheme(useDarkTheme = true) {
+        @Suppress("MagicNumber")
+        MainHeader(
+            icon = R.drawable.icon_gear_six_bold_24,
+            healthStatus = HealthStatusUiModel(
+                10f,
                 HealthStatus.WINK,
-                faker.quote.fortuneCookie(),
-                faker.quote.fortuneCookie(),
             ),
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_MainHeader_Loading_Light() {
+    YaaumTheme(useDarkTheme = false) {
+        MainHeader(
+            icon = R.drawable.icon_gear_six_bold_24,
+            healthStatus = null,
         )
     }
 }
