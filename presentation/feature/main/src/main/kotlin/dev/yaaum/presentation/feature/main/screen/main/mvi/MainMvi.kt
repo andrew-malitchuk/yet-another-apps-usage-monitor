@@ -1,5 +1,6 @@
 package dev.yaaum.presentation.feature.main.screen.main.mvi
 
+import dev.yaaum.domain.health.GetGeneralTimeUsageStatisticUseCase
 import dev.yaaum.domain.health.GetHealthStatusUseCase
 import dev.yaaum.domain.timeusage.GetTopAppsWithHighestUsageUseCase
 import dev.yaaum.presentation.core.localisation.UiText
@@ -15,6 +16,7 @@ import kotlinx.coroutines.flow.StateFlow
 class MainMvi(
     private val getTopAppsWithHighestUsageUseCase: GetTopAppsWithHighestUsageUseCase,
     private val getHealthStatusUseCase: GetHealthStatusUseCase,
+    private val getGeneralTimeUsageStatisticUseCase: GetGeneralTimeUsageStatisticUseCase,
 ) : BaseMvi<MainMviState, MainMviEvent, MainMviEffect>() {
 
     override val state: StateFlow<MainMviState>
@@ -34,12 +36,15 @@ class MainMvi(
             MainMviEvent.UpdateContent -> update()
             MainMviEvent.GetHealthStatus -> getHealthStatus()
             is MainMviEvent.OnHealthStatusFetched -> Unit
+            MainMviEvent.GetGeneralTimeUsage -> getGetGeneralTimeUsage()
+            is MainMviEvent.OnGeneralTimeUsageFetched -> Unit
         }
     }
 
     private fun update() {
         getTopAppsUsage()
         getHealthStatus()
+        getGetGeneralTimeUsage()
     }
 
     private fun getTopAppsUsage() {
@@ -105,6 +110,49 @@ class MainMvi(
                             content = (reducer.state.value.content ?: MainMviContent())
                                 .copy(
                                     healthStatus = result.toUiModel(),
+                                ),
+                        ),
+                    )
+                })
+            },
+            loading = {
+            },
+        ) {
+            reducer.setState(
+                MainMviState.error(
+                    // TODO: fix me
+                    SwwUiError(
+                        UiText.DynamicString(it.message ?: ""),
+                        it,
+                    ),
+                ),
+            )
+        }
+    }
+
+    private fun getGetGeneralTimeUsage() {
+        launch(
+            request = {
+                // TODO: fix
+                getGeneralTimeUsageStatisticUseCase(0L, 0L)
+            },
+            result = { result ->
+                result?.fold({ error ->
+                    reducer.setState(
+                        MainMviState.error(
+                            // TODO: fix me
+                            SwwUiError(
+                                UiText.DynamicString(error.message ?: ""),
+                                error.throwable,
+                            ),
+                        ),
+                    )
+                }, { result ->
+                    reducer.setState(
+                        MainMviState.fetched(
+                            content = (reducer.state.value.content ?: MainMviContent())
+                                .copy(
+                                    timeUsage = result.toUiModel(),
                                 ),
                         ),
                     )

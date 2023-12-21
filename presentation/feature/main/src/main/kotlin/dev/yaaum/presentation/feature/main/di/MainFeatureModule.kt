@@ -25,6 +25,7 @@ val mainFeatureModule = module {
         MainMvi(
             getTopAppsWithHighestUsageUseCase = get(),
             getHealthStatusUseCase = get(),
+            getGeneralTimeUsageStatisticUseCase = get(),
         )
     }
 }

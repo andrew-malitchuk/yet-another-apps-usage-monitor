@@ -75,6 +75,32 @@ class MainMviReducer(initial: MainMviState) :
                     ),
                 )
             }
+
+            MainMviEvent.GetGeneralTimeUsage -> {
+                val previous = oldState.content ?: MainMviContent()
+                setState(
+                    oldState.copy(
+                        loading = false,
+                        content = previous.copy(
+                            timeUsage = null,
+                        ),
+                        error = null,
+                    ),
+                )
+            }
+
+            is MainMviEvent.OnGeneralTimeUsageFetched -> {
+                val previous = oldState.content ?: MainMviContent()
+                setState(
+                    oldState.copy(
+                        loading = false,
+                        content = previous.copy(
+                            timeUsage = event.timeUsage,
+                        ),
+                        error = null,
+                    ),
+                )
+            }
         }
     }
 }

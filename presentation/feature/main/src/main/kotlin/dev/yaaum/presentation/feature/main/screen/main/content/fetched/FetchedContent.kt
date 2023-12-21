@@ -32,7 +32,6 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun FetchedContent(
-    @Suppress("UnusedParameter")
     state: MainMviState,
     onSettingsClick: (() -> Unit)? = null,
     onHealthClick: (() -> Unit)? = null,
@@ -78,6 +77,7 @@ fun FetchedContent(
                 healthStatus = state.content?.healthStatus,
             )
             GeneralHealthCard(
+                timeUsage = state.content?.timeUsage,
                 modifier = Modifier
                     .padding(horizontal = YaaumTheme.spacing.medium),
                 onClick = onHealthClick,
