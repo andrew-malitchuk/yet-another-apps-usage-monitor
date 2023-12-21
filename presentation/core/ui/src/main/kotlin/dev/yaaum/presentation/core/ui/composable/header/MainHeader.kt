@@ -19,9 +19,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import dev.yaaum.presentation.core.localisation.UiText
 import dev.yaaum.presentation.core.models.HealthStatus
 import dev.yaaum.presentation.core.models.HealthStatusUiModel
 import dev.yaaum.presentation.core.ui.R
@@ -108,17 +110,19 @@ fun MainHeader(
                 else -> R.drawable.icon_info_bold_24
             }
 
-            val titleHealth = when (healthStatus?.status) {
-                HealthStatus.NERVOUS -> "NERVOUS"
-                HealthStatus.SMILEY -> "SMILEY"
-                HealthStatus.ANGRY -> "ANGRY"
-                HealthStatus.BLANK -> "BLANK"
-                HealthStatus.MEH -> "MEH"
-                HealthStatus.SAD -> "SAD"
-                HealthStatus.WINK -> "WINK"
-                HealthStatus.DAMN -> "DAMN"
-                else -> "SWW"
-            }
+            val titleHealth = UiText.StringResource(
+                when (healthStatus.status) {
+                    HealthStatus.NERVOUS -> dev.yaaum.presentation.core.localisation.R.string.health_status_nervous
+                    HealthStatus.SMILEY -> dev.yaaum.presentation.core.localisation.R.string.health_status_smiley
+                    HealthStatus.ANGRY -> dev.yaaum.presentation.core.localisation.R.string.health_status_angry
+                    HealthStatus.BLANK -> dev.yaaum.presentation.core.localisation.R.string.health_status_blank
+                    HealthStatus.MEH -> dev.yaaum.presentation.core.localisation.R.string.health_status_meh
+                    HealthStatus.SAD -> dev.yaaum.presentation.core.localisation.R.string.health_status_sad
+                    HealthStatus.WINK -> dev.yaaum.presentation.core.localisation.R.string.health_status_wink
+                    HealthStatus.DAMN -> dev.yaaum.presentation.core.localisation.R.string.health_status_damn
+                    else -> dev.yaaum.presentation.core.localisation.R.string.health_status_blank
+                },
+            ).asString(LocalContext.current)
 
             Row(
                 modifier = modifier

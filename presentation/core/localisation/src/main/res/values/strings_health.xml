@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="health_status_nervous">Well...</string>
+    <string name="health_status_smiley">Good!</string>
+    <string name="health_status_angry">Not great, not terrible</string>
+    <string name="health_status_blank">Keep going!</string>
+    <string name="health_status_meh">Not so good(</string>
+    <string name="health_status_sad">What happened?</string>
+    <string name="health_status_wink">Awesome</string>
+    <string name="health_status_damn">Take a rest</string>
+</resources>

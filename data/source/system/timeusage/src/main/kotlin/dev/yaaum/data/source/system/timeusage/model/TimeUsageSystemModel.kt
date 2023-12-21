@@ -2,7 +2,6 @@ package dev.yaaum.data.source.system.timeusage.model
 
 import android.app.usage.UsageStats
 import android.content.Context
-import android.content.res.Resources
 import dev.yaaum.data.source.system.core.model.base.BaseSystemModel
 
 /**
@@ -24,11 +23,11 @@ fun UsageStats.toSystemModel(context: Context): TimeUsageSystemModel {
     val applicationName = try {
         context.packageManager.getApplicationInfo(packageName, 0).loadLabel(context.packageManager)
             .toString()
-    } catch (ex: Resources.NotFoundException) {
+    } catch (ex: Exception) {
         null
     }
     return TimeUsageSystemModel(
-        applicationName = applicationName,
+        applicationName = applicationName ?: this.packageName,
         packageName = this.packageName,
         usageBegin = this.firstTimeStamp,
         usageEnd = this.lastTimeStamp,
