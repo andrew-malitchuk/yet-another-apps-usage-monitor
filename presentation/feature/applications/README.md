@@ -2,6 +2,9 @@
 
 ## :presentation:feature:onboarding
 
-### Components 
+### Purpose 
 
-#### Onboarding
+Main goals:
+
+- show all applications;
+- show detalization of certain application.
