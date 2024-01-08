@@ -2,6 +2,7 @@ package dev.yaaum.presentation.feature.settings.screen.permission.content.fetche
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -16,7 +17,8 @@ import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.header.SimpleHeader
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
-import dev.yaaum.presentation.feature.settings.screen.permission.item.PermissionListItem
+import dev.yaaum.presentation.feature.settings.screen.permission.content.loading.PermissionLoadingContent
+import dev.yaaum.presentation.feature.settings.screen.permission.item.fetched.PermissionFetchedListItem
 import dev.yaaum.presentation.feature.settings.screen.permission.mvi.PermissionConfigure
 import dev.yaaum.presentation.feature.settings.screen.permission.mvi.PermissionMviContent
 import dev.yaaum.presentation.feature.settings.screen.permission.mvi.PermissionMviState
@@ -51,43 +53,60 @@ fun PermissionFetchedContent(
                     bottom = YaaumTheme.spacing.small,
                 ),
         )
-        Column(
+        Box(
             modifier = Modifier
-                .verticalScroll(rememberScrollState())
-                .weight(weight = 1f, fill = false)
-                .background(YaaumTheme.colors.background)
-                .padding(horizontal = YaaumTheme.spacing.medium),
-            verticalArrangement = Arrangement
-                .spacedBy(YaaumTheme.spacing.small),
+                .weight(1.0f),
         ) {
-            PermissionListItem(
-                permission = UiText
-                    .StringResource(dev.yaaum.presentation.core.localisation.R.string.settings_permission_notification)
-                    .asString(LocalContext.current),
-                icon = R.drawable.icon_notification_bold_24,
-                initValue = state.content?.data?.isNotificationPermissionGranted ?: false,
-                onPermissionClick = {
-                    onPermissionChangeState?.invoke(
-                        PermissionChangeState.OnNotificationStateChanged(
-                            isGranted = it,
-                        ),
-                    )
-                },
-            )
-            PermissionListItem(
-                permission = UiText
-                    .StringResource(dev.yaaum.presentation.core.localisation.R.string.settings_permission_usage)
-                    .asString(LocalContext.current),
-                icon = R.drawable.icon_chart_pie_slice_bold_24,
-                initValue = state.content?.data?.isAppUsagePermissionGranted ?: false,
-                onPermissionClick = {
-                    onPermissionChangeState?.invoke(
-                        PermissionChangeState.OnAppUsageStateChanged(
-                            isGranted = it,
-                        ),
-                    )
-                },
-            )
+            when {
+                (state.content?.data?.isValid() == false || state.content == null) ->
+                    PermissionLoadingContent()
+
+                (state.content.data?.isValid() == true) ->
+                    Column(
+                        modifier = Modifier
+                            .verticalScroll(rememberScrollState())
+                            .background(YaaumTheme.colors.background)
+                            .padding(horizontal = YaaumTheme.spacing.medium),
+                        verticalArrangement = Arrangement
+                            .spacedBy(YaaumTheme.spacing.small),
+                    ) {
+                        PermissionFetchedListItem(
+                            permission = UiText
+                                .StringResource(
+                                    dev.yaaum.presentation.core.localisation
+                                        .R.string.settings_permission_notification,
+                                )
+                                .asString(LocalContext.current),
+                            icon = R.drawable.icon_notification_bold_24,
+                            initValue = state.content.data.isNotificationPermissionGranted
+                                ?: false,
+                            onPermissionClick = {
+                                onPermissionChangeState?.invoke(
+                                    PermissionChangeState.OnNotificationStateChanged(
+                                        isGranted = it,
+                                    ),
+                                )
+                            },
+                        )
+                        PermissionFetchedListItem(
+                            permission = UiText
+                                .StringResource(
+                                    dev.yaaum.presentation.core.localisation
+                                        .R.string.settings_permission_usage,
+                                )
+                                .asString(LocalContext.current),
+                            icon = R.drawable.icon_chart_pie_slice_bold_24,
+                            initValue = state.content.data.isAppUsagePermissionGranted ?: false,
+                            onPermissionClick = {
+                                onPermissionChangeState?.invoke(
+                                    PermissionChangeState.OnAppUsageStateChanged(
+                                        isGranted = it,
+                                    ),
+                                )
+                            },
+                        )
+                    }
+            }
         }
     }
 }

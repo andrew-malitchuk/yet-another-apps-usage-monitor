@@ -65,6 +65,8 @@ include(":domain:configuration")
 include(":domain:configuration:impl")
 include(":domain:applications")
 include(":domain:applications:impl")
+include(":domain:health")
+include(":domain:health:impl")
 //endregion Domain
 
 //region Presentation

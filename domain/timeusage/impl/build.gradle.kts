@@ -22,6 +22,7 @@ dependencies{
     implementation(project(":domain:core"))
     implementation(project(":data:repository:core"))
     implementation(project(":data:repository:timeusage"))
+    implementation(project(":data:repository:applications"))
 }
 
 // Necessary for context receiver

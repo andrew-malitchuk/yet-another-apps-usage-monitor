@@ -57,6 +57,17 @@ class HostViewModel(
         )
     }
 
+    fun updateTheme() {
+        launch(
+            request = {
+                getCurrentConfigurationUseCase().getOrNull() ?: ConfigurationDomainModel()
+            },
+            result = { result ->
+                currentThemeUiModel.setValue(result?.toUiModel()?.themeMode)
+            },
+        )
+    }
+
     private fun setup() {
         getConfiguration()
     }

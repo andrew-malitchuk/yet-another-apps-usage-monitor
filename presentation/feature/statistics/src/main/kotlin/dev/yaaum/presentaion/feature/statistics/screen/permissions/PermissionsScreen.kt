@@ -20,6 +20,7 @@ import androidx.lifecycle.LifecycleEventObserver
 import cafe.adriel.voyager.navigator.Navigator
 import com.theapache64.rebugger.Rebugger
 import dev.yaaum.presentaion.feature.statistics.screen.permissions.content.fetched.PermissionFetchedContent
+import dev.yaaum.presentation.core.platform.permissions.ext.isAppUsageStatisticPermissionGranted
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 
 // TODO: place it somewhere
@@ -49,10 +50,10 @@ fun PermissionsScreen(
     val context = LocalContext.current
     LaunchedEffect(lifecycleEvent) {
         if (lifecycleEvent == Lifecycle.Event.ON_RESUME) {
-//            val isGranted = context.isAppUsageStatisticPermissionGranted()
-//            if (isGranted) {
-//            } else {
-//            }
+            val isGranted = context.isAppUsageStatisticPermissionGranted()
+            if (isGranted) {
+                navigator.pop()
+            }
         }
     }
     val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)

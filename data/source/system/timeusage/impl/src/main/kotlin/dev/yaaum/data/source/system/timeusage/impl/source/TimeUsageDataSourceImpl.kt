@@ -23,13 +23,20 @@ class TimeUsageDataSourceImpl(
                     )
             val result = ArrayList<TimeUsageSystemModel>()
             lUsageStatsMap?.forEach { (_, u) ->
-                result.add(u.toSystemModel())
+                try {
+                    result.add(u.toSystemModel(context = context))
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
+                }
             }
             continuation.resume(result)
         }
     }
 
-    override suspend fun getApplicationsUsage(beginTime: Long, endTime: Long): List<TimeUsageSystemModel> {
+    override suspend fun getApplicationsUsage(
+        beginTime: Long,
+        endTime: Long,
+    ): List<TimeUsageSystemModel> {
         return suspendCoroutine { continuation ->
             val lUsageStatsMap =
                 (context.getSystemService(ComponentActivity.USAGE_STATS_SERVICE) as? UsageStatsManager)
@@ -39,7 +46,7 @@ class TimeUsageDataSourceImpl(
                     )
             val result = ArrayList<TimeUsageSystemModel>()
             lUsageStatsMap?.forEach { (_, u) ->
-                result.add(u.toSystemModel())
+                result.add(u.toSystemModel(context = context))
             }
             continuation.resume(result)
         }

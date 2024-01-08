@@ -24,6 +24,9 @@ interface TimeUsageDataSource {
      * Retrieve general information about application usage in certain time scope ([beginTime]..[endTime])
      * Returns about __all__ application.
      *
+     * @param beginTime
+     * @param endTime
+     *
      * @return list of app usage info limit by time scope
      *
      * @throws BaseDataException

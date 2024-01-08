@@ -128,7 +128,6 @@ class ApplicationsMvi(
                     } else {
                         removeAppFromChosenUseCase(application.toDomainModel())
                     }
-
                     // TODO: fix
                     val foo = application.copy(isChosen = isChosen)
                     sendEvent(ApplicationsMviEvent.ApplicationsUpdatedFetchedMviEvent(foo))
@@ -138,9 +137,5 @@ class ApplicationsMvi(
                 })
             },
         )
-    }
-
-    init {
-        sendEvent(ApplicationsMviEvent.GetApplicationsMviEvent)
     }
 }

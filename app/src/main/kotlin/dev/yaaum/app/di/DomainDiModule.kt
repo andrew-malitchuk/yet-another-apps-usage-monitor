@@ -2,6 +2,7 @@ package dev.yaaum.app.di
 
 import dev.yaaum.domain.applications.impl.di.applicationsDomainModule
 import dev.yaaum.domain.configuration.impl.di.configurationDomainModule
+import dev.yaaum.domain.health.impl.di.healthDomainModule
 import dev.yaaum.domain.timeusage.impl.di.timeUsageDomainModule
 import org.koin.dsl.module
 
@@ -13,5 +14,6 @@ val domainDiModule = module {
         timeUsageDomainModule,
         configurationDomainModule,
         applicationsDomainModule,
+        healthDomainModule,
     )
 }
