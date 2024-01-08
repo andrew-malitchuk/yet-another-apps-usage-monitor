@@ -32,6 +32,7 @@ import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import dev.yaaum.presentation.core.models.ApplicationsUiModel
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumCircleButton
+import dev.yaaum.presentation.core.ui.composable.button.ordinary.YaaumOrdinaryButton
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 import io.github.serpro69.kfaker.Faker
@@ -49,6 +50,7 @@ fun ApplicationDetalizationCard(
         mutableStateOf(true)
     }
 
+    val backId = "back_id"
     val cardId = "card_id"
     val totalTitleId = "total_title_id"
     val packageNameId = "package_name_id"
@@ -65,11 +67,17 @@ fun ApplicationDetalizationCard(
     )
 
     val constraintSetStart = ConstraintSet {
+        val back = createRefFor(backId)
         val card = createRefFor(cardId)
         val totalTitle = createRefFor(totalTitleId)
         val applicationBox = createRefFor(applicationBoxId)
         val packageName = createRefFor(packageNameId)
         val changeState = createRefFor(changeStateId)
+
+        constrain(back) {
+            top.linkTo(parent.top, paddingSmall)
+            start.linkTo(parent.start, paddingSmall)
+        }
 
         constrain(card) {
             top.linkTo(parent.top)
@@ -105,24 +113,30 @@ fun ApplicationDetalizationCard(
         }
 
         constrain(changeState) {
-            top.linkTo(card.top, paddingMedium)
+            top.linkTo(card.top, paddingSmall)
             end.linkTo(card.end, paddingSmall)
         }
     }
 
     val constraintSetEnd = ConstraintSet {
+        val back = createRefFor(backId)
         val card = createRefFor(cardId)
         val totalTitle = createRefFor(totalTitleId)
         val applicationBox = createRefFor(applicationBoxId)
         val packageName = createRefFor(packageNameId)
         val changeState = createRefFor(changeStateId)
 
+        constrain(back) {
+            top.linkTo(parent.top, paddingSmall)
+            start.linkTo(parent.start)
+        }
+
         constrain(card) {
             top.linkTo(parent.top)
             bottom.linkTo(parent.bottom)
-            start.linkTo(parent.start)
+            start.linkTo(back.end, paddingSmall)
             end.linkTo(parent.end)
-            width = Dimension.matchParent
+            width = Dimension.fillToConstraints
             height = Dimension.fillToConstraints
         }
 
@@ -150,7 +164,8 @@ fun ApplicationDetalizationCard(
         }
 
         constrain(changeState) {
-            top.linkTo(card.top, paddingMedium)
+            top.linkTo(card.top)
+            bottom.linkTo(card.bottom)
             end.linkTo(card.end, paddingSmall)
         }
     }
@@ -159,11 +174,24 @@ fun ApplicationDetalizationCard(
         from = "start",
         to = "end",
     ) {
+        val back = createRefFor(backId)
         val card = createRefFor(cardId)
         val totalTitle = createRefFor(totalTitleId)
         val packageName = createRefFor(packageNameId)
         val changeState = createRefFor(changeStateId)
 
+        @Suppress("MagicNumber")
+        keyAttributes(back) {
+            frame(0) {
+                alpha = 1f
+            }
+            frame(50) {
+                alpha = 0f
+            }
+            frame(100) {
+                alpha = 1f
+            }
+        }
         @Suppress("MagicNumber")
         keyAttributes(packageName) {
             frame(25) {
@@ -213,6 +241,18 @@ fun ApplicationDetalizationCard(
                 .background(YaaumTheme.colors.surface),
         ) {
         }
+
+        YaaumOrdinaryButton(
+            icon = R.drawable.icon_caret_left_bold_24,
+            modifier = Modifier
+                .layoutId(backId),
+            defaultBackgroundColor = YaaumTheme.colors.secondary,
+            pressedBackgroundColor = YaaumTheme.colors.primary,
+            iconSize = YaaumTheme.icons.smallMedium,
+            onClick = {
+//                onBackClick?.invoke()
+            },
+        )
 
         Text(
             text = applicationsUiModel.applicationName ?: "SWW",
