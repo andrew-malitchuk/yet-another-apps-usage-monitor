@@ -8,4 +8,5 @@
     <string name="health_status_sad">What happened?</string>
     <string name="health_status_wink">Awesome</string>
     <string name="health_status_damn">Take a rest</string>
+    <string name="health_month">Month view</string>
 </resources>

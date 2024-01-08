@@ -4,17 +4,26 @@ package dev.yaaum.presentation.core.ui.composable.card
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -24,6 +33,7 @@ import androidx.constraintlayout.compose.MotionLayout
 import androidx.constraintlayout.compose.MotionScene
 import androidx.constraintlayout.compose.Transition
 import androidx.constraintlayout.compose.layoutId
+import dev.yaaum.presentation.core.localisation.UiText
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumCircleButton
 import dev.yaaum.presentation.core.ui.composable.chart.bar.YaaumBarChart
@@ -45,9 +55,7 @@ fun DetailsHealthCard(
     }
 
     val cardId = "card_id"
-    val weekId = "week_id"
-    val monthId = "month_id"
-    val yearId = "year_id"
+    val iconId = "icon_id"
     val chartId = "chart_id"
     val totalTitleId = "total_title_id"
     val changeStateId = "change_state_id"
@@ -62,10 +70,8 @@ fun DetailsHealthCard(
     )
 
     val constraintSetStart = ConstraintSet {
+        val icon = createRefFor(iconId)
         val card = createRefFor(cardId)
-        val week = createRefFor(weekId)
-        val month = createRefFor(monthId)
-        val year = createRefFor(yearId)
         val chart = createRefFor(chartId)
         val totalTitle = createRefFor(totalTitleId)
         val changeState = createRefFor(changeStateId)
@@ -84,7 +90,7 @@ fun DetailsHealthCard(
             start.linkTo(parent.start, paddingSmall)
         }
         constrain(chart) {
-            top.linkTo(year.bottom, paddingSmall)
+            top.linkTo(changeState.bottom, paddingSmall)
             bottom.linkTo(parent.bottom, paddingSmall)
             start.linkTo(parent.start, paddingSmall)
             end.linkTo(parent.end, paddingSmall)
@@ -95,25 +101,15 @@ fun DetailsHealthCard(
             top.linkTo(card.top, paddingMedium)
             end.linkTo(card.end, paddingSmall)
         }
-        constrain(week) {
+        constrain(icon) {
             top.linkTo(card.top, paddingMedium)
             start.linkTo(card.start, paddingSmall)
-        }
-        constrain(month) {
-            top.linkTo(card.top, paddingMedium)
-            start.linkTo(week.end, paddingSmall)
-        }
-        constrain(year) {
-            top.linkTo(card.top, paddingMedium)
-            start.linkTo(month.end, paddingSmall)
         }
     }
 
     val constraintSetEnd = ConstraintSet {
+        val icon = createRefFor(iconId)
         val card = createRefFor(cardId)
-        val week = createRefFor(weekId)
-        val month = createRefFor(monthId)
-        val year = createRefFor(yearId)
         val chart = createRefFor(chartId)
         val totalTitle = createRefFor(totalTitleId)
         val changeState = createRefFor(changeStateId)
@@ -127,12 +123,12 @@ fun DetailsHealthCard(
             height = Dimension.fillToConstraints
         }
         constrain(totalTitle) {
-            top.linkTo(parent.top, paddingSmall)
-            bottom.linkTo(parent.bottom, paddingSmall)
-            start.linkTo(parent.start, paddingSmall)
+            top.linkTo(icon.top)
+            bottom.linkTo(icon.bottom)
+            start.linkTo(icon.end, paddingSmall)
         }
         constrain(chart) {
-            top.linkTo(year.bottom, paddingSmall)
+            top.linkTo(changeState.bottom, paddingSmall)
             bottom.linkTo(parent.bottom, paddingSmall)
             start.linkTo(parent.start, paddingSmall)
             end.linkTo(parent.end, paddingSmall)
@@ -140,20 +136,14 @@ fun DetailsHealthCard(
             height = Dimension.value(0.dp)
         }
         constrain(changeState) {
-            top.linkTo(card.top, paddingMedium)
+            top.linkTo(card.top)
+            bottom.linkTo(card.bottom)
             end.linkTo(card.end, paddingSmall)
         }
-        constrain(week) {
-            top.linkTo(card.top, paddingMedium)
+        constrain(icon) {
+            top.linkTo(card.top, paddingSmall)
+            bottom.linkTo(card.bottom, paddingSmall)
             start.linkTo(card.start, paddingSmall)
-        }
-        constrain(month) {
-            top.linkTo(card.top, paddingMedium)
-            start.linkTo(week.end, paddingSmall)
-        }
-        constrain(year) {
-            top.linkTo(card.top, paddingMedium)
-            start.linkTo(month.end, paddingSmall)
         }
     }
 
@@ -161,16 +151,13 @@ fun DetailsHealthCard(
         from = "start",
         to = "end",
     ) {
-        val card = createRefFor(cardId)
-        val week = createRefFor(weekId)
-        val month = createRefFor(monthId)
-        val year = createRefFor(yearId)
+        val icon = createRefFor(iconId)
         val chart = createRefFor(chartId)
         val totalTitle = createRefFor(totalTitleId)
         val changeState = createRefFor(changeStateId)
 
         @Suppress("MagicNumber")
-        keyAttributes(week, month, year, chart) {
+        keyAttributes(chart) {
             frame(0) {
                 alpha = 1f
             }
@@ -179,6 +166,16 @@ fun DetailsHealthCard(
             }
             frame(100) {
                 alpha = 0f
+            }
+        }
+
+        @Suppress("MagicNumber")
+        keyAttributes(icon) {
+            frame(0) {
+                alpha = 0f
+            }
+            frame(100) {
+                alpha = 1f
             }
         }
 
@@ -252,7 +249,9 @@ fun DetailsHealthCard(
         )
 
         Text(
-            text = "application-name",
+            text = UiText
+                .StringResource(dev.yaaum.presentation.core.localisation.R.string.health_month)
+                .asString(LocalContext.current),
             style = YaaumTheme.typography.title,
             color = YaaumTheme.colors.onSurface,
             maxLines = 1,
@@ -267,47 +266,30 @@ fun DetailsHealthCard(
                 .layoutId(changeStateId),
             defaultBackgroundColor = YaaumTheme.colors.primary,
             pressedBackgroundColor = YaaumTheme.colors.secondary,
-            // TODO: fix
-            iconSize = 24.dp,
+            iconSize = YaaumTheme.icons.small,
             onClick = {
                 isOpened.value = isOpened.value.not()
             },
         )
-
-        YaaumCircleButton(
-            icon = R.drawable.icon_fire_bold_24,
+        Box(
             modifier = Modifier
-                .layoutId(weekId),
-            defaultBackgroundColor = YaaumTheme.colors.primary,
-            pressedBackgroundColor = YaaumTheme.colors.secondary,
-            // TODO: fix
-            iconSize = 24.dp,
-            onClick = {
-            },
-        )
-
-        YaaumCircleButton(
-            icon = R.drawable.icon_fire_bold_24,
-            modifier = Modifier
-                .layoutId(monthId),
-            defaultBackgroundColor = YaaumTheme.colors.primary,
-            pressedBackgroundColor = YaaumTheme.colors.secondary,
-            // TODO: fix
-            iconSize = 24.dp,
-            onClick = {
-            },
-        )
-        YaaumCircleButton(
-            icon = R.drawable.icon_fire_bold_24,
-            modifier = Modifier
-                .layoutId(yearId),
-            defaultBackgroundColor = YaaumTheme.colors.primary,
-            pressedBackgroundColor = YaaumTheme.colors.secondary,
-            // TODO: fix
-            iconSize = 24.dp,
-            onClick = {
-            },
-        )
+                .size(YaaumTheme.icons.medium)
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .clip(RoundedCornerShape(YaaumTheme.corners.medium))
+                .layoutId(iconId)
+                .background(YaaumTheme.colors.secondary),
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.icon_chart_pie_slice_bold_24),
+                colorFilter = ColorFilter.tint(YaaumTheme.colors.onPrimary),
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .align(Alignment.Center)
+                    .padding(YaaumTheme.spacing.small),
+            )
+        }
     }
 }
 
