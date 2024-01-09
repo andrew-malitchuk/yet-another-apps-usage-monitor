@@ -25,6 +25,7 @@ import io.github.serpro69.kfaker.Faker
 @Composable
 fun ApplicationDetalizationFetchedContent(
     state: ApplicationDetalizationMviState,
+    onBackClick: (() -> Unit)? = null,
 ) {
     val scrollState = rememberScrollState()
     Column(
@@ -41,6 +42,7 @@ fun ApplicationDetalizationFetchedContent(
                 modifier = Modifier
                     .padding(top = YaaumTheme.spacing.small),
                 applicationsUiModel = it,
+                onBackClick = onBackClick,
             )
         }
         SimplifiedHealthCard(

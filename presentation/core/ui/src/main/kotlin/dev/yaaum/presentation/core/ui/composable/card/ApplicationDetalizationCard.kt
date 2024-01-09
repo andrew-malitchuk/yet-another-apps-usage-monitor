@@ -45,6 +45,7 @@ import io.github.serpro69.kfaker.Faker
 fun ApplicationDetalizationCard(
     modifier: Modifier = Modifier,
     applicationsUiModel: ApplicationsUiModel,
+    onBackClick: (() -> Unit)? = null,
 ) {
     val isOpened = remember {
         mutableStateOf(true)
@@ -250,7 +251,7 @@ fun ApplicationDetalizationCard(
             pressedBackgroundColor = YaaumTheme.colors.primary,
             iconSize = YaaumTheme.icons.smallMedium,
             onClick = {
-//                onBackClick?.invoke()
+                onBackClick?.invoke()
             },
         )
 
