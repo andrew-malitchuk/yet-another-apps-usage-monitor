@@ -51,4 +51,33 @@ class TimeUsageDataSourceImpl(
             continuation.resume(result)
         }
     }
+
+    override suspend fun foo(
+        packageName: String,
+        beginTime: Long,
+        endTime: Long,
+    ): TimeUsageSystemModel {
+        return suspendCoroutine { continuation ->
+            val usageStatsManager =
+                context.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
+
+            // Query for usage stats during the specified period
+            val usageStatsList = usageStatsManager.queryUsageStats(
+                UsageStatsManager.INTERVAL_DAILY,
+                beginTime,
+                endTime,
+            ).firstOrNull { it.packageName == packageName }
+
+            val temp = TimeUsageSystemModel(
+                packageName,
+                packageName,
+                beginTime,
+                endTime,
+                usageStatsList?.lastTimeUsed,
+                usageStatsList?.totalTimeInForeground,
+            )
+
+            continuation.resume(temp)
+        }
+    }
 }

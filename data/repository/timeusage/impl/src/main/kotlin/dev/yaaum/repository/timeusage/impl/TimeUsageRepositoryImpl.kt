@@ -13,10 +13,26 @@ class TimeUsageRepositoryImpl(
         return timeUsageDataSource.getApplicationsUsage().map { it.toRepoModel() }
     }
 
-    override suspend fun getApplicationsUsage(beginTime: Long, endTime: Long): List<TimeUsageRepoModel> {
+    override suspend fun getApplicationsUsage(
+        beginTime: Long,
+        endTime: Long,
+    ): List<TimeUsageRepoModel> {
         return timeUsageDataSource.getApplicationsUsage(
             beginTime,
             endTime,
         ).map { it.toRepoModel() }
+    }
+
+    override suspend fun getApplicationUsage(
+        packageName: String,
+        beginTime: Long,
+        endTime: Long,
+    ): TimeUsageRepoModel? {
+//        return timeUsageDataSource.getApplicationsUsage(
+        return timeUsageDataSource.foo(
+            packageName,
+            beginTime,
+            endTime,
+        ).toRepoModel()
     }
 }

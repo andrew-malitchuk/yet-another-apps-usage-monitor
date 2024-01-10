@@ -18,6 +18,7 @@ dependencies{
     implementation(libs.arrow.optics)
     ksp(libs.arrow.optics.ksp.plugin)
     
+    implementation(project(":common:core"))
     implementation(project(":domain:timeusage"))
     implementation(project(":domain:core"))
     implementation(project(":data:repository:core"))

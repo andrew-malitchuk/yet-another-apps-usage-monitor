@@ -5,11 +5,13 @@ import dev.yaaum.domain.timeusage.GetTopAppsWithHighestUsageUseCase
 import dev.yaaum.domain.timeusage.GetTotalUsageOfAllApplicationUseCase
 import dev.yaaum.domain.timeusage.GetTotalUsageOfChosenApplicationUseCase
 import dev.yaaum.domain.timeusage.GetTotalUsageOfUserApplicationsUseCase
+import dev.yaaum.domain.timeusage.GetWeekStatisticUseCase
 import dev.yaaum.domain.timeusage.impl.GetStatisticsAboutAllAppsUseCaseImpl
 import dev.yaaum.domain.timeusage.impl.GetTopAppsWithHighestUsageUseCaseImpl
 import dev.yaaum.domain.timeusage.impl.GetTotalUsageOfAllApplicationUseCaseImpl
 import dev.yaaum.domain.timeusage.impl.GetTotalUsageOfChosenApplicationUseCaseImpl
 import dev.yaaum.domain.timeusage.impl.GetTotalUsageOfUserApplicationsUseCaseImpl
+import dev.yaaum.domain.timeusage.impl.GetWeekStatisticUseCaseImpl
 import org.koin.dsl.module
 
 /**
@@ -39,6 +41,12 @@ val timeUsageDomainModule = module {
     }
     single<GetTotalUsageOfChosenApplicationUseCase> {
         GetTotalUsageOfChosenApplicationUseCaseImpl(
+            timeUsageRepository = get(),
+            applicationsRepository = get(),
+        )
+    }
+    single<GetWeekStatisticUseCase> {
+        GetWeekStatisticUseCaseImpl(
             timeUsageRepository = get(),
             applicationsRepository = get(),
         )

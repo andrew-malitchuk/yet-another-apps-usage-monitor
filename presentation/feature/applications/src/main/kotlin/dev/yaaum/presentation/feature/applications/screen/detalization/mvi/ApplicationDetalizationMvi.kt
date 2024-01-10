@@ -1,6 +1,7 @@
 package dev.yaaum.presentation.feature.applications.screen.detalization.mvi
 
 import dev.yaaum.domain.applications.GetApplicationUseCase
+import dev.yaaum.domain.timeusage.GetWeekStatisticUseCase
 import dev.yaaum.presentation.core.localisation.UiText
 import dev.yaaum.presentation.core.models.toUiModel
 import dev.yaaum.presentation.core.platform.mvi.BaseMvi
@@ -12,6 +13,7 @@ import kotlinx.coroutines.flow.StateFlow
 @Suppress("Unused", "UnusedPrivateProperty")
 class ApplicationDetalizationMvi(
     private val getApplicationUseCase: GetApplicationUseCase,
+    private val getWeekStatisticUseCase: GetWeekStatisticUseCase,
 ) :
     BaseMvi<ApplicationDetalizationMviState, ApplicationDetalizationMviEvent, ApplicationDetalizationMviEffect>() {
 
@@ -42,6 +44,9 @@ class ApplicationDetalizationMvi(
     private fun getApplicationDetalization(packageName: String) {
         launch(
             request = {
+                getWeekStatisticUseCase(
+                    packageName,
+                )
                 getApplicationUseCase(packageName = packageName)
             },
             result = { result ->
