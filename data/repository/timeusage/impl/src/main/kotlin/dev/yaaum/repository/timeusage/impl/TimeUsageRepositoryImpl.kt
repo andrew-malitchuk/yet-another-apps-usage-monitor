@@ -33,6 +33,6 @@ class TimeUsageRepositoryImpl(
             packageName,
             beginTime,
             endTime,
-        ).toRepoModel()
+        )?.toRepoModel()
     }
 }

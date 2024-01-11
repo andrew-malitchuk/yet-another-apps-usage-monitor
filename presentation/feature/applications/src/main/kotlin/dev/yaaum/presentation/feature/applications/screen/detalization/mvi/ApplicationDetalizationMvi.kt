@@ -44,9 +44,6 @@ class ApplicationDetalizationMvi(
     private fun getApplicationDetalization(packageName: String) {
         launch(
             request = {
-                getWeekStatisticUseCase(
-                    packageName,
-                )
                 getApplicationUseCase(packageName = packageName)
             },
             result = { result ->
@@ -80,6 +77,42 @@ class ApplicationDetalizationMvi(
                             it,
                         ),
                     ),
+                )
+            },
+        )
+    }
+
+    @Suppress("UnusedPrivateMember")
+    private fun getAppUsagePerWeek(packageName: String) {
+        launch(
+            request = {
+                getWeekStatisticUseCase(
+                    packageName,
+                )
+            },
+            result = { result ->
+                result?.fold(
+                    {
+                        reducer.setState(
+                            ApplicationDetalizationMviState.error(
+                                // TODO: fix me
+                                SwwUiError(
+                                    UiText.DynamicString(it.message ?: ""),
+                                    it.throwable,
+                                ),
+                            ),
+                        )
+                    },
+                    {
+                        reducer.setState(
+                            ApplicationDetalizationMviState.fetched(
+                                content = ApplicationDetalizationMviContent(
+                                    data = it.toUiModel(),
+                                    packageName = packageName,
+                                ),
+                            ),
+                        )
+                    },
                 )
             },
         )

@@ -15,3 +15,20 @@ fun getBeginningOfDayTimestamp(): Long {
 
     return calendar.timeInMillis
 }
+
+/**
+ * TODO: test me
+ * TODO: kdoc
+ */
+fun getDaysOfWeekFromTodayToXDaysAgo(daysAgo: Int): List<Int> {
+    val daysOfWeekList = mutableListOf<Int>()
+    val calendar = Calendar.getInstance()
+    // TODO: recode
+    @Suppress("UnusedPrivateProperty")
+    for (i in 0 until daysAgo) {
+        val weekdayNumber = calendar.get(Calendar.DAY_OF_WEEK)
+        daysOfWeekList.add(weekdayNumber)
+        calendar.add(Calendar.DAY_OF_YEAR, -1)
+    }
+    return daysOfWeekList
+}

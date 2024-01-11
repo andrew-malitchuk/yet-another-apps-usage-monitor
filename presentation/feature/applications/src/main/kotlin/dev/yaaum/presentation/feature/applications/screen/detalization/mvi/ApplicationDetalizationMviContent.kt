@@ -6,4 +6,5 @@ import dev.yaaum.presentation.core.platform.mvi.state.content.MviContent
 data class ApplicationDetalizationMviContent(
     val data: ApplicationsUiModel?,
     val packageName: String?,
+//    val
 ) : MviContent

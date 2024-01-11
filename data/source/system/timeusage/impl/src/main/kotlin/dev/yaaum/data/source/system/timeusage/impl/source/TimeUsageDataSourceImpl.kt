@@ -38,14 +38,14 @@ class TimeUsageDataSourceImpl(
         endTime: Long,
     ): List<TimeUsageSystemModel> {
         return suspendCoroutine { continuation ->
-            val lUsageStatsMap =
+            val usageStats =
                 (context.getSystemService(ComponentActivity.USAGE_STATS_SERVICE) as? UsageStatsManager)
                     ?.queryAndAggregateUsageStats(
                         beginTime,
                         endTime,
                     )
             val result = ArrayList<TimeUsageSystemModel>()
-            lUsageStatsMap?.forEach { (_, u) ->
+            usageStats?.forEach { (_, u) ->
                 result.add(u.toSystemModel(context = context))
             }
             continuation.resume(result)
@@ -56,28 +56,16 @@ class TimeUsageDataSourceImpl(
         packageName: String,
         beginTime: Long,
         endTime: Long,
-    ): TimeUsageSystemModel {
+    ): TimeUsageSystemModel? {
         return suspendCoroutine { continuation ->
             val usageStatsManager =
                 context.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
-
-            // Query for usage stats during the specified period
-            val usageStatsList = usageStatsManager.queryUsageStats(
+            val usageStats = usageStatsManager.queryUsageStats(
                 UsageStatsManager.INTERVAL_DAILY,
                 beginTime,
                 endTime,
             ).firstOrNull { it.packageName == packageName }
-
-            val temp = TimeUsageSystemModel(
-                packageName,
-                packageName,
-                beginTime,
-                endTime,
-                usageStatsList?.lastTimeUsed,
-                usageStatsList?.totalTimeInForeground,
-            )
-
-            continuation.resume(temp)
+            continuation.resume(usageStats?.toSystemModel(context))
         }
     }
 }

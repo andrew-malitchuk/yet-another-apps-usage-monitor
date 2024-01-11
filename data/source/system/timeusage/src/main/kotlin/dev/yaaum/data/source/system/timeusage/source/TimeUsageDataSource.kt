@@ -34,5 +34,5 @@ interface TimeUsageDataSource {
     @Throws(BaseDataException::class)
     suspend fun getApplicationsUsage(beginTime: Long, endTime: Long): List<TimeUsageSystemModel>
 
-    suspend fun foo(packageName: String, beginTime: Long, endTime: Long): TimeUsageSystemModel
+    suspend fun foo(packageName: String, beginTime: Long, endTime: Long): TimeUsageSystemModel?
 }

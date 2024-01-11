@@ -106,7 +106,6 @@ fun Preview_ApplicationFetchedListItem_Dark() {
                 packageName = faker.quote.fortuneCookie(),
                 usageBegin = 0L,
                 usageEnd = System.currentTimeMillis(),
-                lastTimeUsage = 0L,
                 totalTimeInForeground = 0L,
             ),
         )
@@ -124,7 +123,6 @@ fun Preview_ApplicationFetchedListItem_Light() {
                 packageName = faker.quote.fortuneCookie(),
                 usageBegin = 0L,
                 usageEnd = System.currentTimeMillis(),
-                lastTimeUsage = 0L,
                 totalTimeInForeground = 0L,
             ),
         )

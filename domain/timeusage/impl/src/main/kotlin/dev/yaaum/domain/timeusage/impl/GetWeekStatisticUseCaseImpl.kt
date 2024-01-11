@@ -2,16 +2,13 @@ package dev.yaaum.domain.timeusage.impl
 
 import arrow.core.Either
 import dev.yaaum.common.core.utils.getBeginningOfDayTimestamp
-import dev.yaaum.data.repository.applications.ApplicationsRepository
+import dev.yaaum.common.core.utils.getDaysOfWeekFromTodayToXDaysAgo
 import dev.yaaum.data.repository.timeusage.TimeUsageRepository
 import dev.yaaum.data.repository.timeusage.model.TimeUsageRepoModel
-import dev.yaaum.domain.core.error.NoDataDomainError
 import dev.yaaum.domain.core.error.base.BaseDomainError
 import dev.yaaum.domain.timeusage.GetWeekStatisticUseCase
 import dev.yaaum.domain.timeusage.model.DayUsageStatisticDomainModel
 import dev.yaaum.domain.timeusage.model.WeekStatisticDomainModel
-import io.getstream.log.StreamLog
-import io.getstream.log.streamLog
 import java.util.concurrent.TimeUnit
 
 /**
@@ -26,54 +23,49 @@ import java.util.concurrent.TimeUnit
 @Suppress("KDocUnresolvedReference")
 class GetWeekStatisticUseCaseImpl(
     private val timeUsageRepository: TimeUsageRepository,
-    private val applicationsRepository: ApplicationsRepository,
 ) : GetWeekStatisticUseCase {
 
     override suspend fun invoke(
         packageName: String,
     ): Either<BaseDomainError, WeekStatisticDomainModel> {
-        val application = applicationsRepository.getAllApplications().firstOrNull {
-            it.packageName == packageName
-        }
-
-        if (application == null) {
-            return Either.Left(
-                NoDataDomainError(),
-            )
-        }
-
         var beginTimeTemp = getBeginningOfDayTimestamp()
         var endTimeTemp = System.currentTimeMillis()
 
-        var bar = mutableListOf<TimeUsageRepoModel?>()
+        val timeUsageByRange = mutableListOf<TimeUsageRepoModel?>()
 
-        @Suppress("MagicNumber")
-        repeat(7) {
-            val foo = timeUsageRepository.getApplicationUsage(
+        repeat(DAYS) {
+            val applicationUsage = timeUsageRepository.getApplicationUsage(
                 packageName = packageName,
                 beginTime = beginTimeTemp,
                 endTime = endTimeTemp,
             )
-            StreamLog.streamLog {
-                foo.toString()
-            }
-            bar.add(foo)
+            timeUsageByRange.add(applicationUsage)
             endTimeTemp = beginTimeTemp
             beginTimeTemp -= TimeUnit.DAYS.toMillis(1)
         }
-        bar.toString()
+
+        val dayUsageList = mutableListOf<DayUsageStatisticDomainModel>()
+        val last7Days = getDaysOfWeekFromTodayToXDaysAgo(DAYS)
+        @Suppress("ForEachOnRange")
+        (0..<DAYS).forEach { dayIndex ->
+            dayUsageList.add(
+                DayUsageStatisticDomainModel(
+                    last7Days[dayIndex],
+                    timeUsageByRange[dayIndex]?.totalTimeInForeground ?: 0L,
+                ),
+            )
+        }
+
         return Either.Right(
             WeekStatisticDomainModel(
-                // TODO: fix
-                packageName,
-                packageName,
-                bar.map {
-                    DayUsageStatisticDomainModel(
-                        "foo",
-                        it?.totalTimeInForeground ?: 0L,
-                    )
-                }.toSet(),
+                timeUsageByRange[0]?.packageName,
+                timeUsageByRange[0]?.applicationName,
+                dayUsageList.toSet(),
             ),
         )
+    }
+
+    companion object {
+        const val DAYS = 7
     }
 }

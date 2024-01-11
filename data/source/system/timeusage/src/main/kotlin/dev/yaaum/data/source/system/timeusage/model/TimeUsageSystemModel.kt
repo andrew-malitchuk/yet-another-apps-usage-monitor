@@ -12,7 +12,6 @@ data class TimeUsageSystemModel(
     val packageName: String?,
     val usageBegin: Long?,
     val usageEnd: Long?,
-    val lastTimeUsage: Long?,
     val totalTimeInForeground: Long?,
 ) : BaseSystemModel
 
@@ -31,7 +30,6 @@ fun UsageStats.toSystemModel(context: Context): TimeUsageSystemModel {
         packageName = this.packageName,
         usageBegin = this.firstTimeStamp,
         usageEnd = this.lastTimeStamp,
-        lastTimeUsage = this.lastTimeUsed,
         totalTimeInForeground = this.totalTimeInForeground,
     )
 }

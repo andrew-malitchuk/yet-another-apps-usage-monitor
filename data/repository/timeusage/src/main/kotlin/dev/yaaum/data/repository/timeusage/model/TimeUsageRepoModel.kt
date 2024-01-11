@@ -11,7 +11,6 @@ data class TimeUsageRepoModel(
     val packageName: String?,
     val usageBegin: Long?,
     val usageEnd: Long?,
-    val lastTimeUsage: Long?,
     val totalTimeInForeground: Long?,
 ) : BaseRepoModel
 
@@ -24,6 +23,5 @@ fun TimeUsageSystemModel.toRepoModel() =
         packageName = this.packageName,
         usageBegin = this.usageBegin,
         usageEnd = this.usageEnd,
-        lastTimeUsage = this.lastTimeUsage,
         totalTimeInForeground = this.totalTimeInForeground,
     )

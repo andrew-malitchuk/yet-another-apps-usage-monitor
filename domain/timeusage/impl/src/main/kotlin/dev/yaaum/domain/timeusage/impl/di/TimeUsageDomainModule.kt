@@ -48,7 +48,6 @@ val timeUsageDomainModule = module {
     single<GetWeekStatisticUseCase> {
         GetWeekStatisticUseCaseImpl(
             timeUsageRepository = get(),
-            applicationsRepository = get(),
         )
     }
 }
