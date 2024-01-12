@@ -34,6 +34,7 @@ import androidx.constraintlayout.compose.MotionScene
 import androidx.constraintlayout.compose.Transition
 import androidx.constraintlayout.compose.layoutId
 import dev.yaaum.presentation.core.localisation.UiText
+import dev.yaaum.presentation.core.models.DayUsageStatisticUiModel
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumCircleButton
 import dev.yaaum.presentation.core.ui.composable.chart.bar.YaaumBarChart
@@ -47,6 +48,7 @@ import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 @Suppress("LongMethod")
 @Composable
 fun DetailsHealthCard(
+    data: List<DayUsageStatisticUiModel>?,
     modifier: Modifier =
         Modifier,
 ) {
@@ -234,20 +236,15 @@ fun DetailsHealthCard(
         YaaumBarChart(
             modifier = Modifier
                 .layoutId(chartId),
-            data = mapOf(
-                Pair("Jan", 6f),
-                Pair("Feb", 0.25f),
-                Pair("Mar", 9f),
-                Pair("Apr", 7f),
-                Pair("May", 8f),
-                Pair("Jun", 9f),
-                Pair("Jul", 3f),
-                Pair("Aug", 11f),
-                Pair("Sep", 15f),
-            ),
+            data = data?.let {
+                val temp = mutableMapOf<Any, Float>()
+                data.filter { it.appUsage != 0L }.forEach {
+                    temp[it.appUsage.toString()] = it.appUsage.toFloat()
+                }
+                temp
+            } ?: emptyMap(),
             height = 250.dp,
         )
-
         Text(
             text = UiText
                 .StringResource(dev.yaaum.presentation.core.localisation.R.string.health_month)
@@ -297,7 +294,9 @@ fun DetailsHealthCard(
 @Composable
 fun Preview_DetailsHealthCard_Dark() {
     YaaumTheme(useDarkTheme = true) {
-        DetailsHealthCard()
+        DetailsHealthCard(
+            data = null,
+        )
     }
 }
 
@@ -305,6 +304,8 @@ fun Preview_DetailsHealthCard_Dark() {
 @Composable
 fun Preview_DetailsHealthCard_Light() {
     YaaumTheme(useDarkTheme = false) {
-        DetailsHealthCard()
+        DetailsHealthCard(
+            data = null,
+        )
     }
 }

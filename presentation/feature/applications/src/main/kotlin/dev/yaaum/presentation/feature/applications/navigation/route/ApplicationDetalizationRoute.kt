@@ -28,11 +28,21 @@ class ApplicationDetalizationRoute(
         LifecycleEffect(
             onStarted = {
                 hostViewModel.updateTheme()
+//                applicationDetalizationMvi.sendEvent(
+//                    ApplicationDetalizationMviEvent.GetApplicationUsageMviEvent(
+//                        packageName
+//                    )
+//                )
+//                applicationDetalizationMvi.sendEvent(
+//                    ApplicationDetalizationMviEvent.GetApplicationDetalizationMviEvent(
+//                        packageName
+//                    )
+//                )
+                applicationDetalizationMvi.packageName = packageName
             },
             onDisposed = {
             },
         )
-        applicationDetalizationMvi.packageName = packageName
 
         ApplicationDetalizationScreen(
             navigator = navigator,

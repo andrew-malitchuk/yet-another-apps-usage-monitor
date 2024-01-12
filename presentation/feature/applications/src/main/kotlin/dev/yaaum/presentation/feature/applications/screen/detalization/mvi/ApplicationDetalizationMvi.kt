@@ -21,6 +21,7 @@ class ApplicationDetalizationMvi(
         set(value) {
             value?.let {
                 sendEvent(ApplicationDetalizationMviEvent.GetApplicationDetalizationMviEvent(it))
+                sendEvent(ApplicationDetalizationMviEvent.GetApplicationUsageMviEvent(it))
             }
             field = value
         }
@@ -35,9 +36,13 @@ class ApplicationDetalizationMvi(
 
     override fun innerEventProcessing(event: ApplicationDetalizationMviEvent) {
         when (event) {
-            is ApplicationDetalizationMviEvent.ApplicationsFetchedMviEvent -> TODO()
+            is ApplicationDetalizationMviEvent.ApplicationsFetchedMviEvent -> Unit
             is ApplicationDetalizationMviEvent.GetApplicationDetalizationMviEvent ->
                 getApplicationDetalization(event.packageName)
+
+            is ApplicationDetalizationMviEvent.ApplicationsDetalizationFetchedMviEvent -> Unit
+            is ApplicationDetalizationMviEvent.GetApplicationUsageMviEvent ->
+                getAppUsagePerWeek(event.packageName)
         }
     }
 
@@ -63,6 +68,7 @@ class ApplicationDetalizationMvi(
                             content = ApplicationDetalizationMviContent(
                                 data = it.toUiModel(),
                                 packageName = packageName,
+                                weekUsageStatics = state.value.content?.weekUsageStatics,
                             ),
                         ),
                     )
@@ -82,7 +88,6 @@ class ApplicationDetalizationMvi(
         )
     }
 
-    @Suppress("UnusedPrivateMember")
     private fun getAppUsagePerWeek(packageName: String) {
         launch(
             request = {
@@ -104,11 +109,13 @@ class ApplicationDetalizationMvi(
                         )
                     },
                     {
+                        // TODO: fix
                         reducer.setState(
                             ApplicationDetalizationMviState.fetched(
                                 content = ApplicationDetalizationMviContent(
-                                    data = it.toUiModel(),
-                                    packageName = packageName,
+                                    packageName = reducer.state.value.content?.packageName,
+                                    data = reducer.state.value.content?.data,
+                                    weekUsageStatics = it.dayAndStatistic.map { it.toUiModel() },
                                 ),
                             ),
                         )

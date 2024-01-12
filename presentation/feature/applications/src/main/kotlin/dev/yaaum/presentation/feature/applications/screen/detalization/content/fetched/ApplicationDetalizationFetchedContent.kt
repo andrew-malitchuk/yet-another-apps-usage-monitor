@@ -52,7 +52,9 @@ fun ApplicationDetalizationFetchedContent(
                 Faker().quote.fortuneCookie(),
             ),
         )
-        DetailsHealthCard()
+        DetailsHealthCard(
+            state.content?.weekUsageStatics,
+        )
     }
 }
 
@@ -71,6 +73,7 @@ fun Preview_ApplicationDetalizationFetchedContent_Dark() {
                         isChosen = false,
                     ),
                     packageName = faker.quote.fortuneCookie(),
+                    weekUsageStatics = null,
                 ),
             ),
         )
@@ -92,6 +95,7 @@ fun Preview_ApplicationDetalizationFetchedContent_Light() {
                         isChosen = false,
                     ),
                     packageName = faker.quote.fortuneCookie(),
+                    weekUsageStatics = null,
                 ),
             ),
         )
