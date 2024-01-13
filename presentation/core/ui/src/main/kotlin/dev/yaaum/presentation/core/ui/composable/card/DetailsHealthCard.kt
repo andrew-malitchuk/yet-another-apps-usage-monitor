@@ -236,10 +236,11 @@ fun DetailsHealthCard(
         YaaumBarChart(
             modifier = Modifier
                 .layoutId(chartId),
+            // TODO: fix
             data = data?.let {
                 val temp = mutableMapOf<Any, Float>()
                 data.filter { it.appUsage != 0L }.forEach {
-                    temp[it.appUsage.toString()] = it.appUsage.toFloat()
+                    temp[it.weekDay.asString(LocalContext.current)] = it.appUsage.toFloat()
                 }
                 temp
             } ?: emptyMap(),
