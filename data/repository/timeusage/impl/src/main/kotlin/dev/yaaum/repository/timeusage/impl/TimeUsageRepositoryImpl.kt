@@ -29,7 +29,7 @@ class TimeUsageRepositoryImpl(
         endTime: Long,
     ): TimeUsageRepoModel? {
 //        return timeUsageDataSource.getApplicationsUsage(
-        return timeUsageDataSource.foo(
+        return timeUsageDataSource.getApplicationUsage(
             packageName,
             beginTime,
             endTime,

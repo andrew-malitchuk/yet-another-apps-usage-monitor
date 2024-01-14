@@ -34,5 +34,17 @@ interface TimeUsageDataSource {
     @Throws(BaseDataException::class)
     suspend fun getApplicationsUsage(beginTime: Long, endTime: Long): List<TimeUsageSystemModel>
 
-    suspend fun foo(packageName: String, beginTime: Long, endTime: Long): TimeUsageSystemModel?
+    /**
+     * Retrieve general information about application usage in certain time scope ([beginTime]..[endTime])
+     *
+     * @param packageName
+     * @param beginTime
+     * @param endTime
+     *
+     * @return app usage info limit by time scope
+     *
+     * @throws BaseDataException
+     */
+    @Throws(BaseDataException::class)
+    suspend fun getApplicationUsage(packageName: String, beginTime: Long, endTime: Long): TimeUsageSystemModel?
 }

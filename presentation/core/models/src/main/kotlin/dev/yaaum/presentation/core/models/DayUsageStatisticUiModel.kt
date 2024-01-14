@@ -1,5 +1,6 @@
 package dev.yaaum.presentation.core.models
 
+import dev.yaaum.common.core.ext.asHours
 import dev.yaaum.domain.timeusage.model.DayUsageStatisticDomainModel
 import dev.yaaum.presentation.core.localisation.UiText
 import dev.yaaum.presentation.core.models.base.BaseUiModel
@@ -10,6 +11,7 @@ import dev.yaaum.presentation.core.models.base.BaseUiModel
 data class DayUsageStatisticUiModel(
     val weekDay: UiText,
     val appUsage: Long,
+    val appUsageHours: String,
 ) : BaseUiModel
 
 /**
@@ -20,6 +22,7 @@ fun DayUsageStatisticDomainModel.toUiModel() =
         weekDay = getWeekDay(this.weekDay),
         // TODO: fix
         appUsage = this.appUsage,
+        appUsageHours = this.appUsage.asHours(),
     )
 
 // TODO: test

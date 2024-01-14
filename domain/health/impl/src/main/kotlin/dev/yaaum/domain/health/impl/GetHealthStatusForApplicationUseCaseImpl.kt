@@ -4,31 +4,35 @@ import arrow.core.Either
 import dev.yaaum.domain.core.error.NoDataDomainError
 import dev.yaaum.domain.core.error.SwwDomainError
 import dev.yaaum.domain.core.error.base.BaseDomainError
-import dev.yaaum.domain.health.GetGeneralTimeUsageStatisticUseCase
-import dev.yaaum.domain.health.GetHealthStatusUseCase
+import dev.yaaum.domain.health.GetHealthStatusForApplicationUseCase
 import dev.yaaum.domain.health.model.HealthStatusDomainModel
 import dev.yaaum.domain.health.model.getStatus
+import dev.yaaum.domain.timeusage.GetApplicationUsageUseCase
+import dev.yaaum.domain.timeusage.GetTotalUsageOfChosenApplicationUseCase
 
 /**
- * Return health status
+ * Return health status for certain application
  *
+ * @param packageName
  * @param beginTime
  * @param endTime
  *
  * @return health status
  */
 // TODO: test me
-@Suppress("KDocUnresolvedReference")
-class GetHealthStatusUseCaseImpl(
-    private val getGeneralTimeUsageStatisticUseCase: GetGeneralTimeUsageStatisticUseCase,
-) : GetHealthStatusUseCase {
+@Suppress("KDocUnresolvedReference", "UnusedPrivateProperty")
+class GetHealthStatusForApplicationUseCaseImpl(
+    private val getTotalUsageOfChosenApplicationUseCase: GetTotalUsageOfChosenApplicationUseCase,
+    private val getApplicationUsageUseCase: GetApplicationUsageUseCase,
+) : GetHealthStatusForApplicationUseCase {
 
     override suspend fun invoke(
+        packageName: String,
         beginTime: Long,
         endTime: Long,
     ): Either<BaseDomainError, HealthStatusDomainModel> {
         return try {
-            val generalTimeUsage = getGeneralTimeUsageStatisticUseCase(
+            val generalTimeUsage = getApplicationUsageUseCase(
                 beginTime = beginTime,
                 endTime = endTime,
             )

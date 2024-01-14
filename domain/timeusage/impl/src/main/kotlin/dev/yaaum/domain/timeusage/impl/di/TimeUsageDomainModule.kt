@@ -1,11 +1,13 @@
 package dev.yaaum.domain.timeusage.impl.di
 
+import dev.yaaum.domain.timeusage.GetApplicationUsageUseCase
 import dev.yaaum.domain.timeusage.GetStatisticsAboutAllAppsUseCase
 import dev.yaaum.domain.timeusage.GetTopAppsWithHighestUsageUseCase
 import dev.yaaum.domain.timeusage.GetTotalUsageOfAllApplicationUseCase
 import dev.yaaum.domain.timeusage.GetTotalUsageOfChosenApplicationUseCase
 import dev.yaaum.domain.timeusage.GetTotalUsageOfUserApplicationsUseCase
 import dev.yaaum.domain.timeusage.GetWeekStatisticUseCase
+import dev.yaaum.domain.timeusage.impl.GetApplicationUsageUseCaseImpl
 import dev.yaaum.domain.timeusage.impl.GetStatisticsAboutAllAppsUseCaseImpl
 import dev.yaaum.domain.timeusage.impl.GetTopAppsWithHighestUsageUseCaseImpl
 import dev.yaaum.domain.timeusage.impl.GetTotalUsageOfAllApplicationUseCaseImpl
@@ -47,6 +49,11 @@ val timeUsageDomainModule = module {
     }
     single<GetWeekStatisticUseCase> {
         GetWeekStatisticUseCaseImpl(
+            timeUsageRepository = get(),
+        )
+    }
+    single<GetApplicationUsageUseCase> {
+        GetApplicationUsageUseCaseImpl(
             timeUsageRepository = get(),
         )
     }
