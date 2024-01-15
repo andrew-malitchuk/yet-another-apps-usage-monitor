@@ -16,6 +16,7 @@ class ApplicationDetalizationMviReducer(initial: ApplicationDetalizationMviState
                         data = event.data,
                         packageName = event.packageName,
                         weekUsageStatics = oldState.content?.weekUsageStatics,
+                        health = oldState.content?.health,
                     ),
                     error = null,
                 ),
@@ -32,12 +33,30 @@ class ApplicationDetalizationMviReducer(initial: ApplicationDetalizationMviState
                         data = oldState.content?.data,
                         packageName = oldState.content?.packageName,
                         weekUsageStatics = event.weekUsageStatics.dayAndStatistic.toList(),
+                        health = oldState.content?.health,
                     ),
                     error = null,
                 ),
             )
 
             is ApplicationDetalizationMviEvent.GetApplicationUsageMviEvent -> setState(
+                ApplicationDetalizationMviState.loading(),
+            )
+
+            is ApplicationDetalizationMviEvent.ApplicationHealthFetchedMviEvent -> setState(
+                ApplicationDetalizationMviState(
+                    loading = false,
+                    content = ApplicationDetalizationMviContent(
+                        data = oldState.content?.data,
+                        packageName = oldState.content?.packageName,
+                        weekUsageStatics = oldState.content?.weekUsageStatics,
+                        health = event.healthStatusUiModel,
+                    ),
+                    error = null,
+                ),
+            )
+
+            is ApplicationDetalizationMviEvent.GetApplicationHealthMviEvent -> setState(
                 ApplicationDetalizationMviState.loading(),
             )
         }

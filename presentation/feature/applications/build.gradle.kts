@@ -26,7 +26,6 @@ dependencies {
     implementation(libs.accompanist.drawablepainter)
     implementation(libs.lifecycle.runtime.compose)
 
-
     implementation(project(":common:core"))
     implementation(project(":presentation:core:ui"))
     implementation(project(":presentation:core:platform"))
@@ -43,4 +42,5 @@ dependencies {
     implementation(project(":domain:configuration"))
     implementation(project(":domain:applications"))
     implementation(project(":domain:timeusage"))
+    implementation(project(":domain:health"))
 }

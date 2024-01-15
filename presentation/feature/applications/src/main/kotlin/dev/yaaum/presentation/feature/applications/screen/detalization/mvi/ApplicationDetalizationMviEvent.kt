@@ -2,6 +2,7 @@ package dev.yaaum.presentation.feature.applications.screen.detalization.mvi
 
 import androidx.compose.runtime.Immutable
 import dev.yaaum.presentation.core.models.ApplicationsUiModel
+import dev.yaaum.presentation.core.models.HealthStatusUiModel
 import dev.yaaum.presentation.core.models.WeekStatisticUiModel
 import dev.yaaum.presentation.core.platform.mvi.event.MviEvent
 
@@ -22,5 +23,14 @@ sealed class ApplicationDetalizationMviEvent : MviEvent {
 
     data class ApplicationsDetalizationFetchedMviEvent(
         val weekUsageStatics: WeekStatisticUiModel,
+    ) : ApplicationDetalizationMviEvent()
+
+    data class GetApplicationHealthMviEvent(
+        val packageName: String,
+    ) : ApplicationDetalizationMviEvent()
+
+    data class ApplicationHealthFetchedMviEvent(
+        val packageName: String,
+        val healthStatusUiModel: HealthStatusUiModel,
     ) : ApplicationDetalizationMviEvent()
 }

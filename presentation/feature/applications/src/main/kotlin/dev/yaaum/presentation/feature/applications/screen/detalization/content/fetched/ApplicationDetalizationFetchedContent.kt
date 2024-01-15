@@ -11,8 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import dev.yaaum.presentation.core.models.ApplicationsUiModel
-import dev.yaaum.presentation.core.models.HealthSimplifiedUiModel
-import dev.yaaum.presentation.core.models.HealthStatus
 import dev.yaaum.presentation.core.ui.composable.card.ApplicationDetalizationCard
 import dev.yaaum.presentation.core.ui.composable.card.DetailsHealthCard
 import dev.yaaum.presentation.core.ui.composable.card.SimplifiedHealthCard
@@ -46,11 +44,7 @@ fun ApplicationDetalizationFetchedContent(
             )
         }
         SimplifiedHealthCard(
-            healthStatus = HealthSimplifiedUiModel(
-                HealthStatus.WINK,
-                Faker().quote.fortuneCookie(),
-                Faker().quote.fortuneCookie(),
-            ),
+            healthStatus = state.content?.health,
         )
         DetailsHealthCard(
             state.content?.weekUsageStatics,
@@ -74,6 +68,7 @@ fun Preview_ApplicationDetalizationFetchedContent_Dark() {
                     ),
                     packageName = faker.quote.fortuneCookie(),
                     weekUsageStatics = null,
+                    health = null,
                 ),
             ),
         )
@@ -96,6 +91,7 @@ fun Preview_ApplicationDetalizationFetchedContent_Light() {
                     ),
                     packageName = faker.quote.fortuneCookie(),
                     weekUsageStatics = null,
+                    health = null,
                 ),
             ),
         )

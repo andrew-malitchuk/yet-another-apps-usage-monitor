@@ -24,11 +24,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.yaaum.presentation.core.models.HealthSimplifiedUiModel
 import dev.yaaum.presentation.core.models.HealthStatus
+import dev.yaaum.presentation.core.models.HealthStatusUiModel
+import dev.yaaum.presentation.core.ui.composable.ext.placeholder
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
-import io.github.serpro69.kfaker.Faker
 
 /**
  * Simplified health card
@@ -36,9 +36,9 @@ import io.github.serpro69.kfaker.Faker
 @Composable
 fun SimplifiedHealthCard(
     modifier: Modifier = Modifier,
-    healthStatus: HealthSimplifiedUiModel,
+    healthStatus: HealthStatusUiModel?,
 ) {
-    val icon = when (healthStatus.status) {
+    val icon = when (healthStatus?.status) {
         HealthStatus.NERVOUS -> dev.yaaum.presentation.core.ui.R.drawable.icon_smiley_nervous_bold_24
         HealthStatus.SMILEY -> dev.yaaum.presentation.core.ui.R.drawable.icon_smiley_bold_24
         HealthStatus.ANGRY -> dev.yaaum.presentation.core.ui.R.drawable.icon_smiley_angry_bold_24
@@ -46,7 +46,7 @@ fun SimplifiedHealthCard(
         HealthStatus.MEH -> dev.yaaum.presentation.core.ui.R.drawable.icon_smiley_meh_bold_24
         HealthStatus.SAD -> dev.yaaum.presentation.core.ui.R.drawable.icon_smiley_sad_bold_24
         HealthStatus.WINK -> dev.yaaum.presentation.core.ui.R.drawable.icon_smiley_wink_bold_24
-        HealthStatus.DAMN -> dev.yaaum.presentation.core.ui.R.drawable.icon_smiley_x_eyes_bold_24
+        else -> dev.yaaum.presentation.core.ui.R.drawable.icon_smiley_x_eyes_bold_24
     }
 
     Row(
@@ -55,6 +55,11 @@ fun SimplifiedHealthCard(
             .wrapContentHeight()
             .clip(RoundedCornerShape(YaaumTheme.corners.medium))
             .background(YaaumTheme.colors.surface)
+            .placeholder(
+                backgroundColor = YaaumTheme.colors.surface,
+                isLoading = healthStatus == null,
+                shape = RoundedCornerShape(YaaumTheme.corners.medium),
+            )
             .padding(YaaumTheme.spacing.small),
     ) {
         // TODO: add sizes
@@ -82,7 +87,7 @@ fun SimplifiedHealthCard(
             modifier = Modifier,
         ) {
             Text(
-                text = healthStatus.title,
+                text = "healthStatus.title",
                 style = YaaumTheme.typography.title,
                 color = YaaumTheme.colors.onSurface,
                 maxLines = 1,
@@ -90,7 +95,7 @@ fun SimplifiedHealthCard(
             )
             Spacer(modifier = Modifier.height(YaaumTheme.spacing.extraSmall))
             Text(
-                text = healthStatus.description,
+                text = "healthStatus.description",
                 style = YaaumTheme.typography.caption,
                 color = YaaumTheme.colors.onSurface,
                 maxLines = 1,
@@ -103,13 +108,12 @@ fun SimplifiedHealthCard(
 @Preview(showBackground = true)
 @Composable
 fun Preview_SimplifiedHealthCard_Dark() {
-    val faker = Faker()
     YaaumTheme(useDarkTheme = true) {
+        @Suppress("MagicNumber")
         SimplifiedHealthCard(
-            healthStatus = HealthSimplifiedUiModel(
-                HealthStatus.WINK,
-                faker.quote.fortuneCookie(),
-                faker.quote.fortuneCookie(),
+            healthStatus = HealthStatusUiModel(
+                10f,
+                HealthStatus.BLANK,
             ),
         )
     }
@@ -118,13 +122,12 @@ fun Preview_SimplifiedHealthCard_Dark() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_SimplifiedHealthCard_Light() {
-    val faker = Faker()
     YaaumTheme(useDarkTheme = false) {
+        @Suppress("MagicNumber")
         SimplifiedHealthCard(
-            healthStatus = HealthSimplifiedUiModel(
-                HealthStatus.WINK,
-                faker.quote.fortuneCookie(),
-                faker.quote.fortuneCookie(),
+            healthStatus = HealthStatusUiModel(
+                10f,
+                HealthStatus.BLANK,
             ),
         )
     }

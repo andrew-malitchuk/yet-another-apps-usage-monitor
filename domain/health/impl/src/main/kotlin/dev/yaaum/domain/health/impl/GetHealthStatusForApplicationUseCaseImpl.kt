@@ -8,7 +8,7 @@ import dev.yaaum.domain.health.GetHealthStatusForApplicationUseCase
 import dev.yaaum.domain.health.model.HealthStatusDomainModel
 import dev.yaaum.domain.health.model.getStatus
 import dev.yaaum.domain.timeusage.GetApplicationUsageUseCase
-import dev.yaaum.domain.timeusage.GetTotalUsageOfChosenApplicationUseCase
+import dev.yaaum.domain.timeusage.GetTotalUsageOfUserApplicationsUseCase
 
 /**
  * Return health status for certain application
@@ -22,7 +22,7 @@ import dev.yaaum.domain.timeusage.GetTotalUsageOfChosenApplicationUseCase
 // TODO: test me
 @Suppress("KDocUnresolvedReference", "UnusedPrivateProperty")
 class GetHealthStatusForApplicationUseCaseImpl(
-    private val getTotalUsageOfChosenApplicationUseCase: GetTotalUsageOfChosenApplicationUseCase,
+    private val getTotalUsageOfUserApplicationsUseCase: GetTotalUsageOfUserApplicationsUseCase,
     private val getApplicationUsageUseCase: GetApplicationUsageUseCase,
 ) : GetHealthStatusForApplicationUseCase {
 
@@ -32,36 +32,32 @@ class GetHealthStatusForApplicationUseCaseImpl(
         endTime: Long,
     ): Either<BaseDomainError, HealthStatusDomainModel> {
         return try {
-            val generalTimeUsage = getApplicationUsageUseCase(
-                beginTime = beginTime,
-                endTime = endTime,
-            )
+            val applicationUsage = getApplicationUsageUseCase(
+                packageName = packageName,
+            ).getOrNull()
+            val userApplicationsUsage = getTotalUsageOfUserApplicationsUseCase(
+                beginTime,
+                endTime,
+            ).getOrNull()
 
-            generalTimeUsage.fold({
+            if (applicationUsage == null || userApplicationsUsage == null) {
                 Either.Left(
-                    it,
+                    NoDataDomainError(),
                 )
-            }, { result ->
-                // TODO: fix
-                if (result.totalChosenAppsUsage != 0L && result.totalAppsUsage != 0L) {
-                    val percent =
-                        (
-                            generalTimeUsage.getOrNull()?.totalChosenAppsUsage!!.toFloat() /
-                                generalTimeUsage.getOrNull()?.totalAppsUsage!!.toFloat()
-                            )
+            } else {
+                val percent =
+                    (
+                        applicationUsage.totalTimeInForeground
+                            ?: 0L
+                        ).toFloat() / userApplicationsUsage.toFloat()
 
-                    Either.Right(
-                        HealthStatusDomainModel(
-                            percent = percent,
-                            status = getStatus(percent),
-                        ),
-                    )
-                } else {
-                    Either.Left(
-                        NoDataDomainError(),
-                    )
-                }
-            })
+                Either.Right(
+                    HealthStatusDomainModel(
+                        percent = percent,
+                        status = getStatus(percent),
+                    ),
+                )
+            }
         } catch (ex: Exception) {
             Either.Left(
                 SwwDomainError(

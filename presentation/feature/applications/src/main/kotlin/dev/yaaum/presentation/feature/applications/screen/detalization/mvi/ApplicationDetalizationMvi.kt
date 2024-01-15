@@ -1,6 +1,7 @@
 package dev.yaaum.presentation.feature.applications.screen.detalization.mvi
 
 import dev.yaaum.domain.applications.GetApplicationUseCase
+import dev.yaaum.domain.health.GetHealthStatusForApplicationUseCase
 import dev.yaaum.domain.timeusage.GetWeekStatisticUseCase
 import dev.yaaum.presentation.core.localisation.UiText
 import dev.yaaum.presentation.core.models.toUiModel
@@ -14,6 +15,7 @@ import kotlinx.coroutines.flow.StateFlow
 class ApplicationDetalizationMvi(
     private val getApplicationUseCase: GetApplicationUseCase,
     private val getWeekStatisticUseCase: GetWeekStatisticUseCase,
+    private val getHealthStatusForApplicationUseCase: GetHealthStatusForApplicationUseCase,
 ) :
     BaseMvi<ApplicationDetalizationMviState, ApplicationDetalizationMviEvent, ApplicationDetalizationMviEffect>() {
 
@@ -22,6 +24,7 @@ class ApplicationDetalizationMvi(
             value?.let {
                 sendEvent(ApplicationDetalizationMviEvent.GetApplicationDetalizationMviEvent(it))
                 sendEvent(ApplicationDetalizationMviEvent.GetApplicationUsageMviEvent(it))
+                sendEvent(ApplicationDetalizationMviEvent.GetApplicationHealthMviEvent(it))
             }
             field = value
         }
@@ -43,6 +46,10 @@ class ApplicationDetalizationMvi(
             is ApplicationDetalizationMviEvent.ApplicationsDetalizationFetchedMviEvent -> Unit
             is ApplicationDetalizationMviEvent.GetApplicationUsageMviEvent ->
                 getAppUsagePerWeek(event.packageName)
+
+            is ApplicationDetalizationMviEvent.ApplicationHealthFetchedMviEvent -> Unit
+            is ApplicationDetalizationMviEvent.GetApplicationHealthMviEvent ->
+                getHealthStatusForApplication(event.packageName)
         }
     }
 
@@ -69,6 +76,7 @@ class ApplicationDetalizationMvi(
                                 data = it.toUiModel(),
                                 packageName = packageName,
                                 weekUsageStatics = state.value.content?.weekUsageStatics,
+                                health = reducer.state.value.content?.health,
                             ),
                         ),
                     )
@@ -116,6 +124,47 @@ class ApplicationDetalizationMvi(
                                     packageName = reducer.state.value.content?.packageName,
                                     data = reducer.state.value.content?.data,
                                     weekUsageStatics = it.dayAndStatistic.map { it.toUiModel() },
+                                    health = reducer.state.value.content?.health,
+                                ),
+                            ),
+                        )
+                    },
+                )
+            },
+        )
+    }
+
+    private fun getHealthStatusForApplication(packageName: String) {
+        launch(
+            request = {
+                getHealthStatusForApplicationUseCase(
+                    packageName,
+                    0L,
+                    System.currentTimeMillis(),
+                )
+            },
+            result = { result ->
+                result?.fold(
+                    {
+                        reducer.setState(
+                            ApplicationDetalizationMviState.error(
+                                // TODO: fix me
+                                SwwUiError(
+                                    UiText.DynamicString(it.message ?: ""),
+                                    it.throwable,
+                                ),
+                            ),
+                        )
+                    },
+                    {
+                        // TODO: fix
+                        reducer.setState(
+                            ApplicationDetalizationMviState.fetched(
+                                content = ApplicationDetalizationMviContent(
+                                    packageName = reducer.state.value.content?.packageName,
+                                    data = reducer.state.value.content?.data,
+                                    weekUsageStatics = reducer.state.value.content?.weekUsageStatics,
+                                    health = it.toUiModel(),
                                 ),
                             ),
                         )

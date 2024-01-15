@@ -2,7 +2,6 @@ package dev.yaaum.domain.timeusage.impl
 
 import arrow.core.Either
 import dev.yaaum.data.repository.timeusage.TimeUsageRepository
-import dev.yaaum.domain.core.error.NoDataDomainError
 import dev.yaaum.domain.core.error.SwwDomainError
 import dev.yaaum.domain.core.error.base.BaseDomainError
 import dev.yaaum.domain.timeusage.GetApplicationUsageUseCase
@@ -26,16 +25,8 @@ class GetApplicationUsageUseCaseImpl(
         packageName: String,
     ): Either<BaseDomainError, TimeUsageDomainModel> {
         return try {
-            val result = timeUsageRepository.getApplicationsUsage()
-                .firstOrNull { it.packageName == packageName }?.toDomainModel()
-
-            if (result == null) {
-                Either.Left(
-                    NoDataDomainError(),
-                )
-            } else {
-                Either.Right(result)
-            }
+            val result = timeUsageRepository.getApplicationUsage(packageName).toDomainModel()
+            Either.Right(result)
         } catch (ex: Exception) {
             Either.Left(
                 SwwDomainError(

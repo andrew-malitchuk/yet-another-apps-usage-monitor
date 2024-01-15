@@ -22,6 +22,7 @@ val applicationsFeatureModule = module {
         ApplicationDetalizationMvi(
             getApplicationUseCase = get(),
             getWeekStatisticUseCase = get(),
+            getHealthStatusForApplicationUseCase = get(),
         )
     }
 }
