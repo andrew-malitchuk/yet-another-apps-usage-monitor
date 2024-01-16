@@ -12,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -23,10 +22,11 @@ import androidx.constraintlayout.compose.MotionLayout
 import androidx.constraintlayout.compose.MotionScene
 import androidx.constraintlayout.compose.Transition
 import androidx.constraintlayout.compose.layoutId
+import dev.yaaum.common.core.ext.asHours
+import dev.yaaum.presentation.core.models.GeneralTimeUsageStatisticUiModel
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumCircleButton
-import dev.yaaum.presentation.core.ui.composable.chart.CircleChartModel
-import dev.yaaum.presentation.core.ui.composable.chart.pie.YaaumPieChart
+import dev.yaaum.presentation.core.ui.composable.button.ordinary.YaaumOrdinaryButton
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
@@ -38,8 +38,11 @@ import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 fun ProgressHealthCard(
     modifier: Modifier = Modifier,
     onClick: (() -> Unit)? = null,
+    onBackClick: (() -> Unit)? = null,
     isOpened: Boolean,
+    data: GeneralTimeUsageStatisticUiModel?,
 ) {
+    val backId = "back_id"
     val cardId = "card_id"
     val totalTitleId = "total_title_id"
     val totalValueId = "total_value_id"
@@ -63,6 +66,7 @@ fun ProgressHealthCard(
     )
 
     val constraintSetStart = ConstraintSet {
+        val back = createRefFor(backId)
         val card = createRefFor(cardId)
         val totalTitle = createRefFor(totalTitleId)
         val totalValue = createRefFor(totalValueId)
@@ -75,6 +79,11 @@ fun ProgressHealthCard(
         val deltaIcon = createRefFor(deltaIconId)
         val chart = createRefFor(chartId)
         val action = createRefFor(actionIconId)
+
+        constrain(back) {
+            top.linkTo(parent.top, paddingSmall)
+            start.linkTo(parent.start)
+        }
 
         constrain(action) {
             top.linkTo(parent.top, paddingSmall)
@@ -143,6 +152,7 @@ fun ProgressHealthCard(
     }
 
     val constraintSetEnd = ConstraintSet {
+        val back = createRefFor(backId)
         val card = createRefFor(cardId)
         val totalTitle = createRefFor(totalTitleId)
         val totalValue = createRefFor(totalValueId)
@@ -156,6 +166,11 @@ fun ProgressHealthCard(
         val chart = createRefFor(chartId)
         val action = createRefFor(actionIconId)
 
+        constrain(back) {
+            top.linkTo(parent.top, paddingSmall)
+            start.linkTo(parent.start)
+        }
+
         constrain(action) {
             top.linkTo(parent.top, paddingSmall)
             end.linkTo(parent.end)
@@ -164,8 +179,8 @@ fun ProgressHealthCard(
         constrain(card) {
             top.linkTo(action.top)
             bottom.linkTo(action.bottom)
-            start.linkTo(parent.start)
-            end.linkTo(action.start, paddingMedium)
+            start.linkTo(back.end, paddingMedium)
+            end.linkTo(parent.end)
             width = Dimension.fillToConstraints
             height = Dimension.fillToConstraints
         }
@@ -237,6 +252,7 @@ fun ProgressHealthCard(
         val deltaValue = createRefFor(deltaValueId)
         val deltaIcon = createRefFor(deltaIconId)
         val chart = createRefFor(chartId)
+        val actionIcon = createRefFor(actionIconId)
 
         @Suppress("MagicNumber")
         keyAttributes(
@@ -251,6 +267,15 @@ fun ProgressHealthCard(
         ) {
             frame(25) {
                 alpha = 0f
+            }
+            frame(100) {
+                alpha = 0f
+            }
+        }
+        @Suppress("MagicNumber")
+        keyAttributes(actionIcon) {
+            frame(0) {
+                alpha = 1f
             }
             frame(100) {
                 alpha = 0f
@@ -288,6 +313,18 @@ fun ProgressHealthCard(
         ) {
         }
 
+        YaaumOrdinaryButton(
+            icon = R.drawable.icon_caret_left_bold_24,
+            modifier = Modifier
+                .layoutId(backId),
+            defaultBackgroundColor = YaaumTheme.colors.secondary,
+            pressedBackgroundColor = YaaumTheme.colors.primary,
+            iconSize = YaaumTheme.icons.smallMedium,
+            onClick = {
+//                onBackClick?.invoke()
+            },
+        )
+
         Text(
             text = "Total",
             style = YaaumTheme.typography.caption,
@@ -298,7 +335,7 @@ fun ProgressHealthCard(
                 .layoutId(totalTitleId),
         )
         Text(
-            text = "12h 30m 56s",
+            text = data?.totalAppsUsage?.asHours() ?: "NI",
             style = YaaumTheme.typography.title,
             color = YaaumTheme.colors.onSurface,
             maxLines = 1,
@@ -318,7 +355,7 @@ fun ProgressHealthCard(
         )
 
         Text(
-            text = "12h 30m 56s",
+            text = data?.totalChosenAppsUsage?.asHours() ?: "NI",
             style = YaaumTheme.typography.title,
             color = YaaumTheme.colors.onSurface,
             maxLines = 1,
@@ -338,7 +375,7 @@ fun ProgressHealthCard(
         )
 
         Text(
-            text = "12h 30m 56s",
+            text = ((data?.totalAppsUsage ?: 0L) - (data?.totalChosenAppsUsage ?: 0L)).asHours(),
             style = YaaumTheme.typography.title,
             color = YaaumTheme.colors.onSurface,
             maxLines = 1,
@@ -346,17 +383,6 @@ fun ProgressHealthCard(
             modifier = Modifier
                 .layoutId(deltaValueId),
         )
-        @Suppress("MagicNumber")
-        YaaumPieChart(
-            entries = listOf(
-                CircleChartModel(Color.Red, 0.5f),
-                CircleChartModel(Color.Green, 0.3f),
-                CircleChartModel(Color.Blue, 0.2f),
-            ),
-            modifier = Modifier
-                .layoutId(chartId),
-        )
-
         Icon(
             painter = painterResource(id = R.drawable.icon_sigma_bold_24),
             contentDescription = null,
@@ -399,7 +425,10 @@ fun ProgressHealthCard(
 @Composable
 fun Preview_ProgressHealthCard_Dark() {
     YaaumTheme(useDarkTheme = true) {
-        ProgressHealthCard(isOpened = true)
+        ProgressHealthCard(
+            isOpened = true,
+            data = null,
+        )
     }
 }
 
@@ -407,6 +436,9 @@ fun Preview_ProgressHealthCard_Dark() {
 @Composable
 fun Preview_ProgressHealthCard_Light() {
     YaaumTheme(useDarkTheme = false) {
-        ProgressHealthCard(isOpened = false)
+        ProgressHealthCard(
+            isOpened = true,
+            data = null,
+        )
     }
 }

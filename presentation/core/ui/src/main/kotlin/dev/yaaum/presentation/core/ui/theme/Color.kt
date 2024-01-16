@@ -8,23 +8,29 @@ import dev.yaaum.presentation.core.ui.theme.common.YaaumColors
 //region Light colors
 val yaaum_theme_light_primary = Color(0xFF01BAEF)
 val yaaum_theme_light_onPrimary = Color(0xFFFBFBFF)
-val yaaum_theme_light_secondary = Color(0xFFED254E)
-val yaaum_theme_light_onSecondary = Color(0xFFFBFBFF)
+
+val yaaum_theme_light_secondary = Color(0xFFFF8C82)
+val yaaum_theme_light_onSecondary = Color(0xFF1C1C1C)
+
 val yaaum_theme_light_background = Color(0xFFFBFBFF)
-val yaaum_theme_light_onBackground = Color(0xFF040f16)
-val yaaum_theme_light_surface = Color(0xFFB8B8D1)
-val yaaum_theme_light_onSurface = Color(0xFFFBFBFF)
+val yaaum_theme_light_onBackground = Color(0xFF1C1C1C)
+
+val yaaum_theme_light_surface = Color(0xFFEBEBEB)
+val yaaum_theme_light_onSurface = Color(0xFF1C1C1C)
 //endregion Light colors
 
 //region Dark colors
 val yaaum_theme_dark_primary = Color(0xFF01BAEF)
 val yaaum_theme_dark_onPrimary = Color(0xFFFBFBFF)
-val yaaum_theme_dark_secondary = Color(0xFFED254E)
-val yaaum_theme_dark_onSecondary = Color(0xFFFBFBFF)
-val yaaum_theme_dark_background = Color(0xFF040F16)
+
+val yaaum_theme_dark_secondary = Color(0xFFFF8C82)
+val yaaum_theme_dark_onSecondary = Color(0xFF1C1C1C)
+
+val yaaum_theme_dark_background = Color(0xFF1C1C1C)
 val yaaum_theme_dark_onBackground = Color(0xFFFBFBFF)
-val yaaum_theme_dark_surface = Color(0xFF011936)
-val yaaum_theme_dark_onSurface = Color(0xFFEBF5EE)
+
+val yaaum_theme_dark_surface = Color(0xFF8B9DA6)
+val yaaum_theme_dark_onSurface = Color(0xFF1C1C1C)
 //endregion Dark colors
 
 val baseLightColorPalette = YaaumColors(

@@ -58,6 +58,9 @@ fun HealthScreen(
                         )
                     }
                 },
+                onBackClick = {
+                    navigator.pop()
+                },
             )
 
             MviPartialState.LOADING -> DefaultLoadingContent()

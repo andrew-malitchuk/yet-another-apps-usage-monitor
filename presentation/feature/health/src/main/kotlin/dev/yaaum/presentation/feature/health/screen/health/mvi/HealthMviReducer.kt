@@ -14,6 +14,7 @@ class HealthMviReducer(initial: HealthMviState) :
                     loading = false,
                     content = HealthMviContent(
                         data = event.data,
+                        health = oldState.content?.health,
                     ),
                     error = null,
                 ),
@@ -23,6 +24,25 @@ class HealthMviReducer(initial: HealthMviState) :
                 oldState.copy(
                     loading = true,
                     content = null,
+                    error = null,
+                ),
+            )
+
+            is HealthMviEvent.GetApplicationsHealthMviEvent -> setState(
+                oldState.copy(
+                    loading = true,
+                    content = null,
+                    error = null,
+                ),
+            )
+
+            is HealthMviEvent.ApplicationsHealthFetchedMviEvent -> setState(
+                oldState.copy(
+                    loading = false,
+                    content = HealthMviContent(
+                        data = oldState.content?.data,
+                        health = event.timeusage,
+                    ),
                     error = null,
                 ),
             )
