@@ -1,31 +1,43 @@
 package dev.yaaum.presentation.core.ui.composable.card
 
-import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yaaum.common.core.ext.asHours
+import dev.yaaum.presentation.core.localisation.UiText
 import dev.yaaum.presentation.core.models.GeneralTimeUsageStatisticUiModel
-import dev.yaaum.presentation.core.ui.composable.chart.CircleChartModel
-import dev.yaaum.presentation.core.ui.composable.chart.donut.YaaumChartDonut
+import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.ext.placeholder
 import dev.yaaum.presentation.core.ui.composable.item.YaaumBaseListContainer
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
@@ -41,6 +53,7 @@ fun GeneralHealthCard(
     modifier: Modifier = Modifier,
     onClick: (() -> Unit)? = null,
 ) {
+    var composableWidth by remember { mutableIntStateOf(0) }
     YaaumBaseListContainer(
         modifier = modifier
             .fillMaxWidth()
@@ -67,99 +80,179 @@ fun GeneralHealthCard(
                 }
 
             else ->
-                Row(
+                Column(
                     modifier = Modifier
                         .fillMaxWidth()
                         .wrapContentHeight()
-                        .padding(YaaumTheme.spacing.medium),
+                        .padding(YaaumTheme.spacing.small)
+                        .onSizeChanged {
+                            composableWidth = it.width
+                        },
                 ) {
-                    @Suppress("MagicNumber")
-                    YaaumChartDonut(
-                        entries = listOf(
-                            CircleChartModel(Color.Red, timeUsage.totalUsersAppsUsagePercent),
-                            CircleChartModel(Color.Green, timeUsage.totalChosenAppsUsagePercent),
-                            CircleChartModel(Color.Yellow, timeUsage.totalAppsUsagePercent),
-                        ),
+                    Row(
                         modifier = Modifier
-                            .height(YaaumTheme.icons.large),
-                    )
+                            .fillMaxWidth()
+                            .wrapContentHeight(),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .size(YaaumTheme.icons.medium)
+                                .fillMaxWidth()
+                                .wrapContentHeight()
+                                .clip(RoundedCornerShape(YaaumTheme.corners.medium))
+                                .background(YaaumTheme.colors.secondary),
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.icon_chart_pie_slice_bold_24),
+                                colorFilter = ColorFilter.tint(YaaumTheme.colors.onPrimary),
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .align(Alignment.Center)
+                                    .padding(YaaumTheme.spacing.small),
+                            )
+                        }
+                        Spacer(
+                            modifier = Modifier
+                                .width(YaaumTheme.spacing.small),
+                        )
+                        Text(
+                            text = UiText
+                                .StringResource(dev.yaaum.presentation.core.localisation.R.string.health_month)
+                                .asString(LocalContext.current),
+                            style = YaaumTheme.typography.title,
+                            color = YaaumTheme.colors.onSurface,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                            modifier = Modifier,
+                        )
+                    }
                     Spacer(
                         modifier = Modifier
-                            .width(YaaumTheme.spacing.medium),
+                            .height(YaaumTheme.spacing.medium),
                     )
-                    Column(
+                    Row(
                         modifier = Modifier
                             .fillMaxWidth()
                             .wrapContentHeight(),
                     ) {
-                        Row(
+                        Column(
                             modifier = Modifier
-                                .fillMaxWidth()
+                                .wrapContentWidth()
                                 .wrapContentHeight(),
                         ) {
-                            Canvas(
+                            Row(
                                 modifier = Modifier
-                                    .size(YaaumTheme.icons.small)
-                                    .clip(CircleShape)
-                                    .background(Color.Red),
-                            ) {}
+                                    .wrapContentHeight(),
+                            ) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.icon_bookmarks_bold_24),
+                                    contentDescription = null,
+                                    tint = YaaumTheme.colors.onPrimary,
+                                    modifier = Modifier
+                                        .size(YaaumTheme.icons.small)
+                                        .clip(CircleShape)
+                                        .background(YaaumTheme.colors.primary)
+                                        .padding(YaaumTheme.spacing.extraSmall),
+                                )
+                                Spacer(
+                                    modifier = Modifier
+                                        .width(YaaumTheme.spacing.small),
+                                )
+                                Text(
+                                    text = timeUsage.totalAppsUsage.asHours(),
+                                    style = YaaumTheme.typography.title,
+                                    color = YaaumTheme.colors.onSurface,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis,
+                                )
+                            }
                             Spacer(
                                 modifier = Modifier
-                                    .width(YaaumTheme.spacing.small),
+                                    .height(YaaumTheme.spacing.small),
                             )
-                            Text(
-                                text = timeUsage.totalAppsUsage.asHours(),
-                                style = YaaumTheme.typography.title,
-                                color = YaaumTheme.colors.onSurface,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis,
-                            )
-                        }
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .wrapContentHeight()
-                                .padding(vertical = YaaumTheme.spacing.small),
-                        ) {
-                            Canvas(
+                            Row(
                                 modifier = Modifier
-                                    .size(YaaumTheme.icons.small)
-                                    .clip(CircleShape)
-                                    .background(Color.Green),
-                            ) {}
+                                    .wrapContentHeight(),
+                            ) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.icon_bookmarks_bold_24),
+                                    contentDescription = null,
+                                    tint = YaaumTheme.colors.onSecondary,
+                                    modifier = Modifier
+                                        .size(YaaumTheme.icons.small)
+                                        .clip(CircleShape)
+                                        .background(YaaumTheme.colors.secondary)
+                                        .padding(YaaumTheme.spacing.extraSmall),
+                                )
+                                Spacer(
+                                    modifier = Modifier
+                                        .width(YaaumTheme.spacing.small),
+                                )
+                                Text(
+                                    text = timeUsage.totalUsersAppsUsage.asHours(),
+                                    style = YaaumTheme.typography.title,
+                                    color = YaaumTheme.colors.onSurface,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis,
+                                )
+                            }
                             Spacer(
                                 modifier = Modifier
-                                    .width(YaaumTheme.spacing.small),
+                                    .height(YaaumTheme.spacing.small),
                             )
-                            Text(
-                                text = timeUsage.totalChosenAppsUsage.asHours(),
-                                style = YaaumTheme.typography.title,
-                                color = YaaumTheme.colors.onSurface,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis,
-                            )
+                            Row(
+                                modifier = Modifier
+                                    .wrapContentHeight(),
+                            ) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.icon_bookmarks_bold_24),
+                                    contentDescription = null,
+                                    tint = YaaumTheme.colors.surface,
+                                    modifier = Modifier
+                                        .size(YaaumTheme.icons.small)
+                                        .clip(CircleShape)
+                                        .background(YaaumTheme.colors.onSurface)
+                                        .padding(YaaumTheme.spacing.extraSmall),
+                                )
+                                Spacer(
+                                    modifier = Modifier
+                                        .width(YaaumTheme.spacing.small),
+                                )
+                                Text(
+                                    text = timeUsage.totalChosenAppsUsage.asHours(),
+                                    style = YaaumTheme.typography.title,
+                                    color = YaaumTheme.colors.onSurface,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis,
+                                )
+                            }
                         }
-                        Row(
+                        Spacer(modifier = Modifier.weight(1f))
+                        Column(
                             modifier = Modifier
-                                .fillMaxWidth()
+                                .wrapContentWidth()
                                 .wrapContentHeight(),
+                            horizontalAlignment = Alignment.End,
+                            verticalArrangement = Arrangement.Center,
                         ) {
-                            Canvas(
-                                modifier = Modifier
-                                    .size(YaaumTheme.icons.small)
-                                    .clip(CircleShape)
-                                    .background(Color.Yellow),
-                            ) {}
-                            Spacer(
-                                modifier = Modifier
-                                    .width(YaaumTheme.spacing.small),
-                            )
                             Text(
-                                text = timeUsage.totalUsersAppsUsage.asHours(),
-                                style = YaaumTheme.typography.title,
+                                text = "Today's screen time",
+                                style = YaaumTheme.typography.subHeading,
                                 color = YaaumTheme.colors.onSurface,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis,
+                                modifier = Modifier,
+                            )
+                            Spacer(modifier = Modifier.height(YaaumTheme.spacing.small))
+                            Text(
+                                text = "90h",
+                                style = YaaumTheme.typography.display,
+                                color = YaaumTheme.colors.onSurface,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
+                                modifier = Modifier,
                             )
                         }
                     }
