@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -238,7 +239,7 @@ fun GeneralHealthCard(
                             verticalArrangement = Arrangement.Center,
                         ) {
                             Text(
-                                text = "Today's screen time",
+                                text = "Streak",
                                 style = YaaumTheme.typography.subHeading,
                                 color = YaaumTheme.colors.onSurface,
                                 maxLines = 1,
@@ -246,14 +247,28 @@ fun GeneralHealthCard(
                                 modifier = Modifier,
                             )
                             Spacer(modifier = Modifier.height(YaaumTheme.spacing.small))
-                            Text(
-                                text = "90h",
-                                style = YaaumTheme.typography.display,
-                                color = YaaumTheme.colors.onSurface,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis,
-                                modifier = Modifier,
-                            )
+                            Row(
+                                modifier = Modifier
+                                    .wrapContentSize(),
+                                verticalAlignment = Alignment.CenterVertically,
+                            ) {
+                                Text(
+                                    text = "90",
+                                    style = YaaumTheme.typography.display,
+                                    color = YaaumTheme.colors.primary,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis,
+                                    modifier = Modifier,
+                                )
+                                Spacer(modifier = Modifier.height(YaaumTheme.spacing.small))
+                                Icon(
+                                    painter = painterResource(id = R.drawable.icon_fire_bold_24),
+                                    contentDescription = null,
+                                    tint = YaaumTheme.colors.primary,
+                                    modifier = Modifier
+                                        .size(YaaumTheme.icons.medium),
+                                )
+                            }
                         }
                     }
                 }

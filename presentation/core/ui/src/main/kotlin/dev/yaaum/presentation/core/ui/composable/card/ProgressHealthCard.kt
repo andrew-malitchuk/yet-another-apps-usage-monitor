@@ -242,8 +242,10 @@ fun ProgressHealthCard(
         }
 
         constrain(statusDescription) {
-            top.linkTo(status.bottom, paddingSmall)
-            end.linkTo(card.end, paddingSmall)
+//            top.linkTo(status.bottom, paddingSmall)
+//            end.linkTo(card.end, paddingSmall)
+            top.linkTo(parent.top, paddingSmall)
+            end.linkTo(parent.end)
         }
     }
 
@@ -334,7 +336,7 @@ fun ProgressHealthCard(
             pressedBackgroundColor = YaaumTheme.colors.primary,
             iconSize = YaaumTheme.icons.smallMedium,
             onClick = {
-//                onBackClick?.invoke()
+                onBackClick?.invoke()
             },
         )
 
@@ -468,7 +470,7 @@ fun ProgressHealthCard(
 fun Preview_ProgressHealthCard_Dark() {
     YaaumTheme(useDarkTheme = true) {
         ProgressHealthCard(
-            isOpened = true,
+            isOpened = false,
             data = null,
         )
     }
@@ -479,7 +481,7 @@ fun Preview_ProgressHealthCard_Dark() {
 fun Preview_ProgressHealthCard_Light() {
     YaaumTheme(useDarkTheme = false) {
         ProgressHealthCard(
-            isOpened = true,
+            isOpened = false,
             data = null,
         )
     }
