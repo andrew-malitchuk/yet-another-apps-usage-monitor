@@ -39,6 +39,7 @@ import dev.yaaum.common.core.ext.asHours
 import dev.yaaum.presentation.core.localisation.UiText
 import dev.yaaum.presentation.core.models.GeneralTimeUsageStatisticUiModel
 import dev.yaaum.presentation.core.ui.R
+import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumCircleButton
 import dev.yaaum.presentation.core.ui.composable.ext.placeholder
 import dev.yaaum.presentation.core.ui.composable.item.YaaumBaseListContainer
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
@@ -53,6 +54,7 @@ fun GeneralHealthCard(
     timeUsage: GeneralTimeUsageStatisticUiModel?,
     modifier: Modifier = Modifier,
     onClick: (() -> Unit)? = null,
+    onInfoClick: (() -> Unit)? = null,
 ) {
     var composableWidth by remember { mutableIntStateOf(0) }
     YaaumBaseListContainer(
@@ -120,13 +122,27 @@ fun GeneralHealthCard(
                         )
                         Text(
                             text = UiText
-                                .StringResource(dev.yaaum.presentation.core.localisation.R.string.health_month)
+                                .StringResource(dev.yaaum.presentation.core.localisation.R.string.health_day)
                                 .asString(LocalContext.current),
                             style = YaaumTheme.typography.title,
                             color = YaaumTheme.colors.onSurface,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                             modifier = Modifier,
+                        )
+                        Spacer(
+                            modifier = Modifier
+                                .weight(1f),
+                        )
+                        YaaumCircleButton(
+                            icon = R.drawable.icon_info_bold_24,
+                            modifier = Modifier,
+                            defaultBackgroundColor = YaaumTheme.colors.primary,
+                            pressedBackgroundColor = YaaumTheme.colors.secondary,
+                            iconSize = YaaumTheme.icons.extraSmall,
+                            onClick = {
+                                onInfoClick?.invoke()
+                            },
                         )
                     }
                     Spacer(
@@ -239,7 +255,9 @@ fun GeneralHealthCard(
                             verticalArrangement = Arrangement.Center,
                         ) {
                             Text(
-                                text = "Streak",
+                                text = UiText
+                                    .StringResource(dev.yaaum.presentation.core.localisation.R.string.health_rate)
+                                    .asString(LocalContext.current),
                                 style = YaaumTheme.typography.subHeading,
                                 color = YaaumTheme.colors.onSurface,
                                 maxLines = 1,
@@ -253,7 +271,7 @@ fun GeneralHealthCard(
                                 verticalAlignment = Alignment.CenterVertically,
                             ) {
                                 Text(
-                                    text = "90",
+                                    text = "A",
                                     style = YaaumTheme.typography.display,
                                     color = YaaumTheme.colors.primary,
                                     maxLines = 1,
