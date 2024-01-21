@@ -28,6 +28,7 @@ import dev.yaaum.presentation.core.models.HealthStatus
 import dev.yaaum.presentation.core.models.HealthStatusUiModel
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumCircleButton
+import dev.yaaum.presentation.core.ui.composable.button.ordinary.YaaumOrdinaryButton
 import dev.yaaum.presentation.core.ui.composable.ext.placeholder
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
@@ -38,7 +39,8 @@ import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
  * @param modifier
  * @param icon icon to set
  * @param healthStatus display icon which depends on health status
- * @param onClick lambda
+ * @param onActionClick lambda
+ * @param onHealthClick lambda
  */
 @Suppress("LongMethod")
 // TODO: recode me
@@ -48,7 +50,8 @@ fun MainHeader(
     @DrawableRes
     icon: Int,
     healthStatus: HealthStatusUiModel?,
-    onClick: (() -> Unit)? = null,
+    onActionClick: (() -> Unit)? = null,
+    onHealthClick: (() -> Unit)? = null,
 ) {
     when (healthStatus) {
         null ->
@@ -92,7 +95,7 @@ fun MainHeader(
                     pressedBackgroundColor = YaaumTheme.colors.secondary,
                     iconSize = YaaumTheme.icons.smallMedium,
                     onClick = {
-                        onClick?.invoke()
+                        onActionClick?.invoke()
                     },
                 )
             }
@@ -131,25 +134,18 @@ fun MainHeader(
                     .background(YaaumTheme.colors.background)
                     .padding(vertical = YaaumTheme.spacing.small),
             ) {
-                Box(
+                YaaumOrdinaryButton(
                     modifier = Modifier
-                        .size(YaaumTheme.icons.medium)
-                        .fillMaxWidth()
-                        .wrapContentHeight()
-                        .clip(RoundedCornerShape(YaaumTheme.corners.medium))
-                        .align(Alignment.CenterVertically)
-                        .background(YaaumTheme.colors.secondary),
-                ) {
-                    Image(
-                        colorFilter = ColorFilter.tint(YaaumTheme.colors.onPrimary),
-                        painter = painterResource(id = iconHealth),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .align(Alignment.Center)
-                            .padding(YaaumTheme.spacing.small),
-                    )
-                }
+                        .size(YaaumTheme.icons.medium),
+                    icon = iconHealth,
+                    defaultBackgroundColor = YaaumTheme.colors.secondary,
+                    pressedBackgroundColor = YaaumTheme.colors.primary,
+                    defaultForegroundColor = YaaumTheme.colors.onPrimary,
+                    pressedForegroundColor = YaaumTheme.colors.onPrimary,
+                    onClick = {
+                        onHealthClick?.invoke()
+                    },
+                )
                 Spacer(modifier = Modifier.width(YaaumTheme.spacing.small))
                 Text(
                     modifier = Modifier
@@ -170,7 +166,7 @@ fun MainHeader(
                     pressedBackgroundColor = YaaumTheme.colors.secondary,
                     iconSize = YaaumTheme.icons.smallMedium,
                     onClick = {
-                        onClick?.invoke()
+                        onActionClick?.invoke()
                     },
                 )
             }

@@ -4,6 +4,7 @@ import dev.yaaum.presentation.core.platform.mvi.MviReducer
 
 class MainMviReducer(initial: MainMviState) :
     MviReducer<MainMviState, MainMviEvent>(initial) {
+    @Suppress("LongMethod")
     override fun reduce(oldState: MainMviState, event: MainMviEvent) {
         when (event) {
             is MainMviEvent.GetMainMviEvent -> setState(
@@ -12,6 +13,7 @@ class MainMviReducer(initial: MainMviState) :
                     content = MainMviContent(
                         topUsageApps = null,
                         healthStatus = null,
+                        recommendations = null,
                     ),
                     error = null,
                 ),
@@ -96,6 +98,32 @@ class MainMviReducer(initial: MainMviState) :
                         loading = false,
                         content = previous.copy(
                             timeUsage = event.timeUsage,
+                        ),
+                        error = null,
+                    ),
+                )
+            }
+
+            MainMviEvent.GetRecommendation -> {
+                val previous = oldState.content ?: MainMviContent()
+                setState(
+                    oldState.copy(
+                        loading = false,
+                        content = previous.copy(
+                            recommendations = null,
+                        ),
+                        error = null,
+                    ),
+                )
+            }
+
+            is MainMviEvent.OnRecommendationFetched -> {
+                val previous = oldState.content ?: MainMviContent()
+                setState(
+                    oldState.copy(
+                        loading = false,
+                        content = previous.copy(
+                            recommendations = event.recommendation,
                         ),
                         error = null,
                     ),

@@ -9,4 +9,5 @@
     <string name="various_fri">Fri</string>
     <string name="various_sat">Sat</string>
     <string name="various_sun">Sun</string>
+    <string name="various_recommendation">Recommendation</string>
 </resources>

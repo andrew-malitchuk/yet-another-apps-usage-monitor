@@ -4,6 +4,7 @@ import dev.yaaum.domain.health.GetGeneralTimeUsageStatisticUseCase
 import dev.yaaum.domain.health.GetHealthStatusUseCase
 import dev.yaaum.domain.timeusage.GetTopAppsWithHighestUsageUseCase
 import dev.yaaum.presentation.core.localisation.UiText
+import dev.yaaum.presentation.core.models.RecommendationUiModel
 import dev.yaaum.presentation.core.models.toUiModel
 import dev.yaaum.presentation.core.platform.mvi.BaseMvi
 import dev.yaaum.presentation.core.ui.error.SwwUiError
@@ -38,6 +39,8 @@ class MainMvi(
             is MainMviEvent.OnHealthStatusFetched -> Unit
             MainMviEvent.GetGeneralTimeUsage -> getGetGeneralTimeUsage()
             is MainMviEvent.OnGeneralTimeUsageFetched -> Unit
+            MainMviEvent.GetRecommendation -> getRecommendation()
+            is MainMviEvent.OnRecommendationFetched -> Unit
         }
     }
 
@@ -45,6 +48,7 @@ class MainMvi(
         getTopAppsUsage()
         getHealthStatus()
         getGetGeneralTimeUsage()
+        getRecommendation()
     }
 
     private fun getTopAppsUsage() {
@@ -171,6 +175,36 @@ class MainMvi(
                 ),
             )
         }
+    }
+
+    private fun getRecommendation() {
+        launch(
+            request = {
+                listOf(
+                    RecommendationUiModel(
+                        "User's application",
+                        "Find out and select apps to track",
+                        "",
+                    ),
+                    RecommendationUiModel(
+                        "Permissions",
+                        "Check app permissions to open all features",
+                        "",
+                    ),
+                )
+            },
+            result = {
+                reducer.setState(
+                    MainMviState.fetched(
+                        content = (reducer.state.value.content ?: MainMviContent())
+                            .copy(
+                                recommendations = it,
+                            ),
+                    ),
+                )
+            },
+
+        )
     }
 
     companion object {
