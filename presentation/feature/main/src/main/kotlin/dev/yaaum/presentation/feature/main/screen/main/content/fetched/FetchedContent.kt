@@ -75,6 +75,7 @@ fun FetchedContent(
                 icon = R.drawable.icon_gear_six_bold_24,
                 onActionClick = onSettingsClick,
                 healthStatus = state.content?.healthStatus,
+                onHealthClick = onHealthClick,
             )
             GeneralHealthCard(
                 timeUsage = state.content?.timeUsage,

@@ -2,4 +2,6 @@
 <resources>
     <string name="main_top_apps_title">Top applications</string>
     <string name="main_no_usage_permission">No permission</string>
+    <string name="main_health_general_dialog_title">Health status</string>
+    <string name="main_health_general_dialog_description">Brief info about app usage health</string>
 </resources>
