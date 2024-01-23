@@ -30,6 +30,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+// TODO: rename me
 @Composable
 fun FetchedContent(
     state: MainMviState,
@@ -38,6 +39,10 @@ fun FetchedContent(
     onMoreClick: (() -> Unit)? = null,
     onApplicationClick: ((TimeUsageUiModel) -> Unit)? = null,
     onPermissionClick: (() -> Unit)? = null,
+    onHealthInfoClick: (() -> Unit)? = null,
+    onHealthStatusClick: (() -> Unit)? = null,
+    onRecommendationInfoClick: (() -> Unit)? = null,
+    onAppsInfoClick: (() -> Unit)? = null,
 ) {
     val scrollState = rememberScrollState()
 
@@ -75,13 +80,14 @@ fun FetchedContent(
                 icon = R.drawable.icon_gear_six_bold_24,
                 onActionClick = onSettingsClick,
                 healthStatus = state.content?.healthStatus,
-                onHealthClick = onHealthClick,
+                onHealthClick = onHealthStatusClick,
             )
             GeneralHealthCard(
                 timeUsage = state.content?.timeUsage,
                 modifier = Modifier
                     .padding(horizontal = YaaumTheme.spacing.medium),
                 onClick = onHealthClick,
+                onInfoClick = onHealthInfoClick,
             )
             LimitedApplicationListBlock(
                 modifier = Modifier
@@ -90,12 +96,14 @@ fun FetchedContent(
                 onMoreClick = onMoreClick,
                 onApplicationClick = onApplicationClick,
                 onPermissionClick = onPermissionClick,
+                onInfoClick = onAppsInfoClick,
             )
             RecommendationBlock(
                 title = UiText
                     .StringResource(dev.yaaum.presentation.core.localisation.R.string.various_recommendation)
                     .asString(LocalContext.current),
                 list = state.content?.recommendations,
+                onInfoClick = onRecommendationInfoClick,
             )
         }
     }

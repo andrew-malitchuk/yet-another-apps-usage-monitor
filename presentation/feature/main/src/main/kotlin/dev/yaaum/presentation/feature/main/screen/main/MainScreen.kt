@@ -13,10 +13,15 @@ import dev.yaaum.presentation.core.navigation.RouteGraph
 import dev.yaaum.presentation.core.ui.composable.dialog.YaaumBottomSheetDialog
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.feature.main.dialog.GeneralHealthInfoContent
+import dev.yaaum.presentation.feature.main.dialog.HealthSummaryInfoContent
+import dev.yaaum.presentation.feature.main.dialog.RecommendationInfoContent
+import dev.yaaum.presentation.feature.main.dialog.TopAppsInfoContent
 import dev.yaaum.presentation.feature.main.screen.HostViewModel
 import dev.yaaum.presentation.feature.main.screen.main.content.fetched.FetchedContent
 import dev.yaaum.presentation.feature.main.screen.main.mvi.MainMvi
 
+@Suppress("LongMethod")
+// TODO: fix
 @Composable
 fun MainScreen(
     navigator: Navigator,
@@ -33,12 +38,15 @@ fun MainScreen(
     val settingsScreen = rememberScreen(RouteGraph.SettingsScreen)
     val applicationsScreen = rememberScreen(RouteGraph.ApplicationsScreen)
     val permissionsScreen = rememberScreen(RouteGraph.PermissionsScreen)
-//    val healthScreen = rememberScreen(RouteGraph.HealthScreen)
+    val healthScreen = rememberScreen(RouteGraph.HealthScreen)
     val applicationDetalizationScreen = rememberScreen(
         RouteGraph.ApplicationDetalizationScreen("foo"),
     )
 
     var showGeneralHealth by remember { mutableStateOf(false) }
+    var showTopApps by remember { mutableStateOf(false) }
+    var showRecommendation by remember { mutableStateOf(false) }
+    var showHealthSummary by remember { mutableStateOf(false) }
 
     Rebugger(
         trackMap = mapOf(
@@ -62,10 +70,47 @@ fun MainScreen(
             )
         }
     }
+    if (showTopApps) {
+        YaaumBottomSheetDialog(
+            onDismiss = {
+                showTopApps = false
+            },
+        ) {
+            TopAppsInfoContent(
+                onDismiss = {
+                    showTopApps = false
+                },
+            )
+        }
+    }
+    if (showRecommendation) {
+        YaaumBottomSheetDialog(
+            onDismiss = {
+                showRecommendation = false
+            },
+        ) {
+            RecommendationInfoContent(
+                onDismiss = {
+                    showRecommendation = false
+                },
+            )
+        }
+    }
+    if (showHealthSummary) {
+        YaaumBottomSheetDialog(
+            onDismiss = {
+                showHealthSummary = false
+            },
+        ) {
+            HealthSummaryInfoContent(
+                onDismiss = {
+                    showHealthSummary = false
+                },
+            )
+        }
+    }
 
     YaaumTheme(theme = theme) {
-//        when (state.partialState) {
-//            MviPartialState.FETCHED ->
         FetchedContent(
             state = state,
             onSettingsClick = {
@@ -74,8 +119,13 @@ fun MainScreen(
             onMoreClick = {
                 navigator.push(applicationsScreen)
             },
+            onAppsInfoClick = {
+                showTopApps = true
+            },
             onHealthClick = {
-//                navigator.push(healthScreen)
+                navigator.push(healthScreen)
+            },
+            onHealthStatusClick = {
                 showGeneralHealth = true
             },
             onApplicationClick = {
@@ -84,11 +134,12 @@ fun MainScreen(
             onPermissionClick = {
                 navigator.push(permissionsScreen)
             },
+            onHealthInfoClick = {
+                showHealthSummary = true
+            },
+            onRecommendationInfoClick = {
+                showRecommendation = true
+            },
         )
-//            MviPartialState.LOADING->
-//                DefaultLoadingContent()
-//
-//            else -> Unit
-//        }
     }
 }

@@ -32,6 +32,7 @@ fun LimitedApplicationListBlock(
     modifier: Modifier = Modifier,
     list: List<TimeUsageUiModel>?,
     onMoreClick: (() -> Unit)? = null,
+    onInfoClick: (() -> Unit)? = null,
     onPermissionClick: (() -> Unit)? = null,
     onApplicationClick: ((TimeUsageUiModel) -> Unit)? = null,
 ) {
@@ -109,7 +110,7 @@ fun LimitedApplicationListBlock(
             // TODO: fix
             iconSize = 16.dp,
             onClick = {
-                onMoreClick?.invoke()
+                onInfoClick?.invoke()
             },
         )
     }

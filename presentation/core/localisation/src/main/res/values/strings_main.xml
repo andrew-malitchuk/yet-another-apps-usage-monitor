@@ -4,4 +4,11 @@
     <string name="main_no_usage_permission">No permission</string>
     <string name="main_health_general_dialog_title">Health status</string>
     <string name="main_health_general_dialog_description">Brief info about app usage health</string>
+    <string name="main_top_apps_dialog_title">Top apps</string>
+    <string name="main_top_apps_dialog_description">Top 3 apps with the highest usage</string>
+    <string name="main_recommendation_dialog_title">Recommendation</string>
+    <string name="main_recommendation_dialog_description">General suggestions how to improve UX</string>
+    <string name="main_health_summary_dialog_title">Health day review</string>
+    <string name="main_health_summary_dialog_description">Take a glance to the apps usage and your grade</string>
+
 </resources>
