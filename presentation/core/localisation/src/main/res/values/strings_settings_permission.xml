@@ -5,4 +5,6 @@
     <string name="settings_permission_usage">Usage</string>
     <string name="settings_permission_dialog_title">Enable Essential Permissions</string>
     <string name="settings_permission_dialog_description">To provide you with the best YAAUM experience, we require your permission to access some essential features. Rest assured, we prioritize your privacy and only seek access to what is necessary for seamless functionality. </string>
+    <string name="settings_language_dialog_title">Language</string>
+    <string name="settings_language_dialog_description">Select app language from the list bellow</string>
 </resources>

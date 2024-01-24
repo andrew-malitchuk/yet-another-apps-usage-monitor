@@ -4,6 +4,9 @@ import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.navigator.Navigator
 import com.theapache64.rebugger.Rebugger
@@ -12,9 +15,11 @@ import dev.yaaum.presentation.core.navigation.RouteGraph
 import dev.yaaum.presentation.core.platform.mvi.MviPartialState
 import dev.yaaum.presentation.core.ui.composable.content.error.DefaultErrorContent
 import dev.yaaum.presentation.core.ui.composable.content.loading.DefaultLoadingContent
+import dev.yaaum.presentation.core.ui.composable.dialog.YaaumBottomSheetDialog
 import dev.yaaum.presentation.core.ui.composable.theme.CircularReveal
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.feature.main.screen.HostViewModel
+import dev.yaaum.presentation.feature.settings.dialog.language.LanguageDialogContent
 import dev.yaaum.presentation.feature.settings.screen.settings.content.fetched.SettingsFetchedContent
 import dev.yaaum.presentation.feature.settings.screen.settings.mvi.SettingsMvi
 import dev.yaaum.presentation.feature.settings.screen.settings.mvi.SettingsMvi.Companion.ANIMATION_DURATION
@@ -42,6 +47,8 @@ fun SettingsScreen(
         initial = currentTheme,
     )
 
+    var showLangDialog by remember { mutableStateOf(false) }
+
     StreamLog.streamLog {
         "currentTheme: $currentTheme | theme: $theme"
     }
@@ -61,6 +68,20 @@ fun SettingsScreen(
         ),
     )
 
+    if (showLangDialog) {
+        YaaumBottomSheetDialog(
+            onDismiss = {
+                showLangDialog = false
+            },
+        ) {
+            LanguageDialogContent(
+                onDismiss = {
+                    showLangDialog = false
+                },
+            )
+        }
+    }
+
     CircularReveal(
         targetState = theme,
         animationSpec = tween(ANIMATION_DURATION),
@@ -76,6 +97,9 @@ fun SettingsScreen(
                     onInfoClick = {
 //                        settingsMvi.sendEffect(SettingsMviEffect.GoToInfoScreenMviEffect)
                         LocalisationHelper().changeLang(LocalisationHelper.SupportedLang.UKR)
+                    },
+                    onLangClick = {
+                        showLangDialog = true
                     },
                     onBackClick = {
                         navigator.pop()

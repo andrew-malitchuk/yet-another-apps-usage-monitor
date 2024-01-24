@@ -432,7 +432,7 @@ fun ProgressHealthCard(
                 .layoutId(deltaIconId),
         )
         YaaumCircleButton(
-            icon = R.drawable.icon_fire_bold_24,
+            icon = R.drawable.icon_plus_bold_24,
             modifier = Modifier
                 .layoutId(actionIconId),
             defaultBackgroundColor = YaaumTheme.colors.primary,
