@@ -1,20 +1,35 @@
 package dev.yaaum.presentation.core.localisation
 
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.os.LocaleListCompat
+import android.annotation.SuppressLint
+import android.app.LocaleManager
+import android.content.Context
+import android.os.LocaleList
+import androidx.core.content.ContextCompat.getSystemService
+import java.util.Locale
 
-class LocalisationHelper {
+@SuppressLint("NewApi")
+class LocalisationHelper(context: Context) {
 
-    fun changeLang(lang: SupportedLang) {
-        AppCompatDelegate.setApplicationLocales(
-            LocaleListCompat.forLanguageTags(
-                lang.lang,
-            ),
-        )
+    private var localeManager: LocaleManager? = null
+
+    init {
+        localeManager = context.getSystemService(Context.LOCALE_SERVICE) as? LocaleManager
     }
 
-    enum class SupportedLang(val lang: String) {
-        UKR("ukr"),
-        ENG("en-US"),
+    fun changeLang(lang: SupportedLang) {
+        localeManager?.applicationLocales = LocaleList(Locale.forLanguageTag(lang.code))
+    }
+
+    fun getCurrentLang(): SupportedLang {
+        return SupportedLang.entries.first { it.code == localeManager?.applicationLocales?.toLanguageTags() }
+    }
+
+    fun getSupportedLang(): List<SupportedLang> {
+        return SupportedLang.entries.toList()
+    }
+
+    enum class SupportedLang(val code: String, val language: String) {
+        UKR("ukr", "Українська"),
+        ENG("en", "English"),
     }
 }

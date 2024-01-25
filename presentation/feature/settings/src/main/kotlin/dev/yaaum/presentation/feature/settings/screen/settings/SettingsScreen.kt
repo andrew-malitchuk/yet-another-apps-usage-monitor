@@ -10,7 +10,6 @@ import androidx.compose.runtime.setValue
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.navigator.Navigator
 import com.theapache64.rebugger.Rebugger
-import dev.yaaum.presentation.core.localisation.LocalisationHelper
 import dev.yaaum.presentation.core.navigation.RouteGraph
 import dev.yaaum.presentation.core.platform.mvi.MviPartialState
 import dev.yaaum.presentation.core.ui.composable.content.error.DefaultErrorContent
@@ -75,7 +74,7 @@ fun SettingsScreen(
             },
         ) {
             LanguageDialogContent(
-                onDismiss = {
+                onLang = {
                     showLangDialog = false
                 },
             )
@@ -95,8 +94,7 @@ fun SettingsScreen(
                         settingsMvi.sendEffect(SettingsMviEffect.GoToPermissionsScreenMviEffect)
                     },
                     onInfoClick = {
-//                        settingsMvi.sendEffect(SettingsMviEffect.GoToInfoScreenMviEffect)
-                        LocalisationHelper().changeLang(LocalisationHelper.SupportedLang.UKR)
+                        settingsMvi.sendEffect(SettingsMviEffect.GoToInfoScreenMviEffect)
                     },
                     onLangClick = {
                         showLangDialog = true

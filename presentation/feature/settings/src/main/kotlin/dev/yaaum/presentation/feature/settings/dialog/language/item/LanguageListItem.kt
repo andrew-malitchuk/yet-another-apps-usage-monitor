@@ -26,17 +26,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.yaaum.presentation.core.localisation.LocalisationHelper
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 
 @Composable
 fun LanguageListItem(
     modifier: Modifier = Modifier,
-    lang: String,
-    onApplicationClick: ((String, Boolean) -> Unit)? = null,
+    lang: LocalisationHelper.SupportedLang,
+    currentLang: LocalisationHelper.SupportedLang,
+    onApplicationClick: ((LocalisationHelper.SupportedLang, Boolean) -> Unit)? = null,
 ) {
 //    val isChosen = remember { mutableStateOf(applicationsUiModel.isChosen) }
-    val isChosen = remember { mutableStateOf(true) }
+    val isChosen = remember { mutableStateOf(lang == currentLang) }
 
     val animatedDpValue by animateDpAsState(
         targetValue = if (isChosen.value) {
@@ -83,7 +85,7 @@ fun LanguageListItem(
             contentAlignment = Alignment.Center,
         ) {
             Text(
-                text = lang,
+                text = lang.code,
                 style = YaaumTheme.typography.title,
                 color = YaaumTheme.colors.onSurface,
                 maxLines = 1,
@@ -93,7 +95,7 @@ fun LanguageListItem(
         Spacer(modifier = Modifier.width(YaaumTheme.spacing.small))
         Text(
             // TODO: fix
-            text = "LANG",
+            text = lang.language,
             style = YaaumTheme.typography.title,
             color = YaaumTheme.colors.onSurface,
             maxLines = 1,
@@ -107,7 +109,8 @@ fun LanguageListItem(
 fun Preview_ApplicationListItem_Dark() {
     YaaumTheme(useDarkTheme = true) {
         LanguageListItem(
-            lang = "ukr",
+            lang = LocalisationHelper.SupportedLang.UKR,
+            currentLang = LocalisationHelper.SupportedLang.UKR,
         )
     }
 }
@@ -117,7 +120,8 @@ fun Preview_ApplicationListItem_Dark() {
 fun Preview_ApplicationListItem_Light() {
     YaaumTheme(useDarkTheme = false) {
         LanguageListItem(
-            lang = "ukr",
+            lang = LocalisationHelper.SupportedLang.UKR,
+            currentLang = LocalisationHelper.SupportedLang.UKR,
         )
     }
 }

@@ -23,7 +23,7 @@
 
     <application
         android:name="dev.yaaum.app.YauumApplication"
-        android:localeConfig="@xml/local_config">
+        android:localeConfig="@xml/locales_config">
         <activity
             android:name="dev.yaaum.presentation.feature.host.HostActivity"
             android:exported="true">

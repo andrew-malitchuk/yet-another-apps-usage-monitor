@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import dev.yaaum.presentation.core.localisation.LocalisationHelper
 import dev.yaaum.presentation.core.localisation.R
 import dev.yaaum.presentation.core.localisation.UiText
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
@@ -23,7 +24,14 @@ import dev.yaaum.presentation.feature.settings.dialog.language.item.LanguageList
 @Composable
 fun LanguageDialogContent(
     modifier: Modifier = Modifier,
+    onLang: ((LocalisationHelper.SupportedLang) -> Unit)? = null,
 ) {
+    val localisationHelper = LocalisationHelper(LocalContext.current)
+
+    val supportedLang = localisationHelper.getSupportedLang()
+
+    val currentLang = localisationHelper.getCurrentLang()
+
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -55,11 +63,17 @@ fun LanguageDialogContent(
             verticalArrangement = Arrangement
                 .spacedBy(YaaumTheme.spacing.small),
         ) {
-            item {
-                LanguageListItem(lang = "ukr")
-            }
-            item {
-                LanguageListItem(lang = "eng")
+            items(
+                count = supportedLang.size,
+            ) {
+                LanguageListItem(
+                    lang = supportedLang[it],
+                    currentLang = currentLang,
+                    onApplicationClick = { foo, bar ->
+                        localisationHelper.changeLang(foo)
+                        onLang?.invoke(foo)
+                    },
+                )
             }
         }
         Spacer(modifier = Modifier.height(YaaumTheme.spacing.extraLarge))
