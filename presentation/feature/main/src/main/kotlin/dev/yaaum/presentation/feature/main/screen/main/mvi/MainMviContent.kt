@@ -10,5 +10,6 @@ data class MainMviContent(
     val topUsageApps: List<TimeUsageUiModel>? = null,
     val healthStatus: HealthStatusUiModel? = null,
     val timeUsage: GeneralTimeUsageStatisticUiModel? = null,
+    val rate: String? = null,
     val recommendations: List<RecommendationUiModel>? = null,
 ) : MviContent

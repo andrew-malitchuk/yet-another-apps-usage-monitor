@@ -14,6 +14,7 @@ class MainMviReducer(initial: MainMviState) :
                         topUsageApps = null,
                         healthStatus = null,
                         recommendations = null,
+                        rate = null,
                     ),
                     error = null,
                 ),
@@ -124,6 +125,32 @@ class MainMviReducer(initial: MainMviState) :
                         loading = false,
                         content = previous.copy(
                             recommendations = event.recommendation,
+                        ),
+                        error = null,
+                    ),
+                )
+            }
+
+            MainMviEvent.GetRate -> {
+                val previous = oldState.content ?: MainMviContent()
+                setState(
+                    oldState.copy(
+                        loading = false,
+                        content = previous.copy(
+                            rate = null,
+                        ),
+                        error = null,
+                    ),
+                )
+            }
+
+            is MainMviEvent.OnRateFetched -> {
+                val previous = oldState.content ?: MainMviContent()
+                setState(
+                    oldState.copy(
+                        loading = false,
+                        content = previous.copy(
+                            rate = event.rate,
                         ),
                         error = null,
                     ),

@@ -84,6 +84,7 @@ fun FetchedContent(
             )
             GeneralHealthCard(
                 timeUsage = state.content?.timeUsage,
+                rate = state.content?.rate,
                 modifier = Modifier
                     .padding(horizontal = YaaumTheme.spacing.medium),
                 onClick = onHealthClick,

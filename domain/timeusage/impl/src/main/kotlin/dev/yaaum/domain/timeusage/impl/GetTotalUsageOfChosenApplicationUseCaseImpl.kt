@@ -32,8 +32,8 @@ class GetTotalUsageOfChosenApplicationUseCaseImpl(
             val chosenApplications = applicationsRepository.getAllChosenApplications()
 
             val allApplicationUsage = timeUsageRepository.getApplicationsUsage(
-                beginTime = getMillisOfDay(),
-                endTime = Calendar.getInstance().timeInMillis,
+                beginTime = beginTime,
+                endTime = endTime,
             )
 
             val userApplicationUsage = mutableListOf<TimeUsageRepoModel>()

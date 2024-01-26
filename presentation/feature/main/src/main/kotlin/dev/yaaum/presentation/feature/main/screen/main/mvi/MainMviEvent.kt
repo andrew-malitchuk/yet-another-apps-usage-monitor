@@ -15,6 +15,7 @@ sealed class MainMviEvent : MviEvent {
     data object GetHealthStatus : MainMviEvent()
     data object GetGeneralTimeUsage : MainMviEvent()
     data object GetRecommendation : MainMviEvent()
+    data object GetRate : MainMviEvent()
     data class OnTopAppsUsageFetched(val apps: List<TimeUsageUiModel>?) : MainMviEvent()
     data class OnHealthStatusFetched(val status: HealthStatusUiModel?) : MainMviEvent()
     data class OnGeneralTimeUsageFetched(val timeUsage: GeneralTimeUsageStatisticUiModel?) :
@@ -22,4 +23,6 @@ sealed class MainMviEvent : MviEvent {
 
     data class OnRecommendationFetched(val recommendation: List<RecommendationUiModel>?) :
         MainMviEvent()
+
+    data class OnRateFetched(val rate: String?) : MainMviEvent()
 }

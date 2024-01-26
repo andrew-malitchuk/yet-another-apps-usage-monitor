@@ -52,6 +52,7 @@ import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
 @Composable
 fun GeneralHealthCard(
     timeUsage: GeneralTimeUsageStatisticUiModel?,
+    rate: String?,
     modifier: Modifier = Modifier,
     onClick: (() -> Unit)? = null,
     onInfoClick: (() -> Unit)? = null,
@@ -66,7 +67,7 @@ fun GeneralHealthCard(
         },
     ) {
         when {
-            (timeUsage == null) ->
+            (timeUsage == null || rate == null) ->
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -271,7 +272,7 @@ fun GeneralHealthCard(
                                 verticalAlignment = Alignment.CenterVertically,
                             ) {
                                 Text(
-                                    text = "A",
+                                    text = rate.toString(),
                                     style = YaaumTheme.typography.display,
                                     color = YaaumTheme.colors.primary,
                                     maxLines = 1,
@@ -298,7 +299,10 @@ fun GeneralHealthCard(
 @Composable
 fun Preview_GeneralHealthCard_Loading_Dark() {
     YaaumTheme(useDarkTheme = true) {
-        GeneralHealthCard(timeUsage = null)
+        GeneralHealthCard(
+            timeUsage = null,
+            rate = "A",
+        )
     }
 }
 
@@ -306,7 +310,10 @@ fun Preview_GeneralHealthCard_Loading_Dark() {
 @Composable
 fun Preview_GeneralHealthCard_Loading_Light() {
     YaaumTheme(useDarkTheme = false) {
-        GeneralHealthCard(timeUsage = null)
+        GeneralHealthCard(
+            timeUsage = null,
+            rate = "A",
+        )
     }
 }
 
@@ -315,7 +322,10 @@ fun Preview_GeneralHealthCard_Loading_Light() {
 @Suppress("MagicNumber")
 fun Preview_GeneralHealthCard_Fetched_Dark() {
     YaaumTheme(useDarkTheme = true) {
-        GeneralHealthCard(timeUsage = GeneralTimeUsageStatisticUiModel(100, 100, 100))
+        GeneralHealthCard(
+            timeUsage = GeneralTimeUsageStatisticUiModel(100, 100, 100),
+            rate = "A",
+        )
     }
 }
 
@@ -324,6 +334,6 @@ fun Preview_GeneralHealthCard_Fetched_Dark() {
 @Suppress("MagicNumber")
 fun Preview_GeneralHealthCard_Fetched_Light() {
     YaaumTheme(useDarkTheme = false) {
-        GeneralHealthCard(timeUsage = GeneralTimeUsageStatisticUiModel(100, 100, 100))
+        GeneralHealthCard(timeUsage = GeneralTimeUsageStatisticUiModel(100, 100, 100), rate = "A")
     }
 }
