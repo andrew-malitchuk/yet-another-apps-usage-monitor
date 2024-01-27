@@ -18,4 +18,7 @@ sealed class HealthMviEvent : MviEvent {
     data class ApplicationsHealthFetchedMviEvent(
         val timeusage: GeneralTimeUsageStatisticUiModel,
     ) : HealthMviEvent()
+
+    data object GetRate : HealthMviEvent()
+    data class OnRateFetched(val rate: String?) : HealthMviEvent()
 }

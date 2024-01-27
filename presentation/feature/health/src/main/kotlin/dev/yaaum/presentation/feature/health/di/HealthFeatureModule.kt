@@ -12,6 +12,7 @@ val healthFeatureModule = module {
         HealthMvi(
             getAllAppsUseCase = get(),
             getGeneralTimeUsageStatisticUseCase = get(),
+            getRateUseCase = get(),
         )
     }
 }

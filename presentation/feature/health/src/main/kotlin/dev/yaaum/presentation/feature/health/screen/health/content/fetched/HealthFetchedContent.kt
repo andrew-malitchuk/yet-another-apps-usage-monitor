@@ -49,7 +49,8 @@ fun HealthFetchedContent(
             isOpened = (!lazyScrollState.canScrollBackward && !lazyScrollState.isScrollInProgress),
             onClick = onActionClick,
             onBackClick = onBackClick,
-            data = state.content?.health,
+            health = state.content?.health,
+            rate = state.content?.rate,
         )
         AnimatedDivider(
             state = lazyScrollState,

@@ -41,7 +41,8 @@ fun ProgressHealthCard(
     onClick: (() -> Unit)? = null,
     onBackClick: (() -> Unit)? = null,
     isOpened: Boolean,
-    data: GeneralTimeUsageStatisticUiModel?,
+    health: GeneralTimeUsageStatisticUiModel?,
+    rate: String?,
 ) {
     val backId = "back_id"
     val cardId = "card_id"
@@ -350,7 +351,7 @@ fun ProgressHealthCard(
                 .layoutId(totalTitleId),
         )
         Text(
-            text = data?.totalAppsUsage?.asHours() ?: "NI",
+            text = health?.totalAppsUsage?.asHours() ?: "NI",
             style = YaaumTheme.typography.title,
             color = YaaumTheme.colors.onSurface,
             maxLines = 1,
@@ -370,7 +371,7 @@ fun ProgressHealthCard(
         )
 
         Text(
-            text = data?.totalChosenAppsUsage?.asHours() ?: "NI",
+            text = health?.totalChosenAppsUsage?.asHours() ?: "NI",
             style = YaaumTheme.typography.title,
             color = YaaumTheme.colors.onSurface,
             maxLines = 1,
@@ -390,7 +391,12 @@ fun ProgressHealthCard(
         )
 
         Text(
-            text = ((data?.totalAppsUsage ?: 0L) - (data?.totalChosenAppsUsage ?: 0L)).asHours(),
+            text = (
+                (health?.totalAppsUsage ?: 0L) - (
+                    health?.totalChosenAppsUsage
+                        ?: 0L
+                    )
+                ).asHours(),
             style = YaaumTheme.typography.title,
             color = YaaumTheme.colors.onSurface,
             maxLines = 1,
@@ -454,7 +460,7 @@ fun ProgressHealthCard(
         )
 
         Text(
-            text = "RATE",
+            text = rate ?: "NI",
             style = YaaumTheme.typography.display,
             color = YaaumTheme.colors.onSurface,
             maxLines = 1,
@@ -469,9 +475,11 @@ fun ProgressHealthCard(
 @Composable
 fun Preview_ProgressHealthCard_Dark() {
     YaaumTheme(useDarkTheme = true) {
+        @Suppress("MagicNumber")
         ProgressHealthCard(
             isOpened = false,
-            data = null,
+            health = GeneralTimeUsageStatisticUiModel(10L, 20L, 30L),
+            rate = "A",
         )
     }
 }
@@ -480,9 +488,11 @@ fun Preview_ProgressHealthCard_Dark() {
 @Composable
 fun Preview_ProgressHealthCard_Light() {
     YaaumTheme(useDarkTheme = false) {
+        @Suppress("MagicNumber")
         ProgressHealthCard(
             isOpened = false,
-            data = null,
+            health = GeneralTimeUsageStatisticUiModel(10L, 20L, 30L),
+            rate = "A",
         )
     }
 }

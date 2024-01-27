@@ -2,6 +2,7 @@ package dev.yaaum.presentation.feature.health.screen.health.mvi
 
 import dev.yaaum.domain.applications.GetUserAppsUseCase
 import dev.yaaum.domain.health.GetGeneralTimeUsageStatisticUseCase
+import dev.yaaum.domain.health.GetRateUseCase
 import dev.yaaum.presentation.core.localisation.UiText
 import dev.yaaum.presentation.core.models.toUiModel
 import dev.yaaum.presentation.core.platform.mvi.BaseMvi
@@ -14,6 +15,7 @@ import kotlinx.coroutines.flow.StateFlow
 class HealthMvi(
     private val getAllAppsUseCase: GetUserAppsUseCase,
     private val getGeneralTimeUsageStatisticUseCase: GetGeneralTimeUsageStatisticUseCase,
+    private val getRateUseCase: GetRateUseCase,
 ) : BaseMvi<HealthMviState, HealthMviEvent, HealthMviEffect>() {
 
     override val state: StateFlow<HealthMviState>
@@ -29,6 +31,8 @@ class HealthMvi(
             HealthMviEvent.GetHealthMviEvent -> loadApplication()
             HealthMviEvent.GetApplicationsHealthMviEvent -> loadHealth()
             is HealthMviEvent.ApplicationsHealthFetchedMviEvent -> Unit
+            HealthMviEvent.GetRate -> getRate()
+            is HealthMviEvent.OnRateFetched -> Unit
         }
     }
 
@@ -92,6 +96,51 @@ class HealthMvi(
                     )
                 })
             },
+        )
+    }
+
+    private fun getRate() {
+        launch(
+            request = {
+                getRateUseCase()
+            },
+            result = { result ->
+                result?.fold(
+                    { error ->
+                        reducer.setState(
+                            HealthMviState.error(
+                                // TODO: fix me
+                                SwwUiError(
+                                    UiText.DynamicString(error.message ?: ""),
+                                    error.throwable,
+                                ),
+                            ),
+                        )
+                    },
+                    { result ->
+                        reducer.setState(
+                            HealthMviState.fetched(
+                                content = (reducer.state.value.content ?: HealthMviContent())
+                                    .copy(
+                                        rate = result,
+                                    ),
+                            ),
+                        )
+                    },
+                )
+            },
+            errorBlock = {
+                reducer.setState(
+                    HealthMviState.error(
+                        // TODO: fix me
+                        SwwUiError(
+                            UiText.DynamicString(it.message ?: ""),
+                            it,
+                        ),
+                    ),
+                )
+            },
+
         )
     }
 }

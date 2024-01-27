@@ -29,6 +29,7 @@ class HealthRoute : Screen {
                 hostViewModel.updateTheme()
                 healthMvi.sendEvent(HealthMviEvent.GetHealthMviEvent)
                 healthMvi.sendEvent(HealthMviEvent.GetApplicationsHealthMviEvent)
+                healthMvi.sendEvent(HealthMviEvent.GetRate)
             },
             onDisposed = {
             },
