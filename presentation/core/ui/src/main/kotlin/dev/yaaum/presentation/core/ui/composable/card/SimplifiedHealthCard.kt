@@ -20,10 +20,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import dev.yaaum.presentation.core.localisation.UiText
 import dev.yaaum.presentation.core.models.HealthStatus
 import dev.yaaum.presentation.core.models.HealthStatusUiModel
 import dev.yaaum.presentation.core.ui.composable.ext.placeholder
@@ -49,6 +50,20 @@ fun SimplifiedHealthCard(
         else -> dev.yaaum.presentation.core.ui.R.drawable.icon_smiley_x_eyes_bold_24
     }
 
+    val titleHealth = UiText.StringResource(
+        when (healthStatus?.status) {
+            HealthStatus.NERVOUS -> dev.yaaum.presentation.core.localisation.R.string.health_status_nervous
+            HealthStatus.SMILEY -> dev.yaaum.presentation.core.localisation.R.string.health_status_smiley
+            HealthStatus.ANGRY -> dev.yaaum.presentation.core.localisation.R.string.health_status_angry
+            HealthStatus.BLANK -> dev.yaaum.presentation.core.localisation.R.string.health_status_blank
+            HealthStatus.MEH -> dev.yaaum.presentation.core.localisation.R.string.health_status_meh
+            HealthStatus.SAD -> dev.yaaum.presentation.core.localisation.R.string.health_status_sad
+            HealthStatus.WINK -> dev.yaaum.presentation.core.localisation.R.string.health_status_wink
+            HealthStatus.DAMN -> dev.yaaum.presentation.core.localisation.R.string.health_status_damn
+            else -> dev.yaaum.presentation.core.localisation.R.string.health_status_blank
+        },
+    ).asString(LocalContext.current)
+
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -62,10 +77,9 @@ fun SimplifiedHealthCard(
             )
             .padding(YaaumTheme.spacing.small),
     ) {
-        // TODO: add sizes
         Box(
             modifier = Modifier
-                .size(48.dp)
+                .size(YaaumTheme.icons.medium)
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .clip(RoundedCornerShape(YaaumTheme.corners.medium))
@@ -87,7 +101,9 @@ fun SimplifiedHealthCard(
             modifier = Modifier,
         ) {
             Text(
-                text = "healthStatus.title",
+                text = UiText
+                    .StringResource(dev.yaaum.presentation.core.localisation.R.string.health_month)
+                    .asString(LocalContext.current),
                 style = YaaumTheme.typography.title,
                 color = YaaumTheme.colors.onSurface,
                 maxLines = 1,
@@ -95,7 +111,7 @@ fun SimplifiedHealthCard(
             )
             Spacer(modifier = Modifier.height(YaaumTheme.spacing.extraSmall))
             Text(
-                text = "healthStatus.description",
+                text = titleHealth,
                 style = YaaumTheme.typography.caption,
                 color = YaaumTheme.colors.onSurface,
                 maxLines = 1,
