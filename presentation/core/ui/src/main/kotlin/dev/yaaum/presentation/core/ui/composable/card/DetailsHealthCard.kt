@@ -239,7 +239,7 @@ fun DetailsHealthCard(
             // TODO: fix
             data = data?.let {
                 val temp = mutableMapOf<Any, Float>()
-                data.filter { it.appUsage != 0L }.forEach {
+                data.forEach {
                     temp[it.weekDay.asString(LocalContext.current)] = it.appUsage.toFloat()
                 }
                 temp

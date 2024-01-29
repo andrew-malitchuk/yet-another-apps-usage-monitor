@@ -21,7 +21,8 @@ class LocalisationHelper(context: Context) {
     }
 
     fun getCurrentLang(): SupportedLang {
-        return SupportedLang.entries.first { it.code == localeManager?.applicationLocales?.toLanguageTags() }
+        return SupportedLang.entries.firstOrNull { it.code == localeManager?.applicationLocales?.toLanguageTags() }
+            ?: SupportedLang.ENG
     }
 
     fun getSupportedLang(): List<SupportedLang> {

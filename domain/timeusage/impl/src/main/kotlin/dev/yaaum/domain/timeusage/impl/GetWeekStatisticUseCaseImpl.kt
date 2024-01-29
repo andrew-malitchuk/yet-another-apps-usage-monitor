@@ -60,7 +60,7 @@ class GetWeekStatisticUseCaseImpl(
             WeekStatisticDomainModel(
                 timeUsageByRange[0]?.packageName,
                 timeUsageByRange[0]?.applicationName,
-                dayUsageList.toSet(),
+                dayUsageList.also { it.sortByDescending { it.weekDay } },
             ),
         )
     }

@@ -8,5 +8,5 @@ import dev.yaaum.domain.core.model.BaseDomainModel
 data class WeekStatisticDomainModel(
     val applicationName: String?,
     val packageName: String?,
-    val dayAndStatistic: Set<DayUsageStatisticDomainModel>,
+    val dayAndStatistic: List<DayUsageStatisticDomainModel>,
 ) : BaseDomainModel
