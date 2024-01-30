@@ -16,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.yaaum.presentation.core.localisation.UiText
 import dev.yaaum.presentation.core.models.TimeUsageUiModel
 import dev.yaaum.presentation.core.ui.R
@@ -108,7 +107,7 @@ fun LimitedApplicationListBlock(
             defaultBackgroundColor = YaaumTheme.colors.primary,
             pressedBackgroundColor = YaaumTheme.colors.secondary,
             // TODO: fix
-            iconSize = 16.dp,
+            iconSize = 16.d,
             onClick = {
                 onInfoClick?.invoke()
             },

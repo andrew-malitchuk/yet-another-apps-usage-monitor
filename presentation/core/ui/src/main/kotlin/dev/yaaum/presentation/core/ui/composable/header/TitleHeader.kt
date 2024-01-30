@@ -13,7 +13,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.button.ordinary.YaaumOrdinaryButton
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
@@ -46,15 +45,13 @@ fun TitleHeader(
                 .align(Alignment.CenterVertically),
             defaultBackgroundColor = YaaumTheme.colors.secondary,
             pressedBackgroundColor = YaaumTheme.colors.primary,
-            // TODO: fix
-            iconSize = 32.dp,
+            iconSize = YaaumTheme.icons.smallMedium,
             onClick = {
                 onBackClick?.invoke()
             },
         )
         Spacer(modifier = Modifier.width(YaaumTheme.spacing.small))
         Text(
-            // TODO: fix
             text = title,
             style = YaaumTheme.typography.title,
             color = YaaumTheme.colors.onBackground,

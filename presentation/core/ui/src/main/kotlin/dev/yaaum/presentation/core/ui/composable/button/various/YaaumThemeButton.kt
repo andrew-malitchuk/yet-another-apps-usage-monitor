@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.yaaum.presentation.core.models.ThemeUiModel
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
@@ -41,17 +40,14 @@ fun YaaumThemeButton(
     }
     Box(
         modifier = modifier
-            // TODO: fix
-            .size(48.dp)
+            .size(YaaumTheme.icons.medium)
             .clickable {
                 onSideChangeState = (onSideChangeState ?: SelectedTheme.AUTO).next()
                 onSideChangeState?.let { onThemeSelected?.invoke(it) }
             }
-            // TODO: fix
             .clip(CircleShape)
             .background(YaaumTheme.colors.primary)
-            // TODO: fix
-            .padding(8.dp),
+            .padding(YaaumTheme.spacing.small),
     ) {
         @Suppress("OptionalWhenBraces")
         when (onSideChangeState) {

@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,6 +25,7 @@ import androidx.constraintlayout.compose.MotionScene
 import androidx.constraintlayout.compose.Transition
 import androidx.constraintlayout.compose.layoutId
 import dev.yaaum.common.core.ext.asHours
+import dev.yaaum.presentation.core.localisation.UiText
 import dev.yaaum.presentation.core.models.GeneralTimeUsageStatisticUiModel
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.button.circle.YaaumCircleButton
@@ -450,7 +452,8 @@ fun ProgressHealthCard(
         )
 
         Text(
-            text = "Increase",
+            text = UiText.StringResource(dev.yaaum.presentation.core.localisation.R.string.health_rate)
+                .asString(LocalContext.current),
             style = YaaumTheme.typography.subHeading,
             color = YaaumTheme.colors.onSurface,
             maxLines = 1,
