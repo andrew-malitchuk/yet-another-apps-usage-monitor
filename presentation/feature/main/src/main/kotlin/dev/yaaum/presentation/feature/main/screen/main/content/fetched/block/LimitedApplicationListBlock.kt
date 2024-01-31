@@ -107,7 +107,7 @@ fun LimitedApplicationListBlock(
             defaultBackgroundColor = YaaumTheme.colors.primary,
             pressedBackgroundColor = YaaumTheme.colors.secondary,
             // TODO: fix
-            iconSize = 16.d,
+            iconSize = YaaumTheme.icons.extraSmall,
             onClick = {
                 onInfoClick?.invoke()
             },
