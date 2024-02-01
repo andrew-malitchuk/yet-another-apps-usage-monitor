@@ -52,6 +52,7 @@ constraintlayoutCompose = "1.1.0-alpha13"
 foundationAndroid = "1.5.1"
 streamLogAndroid = "1.1.4"
 uiUtil = "1.5.4"
+accompanistPermissions="0.34.0"
 
 [libraries]
 # https://mvnrepository.com/artifact/androidx.core/core-ktx?repo=google
@@ -153,6 +154,8 @@ foundation-android = { group = "androidx.compose.foundation", name = "foundation
 stream-log-android = { group = "io.getstream", name = "stream-log-android", version.ref = "streamLogAndroid" }
 # https://mvnrepository.com/artifact/androidx.compose.ui/ui-util
 ui-util = { group = "androidx.compose.ui", name = "ui-util", version.ref = "uiUtil" }
+# https://mvnrepository.com/artifact/com.google.accompanist/accompanist-permissions
+accompanist-permissions = {group = "com.google.accompanist", name="accompanist-permissions", version.ref="accompanistPermissions"}
 
 [plugins]
 # https://mvnrepository.com/artifact/com.android.application/com.android.application.gradle.plugin
