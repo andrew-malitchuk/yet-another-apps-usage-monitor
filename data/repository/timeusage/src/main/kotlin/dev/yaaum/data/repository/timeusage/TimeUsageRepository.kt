@@ -21,6 +21,18 @@ interface TimeUsageRepository {
     suspend fun getApplicationsUsage(): List<TimeUsageRepoModel>
 
     /**
+     * Retrieve general information about application usage by it's [packageName]
+     *
+     * @return total app usage
+     *
+     * @throws BaseDataException
+     */
+    @Throws(BaseDataException::class)
+    suspend fun getApplicationUsage(
+        packageName: String,
+    ): TimeUsageRepoModel
+
+    /**
      * Retrieve general information about application usage in certain time scope ([beginTime]..[endTime])
      * Returns about __all__ application.
      *
@@ -29,5 +41,23 @@ interface TimeUsageRepository {
      * @throws BaseDataException
      */
     @Throws(BaseDataException::class)
-    suspend fun getApplicationsUsage(beginTime: Long, endTime: Long): List<TimeUsageRepoModel>
+    suspend fun getApplicationsUsage(
+        beginTime: Long,
+        endTime: Long,
+    ): List<TimeUsageRepoModel>
+
+    /**
+     * Retrieve general information about application usage in certain time scope ([beginTime]..[endTime])
+     * by it's package name
+     *
+     * @return time usage for [packageName] by certain period
+     *
+     * @throws BaseDataException
+     */
+    @Throws(BaseDataException::class)
+    suspend fun getApplicationUsage(
+        packageName: String,
+        beginTime: Long,
+        endTime: Long,
+    ): TimeUsageRepoModel?
 }

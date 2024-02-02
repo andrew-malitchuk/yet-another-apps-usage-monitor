@@ -12,7 +12,6 @@ data class TimeUsageUiModel(
     val packageName: String?,
     val usageBegin: Long?,
     val usageEnd: Long?,
-    val lastTimeUsage: Long?,
     val totalTimeInForeground: Long?,
 ) : BaseUiModel {
 
@@ -30,7 +29,6 @@ fun TimeUsageDomainModel.toUiModel() =
         packageName = this.packageName,
         usageBegin = this.usageBegin,
         usageEnd = this.usageEnd,
-        lastTimeUsage = this.lastTimeUsage,
         totalTimeInForeground = this.totalTimeInForeground,
         applicationName = applicationName,
     )

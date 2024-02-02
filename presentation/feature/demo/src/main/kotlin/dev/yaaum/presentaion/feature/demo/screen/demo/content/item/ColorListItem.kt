@@ -18,7 +18,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.yaaum.presentation.core.ui.composable.item.YaaumBaseListContainer
 import dev.yaaum.presentation.core.ui.theme.YaaumTheme
 import dev.yaaum.presentation.core.ui.theme.common.YaaumTheme
@@ -43,7 +42,7 @@ fun ColorListItem(
             // TODO: add sizes
             Box(
                 modifier = Modifier
-                    .size(48.dp)
+                    .size(YaaumTheme.icons.medium)
                     .clip(CircleShape)
                     .align(Alignment.CenterVertically)
                     .background(color),

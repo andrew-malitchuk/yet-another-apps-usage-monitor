@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<locale-config xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- https://developer.android.com/guide/topics/resources/app-languages#gradle-config:~:text=multilingual%20world%20video-,Sample%20locale_config.xml%20file,-By%20default%2C%20Android -->
+    <locale android:name="en" />
+    <locale android:name="ukr" />
+</locale-config>

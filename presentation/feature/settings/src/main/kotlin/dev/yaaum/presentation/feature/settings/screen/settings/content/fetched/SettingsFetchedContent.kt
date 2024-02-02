@@ -27,6 +27,7 @@ fun SettingsFetchedContent(
     onInfoClick: (() -> Unit)? = null,
     onBackClick: (() -> Unit)? = null,
     onPermissionClick: (() -> Unit)? = null,
+    onLangClick: (() -> Unit)? = null,
     onThemeSelected: ((SelectedTheme) -> Unit)? = null,
 ) {
     val scrollState = rememberScrollState()
@@ -67,6 +68,7 @@ fun SettingsFetchedContent(
                     .asString(LocalContext.current),
                 icon = R.drawable.icon_translate_bold_24,
                 onClick = {
+                    onLangClick?.invoke()
                 },
             )
             SettingsListItem(

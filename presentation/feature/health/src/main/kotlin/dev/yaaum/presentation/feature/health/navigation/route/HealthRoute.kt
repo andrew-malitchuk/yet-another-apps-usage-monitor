@@ -9,6 +9,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import dev.yaaum.presentation.feature.health.screen.health.HealthScreen
 import dev.yaaum.presentation.feature.health.screen.health.mvi.HealthMvi
+import dev.yaaum.presentation.feature.health.screen.health.mvi.HealthMviEvent
 import dev.yaaum.presentation.feature.main.screen.HostViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -26,6 +27,9 @@ class HealthRoute : Screen {
         LifecycleEffect(
             onStarted = {
                 hostViewModel.updateTheme()
+                healthMvi.sendEvent(HealthMviEvent.GetHealthMviEvent)
+                healthMvi.sendEvent(HealthMviEvent.GetApplicationsHealthMviEvent)
+                healthMvi.sendEvent(HealthMviEvent.GetRate)
             },
             onDisposed = {
             },

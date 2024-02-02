@@ -28,7 +28,8 @@ import kotlin.math.abs
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun RecommendationListItem(
-    recommendationUiModel: RecommendationUiModel,
+    modifier: Modifier = Modifier,
+    recommendationUiModel: RecommendationUiModel?,
     onRecommendationClick: ((RecommendationUiModel) -> Unit)? = null,
     state: PagerState,
 ) {
@@ -50,14 +51,14 @@ fun RecommendationListItem(
         1f
     }
     YaaumBaseListContainer(
-        modifier = Modifier
+        modifier = modifier
             .wrapContentHeight()
             .padding(horizontal = YaaumTheme.spacing.medium)
             .scale(scaleValue)
             .alpha(alphaValue)
             .fillMaxWidth(),
         onClick = {
-            onRecommendationClick?.invoke(recommendationUiModel)
+            recommendationUiModel?.let { onRecommendationClick?.invoke(it) }
         },
     ) {
         Column(
@@ -67,7 +68,7 @@ fun RecommendationListItem(
                 .padding(YaaumTheme.spacing.small),
         ) {
             Text(
-                text = recommendationUiModel.description,
+                text = recommendationUiModel?.description ?: "",
                 style = YaaumTheme.typography.caption,
                 color = YaaumTheme.colors.onSurface,
                 maxLines = 1,
@@ -75,7 +76,7 @@ fun RecommendationListItem(
             )
             Spacer(modifier = Modifier.height(YaaumTheme.spacing.largest))
             Text(
-                text = recommendationUiModel.title,
+                text = recommendationUiModel?.title ?: "",
                 style = YaaumTheme.typography.title,
                 color = YaaumTheme.colors.onSurface,
                 maxLines = 1,

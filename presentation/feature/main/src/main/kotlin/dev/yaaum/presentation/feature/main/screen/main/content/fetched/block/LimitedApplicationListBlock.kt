@@ -16,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.yaaum.presentation.core.localisation.UiText
 import dev.yaaum.presentation.core.models.TimeUsageUiModel
 import dev.yaaum.presentation.core.ui.R
@@ -32,6 +31,7 @@ fun LimitedApplicationListBlock(
     modifier: Modifier = Modifier,
     list: List<TimeUsageUiModel>?,
     onMoreClick: (() -> Unit)? = null,
+    onInfoClick: (() -> Unit)? = null,
     onPermissionClick: (() -> Unit)? = null,
     onApplicationClick: ((TimeUsageUiModel) -> Unit)? = null,
 ) {
@@ -107,9 +107,9 @@ fun LimitedApplicationListBlock(
             defaultBackgroundColor = YaaumTheme.colors.primary,
             pressedBackgroundColor = YaaumTheme.colors.secondary,
             // TODO: fix
-            iconSize = 16.dp,
+            iconSize = YaaumTheme.icons.extraSmall,
             onClick = {
-                onMoreClick?.invoke()
+                onInfoClick?.invoke()
             },
         )
     }

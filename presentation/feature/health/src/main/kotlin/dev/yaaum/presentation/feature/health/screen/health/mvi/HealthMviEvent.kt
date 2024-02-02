@@ -2,6 +2,7 @@ package dev.yaaum.presentation.feature.health.screen.health.mvi
 
 import androidx.compose.runtime.Immutable
 import dev.yaaum.presentation.core.models.ApplicationsUiModel
+import dev.yaaum.presentation.core.models.GeneralTimeUsageStatisticUiModel
 import dev.yaaum.presentation.core.platform.mvi.event.MviEvent
 
 @Immutable
@@ -11,4 +12,13 @@ sealed class HealthMviEvent : MviEvent {
     data class ApplicationsFetchedMviEvent(
         val data: List<ApplicationsUiModel>,
     ) : HealthMviEvent()
+
+    data object GetApplicationsHealthMviEvent : HealthMviEvent()
+
+    data class ApplicationsHealthFetchedMviEvent(
+        val timeusage: GeneralTimeUsageStatisticUiModel,
+    ) : HealthMviEvent()
+
+    data object GetRate : HealthMviEvent()
+    data class OnRateFetched(val rate: String?) : HealthMviEvent()
 }

@@ -39,11 +39,11 @@ class GetHealthStatusUseCaseImpl(
                 )
             }, { result ->
                 // TODO: fix
-                if (result.totalChosenAppsUsage != 0L && result.totalUsersAppsUsage != 0L) {
+                if (result.totalChosenAppsUsage != 0L && result.totalAppsUsage != 0L) {
                     val percent =
                         (
                             generalTimeUsage.getOrNull()?.totalChosenAppsUsage!!.toFloat() /
-                                generalTimeUsage.getOrNull()?.totalUsersAppsUsage!!.toFloat()
+                                generalTimeUsage.getOrNull()?.totalAppsUsage!!.toFloat()
                             )
 
                     Either.Right(

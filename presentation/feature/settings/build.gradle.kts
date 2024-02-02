@@ -19,6 +19,7 @@ dependencies {
     implementation(libs.voyager.koin)
     implementation(libs.voyager.tab.navigator)
     implementation(libs.accompanist.drawablepainter)
+    implementation(libs.accompanist.permissions)
 
     // TODO: fix me
     implementation(libs.arrow.core)

@@ -21,6 +21,8 @@ val applicationsFeatureModule = module {
     viewModel {
         ApplicationDetalizationMvi(
             getApplicationUseCase = get(),
+            getWeekStatisticUseCase = get(),
+            getHealthStatusForApplicationUseCase = get(),
         )
     }
 }

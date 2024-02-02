@@ -26,6 +26,7 @@ import dev.yaaum.presentation.feature.health.screen.health.mvi.HealthMviState
 fun HealthFetchedContent(
     state: HealthMviState,
     onActionClick: (() -> Unit)? = null,
+    onBackClick: (() -> Unit)? = null,
     onApplicationClick: ((ApplicationsUiModel) -> Unit)? = null,
 ) {
     val scrollState = rememberScrollState()
@@ -47,6 +48,9 @@ fun HealthFetchedContent(
                 ),
             isOpened = (!lazyScrollState.canScrollBackward && !lazyScrollState.isScrollInProgress),
             onClick = onActionClick,
+            onBackClick = onBackClick,
+            health = state.content?.health,
+            rate = state.content?.rate,
         )
         AnimatedDivider(
             state = lazyScrollState,

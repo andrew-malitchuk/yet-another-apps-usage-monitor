@@ -55,8 +55,7 @@ fun YaaumSwitchButton(
     borderWidth: Dp = YaaumTheme.dividers.extraSmall,
     cornerSize: Int = 50,
     iconInnerPadding: Dp = YaaumTheme.spacing.extraSmall,
-    // TODO: fix
-    thumbSize: Dp = 24.dp,
+    thumbSize: Dp = YaaumTheme.icons.small,
     initValue: Boolean = false,
     onStateChange: ((Boolean) -> Unit)? = null,
     foo: Boolean? = null,

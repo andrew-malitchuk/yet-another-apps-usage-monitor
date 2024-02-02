@@ -29,17 +29,17 @@ class GetTotalUsageOfChosenApplicationUseCaseImpl(
         endTime: Long,
     ): Either<BaseDomainError, Long> {
         return try {
-            val usersApplications = applicationsRepository.getAllChosenApplications()
+            val chosenApplications = applicationsRepository.getAllChosenApplications()
 
             val allApplicationUsage = timeUsageRepository.getApplicationsUsage(
-                beginTime = getMillisOfDay(),
-                endTime = Calendar.getInstance().timeInMillis,
+                beginTime = beginTime,
+                endTime = endTime,
             )
 
             val userApplicationUsage = mutableListOf<TimeUsageRepoModel>()
 
             allApplicationUsage.forEach { timeUsage ->
-                if (usersApplications.any { it.packageName == timeUsage.packageName }) {
+                if (chosenApplications.any { it.packageName == timeUsage.packageName }) {
                     userApplicationUsage.add(timeUsage)
                 }
             }

@@ -9,8 +9,9 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import dev.yaaum.presentation.core.models.RecommendationUiModel
+import dev.yaaum.presentation.core.localisation.UiText
 import dev.yaaum.presentation.core.models.TimeUsageUiModel
 import dev.yaaum.presentation.core.ui.R
 import dev.yaaum.presentation.core.ui.composable.card.GeneralHealthCard
@@ -24,12 +25,12 @@ import dev.yaaum.presentation.feature.main.screen.main.content.fetched.block.Lim
 import dev.yaaum.presentation.feature.main.screen.main.content.fetched.block.RecommendationBlock
 import dev.yaaum.presentation.feature.main.screen.main.mvi.MainMviContent
 import dev.yaaum.presentation.feature.main.screen.main.mvi.MainMviState
-import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+// TODO: rename me
 @Composable
 fun FetchedContent(
     state: MainMviState,
@@ -38,6 +39,10 @@ fun FetchedContent(
     onMoreClick: (() -> Unit)? = null,
     onApplicationClick: ((TimeUsageUiModel) -> Unit)? = null,
     onPermissionClick: (() -> Unit)? = null,
+    onHealthInfoClick: (() -> Unit)? = null,
+    onHealthStatusClick: (() -> Unit)? = null,
+    onRecommendationInfoClick: (() -> Unit)? = null,
+    onAppsInfoClick: (() -> Unit)? = null,
 ) {
     val scrollState = rememberScrollState()
 
@@ -73,14 +78,17 @@ fun FetchedContent(
                 modifier = Modifier
                     .padding(horizontal = YaaumTheme.spacing.medium),
                 icon = R.drawable.icon_gear_six_bold_24,
-                onClick = onSettingsClick,
+                onActionClick = onSettingsClick,
                 healthStatus = state.content?.healthStatus,
+                onHealthClick = onHealthStatusClick,
             )
             GeneralHealthCard(
                 timeUsage = state.content?.timeUsage,
+                rate = state.content?.rate,
                 modifier = Modifier
                     .padding(horizontal = YaaumTheme.spacing.medium),
                 onClick = onHealthClick,
+                onInfoClick = onHealthInfoClick,
             )
             LimitedApplicationListBlock(
                 modifier = Modifier
@@ -89,31 +97,14 @@ fun FetchedContent(
                 onMoreClick = onMoreClick,
                 onApplicationClick = onApplicationClick,
                 onPermissionClick = onPermissionClick,
+                onInfoClick = onAppsInfoClick,
             )
             RecommendationBlock(
-                title = Faker().quote.fortuneCookie(),
-                list = listOf(
-                    RecommendationUiModel(
-                        title = Faker().quote.fortuneCookie(),
-                        description = Faker().quote.fortuneCookie(),
-                        deeplink = "",
-                    ),
-                    RecommendationUiModel(
-                        title = Faker().quote.fortuneCookie(),
-                        description = Faker().quote.fortuneCookie(),
-                        deeplink = "",
-                    ),
-                    RecommendationUiModel(
-                        title = Faker().quote.fortuneCookie(),
-                        description = Faker().quote.fortuneCookie(),
-                        deeplink = "",
-                    ),
-                    RecommendationUiModel(
-                        title = Faker().quote.fortuneCookie(),
-                        description = Faker().quote.fortuneCookie(),
-                        deeplink = "",
-                    ),
-                ),
+                title = UiText
+                    .StringResource(dev.yaaum.presentation.core.localisation.R.string.various_recommendation)
+                    .asString(LocalContext.current),
+                list = state.content?.recommendations,
+                onInfoClick = onRecommendationInfoClick,
             )
         }
     }

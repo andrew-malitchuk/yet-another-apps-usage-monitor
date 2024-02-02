@@ -2,8 +2,10 @@ package dev.yaaum.presentation.feature.main.screen.main.mvi
 
 import dev.yaaum.domain.health.GetGeneralTimeUsageStatisticUseCase
 import dev.yaaum.domain.health.GetHealthStatusUseCase
+import dev.yaaum.domain.health.GetRateUseCase
 import dev.yaaum.domain.timeusage.GetTopAppsWithHighestUsageUseCase
 import dev.yaaum.presentation.core.localisation.UiText
+import dev.yaaum.presentation.core.models.RecommendationUiModel
 import dev.yaaum.presentation.core.models.toUiModel
 import dev.yaaum.presentation.core.platform.mvi.BaseMvi
 import dev.yaaum.presentation.core.ui.error.SwwUiError
@@ -17,6 +19,7 @@ class MainMvi(
     private val getTopAppsWithHighestUsageUseCase: GetTopAppsWithHighestUsageUseCase,
     private val getHealthStatusUseCase: GetHealthStatusUseCase,
     private val getGeneralTimeUsageStatisticUseCase: GetGeneralTimeUsageStatisticUseCase,
+    private val getRateUseCase: GetRateUseCase,
 ) : BaseMvi<MainMviState, MainMviEvent, MainMviEffect>() {
 
     override val state: StateFlow<MainMviState>
@@ -38,6 +41,10 @@ class MainMvi(
             is MainMviEvent.OnHealthStatusFetched -> Unit
             MainMviEvent.GetGeneralTimeUsage -> getGetGeneralTimeUsage()
             is MainMviEvent.OnGeneralTimeUsageFetched -> Unit
+            MainMviEvent.GetRecommendation -> getRecommendation()
+            is MainMviEvent.OnRecommendationFetched -> Unit
+            MainMviEvent.GetRate -> getRate()
+            is MainMviEvent.OnRateFetched -> Unit
         }
     }
 
@@ -45,6 +52,8 @@ class MainMvi(
         getTopAppsUsage()
         getHealthStatus()
         getGetGeneralTimeUsage()
+        getRecommendation()
+        getRate()
     }
 
     private fun getTopAppsUsage() {
@@ -171,6 +180,81 @@ class MainMvi(
                 ),
             )
         }
+    }
+
+    private fun getRecommendation() {
+        launch(
+            request = {
+                listOf(
+                    RecommendationUiModel(
+                        "User's application",
+                        "Find out and select apps to track",
+                        "",
+                    ),
+                    RecommendationUiModel(
+                        "Permissions",
+                        "Check app permissions to open all features",
+                        "",
+                    ),
+                )
+            },
+            result = {
+                reducer.setState(
+                    MainMviState.fetched(
+                        content = (reducer.state.value.content ?: MainMviContent())
+                            .copy(
+                                recommendations = it,
+                            ),
+                    ),
+                )
+            },
+
+        )
+    }
+
+    private fun getRate() {
+        launch(
+            request = {
+                getRateUseCase()
+            },
+            result = { result ->
+                result?.fold(
+                    { error ->
+                        reducer.setState(
+                            MainMviState.error(
+                                // TODO: fix me
+                                SwwUiError(
+                                    UiText.DynamicString(error.message ?: ""),
+                                    error.throwable,
+                                ),
+                            ),
+                        )
+                    },
+                    { result ->
+                        reducer.setState(
+                            MainMviState.fetched(
+                                content = (reducer.state.value.content ?: MainMviContent())
+                                    .copy(
+                                        rate = result,
+                                    ),
+                            ),
+                        )
+                    },
+                )
+            },
+            errorBlock = {
+                reducer.setState(
+                    MainMviState.error(
+                        // TODO: fix me
+                        SwwUiError(
+                            UiText.DynamicString(it.message ?: ""),
+                            it,
+                        ),
+                    ),
+                )
+            },
+
+        )
     }
 
     companion object {

@@ -7,3 +7,8 @@ plugins {
 android {
     namespace = "dev.yaaum.presentation.core.localisation"
 }
+
+dependencies {
+    implementation(libs.core.ktx)
+    implementation(libs.appcompat)
+}

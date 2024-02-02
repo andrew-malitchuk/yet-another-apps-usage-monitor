@@ -2,4 +2,12 @@
 <resources>
     <string name="various_next">Next</string>
     <string name="various_ok">Ok</string>
+    <string name="various_mon">Mon</string>
+    <string name="various_tue">Tur</string>
+    <string name="various_wed">Wed</string>
+    <string name="various_thu">Thu</string>
+    <string name="various_fri">Fri</string>
+    <string name="various_sat">Sat</string>
+    <string name="various_sun">Sun</string>
+    <string name="various_recommendation">Recommendation</string>
 </resources>

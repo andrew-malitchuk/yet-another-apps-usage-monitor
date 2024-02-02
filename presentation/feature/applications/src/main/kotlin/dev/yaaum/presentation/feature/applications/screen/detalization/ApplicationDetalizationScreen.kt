@@ -37,7 +37,13 @@ fun ApplicationDetalizationScreen(
 
     YaaumTheme(theme = theme) {
         when (state.partialState) {
-            MviPartialState.FETCHED -> ApplicationDetalizationFetchedContent(state = state)
+            MviPartialState.FETCHED -> ApplicationDetalizationFetchedContent(
+                state = state,
+                onBackClick = {
+                    navigator.pop()
+                },
+            )
+
             else -> DefaultLoadingContent()
         }
     }

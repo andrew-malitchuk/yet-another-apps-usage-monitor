@@ -15,4 +15,5 @@ dependencies {
     implementation(project(":domain:applications"))
     implementation(project(":domain:health"))
     implementation(project(":common:core"))
+    implementation(project(":presentation:core:localisation"))
 }
