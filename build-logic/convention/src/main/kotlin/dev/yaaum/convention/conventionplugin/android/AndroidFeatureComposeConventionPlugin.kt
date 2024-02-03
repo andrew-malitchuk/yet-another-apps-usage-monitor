@@ -20,12 +20,13 @@ class AndroidFeatureComposeConventionPlugin : Plugin<Project> {
         plugins {
             +"yaaum.convention.feature"
         }
-        lib{
+        lib {
             buildFeatures {
-                compose=true
+                compose = true
             }
             composeOptions {
-                kotlinCompilerExtensionVersion = libs.findVersion("androidxComposeCompiler").get().toString()
+                kotlinCompilerExtensionVersion =
+                    libs.findVersion("androidxComposeCompiler").get().toString()
             }
         }
         with(libs) {

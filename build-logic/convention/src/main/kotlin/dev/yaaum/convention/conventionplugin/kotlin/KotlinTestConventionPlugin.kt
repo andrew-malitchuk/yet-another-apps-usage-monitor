@@ -13,7 +13,7 @@ import org.gradle.kotlin.dsl.dependencies
 @Suppress("unused")
 class KotlinTestConventionPlugin : Plugin<Project> {
 
-    override fun apply(target: Project)= with(target) {
+    override fun apply(target: Project) = with(target) {
         plugins {
 
         }
